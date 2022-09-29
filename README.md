@@ -31,15 +31,15 @@ commit push 전 내가만든 브랜치에서 작업한게 맞는지 다시한번
 # 코드 작업시 폴더 생성 Rule
 사용화면은 user 폴더 하위에서 작업진행
 ex)
-user 안에서 결제 로직 작업 시 
+1. user 안에서 결제 로직 작업 시 
 goodeat > user > payment > controller,dto,repository,entity,service > 하위 클래스들 생성/ 
-user 안에서 회원 로직 작업 시 
+2. user 안에서 회원 로직 작업 시 
 goodeat > user > member > controller,dto,repository,entity,service > 하위 클래스들 생성/ 
 
 어드민 화면은 은 admin폴더 하위에서 작업진행
 ex)
-admin 안에서 결제 로직 작업 시 
+1. admin 안에서 결제 로직 작업 시 
 goodeat > admin > product > controller,dto,repository,entity,service > 하위 클래스들 생성/ 
-admin 안에서 회원 로직 작업 시 
+2. admin 안에서 회원 로직 작업 시 
 goodeat > admin > member > controller,dto,repository,entity,service > 하위 클래스들 생성/ 
  
