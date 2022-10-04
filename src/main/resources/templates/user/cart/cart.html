@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../source/css/cart.css">
+    <title>Document</title>
+</head>
+<body>
+    <section id="content" class="container">
+        <div class="content-wrap frame-sm">
+            <div class="page-title-area">
+                <h2 class="title-page">장바구니</h2>
+                <div class="cart-option">
+                    <div class="custom-checkbox">
+                        <input type="checkbox" id="checkAll" class="checkbox checkboxGroup" checked>
+                        <label for="checkAll">전체해제</label>
+                    </div>
+                    <button type="button" id="deleteUserCartList" class="btn-option btn-default">
+                        <span>선택삭제</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="cart-list-area">
+                <ul class="cart-list">
+                    <li id="cart-list-img">
+                        <div class="prd-info-area cart-info-area">
+                            <div class="inner">
+                                <div class="column img">
+                                    <img src="../source/images/dosi_md.png" alt="상품이미지">
+                                </div>
+                                <div class="column tit">
+                                    <p class="desc">비건 도시락 맛있어요</p>
+                                    <p class="desc"> </p>
+                                    <ul class="price-item">
+                                        <li>
+                                            <span class="num">22,900</span>
+                                            원
+                                        </li>
+
+                                    </ul>
+                                </div>
+                                <div class="column qty">
+                                    <div class="qty-group">
+                                        <button type="button" class="btn-qty cart"></button>
+                                        <input type="text" value="1">
+                                        <button type="button" class="btn-qty cart"></button>
+                                    </div>
+                                </div>
+                                <div class="column price">
+                                    <div class="price-div">
+                                        <span class="num cart-price">22,900</span>
+                                        원
+                                    </div>
+                                </div>
+                                <div class="column btn">
+                                    <button type="button"></button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </li>
+                </ul>
+            </div>
+
+            <div class="cart-total-box grid-area-span4">
+                <div class="colum">
+                    <dl class="price-info">
+                        <dt class="tit">상품금액</dt>
+                        <dd class="price">
+                            <em class="num" id="totalProductPrice">22,900</em>
+                            "원 "
+                        </dd>
+                    </dl>
+                </div>
+                <div class="colum">
+                    <dl class="price-info">
+                        <dt class="tit">할인금액</dt>
+                        <dd class="price">
+                            <em class="num" id="totalDiscountPrice">0</em>
+                            "원 "
+                        </dd>
+                    </dl>
+                </div>
+                <div class="colum">
+                    <dl class="price-info">
+                        <dt class="tit">배송비</dt>
+                        <dd class="price">
+                            <em class="num" id="totalDeliveryPrice">22,900</em>
+                            "원 "
+                        </dd>
+                    </dl>
+                </div>
+                <div class="colum">
+                    <dl class="price-info">
+                        <dt class="tit">총 결제금액</dt>
+                        <dd class="price">
+                            <em class="num" id="totalOrderProductPrice">22,900</em>
+                            "원 "
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="page-guide-center">
+                <ul class="bl-list-type1">
+                    <li>배송방법 선택 또는 배송지에 따라 배송비가 달라질 수 있습니다.</li>
+                    <li>제품별로 출고지 및 출고일정이 상이하여 함포장 또는 개별 발송될 수 있습니다. </li>
+                </ul>
+
+            </div>
+
+            <div class="btn-bottom-area">
+                <a class="btn-basic-xxlg btn-default-ex">
+                    <span>쇼핑계속하기</span>
+                </a>
+                <a class="btn-basic-xxlg btn-primary-ex" id="order">
+                    <span>
+                        <em class="text-num-bold totalOrderPrice">22,990</em>
+                        원 주문하기
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
