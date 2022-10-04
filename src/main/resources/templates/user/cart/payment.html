@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../source/css/payment.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="content-wrap frame-sm">
+        <div class="page-title-area">
+            <h2 class="title-page"> 주문/결제</h2>
+        </div>
+        <div class="order-payment-area">
+            <div class="order-info" id="orderUserInfo">
+                <div class="list-head">
+                    <h3 class="title-list">주문자 정보</h3>
+                </div>
+                <div class="order-address">
+                    <ul class="info-txt">
+                        <li>홍길동 01012345678 lee@naver.com</li>
+                    </ul>
+                    <span>주문자 정보변경</span>
+                </div>
+                <div class="list-head-sub">
+                    <h3 class="title-list">배송지 정보</h3>
+                </div>
+                <div class="lineless-table type1">
+                    <table>
+                        <col>
+                            <col style="width:115px">
+                            <col>
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th scope="row">받는분</th>
+                                <td>홍길동</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">주소</th>
+                                <td>서울시 종로구 종로3가</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">휴대전화</th>
+                                <td> 010-1234-5678</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="cart-list-area">
+                    <ul class="cart-list">
+                        <li id="cart-list-img">
+                            <div class="prd-info-area cart-info-area">
+                                <div class="inner">
+                                    <div class="column img">
+                                        <img src="../source/images/dosi_md.png" alt="상품이미지">
+                                    </div>
+                                    <div class="column tit">
+                                        <p class="desc">비건 도시락 맛있어요</p>
+                                        <p class="desc"> </p>
+                                        <ul class="price-item">
+                                            <li>
+                                                <span class="num">22,900</span>
+                                                원
+                                            </li>
+    
+                                        </ul>
+                                    </div>
+                                    <div class="column qty">
+                                        <div class="qty-group">
+                                            <button type="button" class="btn-qty cart"></button>
+                                            <input type="text" value="1">
+                                            <button type="button" class="btn-qty cart"></button>
+                                        </div>
+                                    </div>
+                                    <div class="column price">
+                                        <div class="price-div">
+                                            <span class="num cart-price">22,900</span>
+                                            원
+                                        </div>
+                                    </div>
+                                    <div class="column btn">
+                                        <button type="button"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="order-info">
+                    <div class="list-head">
+                        <h3 class="title-list">포인트 / 쿠폰 사용</h3>
+                    </div>
+                    <div class="lineless-table type1">
+                        <table>
+                            <colgroup>
+                                <col style="width:190px">
+                                <col>
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">
+                                        <span class="tit">포인트 사용</span>
+                                    </th>
+                                    <td>
+                                        <div class="order-point">
+                                            <div class="input-group-wrap bo-type">
+                                                <div class="input-group">
+                                                    <input type="text" class="input-textUsePoint" placeholder="2,000p부터 사용가능">
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn-ex-grey">전액사용</button>
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="order-info">
+                    <div class="list-head">
+                        <h3 class="title-list">결제방법</h3>
+                    </div>
+                    <div class="payment-select">
+                        <div class="grid-area-span2">
+                            <div class="colum col12">
+                                <ul class="radio-grid-span4">
+                                    <li>
+                                        <div class="custom-radio">
+                                            <input type="radio" id="radio-grid-1" class="radio-box-grid">
+                                            <label for="radio-grid-1">
+                                                랭킹페이
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="custom-radio">
+                                            <input type="radio" id="radio-grid-2" class="radio-box-grid">
+                                            <label for="radio-grid-1">
+                                                신용카드
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="custom-radio">
+                                            <input type="radio" id="radio-grid-3" class="radio-box-grid">
+                                            <label for="radio-grid-1">
+                                                실시간 계좌이체
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="custom-radio">
+                                            <input type="radio" id="radio-grid-4" class="radio-box-grid">
+                                            <label for="radio-grid-1">
+                                                무통장입금
+                                            </label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="btn-bottom-area">
+                    <a class="btn-basic-xxlg btn-primary-ex" id="order">
+                        <span>
+                            <em class="text-num-bold totalOrderPrice">22,990</em>
+                            원 주문하기
+                        </span>
+                    </a>
+                </div>
+            </div>
+            
+
+        </div>
+
+    </div>
+</body>
+</html>
