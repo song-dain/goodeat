@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class AddfileDTO {
 
-	private Long addfileNo;
+	private Integer addfileNo;
 	private String originalFileName;
 	private String savedFileName;
 	private String savedRoute;

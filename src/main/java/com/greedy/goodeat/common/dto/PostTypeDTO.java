@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class PostTypeDTO {
 	
-	private Long postTypeCode;
+	private Integer postTypeCode;
 	private String postType;
 	
 }
