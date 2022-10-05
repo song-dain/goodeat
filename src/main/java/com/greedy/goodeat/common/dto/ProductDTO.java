@@ -5,14 +5,15 @@ import lombok.Data;
 @Data
 public class ProductDTO {
 	
-	private int productCode;
+	private Integer productCode;
 	private String productName;
-	private int productPrice;
+	private Integer productPrice;
 	private String productStatus;
 	private String productDescription;
-	private int productInventory;
+	private Integer productInventory;
 	private java.sql.Date productRegistDate;
 	private java.sql.Date productModifyDate;
 	private java.sql.Date productDeleteDate;
+	private ProductCategoryDTO productCategory;
 	
 }
