@@ -1,5 +1,6 @@
 package com.greedy.goodeat.common.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -20,12 +21,16 @@ import lombok.Setter;
 @DynamicInsert
 public class AuthenticatedMenu {
 	
+	
 	@Id
+	@Column(name = "AUTHENTICATED_MENU_CODE")
+	private Integer authenticatedMenuCode;
+	
 	@ManyToOne
 	@JoinColumn(name = "AUTHORITY_CODE")
 	private MemberAuthority memberAuthority;
 	
-	@Id
+	
 	@ManyToOne
 	@JoinColumn(name = "MENU_CODE")
 	private GlobalMenu globalMenu;
