@@ -5,11 +5,12 @@ import lombok.Data;
 @Data
 public class DeliveryDTO {
 	
-	private int invoiceNo;
+	private OrderDTO order;
+	private Integer invoiceNo;
 	private String invoiceInputType;
 	private String deliveryAddress;
 	private String deliveryDetailAddress;
-	private int zipCode;
+	private Integer zipCode;
 	private String recipient;
 	private String deliveryPhone;
 	private java.sql.Date invoiceDate;

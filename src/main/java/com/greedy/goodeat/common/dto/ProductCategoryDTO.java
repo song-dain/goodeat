@@ -3,9 +3,9 @@ package com.greedy.goodeat.common.dto;
 import lombok.Data;
 
 @Data
-public class productCategoryDTO {
+public class ProductCategoryDTO {
 	
-	private int categoryCode;
+	private Integer categoryCode;
 	private String categotyName;
 
 }
