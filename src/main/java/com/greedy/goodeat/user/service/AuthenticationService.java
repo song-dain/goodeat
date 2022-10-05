@@ -6,13 +6,17 @@ import java.util.Map;
 
 import javax.transaction.Transactional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.greedy.goodeat.user.repository.MemberRepository;
 
 @Service
 @Transactional
-public class AuthenticationService {
+public class AuthenticationService implements UserDetailsService {
 	
 	private final MemberRepository memberRepository;
 	
@@ -28,6 +32,12 @@ public class AuthenticationService {
 		permitListMap.put("admin", memberRepository.findPermitList("ROLE_MEMBER"));
 		
 		return permitListMap;
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

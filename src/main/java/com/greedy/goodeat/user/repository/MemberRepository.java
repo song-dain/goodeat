@@ -10,12 +10,7 @@ import com.greedy.goodeat.common.entity.Member;
 
 public interface MemberRepository extends JpaRepository<Member, Integer> {
 	
-	@Query(value = "SELECT\r\n"
-			+ "      A.MENU_URL\r\n"
-			+ " FROM TBL_GLOBAL_MENU A\r\n"
-			+ " JOIN TBL_AUTHENTICATED_MENU B ON (A.MENU_CODE = B.MENU_CODE)\r\n"
-			+ " JOIN TBL_AUTHORITY C ON (B.AUTHORITY_CODE = C.AUTHORITY_CODE)\r\n"
-			+ "WHERE C.AUTHORITY_NAME = :authorityName", nativeQuery = true)
+	@Query(value = "SELECT A.MENU_NAME FROM TBL_GLOBAL_MENU A JOIN TBL_AUTHENTICATED_MENU B ON (A.MENU_CODE = B.MENU_CODE) JOIN TBL_MEMBER_AUTHORITY C ON (B.AUTHORITY_CODE = C.AUTHORITY_CODE) WHERE C.AUTHORITY_NAME = :authorityName", nativeQuery = true)
 	public List<String> findPermitList(@Param("authorityName") String authorityName);
 
 }
