@@ -23,11 +23,12 @@ import lombok.Setter;
 @DynamicInsert
 public class Delivery implements Serializable {
 	
-	@Id
+	
 	@ManyToOne
 	@JoinColumn(name = "ORDER_NO")
 	private Order order;
 	
+	@Id
 	@Column(name="INVOICE_NO")
 	private Integer invoiceNo;
 	

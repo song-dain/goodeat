@@ -1,5 +1,7 @@
 package com.greedy.goodeat.common.entity;
 
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,6 +28,7 @@ public class Addfile {
 	
 	@Id
 	@Column(name = "ADDFILE_NO")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ADDFILE_SEQ_GENERATOR")
 	private Integer addfileNo;
 	
 	@Column(name = "ORIGINALFILE_NAME")
@@ -43,16 +46,16 @@ public class Addfile {
 	@Column(name = "FILE_DIVISION")
 	private String fileDivision;
 	
-	@ManyToOne
-	@JoinColumn(name = "REVIEW_CODE")
+  @ManyToOne
+	@JoinColumn(name ="REVIEW_CODE")
 	private Review review;
 	
 	@ManyToOne
-	@JoinColumn(name = "POST_CODE")
+	@JoinColumn(name ="POST_CODE")
 	private Post post;
 	
 	@ManyToOne
-	@JoinColumn(name = "PRODUCT_CODE")
+	@JoinColumn(name ="PRODUCT_CODE")
 	private Product product;
 	
 	@Column(name = "THUMBNAIL_ROUTE")
