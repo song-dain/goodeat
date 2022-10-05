@@ -1,13 +1,10 @@
 package com.greedy.goodeat.common.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -28,11 +25,10 @@ import lombok.Setter;
 public class PostType {
 
 	@Id
-	@OneToMany(cascade=CascadeType.PERSIST)
-	@JoinColumn(name="POST_TYPE_CODE")
+	@Column(name="POST_TYPE_CODE")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,
 					generator="POST_SEQ_GENERATOR")
-	private Integer POST_CODE;
+	private Integer PostTypeCode;
 	
 	@Column(name="POST_TYPE")
 	private String postType;
