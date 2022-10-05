@@ -2,15 +2,12 @@ package com.greedy.goodeat.common.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
-
-import com.greedy.goodeat.common.entity.Review;
-import com.greedy.goodeat.common.entity.member;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,9 +20,13 @@ import lombok.Setter;
 @Table(name="TBL_REPORTED")
 @DynamicInsert
 public class Reported {
+	
+	@Id
+	@Column(name="REPORTED_CODE")
+	private Integer reportedCode;
 
 	@Column(name="REIVEW_TITLE")
-	private String ReasonReport;
+	private String reasonReport;
 	
 	@ManyToOne
 	@JoinColumn(name="MEMBER_NO")

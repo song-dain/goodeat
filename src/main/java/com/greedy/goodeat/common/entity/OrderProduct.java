@@ -2,6 +2,7 @@ package com.greedy.goodeat.common.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -23,9 +24,11 @@ public class OrderProduct {
 	@Column(name="PRODUCT_AMOUNT")
 	private String orderAmount;
 	
+	
 	@ManyToOne
 	@JoinColumn(name = "PRODUCT_CODE")
 	private Product product;
+	
 	
 	@ManyToOne
 	@JoinColumn(name = "ORDER_NO")

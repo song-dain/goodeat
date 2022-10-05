@@ -5,7 +5,8 @@ import lombok.Data;
 @Data
 public class ReportedDTO {
 
-	private String ReasonReport;
+	private Integer reportedCode;
+	private String reasonReport;
 	private MemberDTO member;
 	private ReviewDTO review;
 	
