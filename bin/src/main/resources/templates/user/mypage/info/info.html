@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/info.css">
+    <link rel="stylesheet" href="../source/font/Cafe24Ssurround.ttf">
+    <title>MyPage</title>
+</head>
+<body>
+   <!-- 헤더부분 -->
+    <header>
+        <!-- 메인 메뉴 -->
+        <div class="main-nav">
+            <!-- 로그인 했을 때 상단 메뉴 수정 -->
+            <ul>
+                <li><a href="login.html">로그아웃</a>
+                <li class="item myPage">My Page
+                    <ul class="item-menu">
+                        <li><a href="#">내정보</a></li>
+                        <li><a href="#">주문내역</a></li>
+                    </ul>
+                </li>
+                <li><a href="help-main">고객센터</a></li>
+            </ul>
+            <ul class="img-link">
+                <li>
+                    <a href="https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=%EB%B0%B0%EC%86%A1%EC%A1%B0%ED%9A%8C">
+                    <img src="../source/images/post.png"  style="width: 60px; height: 60px;">
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="../source/images/cart.png" style="width: 60px; height: 60px;">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <br>
+        <!-- 로고 부분 -->
+        <div id="head-con">
+            <div class="logo">
+                <a href="#" ><img src="../source/images/Logo.PNG" style="width: 300px;" /></a>
+                <div class="serch-center">
+                    <input type="search">
+                    <button class="img-btn" type="submit" name="search">검색</button>
+                </div>
+            </div>
+        </div>
+        <!-- 서브 메뉴 -->
+        <div class="base">
+            <ul>
+                <li class="item">
+                    <p>카테고리</p>
+                    <!-- 드롭 다운 -->
+                    <ul class="item-menu">
+                        <li><a href="#">밀키트</a></li>
+                        <li><a href="#">도시락</a></li>
+                        <li><a href="#">닭가슴살</a></li>
+                        <li><a href="#">간편식</a></li>
+                        <li><a href="#">비건</a></li>
+                        <li><a href="#">공지사항/이벤트</a></li>
+                    </ul>
+                </li>
+                <li class="item">
+                    <a href="#">밀키트</a>
+                </li>
+                <li class="item">
+                    <a href="#">도시락</a>
+                </li>
+                <li class="item">
+                    <a href="#">닭가슴살</a>
+                </li>
+                <li class="item">
+                    <a href="#">간편식</a>
+                </li>
+                <li class="item">
+                    <a href="#">비건</a>
+                </li>
+                <li class="item">
+                    <a href="#">공지사항/이벤트</a>
+                </li>
+            </ul> 
+        </div>
+        
+    </header>  
+   <!-- 컨텐츠 부분 -->
+   <section id="con-wrap">
+        <div id="registPage">
+            <div id="regist">회원 정보 변경</div><hr style="margin-bottom:2em">
+            <form name="regist" action="index.html" method="POST">
+                <table>
+                    <tr>
+                        <td align="right">아이디</td>
+                        <td align="left"><input id="id" class="text-field" value="user01" disabled/>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td align="left" id="id-check"></td>
+                    </tr>
+                    <tr>
+                        <td align="right">비밀번호</td>
+                        <td align="left"><input type="password" name="userPassword" class="text-field" id="password" placeholder="사용할 비밀번호 입력"/></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td align="left"><input type="password" name="passwordCheck" class="text-field" id="password-check" placeholder="비밀번호 재입력"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td align="left" id="checkMessage"></td>
+                    </tr>
+                    <tr>
+                        <td align="right">이름</td>
+                        <td align="left"><input type="text" name="userName" class="text-field" id="name" value="송다인"/></td>
+                    </tr>
+                    </tr>
+                        <td></td>
+                    <tr>
+                    <tr>
+                        <td align="right">휴대전화</td>
+                        <td align="left"><input text="text" name="phone" class="text-field" id="phone" value="010-1234-5678"/></td>
+                    </tr>
+                    </tr>
+                        <td></td>
+                    <tr>
+                    <tr>
+                        <td align="right">주소</td>
+                        <td align="left">
+                            <input class="text-field" name="zipCode" id="zip-code" value="03163">
+                            <input class="text-field" name="searchAddress" id="search-address" value="서울 특별시 인사동길12">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td align="left">
+                            <input type="text" name="detailAddress" id="detail-address" value=" 15층">
+                            <input type="button" class="search-button button" href="#" value="검색"/>
+                        </td>
+                    </tr>
+                        <td></td>
+                    <tr>
+                        <td align="right">이메일</td>
+                        <td align="left">
+                            <input text="email" class="text-field email-button button" id="email" value="user01" disabled/>
+                            <select id="email-address" disabled>
+                                <option>직접 입력</option>
+                                <option>naver.com</option>
+                                <option>daum.net</option>
+                                <option selected>gmail.com</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td align="right">성별</td>
+                        <td align="left">
+                        <label for="man">남자</label>
+                        <input type="radio" name="gender" value="man" id="man">
+                        <label for="woman">여자</label>
+                        <input type="radio" name="gender" value="woman" id="woman" checked>
+                        </td> 
+                    </tr>
+                    <td></td>
+                    <tr>
+                        <td align="right">생년월일</td>
+                        <td align="left">
+                            <select name="year" id="year">
+                                <option value="">년도 선택</option>
+                                <option value="1980">1980</option>
+                                <option value="1981">1981</option>
+                                <option value="1982">1982</option>
+                                <option value="1983">1983</option>
+                                <option value="1984">1984</option>
+                                <option value="1985">1985</option>
+                                <option value="1986">1986</option>
+                                <option value="1987">1987</option>
+                                <option value="1988">1988</option>
+                                <option value="1989">1989</option>
+                                <option value="1990">1990</option>
+                                <option value="1991">1991</option>
+                                <option value="1992">1992</option>
+                                <option value="1993">1993</option>
+                                <option value="1994">1994</option>
+                                <option value="1995">1995</option>
+                                <option value="1996" selected>1996</option>
+                                <option value="1997">1997</option>
+                                <option value="1998">1998</option>
+                                <option value="1999">1999</option>
+                                <option value="2000">2000</option>
+                                <option value="2001">2001</option>
+                                <option value="2002">2002</option>
+                                <option value="2003">2003</option>
+                                <option value="2004">2004</option>
+                                <option value="2005">2005</option>
+                                <option value="2006">2006</option>
+                                <option value="2007">2007</option>
+                                <option value="2008">2008</option>
+                                <option value="2009">2009</option>
+                                <option value="2010">2010</option>
+                            </select>
+                            <select name="month" id="month">
+                                <option value="">월 선택</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12" selected>12</option>
+                            </select>
+                            <select name="day" id="day">
+                                <option value="">일 선택</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19" selected>19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <td></td>
+                    <tr>
+                        <td align="right">이용약관</td>
+                        <td align="left">
+                            <a href="#" class="links">개인정보처리방침</a>
+                            <input type="checkbox"  checked disabled/>
+                            <a href="#" class="links">마케팅정보제공</a>
+                            <input type="checkbox" name="agreement2" checked/>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                    <div id="join-img">
+                        <input type="image" src="../source/images/modifybutton.png" id="submitButton" width=270px/><br>
+                        <a href="#" class="links">회원탈퇴</a>
+                    </div>
+            </form>
+        </div>
+    </section> 
+   <!-- 푸터 부분 -->
+    <footer>
+        <div id="foot-wrap">
+
+            <div class="foot-logo">
+                <a href="#" ><img src="../source/images/Logo.PNG" style="width: 150px;" /></a>
+            </div>
+            <div class="foot-menu">
+                <ul>
+                    <li><a href="#">공지사항</a></li>
+                    <li>|</li>
+                    <li><a href="#">이벤트</a></li>
+                    <li>|</li>
+                    <li><a href="#">TOP</a></li>
+                </ul>
+            </div>
+            <p class="cop">Copyright LetsGoodEat 2022 <img src="../source/images/copy.PNG" style="width: 10px;">All Right Reserved</p>
+        </div>
+    </footer>
+    
+
+</body>
+</html>

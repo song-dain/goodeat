@@ -1,0 +1,125 @@
+.container{
+    margin-top: 100px;
+    text-align: center;
+    height: 1000px;
+}
+
+.top-h2{
+    margin-bottom: 70px;
+    margin-right: 450px;
+}
+
+.form1{
+    position: relative;
+    bottom:70px;
+    display: block;
+}
+
+input{
+    font-size: 20px;
+}
+
+.form-group{
+    margin: 14px auto;
+}
+
+.form-group > input{
+    width: 500px;
+}
+
+.form-group > textarea{
+    width: 500px;
+}
+
+.form-cont{
+    float: left;
+}
+
+.form-control{
+    resize: none;
+    margin-top: 10px;
+}
+
+.lab{
+    position: relative;
+    top: 67px;
+}
+
+.form-group p{
+    margin-right: 500px;
+    
+
+}
+
+.btn-sl{
+    background-color: #e4ad7a;
+    border: 5px solid #e4ad7a;
+    border-radius: 5px;
+    padding: 4px;
+    width: 200px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.btn-sl2{
+    background-color: #e96969;
+    border: 5px solid #e96969;
+    border-radius: 5px;
+    padding: 4px;
+    width: 200px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.btn-sl:hover{
+    background-color: #797979;
+    border: 5px solid #797979;
+    padding: 4px;
+    color: #fff;
+}
+
+.btn-sl2:hover{
+    background-color: #797979;
+    border: 5px solid #797979;
+    padding: 4px;
+    color: #fff;
+}
+/*문의 등록*/
+
+#for-select{
+    margin-right: 1100px;
+    position: relative;
+    top:25px;
+}
+
+.form2{
+    position: relative;
+    bottom:20px;
+}
+
+input{
+    font-size: 20px;
+}
+
+.form-group2 > input{
+    width: 500px;
+}
+
+.form-group2 > textarea{
+    width: 500px;
+}
+
+.titlebox2{
+    margin-bottom: 10px;
+    margin-left: 140px;
+    width: 1000px;
+    height: 30px;
+}
+
+#textbox2>input{
+    margin-bottom: 10px;
+    margin-right: 390px;
+    width: 1140px;
+    height: 30px;
+}
+
