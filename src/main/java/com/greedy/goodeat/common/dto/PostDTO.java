@@ -2,17 +2,21 @@ package com.greedy.goodeat.common.dto;
 
 
 
+import java.util.List;
+
+import com.greedy.goodeat.common.entity.Addfile;
+
 import lombok.Data;
 
 @Data
 public class PostDTO {
 
-	private Integer postCode;
+	private int postCode;
 	private String postTitle;
 	private String postContent;
-	private AddfileDTO addfile;
+	private List<Addfile> addfileList;
 	private MemberDTO member;
-	private Integer postTypeCode;
+	private PostTypeDTO postType;
 	private java.sql.Date postResistDate;
 	private java.sql.Date postModifyDate;
 	private java.sql.Date postDelDate;

@@ -21,16 +21,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "TBL_ADDFILE")
-@SequenceGenerator(name = "ADDFILE_SEQ_GENERATOR", 
-				   sequenceName = "SEQ_ADDFILE_NO",
-				   initialValue = 1, allocationSize = 1)
 @DynamicInsert
 public class Addfile {
 	
 	@Id
 	@Column(name = "ADDFILE_NO")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ADDFILE_SEQ_GENERATOR")
-	private Integer boardNo;
+	private Integer addfileNo;
 	
 	@Column(name = "ORIGINALFILE_NAME")
 	private String originalFileName;
@@ -48,15 +44,15 @@ public class Addfile {
 	private String fileDivision;
 	
 	@ManyToOne
-	@JoinColumn(name = "TBL_REVIEW")
+	@JoinColumn(name = "REVIEW_CODE")
 	private Review review;
 	
 	@ManyToOne
-	@JoinColumn(name = "TBL_POST")
+	@JoinColumn(name = "POST_CODE")
 	private Post post;
 	
 	@ManyToOne
-	@JoinColumn(name = "TBL_PRODUCT")
+	@JoinColumn(name = "PRODUCT_CODE")
 	private Product product;
 	
 	@Column(name = "THUMBNAIL_ROUTE")

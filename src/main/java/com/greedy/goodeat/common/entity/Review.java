@@ -33,11 +33,8 @@ import lombok.Setter;
 public class Review {
 
 	@Id
-	@OneToMany(cascade=CascadeType.PERSIST)
 	@JoinColumn(name="REVIEW_CODE")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,
-					generator="REVIEW_SEQ_GENERATOR")
-	private Integer REVIEW_CODE;
+	private Integer reviewCode;
 	
 	@Column(name="REIVEW_TITLE")
 	private String reviewTitle;
@@ -56,7 +53,8 @@ public class Review {
 	@JoinColumn(name="ORDER_NO")
 	private Order order;
 	
-	@Column(name="PRODUCT_CODE")
+	@ManyToOne
+	@JoinColumn(name="PRODUCT_CODE")
 	private Product product;
 	
 	@Column(name="REIVEW_REGISDATE")

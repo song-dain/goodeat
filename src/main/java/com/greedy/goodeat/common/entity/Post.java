@@ -1,5 +1,7 @@
 package com.greedy.goodeat.common.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,9 +15,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
-
-import com.greedy.goodeat.common.entity.Addfile;
-import com.greedy.goodeat.common.entity.Member;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,7 +34,7 @@ public class Post {
 	@Column(name="POST_CODE")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,
 					generator="POST_SEQ_GENERATOR")
-	private Integer POST_CODE;
+	private int postCode;
 	
 	@Column(name="POST_TITLE")
 	private String postTitle;
@@ -43,17 +42,17 @@ public class Post {
 	@Column(name="POST_CONTENT")
 	private String postContent;
 	
-	@OneToMany(cascade=CascadeType.PERSIST)
+	@OneToMany
 	@JoinColumn(name="POST_CODE")
-	private Addfile addfile;
+	private List<Addfile> addfileList;
 	
 	@ManyToOne
 	@JoinColumn(name="MEMBER_NO")
 	private Member member;
 	
 	@ManyToOne
-	@JoinColumn(name="POST_TYPECODE")
-	private Integer postTypeCode;
+	@JoinColumn(name="POST_TYPE_CODE")
+	private PostType postType;
 	
 	@Column(name="POST_RESISTDATE")
 	private java.sql.Date postResistDate;

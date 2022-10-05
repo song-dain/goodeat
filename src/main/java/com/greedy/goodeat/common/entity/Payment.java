@@ -3,6 +3,7 @@ package com.greedy.goodeat.common.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -34,7 +35,7 @@ public class Payment {
 	private java.sql.Date payDate;
 	
 	@ManyToOne
-	@Column(name="ORDER_NO")
+	@JoinColumn(name="ORDER_NO")
 	private Order order;
 	
 	

@@ -22,16 +22,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Table(name="TBL_POST_TYPE")
-@SequenceGenerator(name="POST_TYPE_SEQ_GENERATOR", sequenceName="SEQ_POST_TYPE_CODE"
-, initialValue = 1, allocationSize = 1)
+
 @DynamicInsert
 public class PostType {
 
 	@Id
-	@OneToMany(cascade=CascadeType.PERSIST)
-	@JoinColumn(name="POST_TYPE_CODE")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,
-					generator="POST_SEQ_GENERATOR")
+	@Column(name="POST_CODE")
 	private Integer POST_CODE;
 	
 	@Column(name="POST_TYPE")
