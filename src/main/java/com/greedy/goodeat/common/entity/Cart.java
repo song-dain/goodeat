@@ -1,5 +1,6 @@
 package com.greedy.goodeat.common.entity;
 
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,43 +14,37 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
+import com.greedy.goodeat.common.dto.MemberDTO;
+import com.greedy.goodeat.common.dto.ProductDTO;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "TBL_ORDER")
-@SequenceGenerator(name = "ORDER_SEQ_GENERATOR", sequenceName = "SEQ_ORDER_NO", initialValue = 1, allocationSize = 1)
+@Table(name = "TBL_CART")
+@SequenceGenerator(name = "CART_SEQ_GENERATOR", sequenceName = "SEQ_CART_CODE", initialValue = 1, allocationSize = 1)
 @DynamicInsert
-public class Order {
+public class Cart {
 	
-
 	@Id
-	@Column(name="ORDER_NO")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ORDER_SEQ_GENERATOR")
-	private Integer orderNo;
+	@Column(name="CART_CODE")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CART_SEQ_GENERATOR")
+	private Integer cartCode;
 	
-	@Column(name="ORDER_DATE")
-	private java.sql.Date orderDate;
-	
-	@Column(name="ORDER_STATUS")
-	private String orderStatus;
-	
-	@Column(name="DELIVERY_FEE")
-	private Integer deliveryFee;
-	
-	@Column(name="AMOUNT_PAY")
-	private Integer amountPay;
-	
-	@ManyToOne
-	@JoinColumn(name = "MEMBER_NO")
-	private Member member;
+	@Column(name="PRODUCT_AMOUNT")
+	private Integer productAmount;
 	
 	@ManyToOne
 	@JoinColumn(name = "PRODUCT_CODE")
 	private Product product;
+	
+	@ManyToOne
+	@JoinColumn(name = "MEMBER_NO")
+	private Member member;
 
 }
