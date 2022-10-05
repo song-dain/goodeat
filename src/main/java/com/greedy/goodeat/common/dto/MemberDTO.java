@@ -2,7 +2,6 @@ package com.greedy.goodeat.common.dto;
 
 
 
-import com.greedy.goodeat.common.entity.Authority;
 
 import lombok.Data;
 
@@ -22,6 +21,5 @@ public class MemberDTO {
 	private String detailAddress;
 	private java.sql.Date joinDate;
 	private String memberStatus;
-	private Authority authority;
 
 }

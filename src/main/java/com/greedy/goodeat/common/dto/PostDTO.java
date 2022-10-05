@@ -10,7 +10,6 @@ public class PostDTO {
 	private Integer postCode;
 	private String postTitle;
 	private String postContent;
-	private java.sql.Date postRegistDate;
 	private AddfileDTO addfile;
 	private MemberDTO member;
 	private Integer postTypeCode;

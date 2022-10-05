@@ -12,7 +12,7 @@ public class InquiryDTO {
 	private String inquiryContent;
 	private MemberDTO member;
 	private ProductDTO product;
-	private Integer inquiryTypeCode;
+	private InquiryTypeDTO inquiryType;
 	private java.sql.Date inquiryRegistDate;
 	private java.sql.Date inquiryDelDate;
 	private java.sql.Date inquiryModifyDate;
