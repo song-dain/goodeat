@@ -8,16 +8,25 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="main-nav">
-        <ul>
+	
+	<th:block sec:authorize="isAuthenticated()">
+               <div class="main-nav">
+                    <h3><span sec:authentication="principal.nickname"></span>님의 방문을 환영합니다.</h3>
+                    <div class="btns">
+                        <input type="button" class="btn btn-yg" value="정보수정" id="updateMember">
+                        <input type="button" class="btn btn-or" value="로그아웃" id="logout">
+                    </div>
+                </div>
+		<ul>
             <li><a href="login">로그인</a></li>
             <li><a href="using">회원가입</a></li>
             <li><a href="help-main">고객센터</a></li>
         </ul>
+        </th:block>
         <ul class="img-link">
             <li>
                 <a href="#">
-                <img src="./source/images/post.png"  style="width: 60px; height: 60px;">
+                <img src="../images/post.png"  style="width: 60px; height: 60px;">
                 </a>
             </li>
             <li>
