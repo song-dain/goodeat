@@ -1,0 +1,41 @@
+/* 컨텐츠 */
+
+/* 컨텐츠 상단 */
+#section-1{
+    width: 100%;
+    height: 480px;/* 컨텐츠 높이 */
+    text-align: center;
+    border-bottom: 1px solid black;
+    padding-top: 20px;
+}
+
+#section-1 ul{
+    text-align: center;
+    margin: auto 260px;
+}
+
+.item-md{
+    float: left;
+    padding:20px;
+}
+
+
+.item-md img { 
+    display:block; 
+    margin:auto;
+}
+
+.item-md img:hover{
+    background-color: black;
+    opacity: 70%;
+}
+
+.item-md p{
+    padding-top: 10px;
+}
+
+.item-md p:hover{
+    
+    color: burlywood;
+    
+}
