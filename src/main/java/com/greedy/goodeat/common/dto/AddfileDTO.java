@@ -14,6 +14,6 @@ public class AddfileDTO {
 	private ReviewDTO review;
 	private PostDTO post;
 	private ProductDTO product;
-	private String thumbnailRouter;
+	private String thumbnailRoute;
 	
 }
