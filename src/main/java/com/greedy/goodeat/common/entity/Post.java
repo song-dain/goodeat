@@ -1,5 +1,9 @@
 package com.greedy.goodeat.common.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,22 +35,27 @@ public class Post {
 	@Column(name="POST_CODE")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,
 					generator="POST_SEQ_GENERATOR")
-	private Integer postCode;
+	private int postCode;
+
 	
 	@Column(name="POST_TITLE")
 	private String postTitle;
 	
 	@Column(name="POST_CONTENT")
 	private String postContent;
-	
+
+	@OneToMany
+	@JoinColumn(name="POST_CODE")
+	private List<Addfile> addfileList;
+
 	@ManyToOne
 	@JoinColumn(name="MEMBER_NO")
 	private Member member;
 	
 	@ManyToOne
 	@JoinColumn(name="POST_TYPE_CODE")
-	private PostType postTypeCode;
-	
+	private PostType postType;
+
 	@Column(name="POST_RESISTDATE")
 	private java.sql.Date postResistDate;
 	

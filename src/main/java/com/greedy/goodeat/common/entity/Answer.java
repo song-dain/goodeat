@@ -21,14 +21,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "TBL_ANSWER")
-@SequenceGenerator(name = "ANSWER_SEQ_GENERATOR", 
-				   sequenceName = "SEQ_ANSWER_CODE",
-				   initialValue = 1, allocationSize = 1)
 @DynamicInsert
 public class Answer {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ANSWER_SEQ_GENERATOR")
 	@Column(name = "ANSWER_CODE")
 	private Integer answerCode;
 	

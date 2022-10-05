@@ -19,8 +19,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Table(name="TBL_POST_TYPE")
-@SequenceGenerator(name="POST_TYPE_SEQ_GENERATOR", sequenceName="SEQ_POST_TYPE_CODE"
-, initialValue = 1, allocationSize = 1)
+
 @DynamicInsert
 public class PostType {
 

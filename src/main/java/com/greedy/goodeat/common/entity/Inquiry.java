@@ -47,7 +47,7 @@ public class Inquiry {
 	private Product product;
 	
 	@ManyToOne
-	@JoinColumn(name = "TBL_INQUIRY_TYPE")
+	@JoinColumn(name = "INQUIRYTYPE_NO")
 	private InquiryType inquiryType;
 	
 	@Column(name = "INQUIRY_REGISTDATE")

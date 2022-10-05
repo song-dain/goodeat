@@ -23,9 +23,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "TBL_ADDFILE")
-@SequenceGenerator(name = "ADDFILE_SEQ_GENERATOR", 
-				   sequenceName = "SEQ_ADDFILE_NO",
-				   initialValue = 1, allocationSize = 1)
 @DynamicInsert
 public class Addfile {
 	
@@ -49,7 +46,7 @@ public class Addfile {
 	@Column(name = "FILE_DIVISION")
 	private String fileDivision;
 	
-	@ManyToOne
+  @ManyToOne
 	@JoinColumn(name ="REVIEW_CODE")
 	private Review review;
 	

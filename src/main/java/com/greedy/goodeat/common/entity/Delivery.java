@@ -1,5 +1,7 @@
 package com.greedy.goodeat.common.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -19,7 +21,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "TBL_DELIVERY")
 @DynamicInsert
-public class Delivery {
+public class Delivery implements Serializable {
 	
 	
 	@ManyToOne
