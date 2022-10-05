@@ -2,7 +2,11 @@ package com.greedy.goodeat.common.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -23,6 +27,7 @@ public class Product {
 	
 	@Id
 	@Column(name="PRODUCT_CODE")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PRODUCT_SEQ_GENERATOR")
 	private int productCode;
 	
 	@Column(name="PRODUCT_NAME")
@@ -46,10 +51,12 @@ public class Product {
 	@Column(name="PRODUCT_MODIFYDATE")
 	private java.sql.Date productModifyDate;
 	
-
 	@Column(name="PRODUCT_DELETEDATE")
 	private java.sql.Date productDeleteDate;
 	
+	@ManyToOne
+	@JoinColumn(name = "CATEGORY_CODE")
+	private ProductCategory productCategory;
 	
 
 }

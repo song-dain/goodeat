@@ -2,7 +2,7 @@ package com.greedy.goodeat.common.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -16,19 +16,27 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "TBL_ORDER_PRODUCT")
+@Table(name = "TBL_PAYMENT")
 @DynamicInsert
-public class OrderProduct {
+public class Payment {
 	
-	@Column(name="PRODUCT_AMOUNT")
-	private String orderAmount;
+	@Id
+	@Column(name="PAY_HISTORY_CODE")
+	private Integer payHistoryCode;
+	
+	@Column(name="PAY_METHOD")
+	private String payMethod;
+	
+	@Column(name="PAY_STATUS")
+	private String payStatus;
+	
+	@Column(name="PAY_DATE")
+	private java.sql.Date payDate;
 	
 	@ManyToOne
-	@JoinColumn(name = "PRODUCT_CODE")
-	private Product product;
-	
-	@ManyToOne
-	@JoinColumn(name = "ORDER_NO")
+	@Column(name="ORDER_NO")
 	private Order order;
+	
+	
 
 }
