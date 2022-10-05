@@ -21,6 +21,10 @@ import lombok.Setter;
 @DynamicInsert
 public class OrderProduct {
 	
+	@Id
+	@Column(name = "ORDER_PRODUCT_CODE")
+	private Integer orderProductCode;
+	
 	@Column(name="PRODUCT_AMOUNT")
 	private String orderAmount;
 	
