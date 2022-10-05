@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../mainpage(수정ver.2)/source/css/header.css">
-    <link rel="stylesheet" href="../mainpage(수정ver.2)/source/css/main.css">
-    <link rel="stylesheet" href="../mainpage(수정ver.2)/source/css/footer.css">
-    <link rel="stylesheet" href="../mainpage(수정ver.2)/source/css/main-contents.css">
-    <link rel="stylesheet" href="../mainpage(수정ver.2)/source/css/slide.css">
-    <script src="https://www.w3schools.com/lib/w3.js"></script>
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/event.js}"></script>
+    
+	<script>
+	    const message = '[[${message}]]';
+	    message && alert(message);
+	</script>
+	
 </head>
 <body>
-    <header w3-include-html="header.html"></header>
-    <content w3-include-html="slide-content.html"></content>
-    <content w3-include-html="content.html"></content>
-    <content w3-include-html="product-list"></content>
-    <footer w3-include-html="footer.html"></footer>
-</body>
-<script>
-    w3.includeHTML();
-</script>
+	
+	<div th:replace="common/header.html"></div>
+	
+	<h1 align="center">index</h1>
+	
+	<div th:replace="common/footer.html"></div>
+
+</body>    
 </html>
+  

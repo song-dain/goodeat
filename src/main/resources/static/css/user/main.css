@@ -7,7 +7,7 @@
 }
 @font-face {
     font-family: "Cafe24Ssurround";
-    src: url("../font/Cafe24Ssurround.ttf") format("truetype");
+    src: url("/font/user/cartCafe24Ssurround.ttf") format("truetype");
     font-weight: normal;
   }
 
@@ -32,12 +32,6 @@ header{
     height: 218px;
     border-bottom: 1px solid#000;
 }
-
-/* .myPage {
-    font-size: 15px;
-    width: 100px;
-    padding: 0;
-} */
 
 .main-nav{
    float: right;
