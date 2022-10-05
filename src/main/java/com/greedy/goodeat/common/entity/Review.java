@@ -1,6 +1,6 @@
 package com.greedy.goodeat.common.entity;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,15 +8,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
-import com.greedy.goodeat.common.entity.Member;
-import com.greedy.goodeat.common.entity.Order;
-import com.greedy.goodeat.common.entity.Product;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,11 +30,10 @@ import lombok.Setter;
 public class Review {
 
 	@Id
-	@OneToMany(cascade=CascadeType.PERSIST)
-	@JoinColumn(name="REVIEW_CODE")
+	@Column(name="REVIEW_CODE")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,
 					generator="REVIEW_SEQ_GENERATOR")
-	private Integer REVIEW_CODE;
+	private Integer reviewCode;
 	
 	@Column(name="REIVEW_TITLE")
 	private String reviewTitle;
@@ -56,7 +52,8 @@ public class Review {
 	@JoinColumn(name="ORDER_NO")
 	private Order order;
 	
-	@Column(name="PRODUCT_CODE")
+	@ManyToOne
+	@JoinColumn(name="PRODUCT_CODE")
 	private Product product;
 	
 	@Column(name="REIVEW_REGISDATE")

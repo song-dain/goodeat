@@ -39,11 +39,11 @@ public class Inquiry {
 	private String inquiryContent;
 	
 	@ManyToOne
-	@JoinColumn(name = "TBL_MEMBER")
+	@JoinColumn(name = "MEMBER_NO")
 	private Member member;
 	
 	@ManyToOne
-	@JoinColumn(name = "TBL_PRODUCT")
+	@JoinColumn(name = "PRODUCT_CODE")
 	private Product product;
 	
 	@ManyToOne
