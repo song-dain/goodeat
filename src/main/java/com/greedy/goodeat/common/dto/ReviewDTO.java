@@ -14,7 +14,7 @@ public class ReviewDTO {
 	private MemberDTO member;
 	private OrderDTO order;
 	private ProductDTO product;
-	private java.sql.Date review_RegisDate;
+	private java.sql.Date review_RegistDate;
 	private java.sql.Date review_DeleteDate;
 	private java.sql.Date review_ModifyDate;
 	

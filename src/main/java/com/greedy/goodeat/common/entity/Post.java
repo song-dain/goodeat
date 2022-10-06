@@ -33,7 +33,7 @@ public class Post {
 	@Column(name="POST_CODE")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE,
 					generator="POST_SEQ_GENERATOR")
-	private int postCode;
+	private Integer postCode;
 
 	
 	@Column(name="POST_TITLE")
@@ -54,7 +54,7 @@ public class Post {
 	@JoinColumn(name="POST_TYPE_CODE")
 	private PostType postType;
 
-	@Column(name="POST_RESISTDATE")
+	@Column(name="POST_REGISTDATE")
 	private java.sql.Date postResistDate;
 	
 	@Column(name="POST_MODIFYDATE")
