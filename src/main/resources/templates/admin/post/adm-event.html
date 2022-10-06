@@ -1,64 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/goodeat/src/main/resources/static/css/admin/post/event.css">
-    <link rel="stylesheet" href="/goodeat//src/main/resources/static/css/admin/Adminstyle.css">
+    <link rel="stylesheet" th:href="@{/css/admin/post/event.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/Adminstyle.css}">
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gamja+Flower&family=Gowun+Dodum&family=Poor+Story&display=swap" rel="stylesheet">
-    <link rel ="icon" type="image/x-icom" href="/goodeat/src/main/resources/static/images/common/HEQXSRYC.ico">
+    <link rel ="icon" type="image/x-icom" th:href="@{/images/common/HEQXSRYC.ico}">
 </head>
 <body>
-    <header>
-        <div id="container">
-          <div id="top-menu">
-            <div class="logo-menu">
-                <img class="logo" src="/goodeat/src/main/resources/static/images/common/main-logo.PNG">
-            </div>
-            
-            <div class="box">
-                <img class="profile" src="/goodeat/src/main/resources/static/images/admin/TeamReder.PNG" alt="리더">
-            </div>
-            <div class="name-menu">
-                <p>welcome!</p>
-                <h3>관리자</h3>
-                </div>
-            </div>
-                <!--세로형 메뉴-->
-                <div class="menu-base">
-                  <ul>
-                  <li class="sub-menu">
-                      <a href="/goodeat/src/main/resources/templates/admin/member/adm-member.html" id="menu-base-a">회원관리</a></li>
-                  <li class="sub-menu">
-                      <a href="#" id="menu-base-a">상품관리</a></li>
-                  <li class="sub-menu">
-                      <a href="#" id="menu-base-a">주문관리</a></li>
-                  <li class="sub-menu">
-                      <a href="/goodeat/src/main/resources/templates/admin/requeiry/adm-requeiry.html" id="menu-base-a">문의/리뷰관리</a></li>
-                  <li class="sub-menu-select">
-                      <a href="#" id="menu-base-a">게시판관리</a></li>
-              </ul> 
-              </div>
-            <div class="clear"></div>
-        </div>
-    </header>
-    
-    <section>
-        <div class="head-top">
-            <div class="logout-content">
-                <a>로그아웃</a>
-            </div>
-            <div class="logout-img">
-              <a><img src="/goodeat/src/main/resources/static/images/admin/logout.png"></a>
-            </div>
-        </div>
-    </section>
+
+	 <div th:replace="admin/common/header.html"></div>
+   
     <div class="gong-head-box"></div>
     <div class="event-head-box"></div>
       <a class="gong-head">이벤트</a>
-      <a class="event-head" href="/goodeat/src/main/resources/templates/admin/post/adm-post.html">공지사항</a>
+      <a class="event-head" th:href="@{/admin/post}">공지사항</a>
     
     <button class="member-button">등록</button>
     <button class="btn-del">삭제</button>
