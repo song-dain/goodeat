@@ -1,7 +1,5 @@
 package com.greedy.goodeat.common.entity;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,9 +11,6 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
-
-import com.greedy.goodeat.common.dto.MemberDTO;
-import com.greedy.goodeat.common.dto.ProductDTO;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
