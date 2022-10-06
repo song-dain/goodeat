@@ -1,4 +1,4 @@
-package com.greedy.goodeat.admin.inquiry;
+package com.greedy.goodeat.admin.member.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/admin")
-public class AdmReviewController {
+public class AdmMemberController {
 	
-	@GetMapping("/review")
-	public String reviewList() {
+	@GetMapping("/member")
+	public String memberList() {
 		
-		return "/admin/inquiry/adm-review";
+		return "admin/member/adm-member";
 	}
 
 }
