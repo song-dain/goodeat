@@ -1,104 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <link rel="stylesheet" href="../source/css/main.css">
-    <link rel="stylesheet" href="../source/css/main-contents.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/main-contents.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-    <link rel="stylesheet" href="../source/css/select.css">
+    <link rel="stylesheet" href="/css/select.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../source/font/Cafe24Ssurround.ttf">
+    <link rel="stylesheet" href="/font/Cafe24Ssurround.ttf">
     
 </head>
-  
-  
-  
-    
-   
+
     <title>Select</title>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
     <!-- 헤더부분 -->
-     <header>
-         <!-- 메인 메뉴 -->
-         <div class="main-nav">
-             <ul>
-                 <li><a href="login">로그인</a></li>
-                 <li><a href="using">회원가입</a></li>
-                 <li><a href="help-main">고객센터</a></li>
-             </ul>
-             <ul class="img-link">
-                 <li>
-                     <a href="#">
-                     <img src="../source/images/post.png"  style="width: 60px; height: 60px;">
-                     </a>
-                 </li>
-                 <li>
-                     <a href="#">
-                         <img src="../source/images/cart.png" style="width: 60px; height: 60px;">
-                     </a>
-                 </li>
-             </ul>
-         </div>
-         <br>
-         <!-- 로고 부분 -->
-         <div id="head-con">
-             <div class="logo">
-                 <a href="../main/Mainpage.html" ><img src="../source/images/Logo.PNG" style="width: 300px;" /></a>
-                 <div class="serch-center">
-                     <input type="search">
-                     <button class="img-btn" type="submit" name="search">검색</button>
-                 </div>
-             </div>
-         </div>
-         <!-- 서브 메뉴 -->
-         <div class="base">
-             <ul>
-                 <li class="item">
-                     <p>카테고리</p>
-                     <!-- 드롭 다운 -->
-                     <ul class="item-menu">
-                         <li><a href="../sub/mil.html">밀키트</a></li>
-                         <li><a href="../sub/lunchbox.html">도시락</a></li>
-                         <li><a href="../sub/chickenbreast.html">닭가슴살</a></li>
-                         <li><a href="../sub/convenince.html">간편식</a></li>
-                         <li><a href="../sub/vegan.html">비건</a></li>
-                         <li><a href="../sub/boarddetail.html">공지사항/이벤트</a></li>
-                     </ul>
-                 </li>
-                 <li class="item">
-                     <a href="../sub/mil.html">밀키트</a>
-                 </li>
-                 <li class="item">
-                     <a href="../sub/lunchbox.html">도시락</a>
-                 </li>
-                 <li class="item">
-                     <a href="../sub/chickenbreast.html">닭가슴살</a>
-                 </li>
-                 <li class="item">
-                     <a href="../sub/convenince.html">간편식</a>
-                 </li>
-                 <li class="item">
-                     <a href="../sub/vegan.html">비건</a>
-                 </li>
-                 <li class="item">
-                     <a href="../sub/boarddetail.html">공지사항/이벤트</a>
-                     <!-- 드롭 다운 -->
-                     <ul class="item-menu">
-                         <li><a href="../sub/boarddetail.html">공지사항</a></li>
-                         <li><a href="../sub/boarddetail.html">이벤트</a></li>
-                     </ul>
-                    
-                 </li>
-             </ul> 
-         </div>
-         
-     </header>  
+     <div th:replace="user/common/header.html"></div>
  
  <!-- 컨텐츠 부분 -->
   <div class="container">
@@ -121,26 +43,9 @@
         </script>
     </form>    
         <button type="submit" class="btn-sl">등록</button>
-        <button type="submit" onclick="location.href='./product-list.html';" class="btn-sl2">뒤로가기</button>
+        <button type="submit" onclick="location.href='/product-list.html';" class="btn-sl2">뒤로가기</button>
   </div>
        <!-- 푸터 부분 -->
- <footer>
-     <div id="foot-wrap">
- 
-         <div class="foot-logo">
-             <a href="#" ><img src="../source/images/Logo.PNG" style="width: 150px;" /></a>
-         </div>
-         <div class="foot-menu">
-             <ul>
-                 <li><a href="#">공지사항</a></li>
-                 <li>|</li>
-                 <li><a href="#">이벤트</a></li>
-                 <li>|</li>
-                 <li><a href="#">TOP</a></li>
-             </ul>
-         </div>
-         <p class="cop">Copyright LetsGoodEat 2022 <img src="../source/images/copy.PNG" style="width: 10px;">All Right Reserved</p>
-     </div>
- </footer> 
+ <div th:replace="user/common/footer.html"></div>
  </body>
  </html>
