@@ -1,4 +1,4 @@
-package com.greedy.goodeat.user.repository;
+package com.greedy.goodeat.user.login.repository;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.greedy.goodeat.common.entity.Member;
 
-public interface MemberRepository extends JpaRepository<Member, Integer> {
+public interface LoginRepository extends JpaRepository<Member, Integer> {
 	
 	@Query(value = "SELECT"
 			+ " A.MENU_NAME "
