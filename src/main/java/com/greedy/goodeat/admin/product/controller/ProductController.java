@@ -14,12 +14,6 @@ public class ProductController {
 		return "admin/product/adm-product";
 	}
 	
-	@GetMapping("/order")
-	public String orderList() {
-		
-		return "admin/order/adm-order";
-	}
-	
 	
 
 }
