@@ -1,4 +1,4 @@
-package com.greedy.goodeat.admin.order;
+package com.greedy.goodeat.admin.order.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
