@@ -1,14 +1,158 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/css/user/main.css">
+    <link rel="stylesheet" href="css/user/slide.css">
+    <link rel="stylesheet" href="/font/Cafe24Ssurround.ttf">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/event.js}"></script>
+    
+	<script>
+	    const message = '[[${message}]]';
+	    message && alert(message);
+	</script>
+	
 </head>
 <body>
-
 	
-	<h1 align="center">GOOD EAT!!</h1>
+	<div th:replace="user/common/header.html"></div>
+	
+	<div class="slidebox">
+        <input type="radio" name="slide" id="slide01" checked>
+        <input type="radio" name="slide" id="slide02">
+        <input type="radio" name="slide" id="slide03">
+        <input type="radio" name="slide" id="slide04">
+        <ul class="slidelist">
+            <li class="slideitem">
+                <div>
+                    <label for="slide04" class="left"></label>
+                    <label for="slide02" class="right"></label>
+                    <a><img src="/images/user/mainSlide/bland4.png"></a>
+                </div>
+            </li>
+            <li class="slideitem">
+                <div>
+                    <label for="slide01" class="left"></label>
+                    <label for="slide03" class="right"></label>
+                    <a><img src="/images/user/mainSlide/bland2.png"></a>
+                </div>
+            </li>
+            <li class="slideitem">
+                <div>
+                    <label for="slide02" class="left"></label>
+                    <label for="slide04" class="right"></label>
+                    <a><img src="/images/user/mainSlide/bland3.PNG"></a>
+                </div>
+            </li>
+            <li class="slideitem">
+                <div>
+                    <label for="slide03" class="left"></label>
+                    <label for="slide01" class="right"></label>
+                    <a><img src="/images/user/mainSlide/bland.jpg"></a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <hr style="border: 1px solid black;">
+    
+    <section id="con-wrap">
 
+    <div id="section-1">
+        <h2>MD 추천 상품</h2>
+        <ul>
+            <li class="item-md">
+                <a href="">
+                    <img src="/images/user/product/milkit/hy 밀푀유 나베 22,900원 .png" alt="밀키트">
+                </a>
+                <a href="">
+                    <p>밀키트</p>
+                </a>
+            </li>
+            <li class="item-md">
+                <a href="">
+                    <img src="/images/user/product/lunchbox/도시락 사진1.png" alt="도시락">
+                </a>
+                <a href="">
+                    <p>도시락</p>
+                </a>
+            </li>
+            <li class="item-md">
+                <a href="">
+                    <img src="/images/user/product/chicken/닭가슴살 볼 치즈맛 18,900원 .png" alt="닭가슴살">
+                </a>
+                <a href="">
+                    <p>닭가슴살</p>
+                </a>
+            </li>
+            <li class="item-md">
+                <a href="">
+                    <img src="/images/user/product/convenine/만두 오리지널 .png" alt="간편식">
+                </a>
+                <a href="">
+                    <p>간편식</p>
+                </a>
+            </li>
+            <!-- <li class="item-md">
+                <a href="">
+                    <img src="/images/user/product/vegen/비건도시락 사진1.png" alt="비건">
+                </a>
+                <a href="">
+                    <p>비건</p>
+                </a>
+            </li> -->
+        </ul>
+    </div>
+    
+    <div id="section-1">
+        <h2>이 달의 추천 상품</h2>
+        <ul>
+            <li class="item-md">
+                <a href="">
+                    <img src="/images/user/product/milkit/hy 밀푀유 나베 22,900원 .png" alt="밀키트">
+                </a>
+                <a href="">
+                    <p>밀키트</p>
+                </a>
+            </li>
+            <li class="item-md">
+                <a href="">
+                    <img src="/images/user/product/lunchbox/도시락 사진1.png" alt="도시락">
+                </a>
+                <a href="">
+                    <p>도시락</p>
+                </a>
+            </li>
+            <li class="item-md">
+                <a href="">
+                    <img src="/images/user/product/chicken/닭가슴살 볼 치즈맛 18,900원 .png" alt="닭가슴살">
+                </a>
+                <a href="">
+                    <p>닭가슴살</p>
+                </a>
+            </li>
+            <li class="item-md">
+                <a href="">
+                    <img src="/images/user/product/convenine/만두 오리지널 .png" alt="간편식">
+                </a>
+                <a href="">
+                    <p>간편식</p>
+                </a>
+            </li>
+            <!-- <li class="item-md">
+                <a href="">
+                    <img src="/images/user/product/vegen/비건도시락 사진1.png" alt="비건">
+                </a>
+                <a href="">
+                    <p>비건</p>
+                </a>
+            </li> -->
+        </ul>
+    </div>    
+    </section> 
+	
+	<div th:replace="user/common/footer.html"></div>
 
-</body>
+</body>    
 </html>
