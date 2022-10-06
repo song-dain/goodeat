@@ -6,12 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/admin")
-public class ReviewController {
-	
-	@GetMapping("/review")
-	public String reviewList() {
-		
-		return "/admin/inquiry/adm-review";
-	}
+public class AdmInquiryController {
 
+	@GetMapping("/inquiry")
+	public String inquiryList() {
+		
+		return "/admin/inquiry/adm-inquiry";
+	}
 }
