@@ -17,18 +17,19 @@
         <div class="product-title">
             <a>상품등록</a>
         </div>
+        	<form action="/admin/productRegist" method="post">
             <table class="productTable1">
                 <tbody>
                 <tr>
                     <td class="td-left-class">상품명</td>
                     <td class="td-right-class">
-                        <input type="text" placeholder="상품명을 입력해주세요" id="searchbox1">
+                        <input type="text" placeholder="상품명을 입력해주세요" id="searchbox1" name="productName">
                     </td>
                 </tr>
                 <tr>
                     <td class="td-left-class">카테고리</td>
                     <td class="td-right-class">
-                        <select class="selectBox">
+                        <select class="selectBox" name="productCategory.categoryCode">
                             <option value="1">닭가슴살</option>
                             <option value="2">도시락</option>
                             <option value="3">밀키트</option>
@@ -40,29 +41,29 @@
                 <tr>
                     <td class="td-left-class">상품가격</td>
                     <td class="td-right-class">
-                        <input type="text" placeholder="상품가격을 입력해주세요" id="searchbox1">원
+                        <input type="text" placeholder="상품가격을 입력해주세요" id="searchbox1" name="productPrice">원
                     </td>
                 </tr>
                 <tr>
                     <td class="td-left-class">재고</td>
                     <td class="td-right-class">
-                        <input type="text" placeholder="재고를 입력해주세요" id="searchbox1">개
+                        <input type="text" placeholder="재고를 입력해주세요" id="searchbox1" name="productInventory">개
                     </td>
                 </tr>
                 <tr>
                     <td class="td-left-class">상품설명</td>
                     <td class="td-right-class">
-                        <input type="text" placeholder="상품명을 입력해주세요" id="searchbox2">
+                        <input type="text" placeholder="상품설명을 입력해주세요" id="searchbox2" name="productDescription">
                     </td>
                 </tr>
                 <tr>
                     <td class="td-left-class">판매상태</td>
-                    <td class="td-right-class">
-                        <input type="checkbox" id="check1">
+                    <td class="td-right-class" >
+                        <input type="checkbox" id="check1" value="NOMAL" name="productStatus">
                         판매 
-                        <input type="checkbox" id="check1">
+                        <input type="checkbox" id="check1" value="SODLOUT" name="productStatus">
                         품절
-                        <input type="checkbox" id="check1">
+                        <input type="checkbox" id="check1" value="HIDDEN" name="productStatus">
                         숨김
                     </td>
                 </tr>
@@ -75,10 +76,10 @@
                     <td class="td-left-class">상세사진</td>
                     <td class="td-right-class">
                         <input type="submit" value="파일첨부" id="productButton3"></td>
-                    </td>
                 </tr>           
             </table>
             <input type="submit" value="저장" id="productButtonSave">
+          </form>
             <input type="submit" value="목록으로" id="productButtonList">
             <input type="submit" value="삭제" id="productButtonDelete">
 

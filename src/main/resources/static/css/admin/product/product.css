@@ -315,5 +315,20 @@ ul > li {
     font-size: 25px;
 
   }
+  
+  #paging{
+  
+  	width: 80%;
+    border: 1px ;
+    margin-left: 250px;
+    position: absolute;
+    top: 97%;
+    border-collapse:collapse;
+    border-spacing:0;
+  	
+  }
 
+  
+
+  
 

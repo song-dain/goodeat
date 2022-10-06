@@ -59,7 +59,7 @@
                 </tbody>
             </table>
             <input type="submit" value="상품검색" id="productButton1">
-            <input type="submit" value="상품등록" id="productButton2">
+            <input type="submit" value="상품등록" id="productButton2" onclick="location.href='/admin/productRegist'">
 
              <!--검색내용 테이블-->
             <table class="productTable2">
@@ -72,48 +72,39 @@
                     <th>판매상태</th>
                 </tr>
 
-                <tr class="tr-body">
-                    <td>001</td>
-                    <td>닭가슴살</td>
-                    <td>5,000</td>
-                    <td>닭가슴살</td>
-                    <td>20</td>
-                    <td>판매</td>
-                </tr>
-                <tr class="tr-body">
-                    <td>002</td>
-                    <td>도시락</td>
-                    <td>8,000</td>
-                    <td>도시락</td>
-                    <td>0</td>
-                    <td>품절</td>
-                </tr>
-                <tr class="tr-body">
-                    <td>003</td>
-                    <td>간편식</td>
-                    <td>3,000</td>
-                    <td>간편식</td>
-                    <td>13</td>
-                    <td>숨김</td>
-                </tr>
-                <tr class="tr-body">
-                    <td>004</td>
-                    <td>비건</td>
-                    <td>15,000</td>
-                    <td>닭가슴살</td>
-                    <td>8</td>
-                    <td>판매</td>
-                </tr>
-                <tr class="tr-body">
-                    <td>005</td>
-                    <td>밀키트</td>
-                    <td>13,000</td>
-                    <td>밀키트</td>
-                    <td>31</td>
-                    <td>판매</td>
+                <tr class="tr-body" th:each="product : ${ productList }">
+                    <td th:text="${ product.productCode }"></td>
+                    <td th:text="${ product.productName }"></td>
+                    <td th:text="${ product.productPrice }"></td>
+                    <td th:text="${ product.productCategory.categoryName }"></td>
+                    <td th:text="${ product.productInventory }"></td>
+                    <td th:text="${ product.productStatus }"></td>
                 </tr>
             </table>
-
+            
+     <div id="paging" align="center">
+		<!-- 맨 앞으로 이동 -->
+		<button th:onclick="'location.href=\'/admin/productList?page=' + @{${paging.startPage}} + '\''"><<</button>
+		
+		<!-- 이전 페이지로 이동 -->
+		<button th:onclick="'location.href=\'/admin/productList?page=' + @{${paging.currentPage - 1}} + '\''"
+				th:disabled="${ productList.first }"><</button>
+		
+		<!-- 숫자버튼 -->
+		<th:block th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+			<button th:onclick="'location.href=\'/admin/productList?page=' + @{${page}} + '\''"
+					th:text="${ page }"
+					th:disabled="${ paging.currentPage eq page }">
+			</button>
+		</th:block>
+		
+		<!-- 다음 페이지로 이동 -->
+		<button th:onclick="'location.href=\'/admin/productList?page=' + @{${paging.currentPage + 1}} + '\''"
+				th:disabled="${ productList.last }">></button>
+		
+		<!-- 맨 끝으로 이동 -->
+		<button th:onclick="'location.href=\'/admin/productList?page=' + @{${paging.endPage}} + '\''">>></button>			
+	</div>
     </section>
 
 
