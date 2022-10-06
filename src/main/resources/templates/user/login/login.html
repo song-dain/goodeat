@@ -1,18 +1,20 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/user/info/login.css}">
 </head>
 <body>
-   <!-- Çì´õºÎºÐ -->
+   <!-- í—¤ë”ë¶€ë¶„ -->
     <header>
-        <!-- ¸ÞÀÎ ¸Þ´º -->
+        <!-- ë©”ì¸ ë©”ë‰´ -->
         <div class="main-nav">
             <ul>
-                <li><a href="login">·Î±×ÀÎ</a></li>
-                <li><a href="using">È¸¿ø°¡ÀÔ</a></li>
-                <li><a href="help-main">°í°´¼¾ÅÍ</a></li>
+                <li><a href="login">ë¡œê·¸ì¸</a></li>
+                <li><a href="using">íšŒì›ê°€ìž…</a></li>
+                <li><a href="help-main">ê³ ê°ì„¼í„°</a></li>
             </ul>
             <ul class="img-link">
                 <li>
@@ -28,72 +30,72 @@
             </ul>
         </div>
         <br>
-        <!-- ·Î°í ºÎºÐ -->
+        <!-- ë¡œê³  ë¶€ë¶„ -->
         <div id="head-con">
             <div class="logo">
                 <a href="#" ><img src="../source/images/Logo.PNG" style="width: 300px;" /></a>
                 <div class="serch-center">
                     <input type="search">
-                    <button class="img-btn" type="submit" name="search">°Ë»ö</button>
+                    <button class="img-btn" type="submit" name="search">ê²€ìƒ‰</button>
                 </div>
             </div>
         </div>
-        <!-- ¼­ºê ¸Þ´º -->
+        <!-- ì„œë¸Œ ë©”ë‰´ -->
         <div class="base">
             <ul>
                 <li class="item">
-                    <p>Ä«Å×°í¸®</p>
-                    <!-- µå·Ó ´Ù¿î -->
+                    <p>ì¹´í…Œê³ ë¦¬</p>
+                    <!-- ë“œë¡­ ë‹¤ìš´ -->
                     <ul class="item-menu">
-                        <li><a href="#">¹ÐÅ°Æ®</a></li>
-                        <li><a href="#">µµ½Ã¶ô</a></li>
-                        <li><a href="#">´ß°¡½¿»ì</a></li>
-                        <li><a href="#">°£Æí½Ä</a></li>
-                        <li><a href="#">ºñ°Ç</a></li>
-                        <li><a href="#">°øÁö»çÇ×/ÀÌº¥Æ®</a></li>
+                        <li><a href="#">ë°€í‚¤íŠ¸</a></li>
+                        <li><a href="#">ë„ì‹œë½</a></li>
+                        <li><a href="#">ë‹­ê°€ìŠ´ì‚´</a></li>
+                        <li><a href="#">ê°„íŽ¸ì‹</a></li>
+                        <li><a href="#">ë¹„ê±´</a></li>
+                        <li><a href="#">ê³µì§€ì‚¬í•­/ì´ë²¤íŠ¸</a></li>
                     </ul>
                 </li>
                 <li class="item">
-                    <a href="#">¹ÐÅ°Æ®</a>
+                    <a href="#">ë°€í‚¤íŠ¸</a>
                 </li>
                 <li class="item">
-                    <a href="#">µµ½Ã¶ô</a>
+                    <a href="#">ë„ì‹œë½</a>
                 </li>
                 <li class="item">
-                    <a href="#">´ß°¡½¿»ì</a>
+                    <a href="#">ë‹­ê°€ìŠ´ì‚´</a>
                 </li>
                 <li class="item">
-                    <a href="#">°£Æí½Ä</a>
+                    <a href="#">ê°„íŽ¸ì‹</a>
                 </li>
                 <li class="item">
-                    <a href="#">ºñ°Ç</a>
+                    <a href="#">ë¹„ê±´</a>
                 </li>
                 <li class="item">
-                    <a href="#">°øÁö»çÇ×/ÀÌº¥Æ®</a>
+                    <a href="#">ê³µì§€ì‚¬í•­/ì´ë²¤íŠ¸</a>
                 </li>
             </ul> 
         </div>
     </header>  
-   <!-- ÄÁÅÙÃ÷ ºÎºÐ -->
+   <!-- ì»¨í…ì¸  ë¶€ë¶„ -->
    <section id="con-wrap">
     <div id="loginPage">
-    <h1 id="login" class="text">·Î±×ÀÎ</h1>
-            <form id="loginForm" action="#" method="POST">
-                <input type="text" name="id" class="text-field text" placeholder=" ¾ÆÀÌµð"><br>
-                <input type="password" name="password" class="text-field text" placeholder=" ºñ¹Ð¹øÈ£"><br>
-                <input type="checkbox" name="rememberId"><label class="text"> ¾ÆÀÌµð ±â¾ïÇÏ±â</label><br><br>
-                <input type="image" src="../source/images/loginbutton.png" width="295px"/><br>
+    <h1 id="login" class="text">ë¡œê·¸ì¸</h1>
+            <form id="loginForm" action="/user/login" method="POST">
+                <input type="text" name="id" class="text-field text" placeholder=" ì•„ì´ë””"><br>
+                <input type="password" name="password" class="text-field text" placeholder=" ë¹„ë°€ë²ˆí˜¸"><br>
+                <input type="checkbox" name="rememberId"><label class="text"> ì•„ì´ë”” ê¸°ì–µí•˜ê¸°</label><br><br>
+                <input type="image" href="@{/user/images/info/loginbutton.png}" width="295px"/><br>
                 <a href="#" ><img src="../source/images/kakao.jpg" width=50px/></a>
                 <a href="#" ><img src="../source/images/naver.jpg" width=43px /></a>
             </form>
             <div id="links">
-                <a href="#" class="text">¾ÆÀÌµð Ã£±â |</a>
-                <a href="#" class="text">ºñ¹Ð¹øÈ£ Ã£±â</a><br><br>
-                <p class="text">¾ÆÁ÷ È¸¿øÀÌ ¾Æ´Ï½Å°¡¿ä? <a href="#" class="text join">È¸¿ø°¡ÀÔ</a></p>
+                <a href="#" class="text">ì•„ì´ë”” ì°¾ê¸° |</a>
+                <a href="#" class="text">ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°</a><br><br>
+                <p class="text">ì•„ì§ íšŒì›ì´ ì•„ë‹ˆì‹ ê°€ìš”? <a href="#" class="text join">íšŒì›ê°€ìž…</a></p>
             </div>
         </div>
     </section> 
-   <!-- ÇªÅÍ ºÎºÐ -->
+   <!-- í‘¸í„° ë¶€ë¶„ -->
     <footer>
         <div id="foot-wrap">
 
@@ -102,9 +104,9 @@
             </div>
             <div class="foot-menu">
                 <ul>
-                    <li><a href="#">°øÁö»çÇ×</a></li>
+                    <li><a href="#">ê³µì§€ì‚¬í•­</a></li>
                     <li>|</li>
-                    <li><a href="#">ÀÌº¥Æ®</a></li>
+                    <li><a href="#">ì´ë²¤íŠ¸</a></li>
                     <li>|</li>
                     <li><a href="#">TOP</a></li>
                 </ul>

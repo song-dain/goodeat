@@ -29,7 +29,7 @@ public class AuthenticationService implements UserDetailsService {
 		Map<String, List<String>> permitListMap = new HashMap<>();
 		
 		permitListMap.put("admin", memberRepository.findPermitList("ROLE_ADMIN"));
-		permitListMap.put("admin", memberRepository.findPermitList("ROLE_MEMBER"));
+		permitListMap.put("member", memberRepository.findPermitList("ROLE_MEMBER"));
 		
 		return permitListMap;
 	}

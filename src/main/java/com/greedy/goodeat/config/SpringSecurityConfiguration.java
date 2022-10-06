@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
@@ -13,6 +15,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.greedy.goodeat.user.service.AuthenticationService;
+
+import lombok.extern.slf4j.Slf4j;
 
 @EnableWebSecurity
 public class SpringSecurityConfiguration {
@@ -40,8 +44,6 @@ public class SpringSecurityConfiguration {
 		List<String> adminPermitList = permitListMap.get("admin");
 		List<String> memberPermitList = permitListMap.get("member");
 		
-		// 잘 안 되면 로그 찍어보기
-		
 		return http
 			.csrf()
 				.disable()
@@ -51,19 +53,27 @@ public class SpringSecurityConfiguration {
 				.anyRequest().permitAll()
 			.and()
 				.formLogin()
-				.loginPage("/user/login/login")
-				.successForwardUrl("/")
-				.failureForwardUrl("/user/login/login")
+				.loginPage("/user/login")
+				.defaultSuccessUrl("/")
+				.failureForwardUrl("/user/login")
 			.and()
 				.logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/"))
+				.logoutRequestMatcher(new AntPathRequestMatcher("/user"))
 				.deleteCookies("JSESSIONID")
 				.invalidateHttpSession(true)
 				.logoutSuccessUrl("/")
-//			.and()
-//				.exceptionHandling()
-//				.accessDeniedPage("/")
 			.and()
+				.build();
+	}
+	
+	@Bean
+	public AuthenticationManager authManager(HttpSecurity http) throws Exception {
+		
+		return http
+				.getSharedObject(AuthenticationManagerBuilder.class)
+				.userDetailsService(authenticationService)
+				.passwordEncoder(passwordEncoder())
+				.and()
 				.build();
 	}
 	
