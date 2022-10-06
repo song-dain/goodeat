@@ -54,4 +54,8 @@ public class AdmPostController {
 		return "/admin/post/adm-post";
 	}
 	
+	@GetMapping("/post/regist")
+	public String goRegist() {
+		return "/admin/post/adm-detailpost";
+	}
 }
