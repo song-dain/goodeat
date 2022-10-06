@@ -18,6 +18,13 @@ import com.greedy.goodeat.common.entity.Product;
 @Service
 public class AdmProductService {
 		
+	public static final int TEXT_PAGE_SIZE = 10;
+	public static final int THUMBNAIL_PAGE_SIZE = 9;
+	public static final int TEXT_PRODUCT_TYPE = 1;
+	public static final int THUMBNAIL_PRODUCT_TYPE = 2;
+	public static final String SORT_BY = "produceCode";
+	public static final String PRODUCT_STATUS = "Y";
+	
 	private final AdmProductRepository admProductRepository;
 	private final AdmProductCategoryRepository admPproductCategoryRepository;
 	private final ModelMapper modelMapper;
@@ -44,6 +51,22 @@ public class AdmProductService {
 		
 		admProductRepository.save(modelMapper.map(newProduct, Product.class));
 	}
+
+	public Page<ProductDTO> selectThumbnailList(int page) {
+		Pageable pageable = PageRequest.of(page - 1 , THUMBNAIL_PAGE_SIZE, Sort.by(SORT_BY).descending());
+		Page<Product> thumbnailList = admProductRepository.findByProductStatus(PRODUCT_STATUS, pageable);
+		
+		return thumbnailList.map(product -> modelMapper.map(product, ProductDTO.class));
+	}
+
+	public void registThumbnail(ProductDTO product) {
+		
+		product.setProductStatus(PRODUCT_STATUS);
+		admProductRepository.save(modelMapper.map(product, Product.class));
+		
+	}
+
+
 
 //	public List<ProductCategoryDTO> findAllCategory(){
 //		
