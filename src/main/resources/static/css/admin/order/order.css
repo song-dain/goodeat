@@ -430,11 +430,11 @@ ul > li {
   border-style: solid;
 }
 
-.selectBox{
+#selectBox{
   height: 30px;
   margin-top: 15px;
   margin-bottom: 20px;
-  width: 200px;
+  width: 60%;
   border-style: solid;
   
 }
