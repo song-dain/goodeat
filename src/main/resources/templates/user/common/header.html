@@ -1,92 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../source/css/main.css">
+    <link rel="stylesheet" href="/css/user/main.css">
+    <link rel="stylesheet" href="/css/user/main-contents.css">
     <title>Document</title>
 </head>
 <body>
-	
-	<th:block sec:authorize="isAuthenticated()">
-               <div class="main-nav">
-                    <h3><span sec:authentication="principal.nickname"></span>님의 방문을 환영합니다.</h3>
-                    <div class="btns">
-                        <input type="button" class="btn btn-yg" value="정보수정" id="updateMember">
-                        <input type="button" class="btn btn-or" value="로그아웃" id="logout">
-                    </div>
+              <header>
+        <!-- 메인 메뉴 -->
+        <div class="main-nav">
+            <ul>
+                <li><a href="/login">로그인</a></li>
+                <li><a href="using">회원가입</a></li>
+                <li><a href="help-main">고객센터</a></li>
+                <li><button onclick="location.href='/admin/productList'">관리자 - 상품</button>
+                <br>
+                <br>
+					<button onclick="location.href='/admin/member'">관리자 - 회원</button>
+				<br>
+				</li>
+            </ul>
+            <ul class="img-link">
+                <li>
+                    <a href="">
+                    <img src="/images/user/main/post.png"  style="width: 60px; height: 60px;">
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <img src="/images/user/main/cart.png" style="width: 60px; height: 60px;">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <br>
+        <!-- 로고 부분 -->
+        <div id="head-con">
+            <div class="logo">
+                <a href="#" ><img src="/images/user/main/Logo.PNG" style="width: 300px;" /></a>
+                <div class="serch-center">
+                    <input type="search">
+                    <button class="img-btn" type="submit" name="search">검색</button>
                 </div>
-		<ul>
-            <li><a href="login">로그인</a></li>
-            <li><a href="using">회원가입</a></li>
-            <li><a href="help-main">고객센터</a></li>
-        </ul>
-        </th:block>
-        <ul class="img-link">
-            <li>
-                <a href="#">
-                <img src="../images/post.png"  style="width: 60px; height: 60px;">
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <img src="../source/images/cart.png" style="width: 60px; height: 60px;">
-                </a>
-            </li>
-        </ul>
-    </div>
-    <br>
-    <!-- 로고 부분 -->
-    <div id="head-con">
-        <div class="logo">
-            <a href="../main/Mainpage.html" ><img src="./source/images/Logo.PNG" style="width: 300px;" /></a>
-            <div class="serch-center">
-                <input type="search">
-                <button class="img-btn" type="submit" name="search">검색</button>
             </div>
         </div>
-    </div>
-    <!-- 서브 메뉴 -->
-    <div class="base">
-        <ul>
-            <li class="item">
-                <p>카테고리</p>
-                <!-- 드롭 다운 -->
-                <ul class="item-menu">
-                    <li><a href="../sub/mil.html">밀키트</a></li>
-                    <li><a href="../sub/lunchbox.html">도시락</a></li>
-                    <li><a href="../sub/chickenbreast.html">닭가슴살</a></li>
-                    <li><a href="../sub/convenince.html">간편식</a></li>
-                    <li><a href="../sub/vegan.html">비건</a></li>
-                    <li><a href="../sub/boarddetail.html">공지사항/이벤트</a></li>
-                </ul>
-            </li>
-            <li class="item">
-                <a href="../sub/mil.html">밀키트</a>
-            </li>
-            <li class="item">
-                <a href="../sub/lunchbox.html">도시락</a>
-            </li>
-            <li class="item">
-                <a href="../sub/chickenbreast.html">닭가슴살</a>
-            </li>
-            <li class="item">
-                <a href="../sub/convenince.html">간편식</a>
-            </li>
-            <li class="item">
-                <a href="../sub/vegan.html">비건</a>
-            </li>
-            <li class="item">
-                <a href="../sub/boarddetail.html">공지사항/이벤트</a>
-                <!-- 드롭 다운 -->
-                <ul class="item-menu">
-                    <li><a href="../sub/boarddetail.html">공지사항</a></li>
-                    <li><a href="../sub/boarddetail.html">이벤트</a></li>
-                </ul>
-               
-            </li>
-        </ul> 
-    </div>
+        <!-- 서브 메뉴 -->
+        <div class="base">
+            <ul>
+                <li class="item">
+                    <p>카테고리</p>
+                    <!-- 드롭 다운 -->
+                    <ul class="item-menu">
+                        <li><a href="">밀키트</a></li>
+                        <li><a href="">도시락</a></li>
+                        <li><a href="">닭가슴살</a></li>
+                        <li><a href="">간편식</a></li>
+                        <li><a href="">비건</a></li>
+                        <li><a href="">공지사항/이벤트</a></li>
+                    </ul>
+                </li>
+                <li class="item">
+                    <a href="">밀키트</a>
+                </li>
+                <li class="item">
+                    <a href="">도시락</a>
+                </li>
+                <li class="item">
+                    <a href="">닭가슴살</a>
+                </li>
+                <li class="item">
+                    <a href="">간편식</a>
+                </li>
+                <li class="item">
+                    <a href="">비건</a>
+                </li>
+                <li class="item">
+                    <p>공지사항/이벤트</p>
+                    <!-- 드롭 다운 -->
+                    <ul class="item-menu">
+                        <li><a href="">공지사항</a></li>
+                        <li><a href="">이벤트</a></li>
+                    </ul>
+                </li>
+            </ul> 
+        </div>
+        
+    </header>  
 </body>
 </html>
