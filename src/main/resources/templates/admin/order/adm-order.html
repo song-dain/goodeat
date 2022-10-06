@@ -131,13 +131,13 @@
     <div class="popup_layer" id="popup_layer" style="display: none;">
         <div class="popup_box">
             <div style="height: 10px; width: 375px; float: top;">
-              <a href="javascript:closePop();"><img src="/goodeat/src/main/resources/static/images/admin/ic_close.svg" class="m_header-banner-close" width="70px" height="70px"></a>
+              <a href="javascript:closePop();"><img th:src="@{/images/admin/ic_close.svg}" class="m_header-banner-close" width="70px" height="70px"></a>
             </div>
             <!--팝업 컨텐츠 영역-->
             <div class="popup_cont">
                 <h2> 송장번호 입력 </h2>
                     <h3 class="content">택배사</h3>
-                    <select class="selectBox">
+                    <select id="selectBox">
                         <option value="1">CJ대한통운</option>
                         <option value="2">한진택배</option>
                         <option value="3">롯데택배</option>
@@ -162,12 +162,12 @@
       <div class="popup_layer" id="popup_layer_status" style="display: none;">
         <div class="popup_box">
             <div style="height: 10px; width: 375px; float: top;">
-              <a href="javascript:closePopStatus();"><img src="/goodeat/src/main/resources/static/images/admin/ic_close.svg" class="m_header-banner-close" width="70px" height="70px"></a>
+              <a href="javascript:closePopStatus();"><img th:src="@{/images/admin/ic_close.svg}" class="m_header-banner-close" width="70px" height="70px"></a>
             </div>
             <!--팝업 컨텐츠 영역-->
             <div class="popup_cont">
                 <h2> 주문상태변경 </h2>
-                    <select class="selectBox">
+                    <select id="selectBox">
                         <option value="1">취소완료</option>
                         <option value="2">환불완료</option>
                     </select>
