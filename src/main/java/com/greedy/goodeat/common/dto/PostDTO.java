@@ -11,13 +11,13 @@ import lombok.Data;
 @Data
 public class PostDTO {
 
-	private int postCode;
+	private Integer postCode;
 	private String postTitle;
 	private String postContent;
 	private List<Addfile> addfileList;
 	private MemberDTO member;
 	private PostTypeDTO postType;
-	private java.sql.Date postResistDate;
+	private java.sql.Date postRegisDate;
 	private java.sql.Date postModifyDate;
 	private java.sql.Date postDelDate;
 	private String postStatus;

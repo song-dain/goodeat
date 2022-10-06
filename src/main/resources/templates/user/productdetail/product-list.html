@@ -1,101 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../source/css/main.css">
-    <link rel="stylesheet" href="../source/css/product-list.css">
-    <link rel="stylesheet" href="../source/css/main-contents.css">
-    <link rel="stylesheet" href="../source/font/Cafe24Ssurround.ttf">
-    <link rel="stylesheet" href="../sub/footer.html">
+    <link rel="stylesheet" href="/css/user/main.css">
+    <link rel="stylesheet" href="/css/user/productDetail/product-list.css">
+    <link rel="stylesheet" href="/css/user/main-contents.css">
+    <link rel="stylesheet" href="/font/user/Cafe24Ssurround.ttf">
     
     <title>MainPage</title>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
-   <!-- 헤더부분 -->
-    <header>
-        <!-- 메인 메뉴 -->
-        <div class="main-nav">
-            <ul>
-                <li><a href="login">로그인</a></li>
-                <li><a href="using">회원가입</a></li>
-                <li><a href="help-main">고객센터</a></li>
-            </ul>
-            <ul class="img-link">
-                <li>
-                    <a href="#">
-                    <img src="../source/images/post.png"  style="width: 60px; height: 60px;">
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <img src="../source/images/cart.png" style="width: 60px; height: 60px;">
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <br>
-        <!-- 로고 부분 -->
-        <div id="head-con">
-            <div class="logo">
-                <a href="../main/Mainpage.html" ><img src="../source/images/Logo.PNG" style="width: 300px;" /></a>
-                <div class="serch-center">
-                    <input type="search">
-                    <button class="img-btn" type="submit" name="search">검색</button>
-                </div>
-            </div>
-        </div>
-        <!-- 서브 메뉴 -->
-        <div class="base">
-            <ul>
-                <li class="item">
-                    <p>카테고리</p>
-                    <!-- 드롭 다운 -->
-                    <ul class="item-menu">
-                        <li><a href="../sub/mil.html">밀키트</a></li>
-                        <li><a href="../sub/lunchbox.html">도시락</a></li>
-                        <li><a href="../sub/chickenbreast.html">닭가슴살</a></li>
-                        <li><a href="../sub/convenince.html">간편식</a></li>
-                        <li><a href="../sub/vegan.html">비건</a></li>
-                        <li><a href="../sub/boarddetail.html">공지사항/이벤트</a></li>
-                    </ul>
-                </li>
-                <li class="item">
-                    <a href="../sub/mil.html">밀키트</a>
-                </li>
-                <li class="item">
-                    <a href="../sub/lunchbox.html">도시락</a>
-                </li>
-                <li class="item">
-                    <a href="../sub/chickenbreast.html">닭가슴살</a>
-                </li>
-                <li class="item">
-                    <a href="../sub/convenince.html">간편식</a>
-                </li>
-                <li class="item">
-                    <a href="../sub/vegan.html">비건</a>
-                </li>
-                <li class="item">
-                    <a href="../sub/boarddetail.html">공지사항/이벤트</a>
-                    <!-- 드롭 다운 -->
-                    <ul class="item-menu">
-                        <li><a href="../sub/boarddetail.html">공지사항</a></li>
-                        <li><a href="../sub/boarddetail.html">이벤트</a></li>
-                    </ul>
-                   
-                </li>
-            </ul> 
-        </div>
-        
-    </header>  
+
+<div th:replace="user/common/header.html"></div> 
 
 <!-- 컨텐츠 부분 -->
    <div id="cont-list-wrap">
     <div class="product-top">
         <ul>
             <li class="pt-img">
-                <img src="../source/images/밀키트/채근담 떡국 10,000원.png" alt="밀키트">
+                <img src="/images/밀키트/채근담 떡국 10,000원.png" alt="밀키트">
             </li>
             <li class="right-te">
                 <h4>바쁜 직장인 강추 상품</h4>
@@ -131,7 +57,7 @@
     
     <div id="section1" class="container-fluid bg-success" >
         <div class="first-pt">
-            <img src="../source/images/상세/vigen/Dd_sub2.PNG" alt="">
+            <img src="/images/상세/vigen/Dd_sub2.PNG" alt="">
         </div>
       </div>
       <div id="section2" class="container-fluid bg-warning" >
@@ -251,45 +177,13 @@
       </div>
       <div id="section4" class="container-fluid bg-secondary">
         <div class="first-pt">
-            <img src="../source/images/상세/vigen/post_ss.PNG" alt="" style="width: 100%;">
+            <img src="/images/상세/vigen/post_ss.PNG" alt="" style="width: 100%;">
         </div>
       </div>
     </div>
-      <!-- 푸터 부분 -->
-<footer>
-    <div id="foot-wrap">
-
-        <div class="foot-logo">
-            <a href="#" ><img src="../source/images/Logo.PNG" style="width: 150px;" /></a>
-        </div>
-        <div class="foot-menu">
-            <ul>
-                <li><a href="#">공지사항</a></li>
-                <li>|</li>
-                <li><a href="#">이벤트</a></li>
-                <li>|</li>
-                <li><a href="#">TOP</a></li>
-            </ul>
-        </div>
-        <p class="cop">Copyright LetsGoodEat 2022 <img src="../source/images/copy.PNG" style="width: 10px;">All Right Reserved</p>
-    </div>
-</footer> 
-
-    <!-- 탭메뉴 컨텐츠 
-    <div id="product-bottom">
-        <div class="tap-menu">
-            <ul>
-                <li id="first"><a href="#">상품상세</a></li>
-                <li><a href="./product-review.html">구매후기</a></li>
-                <li><a href="#">상품문의</a></li>
-                <li><a href="#">구매정보</a></li>
-            </ul>
-        </div>
-        
-
-   </div> -->
+ 
     
-   
+   <div th:replace="user/common/footer.html"></div>
    
     
     

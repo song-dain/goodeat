@@ -1,5 +1,8 @@
 package com.greedy.goodeat.common.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -58,5 +62,8 @@ public class Product {
 	@JoinColumn(name = "CATEGORY_CODE")
 	private ProductCategory productCategory;
 	
+	@OneToMany(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "REF_BOARD_NO")
+	private List<Addfile> addfileList;
 
 }
