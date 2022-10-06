@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="/css/user/main.css">
 <link rel="stylesheet" href="css/user/slide.css">
 <link rel="stylesheet" href="/css/user/info/join.css">
+<script type="text/javascript" th:src="@{/js/event.js}"></script>
 <meta charset="UTF-8">
 <title>Join</title>
 </head>
@@ -19,7 +20,7 @@
                 <table>
                     <tr>
                         <td align="right">아이디 <img src="/images/user/info/essential.png"/ width="5px"></td>
-                        <td align="left"><input name="id" id="id" class="text-field" placeholder="4~6자 이상 영문, 또는 숫자만 가능"/>
+                        <td align="left"><input name="memberId" id="memberId" class="text-field" placeholder="4~6자 이상 영문, 또는 숫자만 가능"/>
                         <input type="button" class="id-button button" id="checkId" value="중복확인"></td>
                     </tr>
                     <tr>
@@ -28,7 +29,7 @@
                     </tr>
                     <tr>
                         <td align="right">비밀번호 <img src="/images/user/info/essential.png"/ width="5px"></td>
-                        <td align="left"><input type="password" name="password" id="password" class="text-field" placeholder="6~16자 영문, 숫자 혼용 필수"/></td>
+                        <td align="left"><input type="password" name="memberPwd" id="password" class="text-field" placeholder="6~16자 영문, 숫자 혼용 필수"/></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -40,7 +41,7 @@
                     </tr>
                     <tr>
                         <td align="right">이름 <img src="/images/user/info/essential.png"/ width="5px"></td>
-                        <td align="left"><input type="text" id="name" class="text-field" placeholder="2자 이상 입력"/></td>
+                        <td align="left"><input type="text" name="memberName" class="text-field" placeholder="2자 이상 입력"/></td>
                     </tr>
                     </tr>
                         <td></td>
@@ -70,7 +71,7 @@
                     <tr>
                         <td align="right">이메일 <img src="/images/user/info/essential.png"/ width="5px"></td>
                         <td align="left">
-                            <input text="email" name="emailId" class="text-field email-button button" id="email" placeholder="이메일 주소 인증"/>
+                            <input text="email" name="email" class="text-field email-button button" id="email" placeholder="이메일 주소 인증"/>
                             <select name="emailAddress" id="email-address">
                                 <option>선택</option>
                                 <option>gmail.com</option>
@@ -81,7 +82,7 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td align="left"><input text="email" name="emailCode" class="text-field" id="email" placeholder="이메일로 전송된 인증번호 입력"/>
+                        <td align="left"><input text="email" name="emailCode" class="text-field" id="emailCode" placeholder="이메일로 전송된 인증번호 입력"/>
                             <input type="button" class="email-button button" value="이메일 인증"/></td>
                     </tr>
                     <tr>
@@ -224,7 +225,7 @@
 	    	 }
 	     }).open();
      }
-     
+
      </script>
      
  

@@ -14,10 +14,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.greedy.goodeat.user.login.service.AuthenticationService;
+import com.greedy.goodeat.user.member.service.AuthenticationService;
 
 import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @EnableWebSecurity
 public class SpringSecurityConfiguration {
 	
@@ -43,6 +44,9 @@ public class SpringSecurityConfiguration {
 		
 		List<String> adminPermitList = permitListMap.get("admin");
 		List<String> memberPermitList = permitListMap.get("member");
+		
+		adminPermitList.forEach(url -> log.info("adminPermitList : {}", url));
+		memberPermitList.forEach(url -> log.info("memberPermitList : {}", url));
 		
 		return http
 			.csrf()
