@@ -35,13 +35,13 @@ public class Review {
 					generator="REVIEW_SEQ_GENERATOR")
 	private Integer reviewCode;
 	
-	@Column(name="REIVEW_TITLE")
+	@Column(name="REVIEW_TITLE")
 	private String reviewTitle;
 	
-	@Column(name="REIVEW_CONTENT")
+	@Column(name="REVIEW_CONTENT")
 	private String reviewContent;
 	
-	@Column(name="REIVEW_STATUS")
+	@Column(name="REVIEW_STATUS")
 	private String reviewStatus;
 	
 	@ManyToOne
@@ -56,13 +56,13 @@ public class Review {
 	@JoinColumn(name="PRODUCT_CODE")
 	private Product product;
 	
-	@Column(name="REIVEW_REGISDATE")
-	private java.sql.Date review_RegisDate;
+	@Column(name="REVIEW_REGISTDATE")
+	private java.sql.Date reviewRegistDate;
 	
-	@Column(name="REIVEW_DELETEDATE")
-	private java.sql.Date review_DeleteDate;
+	@Column(name="REVIEW_DELETEDATE")
+	private java.sql.Date reviewDeleteDate;
 	
-	@Column(name="REIVEW_MODIFYDATE")
-	private java.sql.Date review_ModifyDate;
+	@Column(name="REVIEW_MODIFYDATE")
+	private java.sql.Date reviewModifyDate;
 	
 }
