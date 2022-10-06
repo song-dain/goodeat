@@ -2,6 +2,7 @@ package com.greedy.goodeat.admin.product.controller;
 
 
 
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.greedy.goodeat.admin.product.service.AdmProductService;
 import com.greedy.goodeat.common.dto.ProductDTO;
@@ -24,11 +26,12 @@ import lombok.extern.slf4j.Slf4j;
 public class AdmProductController {
 	
 	private final AdmProductService admProductService;
+	private final MessageSourceAccessor messageSourceAccessor;
 	
-	public AdmProductController(AdmProductService admProductService) {
+	public AdmProductController(AdmProductService admProductService, MessageSourceAccessor messageSourceAccessor) {
 		
 		this.admProductService = admProductService;
-		
+		this.messageSourceAccessor = messageSourceAccessor;
 	}
 	
 	@GetMapping("/productList")
@@ -62,7 +65,7 @@ public class AdmProductController {
 	}
 	
 	@PostMapping("/productRegist")
-	public String productRegist(Model model, ProductDTO newProduct) {
+	public String productRegist(Model model, ProductDTO newProduct, RedirectAttributes rttr) {
 		
 		log.info("[ProductController] =======================");
 	
@@ -70,10 +73,11 @@ public class AdmProductController {
 		admProductService.registProduct(newProduct);
 		
 		model.addAttribute("newProduct", newProduct);
+		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("product.regist"));
 		
 		log.info("[ProductController] =======================");
 		
-		return "redirect:/admin/product/adm-product";
+		return "redirect:/admin/productList";
 		
 	}
 	
