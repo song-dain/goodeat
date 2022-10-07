@@ -20,6 +20,14 @@ import com.greedy.goodeat.common.entity.Product;
 @Service
 public class AdmPostService {
 	
+	public static final int TEXT_PAGE_SIZE = 10;
+	public static final int THUMBNAIL_PAGE_SIZE = 9;
+	public static final int TEXT_BOARD_TYPE = 1;
+	public static final int THUMBNAIL_BOARD_TYPE = 2;
+	public static final String SORT_BY = "postCode";
+	public static final String ACTIVE_STATUS = "Y";
+	
+	
 	private final ModelMapper modelMapper;
 	private final AdmPostRepository admPostRepository;
 	
@@ -40,6 +48,12 @@ public class AdmPostService {
 		Page<Post> postList = admPostRepository.findAll(pageable);
 		
 		return postList.map(post -> modelMapper.map(post, PostDTO.class));
+	}
+
+	public void registPost(PostDTO newPost) {
+		
+		admPostRepository.save(modelMapper.map(newPost, Post.class));
+		
 	}
 
 }
