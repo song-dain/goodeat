@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<link rel="stylesheet" href="/css/user/main.css">
-<link rel="stylesheet" href="css/user/slide.css">
-<link rel="stylesheet" href="/css/user/info/join.css">
-<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<link rel="stylesheet" href="/css/user/main.css">
+	<link rel="stylesheet" href="css/user/slide.css">
+	<link rel="stylesheet" href="/css/user/info/join.css">
+	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <meta charset="UTF-8">
 <title>Join</title>
 </head>
@@ -16,10 +16,10 @@
    
         <div id="registPage">
             <div id="regist" >회원가입</div><hr style="margin-bottom:2em">
-            <form name="regist" th:action="@{/join}" method="post">
+            <form name="regist" th:action="@{/join}" method="post" id="memberInsertFrom" autocomplete="off" onsubmit="onSubmit()">
                 <table>
                     <tr>
-                        <td align="right">아이디 <img src="/images/user/info/essential.png"/ width="5px"></td>
+                        <td align="right">아이디 <img src="/images/user/info/essential.png" width="5px"/></td>
                         <td align="left"><input name="memberId" id="memberId" class="text-field" placeholder="4~10자 영문, 또는 숫자만 가능"/>
                     </tr>
                     <tr>
@@ -27,7 +27,7 @@
                         <td align="left"><div id="checkedId"></div></td>
                     </tr>
                     <tr>
-                        <td align="right">비밀번호 <img src="/images/user/info/essential.png"/ width="5px"></td>
+                        <td align="right">비밀번호 <img src="/images/user/info/essential.png" width="5px" /></td>
                         <td align="left"><input type="password" name="memberPwd" id="password" class="text-field" placeholder="6~16자 영문, 숫자 혼용 필수"/></td>
                     </tr>
                     <tr>
@@ -36,24 +36,26 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td align="left" id="passwordCheck"></td>
+                        <td align="left" id="checkedPwd"></td>
                     </tr>
                     <tr>
-                        <td align="right">이름 <img src="/images/user/info/essential.png"/ width="5px"></td>
-                        <td align="left"><input type="text" name="memberName" class="text-field" placeholder="2자 이상 입력"/></td>
+                        <td align="right">이름 <img src="/images/user/info/essential.png" width="5px"/></td>
+                        <td align="left"><input type="text" name="memberName" id="memberName" class="text-field" placeholder="2자 이상 입력"/></td>
                     </tr>
-                    </tr>
+                    <tr>
                         <td></td>
-                    <tr>
-                    <tr>
-                        <td align="right">휴대전화 <img src="/images/user/info/essential.png"/ width="5px"></td>
-                        <td align="left"><input text="text" name="phone" class="text-field" placeholder="번호만 입력"/></td>
+                        <td align="left" id="checkedName"></td>
                     </tr>
+                    <tr>
+                        <td align="right">휴대전화 <img src="/images/user/info/essential.png" width="5px" /></td>
+                        <td align="left"><input type="text" name="phone" id="phone" class="text-field" placeholder="'010'부터 번호만 입력"/></td>
                     </tr>
+                    <tr>
                         <td></td>
+                        <td align="left" id="checkedPhone"></td>
+                    </tr>
                     <tr>
-                    <tr>
-                        <td align="right">주소 <img src="/images/user/info/essential.png"/ width="5px"></td>
+                        <td align="right">주소 <img src="/images/user/info/essential.png" width="5px"/></td>
                         <td align="left">
                             <input class="text-field" name="zipCode" id="zipCode" placeholder="우편번호" readonly>
                             <input class="text-field" name="address" id="searchAddress" placeholder="검색을 통해 입력할 수 있습니다" readonly>
@@ -66,11 +68,13 @@
                             <input type="button" class="search-button button" id="search" value="검색"/>
                         </td>
                     </tr>
-                        <td></td>
                     <tr>
-                        <td align="right">이메일 <img src="/images/user/info/essential.png"/ width="5px"></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td align="right">이메일 <img src="/images/user/info/essential.png" width="5px"/></td>
                         <td align="left">
-                            <input text="email" name="email" class="text-field email-button button" id="email" placeholder="이메일 주소 인증"/>
+                            <input type="text" name="email" class="text-field email-button button" id="email" placeholder="이메일 주소 인증"/>
                             <select name="email2" id="emailAddress">
                                 <option>직접입력</option>
                                 <option>gmail.com</option>
@@ -81,7 +85,7 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td align="left"><input text="email" name="emailCode" class="text-field" id="emailCode" placeholder="이메일로 전송된 인증번호 입력"/>
+                        <td align="left"><input type="text" name="emailCode" class="text-field" id="emailCode" placeholder="이메일로 전송된 인증번호 입력"/>
                             <input type="button" class="email-button button" value="이메일 인증"/></td>
                     </tr>
                     <tr>
@@ -96,7 +100,6 @@
                         <input type="radio" name="gender" value="여" id="woman">
                         </td> 
                     </tr>
-                    <td></td>
                     <tr>
                         <td align="right">생년월일</td>
                         <td align="left">
@@ -185,9 +188,11 @@
                             </select>
                         </td>
                     </tr>
-                    <td></td>
                     <tr>
-                        <td align="right">이용약관 <img src="/images/user/info/essential.png"/ width="5px"></td>
+                    <td></td>
+                    </tr>
+                    <tr>
+                        <td align="right">이용약관 <img src="/images/user/info/essential.png" width="5px" /></td>
                         <td align="left">
                             <a href="#" class="links">개인정보처리방침(필수)</a>
                             <input type="checkbox" name="agreement1"/>
@@ -210,72 +215,134 @@
     
      <script>
      
-     // 유효성 검사
      const memberId = document.getElementById("memberId");
-     const memberPwd = document.getElementById("memberPwd");
-
+     const memberPwd = document.getElementById("password");
      const memberName = document.getElementById("memberName");
      const phone = document.getElementById("phone");
      
      var id_RegExp = /^[a-zA-Z0-9]{4,10}$/; //아이디
-     var pwd_RegExp = /^[a-zA-Z0-9]{6,16}$/; // 패스워드
+     var pwd_RegExp = /(?=.*\d)(?=.*[a-zA-ZS]).{6,16}/; // 패스워드
      var n_RegExp = /^[가-힣]{2,15}$/; // 이름
-     var p_RegExp = /^[0-9]{2,15}$/; // 번호 
+     var p_RegExp = /^[0-9]{11,}$/; // 번호 
+     
+     const checkedId = document.getElementById("checkedId");
+     const checkedPwd = document.getElementById("checkedPwd");
+     const password2 = document.getElementById("password2");
+     const checkedName = document.getElementById("checkedName");
+     const checkedPhone = document.getElementById("checkedPhone");
      
      
-/*      $('#joinBtn').onclick(function(){
-    	 
-         // 아이디 검사
-         if(!id_RegExp.test(memberId)){
-        	 alert('영문 및 숫자만 입력해주세요.');
-         }
-    	 
-     }) */
+ 	function onSubmit () {
+ 		
+ 		alert('유효성 검사');
+   	 
+		if(!pwd_RegExp.test(memberPwd)){
+			return false;
+		}
+		
+		if(memberPwd != password2){
+			return false;
+		}
+		
+		if(!n_RegExp.test(memberName)){
+			return false;
+		}
+		
+		if(!p_RegExp.test(phone)){
+			return false;
+		}
+		
+     }
      
-
-     
-     
-     
-     if(memberId){
+    // 아이디 유효성 검사 & 중복 검사
+     if(document.getElementById("memberId")){
 	     
 	     memberId.onkeyup = function () {
 	    	 
-	    	 let memberId = document.getElementById("memberId");
+	    	 let memberIdValue = memberId.value.trim();
+	    	 
+	    	 if(!id_RegExp.test(memberIdValue)){
+	    		 checkedId.innerHTML = '<div id="result"> 4~6자 영문 또는 숫자만 입력 가능합니다. <div>';
+	    		 return;
+	    	 }
 	    	 
 	    	 fetch("/idDupCheck", {
 	    		 method: "POST",
 	    		 headers: {
 	    			 'Content-Type': 'application/json;charset=UTF-8'
 	    		 },
-	    		 body: JSON.stringify({memberId: memberId})
+	    		 body: JSON.stringify({memberId: memberIdValue})
 	    	 })
 	    	 	.then(result => result.text())
 	    	 	.then(result => checkedId.innerHTML = '<div id="result">' + result + '</div>')
 	    	 	.catch((error) => error.text().then((res) => alert(res)));
 	     }
      }
-     
-     //비밀번호 검사
-     
-     const password2 = document.getElementById("password2");
-     
-     password2.onchange = function () {
+    
+    
+     // 비밀번호 유효성 검사
+     if(document.getElementById("password")){
     	 
-    	 let passwordCheck = document.getElementById("passwordCheck");
-    	 
-    	 if(memberPwd != password){
+    	 memberPwd.onkeyup = function() {
     		 
-    		 passwordCheck.innerHTML = '<div id="result">비밀번호가 일치하지 않습니다.</div>';
- 
+    		 let memberPwdValue = memberPwd.value.trim();
     		 
-    	 } else if (memberPwd = password){
-    		 
-    		 passwordCheck.innerHTML = '<div id="result">비밀번호 확인되었습니다.</div>';
-    		 
-    		 return false;
+    		 if(!pwd_RegExp.test(memberPwdValue)){
+    			 checkedPwd.innerHTML = '<div id="result"> 6~16자 영문, 숫자 혼합 비밀번호만 가능합니다. <div>';
+
+    		 } else {
+    			 checkedPwd.innerHTML = '<div id="result"> 사용 가능한 비밀번호입니다. <div>';
+    		 }
     	 }
      }
      
+     // 비밀번호 재검사
+     if(document.getElementById("password2")){
+    	 
+    	 password2.onkeyup = function(){
+    		 
+    		 let memberPwdValue = memberPwd.value.trim();
+    		 let password2Value = password.value.trim();
+    		 
+    		 console.log(memberPwdValue, password2Value);
+    		 
+    		 if(password.value != password2.value)  {
+    			 checkedPwd.innerHTML = '<div id="result"> 비밀번호가 일치하지 않습니다. <div>';
+    		 } else {
+    			 checkedPwd.innerHTML = '';
+    		 }
+    	 }
+     }
+     
+     // 이름 유효성 검사
+     if(document.getElementById("memberName")){
+    	 
+    	 memberName.onkeyup = function() {
+    		 
+    		 let memberNameValue = memberName.value.trim();
+    		 
+    		 if(!n_RegExp.test(memberNameValue)){
+    			 checkedName.innerHTML = '<div id="result"> 2~15자 한글만 입력 가능합니다. <div>';
+    		 }
+    	 }
+     }
+     
+     // 휴대폰 번호
+     if(document.getElementById("phone")){
+    	 
+    	 phone.onkeyup = function() {
+    		 
+    		 let phoneValue = phone.value.trim();
+    		 
+    		 if(!p_RegExp.test(phoneValue)){
+    			 checkedPhone.innerHTML = '<div id="result"> 휴대전화 번호 11자리를 입력하세요. <div>';
+
+    		 } else {
+    			 checkedPhone.innerHTML = '';
+    		 }
+    	 }
+     }
+  
      
      // 주소 검색
      const $searchAddress = document.getElementById("search");
@@ -290,6 +357,9 @@
 	    	 }
 	     }).open();
      }
+     
+     
+
 
      </script>
      
