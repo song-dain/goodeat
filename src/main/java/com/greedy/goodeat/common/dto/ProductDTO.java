@@ -17,5 +17,5 @@ public class ProductDTO {
 	private java.sql.Date productModifyDate;
 	private java.sql.Date productDeleteDate;
 	private ProductCategoryDTO productCategory;
-	private List<AddfileDTO> addfieList;
+	private List<AddfileDTO> addfileList;
 }
