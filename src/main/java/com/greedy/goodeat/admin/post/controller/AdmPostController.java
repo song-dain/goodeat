@@ -65,11 +65,11 @@ public class AdmPostController {
 	}
 	
 	@PostMapping("/post/regist")
-	public String registPost(Model model, PostDTO newPost, @AuthenticationPrincipal MemberDTO member, RedirectAttributes rttr) {
+	public String registPost(Model model, PostDTO newPost, RedirectAttributes rttr) {
 		
 		log.info("[PostController] =======================");
 		
-		newPost.setMember(member);
+		
 		admPostService.registPost(newPost);
 		
 		model.addAttribute("newPost", newPost);
