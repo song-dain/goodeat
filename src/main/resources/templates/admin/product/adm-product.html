@@ -53,15 +53,26 @@
                         숨김
                     </td>
                 </tr>
+               </table>
+               <table class="productTable5">
                 <tr>
                     <td class="td-left-class">검색어</td>
                     <td class="td-right-class">
-                        <input type="text" placeholder="상품명을 입력해주세요" id="searchbox1">
+                        <form id="searchForm" th:action="@{/admin/productList}" method="get"
+					style="display: inline-block">
+					<th:block th:if="${ searchValue != null }">
+					<input type="search" id="searchValue" name="searchValue"
+							th:value="${ searchValue }" class="searchbox1">
+					</th:block>
+					<th:block th:if="${ searchValue == null }">
+						<input type="search" id="searchValue" name="searchValue" class="searchbox1">
+					</th:block>
+					<button class="btn btn-bs" type="submit" id="productButton1">검색하기</button>
+			</form>
                     </td>
                 </tr>
                 </tbody>
             </table>
-            <input type="submit" value="상품검색" id="productButton1">
             <input type="submit" value="상품등록" id="productButton2" onclick="location.href='/admin/productRegist'">
 
              <!--검색내용 테이블-->

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -51,17 +52,24 @@ public class AdmProductController {
 	}
 	
 	@GetMapping("/productList")
-	public String productList(@PageableDefault Pageable pageable, Model model) {
+	public String productList(@RequestParam(defaultValue="1") int page, 
+			@RequestParam(required=false) String searchValue, Model model) {
 		
 		log.info("[ProductController] =======================");
 		
-		Page<ProductDTO> productList = admProductService.findProductList(pageable);
+		Page<ProductDTO> productList = admProductService.findProductList(page, searchValue);
 		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(productList);
 		
 		model.addAttribute("productList", productList);
 		model.addAttribute("paging", paging);
 		
 		log.info("[ProductController] productList : {}",productList );
+		
+		model.addAttribute("productList", productList);
+		model.addAttribute("paging", paging);
+		if(searchValue !=null && !searchValue.isEmpty()) {
+			model.addAttribute("searchValue", searchValue);
+		}
 		
 		log.info("[ProductController] =======================");
 		
@@ -234,6 +242,7 @@ public class AdmProductController {
 		return "redirect:/admin/productDetail?productCode=" + product.getProductCode();
 	}
 
+	
 	
 
 }
