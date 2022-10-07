@@ -1,5 +1,7 @@
 package com.greedy.goodeat.admin.product.service;
 
+
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -13,6 +15,7 @@ import com.greedy.goodeat.admin.product.repository.AdmProductCategoryRepository;
 import com.greedy.goodeat.admin.product.repository.AdmProductRepository;
 import com.greedy.goodeat.common.dto.ProductDTO;
 import com.greedy.goodeat.common.entity.Product;
+import com.greedy.goodeat.common.entity.ProductCategory;
 
 @Transactional
 @Service
@@ -26,13 +29,11 @@ public class AdmProductService {
 	public static final String PRODUCT_STATUS = "Y";
 	
 	private final AdmProductRepository admProductRepository;
-	private final AdmProductCategoryRepository admPproductCategoryRepository;
 	private final ModelMapper modelMapper;
 	
-	public AdmProductService (AdmProductRepository admProductRepository, AdmProductCategoryRepository admPproductCategoryRepository, ModelMapper modelMapper) {
+	public AdmProductService (AdmProductRepository admProductRepository, ModelMapper modelMapper) {
 		
 		this.admProductRepository = admProductRepository;
-		this.admPproductCategoryRepository = admPproductCategoryRepository;
 		this.modelMapper = modelMapper;
 	}
 
@@ -47,6 +48,7 @@ public class AdmProductService {
 		return productList.map(product -> modelMapper.map(product, ProductDTO.class));
 	}
 
+	@Transactional
 	public void registProduct(ProductDTO newProduct) {
 		
 		admProductRepository.save(modelMapper.map(newProduct, Product.class));
@@ -59,27 +61,40 @@ public class AdmProductService {
 		return thumbnailList.map(product -> modelMapper.map(product, ProductDTO.class));
 	}
 
-	public void registThumbnail(ProductDTO product) {
+
+	@Transactional
+	public void deleteProduct(ProductDTO product) {
 		
-		product.setProductStatus(PRODUCT_STATUS);
-		admProductRepository.save(modelMapper.map(product, Product.class));
+		Product deleteProduct = admProductRepository.findById(product.getProductCode()).get();
+		
+		admProductRepository.delete(modelMapper.map(deleteProduct, Product.class));
+
+		
+	}
+
+	public ProductDTO selectProductList(Integer productCode) {
+		
+		Product product = admProductRepository.findById(productCode).get();;
+		
+		return modelMapper.map(product, ProductDTO.class);
+	}
+
+	@Transactional
+	public void modifyProduct(ProductDTO product) {
+		
+		Product selecetProduct = admProductRepository.findById(product.getProductCode()).get();
+		selecetProduct.setProductName(product.getProductName());
+		selecetProduct.setProductCategory(modelMapper.map(product.getProductCategory(), ProductCategory.class));
+		selecetProduct.setProductPrice(product.getProductPrice());
+		selecetProduct.setProductInventory(product.getProductInventory());
+		selecetProduct.setProductStatus(product.getProductStatus());
+	
+		
 		
 	}
 
 
 
-//	public List<ProductCategoryDTO> findAllCategory(){
-//		
-//		List<ProductCategory> categoryList = productCategoryRepository.findAll();
-//		
-//		return categoryList.stream().map(productCategory -> modelMapper.map(productCategory, ProductCategoryDTO.class)).collect(Collectors.toList());
-//	}
-//	
 
-
-
-	
-	
-	
 	
 }

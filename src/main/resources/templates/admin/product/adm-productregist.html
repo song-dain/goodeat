@@ -71,21 +71,21 @@
                 <input type="submit" value="저장" id="productButtonSave">
              </form>
              <div class="outer outer-thumbnail-insert" style="margin-top: 100px;">
-             <form id="thumbnailRegistForm" th:action="@{/thumbnail/regist}"
+             <form id="productRegistForm" th:action="@{/admin/productRegist}"
 					th:method="post" enctype="multipart/form-data">
 				<div class="thumbnail-insert-area">
 	             <table class="productTable3">
 	                <tr>
 	                    <td class="td-left-class">대표사진</td>
 	                    <td class="td-right-class">
-		                   <input type="file" value="파일첨부" id="productButton3" 
+		                   <input type="file" id="productButton3" 
 		                   name="attachImage"accept="image/gif,image/jpeg,image/png">
 		                 </td>
 	                </tr>
 	                <tr>
 	                    <td class="td-left-class">상세사진</td>
 	                    <td class="td-right-class">
-	                        <input type="file" value="파일첨부" id="productButton3"
+	                        <input type="file" id="productButton3"
 	                        name="attachImage"accept="image/gif,image/jpeg,image/png">
 	                    </td>
 	                </tr>
@@ -94,7 +94,6 @@
              </form>
              </div>
             <input type="submit" value="목록으로" id="productButtonList" onclick="location.href='/admin/productList'">
-            <input type="submit" value="삭제" id="productButtonDelete">
     </section>
     <script>
 		(function(){

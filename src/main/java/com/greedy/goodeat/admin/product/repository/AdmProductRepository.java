@@ -15,4 +15,5 @@ public interface AdmProductRepository extends JpaRepository<Product, Integer>{
 	Page<Product> findByProductStatus(String productStatus, Pageable pageable);
 
 
+
 }
