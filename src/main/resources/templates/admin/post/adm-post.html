@@ -42,7 +42,7 @@
             <td class="tg2-0pky">작성자</td>
           </tr>
           <tr th:each="post : ${ postList }"
-          	  th:onclick="|location.href='/admin/post/detail?postNo=${post.postCode}'|">
+          	  th:onclick="|location.href='/admin/post/detail?postCode=${post.postCode}'|">
 			<td class="tg2-0pkq">
               <input type="checkbox" id="cb2">
               <label for="cb1"></label>

@@ -1,7 +1,5 @@
 package com.greedy.goodeat.admin.post.controller;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +77,24 @@ public class AdmPostController {
 		
 		
 		return "redirect:/admin/post";
+	}
+	
+	@GetMapping("/post/detail")
+	public String selectBoardDetail(Model model, Integer postCode) {
+		
+		log.info("[admPostController] ========================================= ");
+		log.info("[admpostController] postCode : {}", postCode);
+		
+		PostDTO post = admPostService.selectPostDetail(postCode);
+		
+		log.info("[admpostController] post : {}", post);
+		
+		model.addAttribute("post", post);
+		
+		log.info("[admpostController] ========================================= ");
+		
+		return "admin/post/adm-postNo";
+		
 	}
 	
 	

@@ -7,4 +7,6 @@ import com.greedy.goodeat.common.entity.Post;
 
 public interface AdmPostRepository extends JpaRepository<Post, Integer> {
 
+	Post findByPostCode(Integer postCode);
+
 }
