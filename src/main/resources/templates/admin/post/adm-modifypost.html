@@ -27,15 +27,24 @@
       <a class="event-head">공지사항</a>
     
     
-    <table id="textbox">
-    	<tr th:text="${ post.member.memberNo }" class="memberNo"></tr>
-    	<tr th:text="${ post.postType.postType }" class="postType"> </tr>
-    	<tr th:text="${ post.postTitle }" class="postTitle"> </tr>
-    	<tr th:text="${ post.postContent }" class="postContent"> </tr>
-    </table>
+    <form id="textbox" action="/admin/post/modify" method="post">
+    	<input type="number" placeholder="관리자 번호를 입력해" name="member.memberNo">
+    	<input type="number" placeholder="수정게시글번호" name="postCode">
+    	<select name="postType.postTypeCode">
+    		<option value="1">공지사항</option>
+    		<option value="2">이벤트</option>
+    	</select>
+        <input type="text" class="titlebox" placeholder="제목을 입력하세요" name="postTitle">
         
-    <button class="member-button" onclick="location.href='/admin/post/modify'">수정</button>
-    <button class="btn-del">삭제</button>
+        <textarea style="width: 100%; height: 70%; resize: none;" 
+        		  placeholder="냐용을 입력해 주세요" id=textbody name="postContent">
+        </textarea>
+        
+        <button class="member-button" type="submit">등록</button>
+    	<button class="btn-del">삭제</button>
+       
+    </form>    
+
 
 </body>
 </html>

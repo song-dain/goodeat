@@ -12,12 +12,12 @@ import org.springframework.stereotype.Service;
 
 import com.greedy.goodeat.admin.post.repository.AdmPostRepository;
 import com.greedy.goodeat.common.dto.PostDTO;
-import com.greedy.goodeat.common.dto.PostTypeDTO;
 import com.greedy.goodeat.common.entity.Post;
-import com.greedy.goodeat.common.entity.PostType;
-import com.greedy.goodeat.common.entity.Product;
+
+import lombok.extern.slf4j.Slf4j;
 
 
+@Slf4j
 @Transactional
 @Service
 public class AdmPostService {
@@ -64,6 +64,19 @@ public class AdmPostService {
 		
 		
 		return modelMapper.map(post, PostDTO.class);
+	}
+
+	public void modifyPost(PostDTO post) {
+		log.info("[AdmPostService] foundPost:{} ", post);
+		Post foundPost = admPostRepository.findByPostCode(post.getPostCode());
+		
+		log.info("[AdmPostService] ========================================= ");
+		log.info("[AdmPostService] foundPost:{} ", foundPost);
+		
+		foundPost.setPostCode(post.getPostCode());
+		foundPost.setPostContent(post.getPostContent());
+		foundPost.setPostTitle(post.getPostTitle());
+		
 	}
 
 	
