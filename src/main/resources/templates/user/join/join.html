@@ -16,11 +16,11 @@
    
         <div id="registPage">
             <div id="regist" >회원가입</div><hr style="margin-bottom:2em">
-            <form name="regist" th:action="@{/join}" method="post" id="memberInsertFrom" autocomplete="off" onsubmit="onSubmit()">
+            <form name="regist" th:action="@{/join}" method="post" id="memberInsertFrom" onsubmit="return checkForm()">
                 <table>
                     <tr>
                         <td align="right">아이디 <img src="/images/user/info/essential.png" width="5px"/></td>
-                        <td align="left"><input name="memberId" id="memberId" class="text-field" placeholder="4~10자 영문, 또는 숫자만 가능"/>
+                        <td align="left"><input name="memberId" id="memberId" class="text-field check" placeholder="4~10자 영문, 또는 숫자만 가능"/>
                     </tr>
                     <tr>
                         <td></td>
@@ -28,11 +28,11 @@
                     </tr>
                     <tr>
                         <td align="right">비밀번호 <img src="/images/user/info/essential.png" width="5px" /></td>
-                        <td align="left"><input type="password" name="memberPwd" id="password" class="text-field" placeholder="6~16자 영문, 숫자 혼용 필수"/></td>
+                        <td align="left"><input type="password" name="memberPwd" id="password" class="text-field check" placeholder="6~16자 영문, 숫자 혼용 필수"/></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td align="left"><input type="password" id="password2" class="text-field" placeholder="비밀번호 재입력"></td>
+                        <td align="left"><input type="password" id="password2" class="text-field check" placeholder="비밀번호 재입력"></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -40,7 +40,7 @@
                     </tr>
                     <tr>
                         <td align="right">이름 <img src="/images/user/info/essential.png" width="5px"/></td>
-                        <td align="left"><input type="text" name="memberName" id="memberName" class="text-field" placeholder="2자 이상 입력"/></td>
+                        <td align="left"><input type="text" name="memberName" id="memberName" class="text-field check" placeholder="2자 이상 입력"/></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -48,7 +48,7 @@
                     </tr>
                     <tr>
                         <td align="right">휴대전화 <img src="/images/user/info/essential.png" width="5px" /></td>
-                        <td align="left"><input type="text" name="phone" id="phone" class="text-field" placeholder="'010'부터 번호만 입력"/></td>
+                        <td align="left"><input type="text" name="phone" id="phone" class="text-field check" placeholder="'010'부터 번호만 입력"/></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -57,16 +57,24 @@
                     <tr>
                         <td align="right">주소 <img src="/images/user/info/essential.png" width="5px"/></td>
                         <td align="left">
-                            <input class="text-field" name="zipCode" id="zipCode" placeholder="우편번호" readonly>
-                            <input class="text-field" name="address" id="searchAddress" placeholder="검색을 통해 입력할 수 있습니다" readonly>
+                            <input class="text-field check" name="zipCode" id="zipCode" placeholder="우편번호" readonly>
+                            <input class="text-field check" name="address" id="searchAddress" placeholder="검색을 통해 입력할 수 있습니다" readonly>
                         </td>
                     </tr>
                     <tr>
                         <td></td>
+                        <td align="left" id="checkedZipCode"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
                         <td align="left">
-                            <input type="text" name="detailAddress" id="detailAddress" placeholder=" 상세 주소 입력">
+                            <input type="text" name="detailAddress" id="detailAddress"  class="check" placeholder=" 상세 주소 입력">
                             <input type="button" class="search-button button" id="search" value="검색"/>
                         </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td align="left" id="checkedAddress"></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -86,7 +94,7 @@
                     <tr>
                         <td></td>
                         <td align="left"><input type="text" name="emailCode" class="text-field" id="emailCode" placeholder="이메일로 전송된 인증번호 입력"/>
-                            <input type="button" class="email-button button" value="이메일 인증"/></td>
+                            <input type="button" class="email-button button check" value="이메일 인증"/></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -194,7 +202,7 @@
                     <tr>
                         <td align="right">이용약관 <img src="/images/user/info/essential.png" width="5px" /></td>
                         <td align="left">
-                            <a href="#" class="links">개인정보처리방침(필수)</a>
+                            <a href="#" class="links check">개인정보처리방침(필수)</a>
                             <input type="checkbox" name="agreement1"/>
                             <a href="#" class="links">마케팅정보제공</a>
                             <input type="checkbox" name="agreement1"/>
@@ -219,6 +227,8 @@
      const memberPwd = document.getElementById("password");
      const memberName = document.getElementById("memberName");
      const phone = document.getElementById("phone");
+     const zipCode = document.getElementById("zipCode");
+     const detailAddress = document.getElementById("detailAddress");
      
      var id_RegExp = /^[a-zA-Z0-9]{4,10}$/; //아이디
      var pwd_RegExp = /(?=.*\d)(?=.*[a-zA-ZS]).{6,16}/; // 패스워드
@@ -230,29 +240,56 @@
      const password2 = document.getElementById("password2");
      const checkedName = document.getElementById("checkedName");
      const checkedPhone = document.getElementById("checkedPhone");
+     const checkedZipCode = document.getElementById("checkedZipCode");
+     const checkedAddress = document.getElementById("checkedAddress");
      
-     
- 	function onSubmit () {
- 		
- 		alert('유효성 검사');
-   	 
-		if(!pwd_RegExp.test(memberPwd)){
-			return false;
-		}
-		
-		if(memberPwd != password2){
-			return false;
-		}
-		
-		if(!n_RegExp.test(memberName)){
-			return false;
-		}
-		
-		if(!p_RegExp.test(phone)){
-			return false;
-		}
-		
+     function checkForm() {
+    	 
+    	 if(!id_RegExp.test(memberId.value.trim())){
+    		 alert('아이디 형식에 맞지 않습니다.');
+    		 
+    		 memberId.focus();
+    		 return false;
+    	 }
+    	 
+     	 if(!pwd_RegExp.test(memberPwd.value.trim())){
+    		 checkedPwd.innerHTML = '<div id="result"> 6~16자 영문, 숫자 혼합 비밀번호만 가능합니다. <div>'
+    		 memberPwd.focus();
+    		 return false;
+    	 }
+     	 
+       	 if(password.value != password2.value){
+     		checkedPwd.innerHTML = '<div id="result"> 비밀번호가 일치하지 않습니다. <div>';
+     		password2.focus();
+     		return false;
+     	 }
+    	 
+    	 if(!n_RegExp.test(memberName.value.trim())){
+    		 checkedName.innerHTML = '<div id="result"> 2~15자 한글만 입력 가능합니다. <div>';
+    		 memberName.focus();
+    		 return false;
+    	 }
+    	 
+    	 if(!p_RegExp.test(phone.value.trim())){
+    		 checkedPhone.innerHTML = '<div id="result"> 휴대전화 번호 11자리를 입력하세요. <div>';
+    		 phone.focus();
+    		 return false;
+    	 }
+    	 
+    	 if(zipCode.value.trim() == ''){
+    		 checkedPhone.innerHTML = '<div id="result"> 주소 검색을 통해 주소를 입력해주세요. <div>';
+    		 detailAddress.focus();
+    		 return false;
+    	 }
+    	 
+    	 if(detailAddress.value.trim() == ''){
+    		 checkedAddress.innerHTML = '<div id="result"> 상세 주소를 입력해주세요. <div>';
+    		 detailAddress.focus();
+    		 return false;
+    	 }
+
      }
+     
      
     // 아이디 유효성 검사 & 중복 검사
      if(document.getElementById("memberId")){
@@ -274,12 +311,18 @@
 	    		 body: JSON.stringify({memberId: memberIdValue})
 	    	 })
 	    	 	.then(result => result.text())
-	    	 	.then(result => checkedId.innerHTML = '<div id="result">' + result + '</div>')
+	    	 	.then(result => {
+	    	 		if(result){
+	    	 			checkedId.innerHTML = '<div id="result" class="canUse">사용 가능한 아이디입니다. </div>';
+	    	 		} else {
+	    	 			checkedId.innerHTML = '<div id="result" class="cannotUse">사용 가능한 아이디입니다. </div>';
+	    	 		}
+	    	 	})
 	    	 	.catch((error) => error.text().then((res) => alert(res)));
 	     }
      }
     
-    
+  
      // 비밀번호 유효성 검사
      if(document.getElementById("password")){
     	 
@@ -323,6 +366,8 @@
     		 
     		 if(!n_RegExp.test(memberNameValue)){
     			 checkedName.innerHTML = '<div id="result"> 2~15자 한글만 입력 가능합니다. <div>';
+    		 } else {
+    			 checkedPwd.innerHTML = '';
     		 }
     	 }
      }
@@ -357,9 +402,6 @@
 	    	 }
 	     }).open();
      }
-     
-     
-
 
      </script>
      

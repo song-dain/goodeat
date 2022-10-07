@@ -36,15 +36,12 @@ public class MemberController {
 	}
 	
 	@PostMapping("/idDupCheck")
-	public ResponseEntity<String> checkDuplication(@RequestBody MemberDTO member){
+	public ResponseEntity<Boolean> checkDuplication(@RequestBody MemberDTO member){
 		
-		String result = "사용 가능한 아이디입니다.";
-		log.info("[MemberController] Request Check Id : {}", member.getMemberId());
-		
+		boolean result = true;
 		
 		if(memberService.selectMemberById(member.getMemberId())) {
-			log.info("[MemberController] Request Check Id : {}", member.getMemberId());
-			result = "중복된 아이디가 존재합니다.";
+			result = false;
 		}
 		
 		
@@ -63,8 +60,8 @@ public class MemberController {
 			member.setEmail(email + "@" + email2);
 		}
 
-		java.sql.Date birthDate = java.sql.Date.valueOf(year + "-" + month + "-" + day);
-		member.setBirthDate(birthDate);
+//		java.sql.Date birthDate = java.sql.Date.valueOf(year + "-" + month + "-" + day);
+//		member.setBirthDate(birthDate);
 		member.setPhone(member.getPhone().replace("-", ""));
 		
 		log.info("[MemberController] joinMember request Member : " + member); 
