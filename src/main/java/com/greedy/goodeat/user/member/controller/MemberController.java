@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.greedy.goodeat.common.dto.MemberDTO;
 import com.greedy.goodeat.user.member.service.MemberService;
@@ -35,14 +36,14 @@ public class MemberController {
 	}
 	
 	@PostMapping("/idDupCheck")
-	public ResponseEntity<String> checkDuplication(String memberId){
+	public ResponseEntity<String> checkDuplication(@RequestBody MemberDTO member){
 		
 		String result = "사용 가능한 아이디입니다.";
-		log.info("[MemberController] Request Check Id : {}", memberId);
+		log.info("[MemberController] Request Check Id : {}", member.getMemberId());
 		
 		
-		if(memberService.selectMemberById(memberId)) {
-			log.info("[MemberController] Request Check Id : {}", memberId);
+		if(memberService.selectMemberById(member.getMemberId())) {
+			log.info("[MemberController] Request Check Id : {}", member.getMemberId());
 			result = "중복된 아이디가 존재합니다.";
 		}
 		
