@@ -31,7 +31,7 @@ spring:
       max-request-size: 10MB
       # 업로드 된 파일의 임시 저장 공간
       
-      location: C:\Users\hi\Desktop\workshop\semi project\goodeat
+      location: C:/Lecture/ShareFolder/project/goodeat/goodeat
 
 image:
   image-dir: src/main/resources

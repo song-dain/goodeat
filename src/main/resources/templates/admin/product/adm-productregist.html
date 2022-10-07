@@ -17,13 +17,15 @@
         <div class="product-title">
             <a>상품등록</a>
         </div>
-        	<form action="/admin/productRegist" method="post">
+        	 <form id="productRegistForm" th:action="@{/admin/productRegist}"
+					th:method="post" enctype="multipart/form-data">
+			<div class="thumbnail-insert-area">
             <table class="productTable1">
                 <tbody>
                 <tr>
                     <td class="td-left-class">상품명</td>
                     <td class="td-right-class">
-                        <input type="text" placeholder="상품명을 입력해주세요" id="searchbox1" name="productName">
+                        <input type="text" placeholder="상품명을 입력해주세요" id="inputBox" name="productName">
                     </td>
                 </tr>
                 <tr>
@@ -41,13 +43,13 @@
                 <tr>
                     <td class="td-left-class">상품가격</td>
                     <td class="td-right-class">
-                        <input type="text" placeholder="상품가격을 입력해주세요" id="searchbox1" name="productPrice">원
+                        <input type="text" placeholder="상품가격을 입력해주세요" id="inputBox" name="productPrice">원
                     </td>
                 </tr>
                 <tr>
                     <td class="td-left-class">재고</td>
                     <td class="td-right-class">
-                        <input type="text" placeholder="재고를 입력해주세요" id="searchbox1" name="productInventory">개
+                        <input type="text" placeholder="재고를 입력해주세요" id="inputBox" name="productInventory">개
                     </td>
                 </tr>
                 <tr>
@@ -67,14 +69,6 @@
                         숨김
                     </td>
                 </tr>
-                  </table>
-                <input type="submit" value="저장" id="productButtonSave">
-             </form>
-             <div class="outer outer-thumbnail-insert" style="margin-top: 100px;">
-             <form id="productRegistForm" th:action="@{/admin/productRegist}"
-					th:method="post" enctype="multipart/form-data">
-				<div class="thumbnail-insert-area">
-	             <table class="productTable3">
 	                <tr>
 	                    <td class="td-left-class">대표사진</td>
 	                    <td class="td-right-class">
@@ -89,10 +83,11 @@
 	                        name="attachImage"accept="image/gif,image/jpeg,image/png">
 	                    </td>
 	                </tr>
-	             </table> 
+	                </tbody>
+	               </table>
+	                    <input type="submit" value="저장" id="productButtonSave">
 	             </div>
              </form>
-             </div>
             <input type="submit" value="목록으로" id="productButtonList" onclick="location.href='/admin/productList'">
     </section>
     <script>
