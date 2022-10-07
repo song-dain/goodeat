@@ -1,5 +1,6 @@
 package com.greedy.goodeat.admin.post.controller;
 
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,15 +9,17 @@ import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.greedy.goodeat.admin.post.service.AdmPostService;
-
+import com.greedy.goodeat.common.dto.MemberDTO;
 import com.greedy.goodeat.common.dto.PostDTO;
-import com.greedy.goodeat.common.dto.ProductDTO;
 import com.greedy.goodeat.common.paging.Pagenation;
 import com.greedy.goodeat.common.paging.PagingButtonInfo;
 
@@ -57,7 +60,32 @@ public class AdmPostController {
 	
 	@GetMapping("/post/regist")
 	public String goRegist() {
+		
 		return "/admin/post/adm-detailpost";
 	}
+	
+	@PostMapping("/post/regist")
+	public String registPost(Model model, PostDTO newPost, @AuthenticationPrincipal MemberDTO member, RedirectAttributes rttr) {
+		
+		log.info("[PostController] =======================");
+		
+		newPost.setMember(member);
+		admPostService.registPost(newPost);
+		
+		model.addAttribute("newPost", newPost);
+		
+		log.info("[PostController] newPost : {} ", newPost);
+//		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("post.regist"));
+		
+		
+		return "redirect:/admin/post";
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }
