@@ -46,17 +46,13 @@ public class Addfile {
 	@Column(name = "FILE_DIVISION")
 	private String fileDivision;
 	
-  @ManyToOne
+	@ManyToOne
 	@JoinColumn(name ="REVIEW_CODE")
 	private Review review;
 	
 	@ManyToOne
 	@JoinColumn(name ="POST_CODE")
 	private Post post;
-	
-	@ManyToOne
-	@JoinColumn(name ="PRODUCT_CODE")
-	private Product product;
 	
 	@Column(name = "THUMBNAIL_ROUTE")
 	private String thumbnailRoute;

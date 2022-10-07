@@ -75,7 +75,9 @@
                     <th>판매상태</th>
                 </tr>
 
-                <tr class="tr-body" th:each="product : ${ productList }">
+                <tr class="tr-body" th:each="product : ${ productList }"
+                	th:onclick= "|location.href='/admin/productDetail?productCode=${product.productCode}'|"
+					style="cursor:pointer;">
                     <td th:text="${ product.productCode }"></td>
                     <td th:text="${ product.productName }"></td>
                     <td th:text="${ product.productPrice }"></td>
