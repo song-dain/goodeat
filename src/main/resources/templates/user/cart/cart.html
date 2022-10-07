@@ -33,51 +33,49 @@
                     </button>
                 </div>
             </div>
+            <table>
+        	<tr th:each="cart : ${ cartList }">
+			<td th:text="${ cart.productName }"></td>
+			<td th:text="${ cart.productAmount }"></td>
+			<td th:text="${ cart.productPrice }"></td>
+			<td th:text="${ cart.memberNo }"></td>
+			<td th:text="${ cart.cartCode }"></td>
+		</tr>
+        </table>
 
             <div class="cart-list-area">
                 <ul class="cart-list">
                     <li id="cart-list-img">
                         <div class="prd-info-area cart-info-area">
-                            <div class="inner">
+                            <div class="inner" th:each="cart : ${ cartList }">
                             
-                            	<table>
-                                		<tr>
-                                			<td>
-                                				<div class="column img">
-			                                    	<img src="/images/user/product/milkit/hy 밀푀유 나베 22,900원 .png" alt="밀키트">
-			                                	</div>
-		                                	</td>
-                                			<td>
-                                				<div class="column tit">
-				                                    <p class="desc">비건 도시락 맛있어요</p>
-				                                    <p class="desc"> </p>
-				                                    <ul class="price-item">
-				                                        <li>
-				                                            <span class="num">22,900</span>
-				                                            원
-				                                        </li>
-				
-				                                    </ul>
-				                                </div>
-                                			</td>
-                                			<td></td>
-                                		</tr>
-                                	</table>
-                                
+                            	<input type="checkbox" class="individual_cart" checked="checked">
+                            	<div class="column img">
+                                    <img src="../source/images/dosi_md.png" alt="상품이미지">
+                                </div>
+                                <div class="column tit">
+                                    <p class="desc" th:text="${ cart.productName }"></p>
+                                    <p class="desc"> </p>
+                                    <ul class="price-item">
+                                        <li>
+                                            <span class="num" th:text="${ cart.productPrice }"></span>
+                                            원
+                                        </li>
+
+                                    </ul>
+                                </div>
                                 
                                 <div class="column qty">
                                     <div class="qty-group">
-                                        
+                                    	<p th:text="${ cart.productAmount }"></p>
                                     </div>
                                 </div>
+                                
                                 <div class="column price">
                                     <div class="price-div">
-                                        <span class="num cart-price">22,900</span>
+                                        <span class="num cart-price" th:text="(${cart.productPrice} * ${ cart.productAmount})"></span>
                                         원
                                     </div>
-                                </div>
-                                <div class="column btn">
-                                    <button type="button"></button>
                                 </div>
                             </div>
                         </div>
@@ -145,6 +143,8 @@
                 </a>
             </div>
         </div>
+        
+        
     </section>
 
 	<div th:replace="user/common/footer.html"></div>
