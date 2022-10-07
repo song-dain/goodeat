@@ -150,3 +150,8 @@ table, td, th, label {
     text-align: center;
 }
 
+#result {
+	font-family: 'Cafe24SsurroundAir';
+	color: red;
+	font-size: 15px;
+}

@@ -6,11 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.greedy.goodeat.common.dto.MemberDTO;
-import com.greedy.goodeat.config.SpringSecurityConfiguration;
 import com.greedy.goodeat.user.member.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -38,11 +35,14 @@ public class MemberController {
 	}
 	
 	@PostMapping("/idDupCheck")
-	public ResponseEntity<String> checkDuplication(@RequestBody MemberDTO member){
+	public ResponseEntity<String> checkDuplication(String memberId){
 		
 		String result = "사용 가능한 아이디입니다.";
+		log.info("[MemberController] Request Check Id : {}", memberId);
 		
-		if(memberService.selectMemberById(member.getMemberId())) {
+		
+		if(memberService.selectMemberById(memberId)) {
+			log.info("[MemberController] Request Check Id : {}", memberId);
 			result = "중복된 아이디가 존재합니다.";
 		}
 		
@@ -50,12 +50,22 @@ public class MemberController {
 	}
 	
 	@PostMapping("/join")
-	public String joinMembership(@ModelAttribute MemberDTO member) {
+	public String joinMembership(@ModelAttribute MemberDTO member, String email, String email2, 
+				String year, String month, String day) {
 		
 		member.setMemberPwd(passwordEncoder.encode(member.getMemberPwd()));
+		
+		if(email2.equals("직접입력")) {
+			member.setEmail(email);
+		} else {
+			member.setEmail(email + "@" + email2);
+		}
+
+		java.sql.Date birthDate = java.sql.Date.valueOf(year + "-" + month + "-" + day);
+		member.setBirthDate(birthDate);
 		member.setPhone(member.getPhone().replace("-", ""));
 		
-		log.info("[MemberController] registMember request Member : " + member);
+		log.info("[MemberController] joinMember request Member : " + member); 
 		
 		memberService.joinMembership(member);
 		

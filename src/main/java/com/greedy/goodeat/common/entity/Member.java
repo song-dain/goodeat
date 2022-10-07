@@ -28,7 +28,7 @@ public class Member {
 	
 	@Id
 	@Column(name="MEMBER_NO")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ORDER_SEQ_GENERATOR")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MEMBER_SEQ_GENERATOR")
 	private Integer memberNo;
 	
 	@Column(name="ID")
