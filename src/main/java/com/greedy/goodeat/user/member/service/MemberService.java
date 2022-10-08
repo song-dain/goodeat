@@ -12,7 +12,6 @@ import com.greedy.goodeat.user.member.repository.MemberRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Service
 @Transactional
 public class MemberService {

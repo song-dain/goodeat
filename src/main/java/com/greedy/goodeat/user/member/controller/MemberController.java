@@ -1,5 +1,6 @@
 package com.greedy.goodeat.user.member.controller;
 
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -11,18 +12,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.greedy.goodeat.common.dto.MemberDTO;
 import com.greedy.goodeat.user.member.service.MemberService;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Controller
 public class MemberController {
 	
 	private final PasswordEncoder passwordEncoder;
 	public final MemberService memberService;
+    private final MessageSourceAccessor messageSourceAccessor;
 	
-	public MemberController(MemberService memberService, PasswordEncoder passwordEncoder) {
+	public MemberController(MemberService memberService, PasswordEncoder passwordEncoder, MessageSourceAccessor messageSourceAccessor) {
 		this.memberService = memberService;
 		this.passwordEncoder = passwordEncoder;
+		this.messageSourceAccessor = messageSourceAccessor;
 	}
 	
 	@GetMapping("/login")
@@ -36,14 +36,13 @@ public class MemberController {
 	}
 	
 	@PostMapping("/idDupCheck")
-	public ResponseEntity<Boolean> checkDuplication(@RequestBody MemberDTO member){
+	public ResponseEntity<String> checkDuplication(@RequestBody MemberDTO member){
 		
-		boolean result = true;
+		String result = "canUse";
 		
 		if(memberService.selectMemberById(member.getMemberId())) {
-			result = false;
+			result = "cannotUse";
 		}
-		
 		
 		return ResponseEntity.ok(result);
 	}
@@ -59,17 +58,17 @@ public class MemberController {
 		} else {
 			member.setEmail(email + "@" + email2);
 		}
-
-//		java.sql.Date birthDate = java.sql.Date.valueOf(year + "-" + month + "-" + day);
-//		member.setBirthDate(birthDate);
-		member.setPhone(member.getPhone().replace("-", ""));
 		
-		log.info("[MemberController] joinMember request Member : " + member); 
+		if(!year.equals("") && !month.equals("") && !day.equals("")) {
+			java.sql.Date birthDate = java.sql.Date.valueOf(year + "-" + month + "-" + day);
+			member.setBirthDate(birthDate);
+		}	
+		
+		member.setPhone(member.getPhone().replace("-", ""));
 		
 		memberService.joinMembership(member);
 		
-		return "redirect:/";
-		
+		return "/user/login/login";
 		
 	}
 

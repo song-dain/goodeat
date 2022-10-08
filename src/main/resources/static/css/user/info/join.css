@@ -39,11 +39,17 @@ a{
     padding: 10px;
 }
 
+.result {
+	font-family: 'Cafe24SsurroundAir';
+	color: rgb(255, 128, 0);
+	font-size: 15px;
+}
+
 #id {
     width: 270px; 
 }
 
-#email {
+#email, #emailCode {
     width: 230px
 }
 
@@ -68,8 +74,8 @@ a{
     font-size: 0.9em;
 }
 
-#email-address {
-    padding: 14px 5px;
+#emailAddress {
+    padding: 13px 1px;
 }
 
 table {
@@ -150,8 +156,4 @@ table, td, th, label {
     text-align: center;
 }
 
-#result {
-	font-family: 'Cafe24SsurroundAir';
-	color: red;
-	font-size: 15px;
-}
+
