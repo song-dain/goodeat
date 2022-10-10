@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품관리</title>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gamja+Flower&family=Gowun+Dodum&family=Poor+Story&display=swap" rel="stylesheet">
+   <link rel="stylesheet" th:href="@{/css/admin/product/product.css}">
+   <link rel="icon" type="image/x-icom" th:href="@{/images/common/HEQXSRYC.ico}">
+</head>
+<body>
+
+	<div th:replace="admin/common/header.html"></div>
+    
+    <section>
+        <div class="product-title">
+            <a>상품등록</a>
+        </div>
+        	 <form id="productRegistForm" th:action="@{/admin/productRegist}"
+					th:method="post" enctype="multipart/form-data">
+			<div class="thumbnail-insert-area">
+            <table class="productTable1">
+                <tbody>
+                <tr>
+                    <td class="td-left-class">상품명</td>
+                    <td class="td-right-class">
+                        <input type="text" placeholder="상품명을 입력해주세요" id="inputBox" name="productName">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-left-class">카테고리</td>
+                    <td class="td-right-class">
+                        <select class="selectBox" name="productCategory.categoryCode">
+                            <option value="1">닭가슴살</option>
+                            <option value="2">도시락</option>
+                            <option value="3">밀키트</option>
+                            <option value="4">간편식</option>
+                            <option value="5">비건</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-left-class">상품가격</td>
+                    <td class="td-right-class">
+                        <input type="text" placeholder="상품가격을 입력해주세요" id="inputBox" name="productPrice">원
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-left-class">재고</td>
+                    <td class="td-right-class">
+                        <input type="text" placeholder="재고를 입력해주세요" id="inputBox" name="productInventory">개
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-left-class">상품설명</td>
+                    <td class="td-right-class">
+                        <input type="text" placeholder="상품설명을 입력해주세요" id="searchbox2" name="productDescription">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-left-class">판매상태</td>
+                    <td class="td-right-class" >
+                        <input type="checkbox" id="check1" value="NOMAL" name="productStatus">
+                        판매 
+                        <input type="checkbox" id="check1" value="SODLOUT" name="productStatus">
+                        품절
+                        <input type="checkbox" id="check1" value="HIDDEN" name="productStatus">
+                        숨김
+                    </td>
+                </tr>
+	                <tr>
+	                    <td class="td-left-class">대표사진</td>
+	                    <td class="td-right-class">
+		                   <input type="file" id="productButton3" 
+		                   name="attachImage"accept="image/gif,image/jpeg,image/png">
+		                 </td>
+	                </tr>
+	                <tr>
+	                    <td class="td-left-class">상세사진</td>
+	                    <td class="td-right-class">
+	                        <input type="file" id="productButton3"
+	                        name="attachImage"accept="image/gif,image/jpeg,image/png">
+	                    </td>
+	                </tr>
+	                </tbody>
+	               </table>
+	                    <input type="submit" value="저장" id="productButtonSave">
+	             </div>
+             </form>
+            <input type="submit" value="목록으로" id="productButtonList" onclick="location.href='/admin/productList'">
+    </section>
+    <script>
+		(function(){
+			// input type file 요소들
+		    const fileElements = document.querySelectorAll("[type=file]");
+		    // div image_area 요소들
+		    const imageArea = document.querySelectorAll(".image-area");
+		    // div 클릭 이벤트 발생 시 open 함수 동작
+		    imageArea.forEach(item => item.addEventListener('click', open));
+		    // change(파일 첨부가 발생하는 상황) 이벤트 발생 시 preview 함수 동작
+		    fileElements.forEach(item => item.addEventListener('change', preview));
+		    
+		    function open() {
+		    	const index = Array.from(imageArea).indexOf(this);
+		    	fileElements[index].click();
+		    }
+	
+		    function preview(){
+		    	const index = Array.from(fileElements).indexOf(this);
+		    	console.log(this);
+		    	console.log(this.files, this.files[0]);
+		        if (this.files && this.files[0]) {
+		           const reader = new FileReader();
+		           reader.readAsDataURL(this.files[0]);
+		           reader.onload = function () {
+		        	   if(index === 0){		        		   
+		        		   imageArea[index].innerHTML = `<img src='${reader.result}' style='width: 350px; height: 200px;'>`;
+		        	   } else {
+		        		   imageArea[index].innerHTML = `<img src='${reader.result}' style='width: 120px; height: 100px;'>`;  
+		        	   }
+		           }
+		       }
+		    }
+		})();
+	</script>
+
+
+</body>
+</html>

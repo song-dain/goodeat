@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="stylesheet" href="../source/css/main-contents.css">
+    <link rel="stylesheet" href="../source/css/main.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <link rel="stylesheet" href="../source/css/select.css">
+    <link rel="stylesheet" href="../source/font/Cafe24Ssurround.ttf">
+    
+</head>
+
+    <title>Select</title>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+    <!-- 헤더부분 -->
+    <div th:replace="user/common/header.html"></div>
+ 
+ <!-- 컨텐츠 부분 -->
+ <div class="container">
+    <h1>문의 등록</h1>
+    <form action="write.jsp" method="post">
+        <select name="support" id="for-select">
+            <option value="">유형선택</option>
+            <option value="배송문의">배송문의</option>
+            <option value="상품문의">상품문의</option>
+            <option value="환불/결제취소">환불/결제취소</option>
+            <option value="기타문의">기타문의</option>
+        </select>
+        <form id="textbox">
+            <input type="text" class="titlebox2" placeholder="제목을 입력하세요">
+            <div id="summernote"></div>
+            <script>
+            $(document).ready(function() {
+                $('#summernote').summernote({
+                    // toolbar: [
+                    // ['para', ['ul']]
+                    //         ],
+                    focus: true,
+                    disableResizeEditor: true
+                });
+                // $('.note-statusbar').hide(); 
+                $(".note-editable").height(420);
+            });
+            </script>
+        </form>    
+      
+    </form>
+        <button type="submit" class="btn-sl">등록</button>
+        <button type="submit" onclick="location.href='product-list.html';" class="btn-sl2">이전으로</button>
+  </div>
+
+       <!-- 푸터 부분 -->
+<div th:replace="user/common/footer.html"></div>
+ </body>
+ </html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원관리</title>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gamja+Flower&family=Gowun+Dodum&family=Poor+Story&display=swap" rel="stylesheet">
+   <link rel="stylesheet" th:href="@{/css/admin/member/detailmember.css}">
+   <link rel="icon" type="image/x-icom" th:href="@{/images/common/HEQXSRYC.ico}">
+</head>
+<body>
+    
+    <div th:replace="admin/common/header.html"></div>
+    
+    
+    <div class="member-wrapper">
+        <a class="member-management-message">회원정보 관리</a>
+    </div>
+    <table class="tg">
+        <tbody>   
+            <tr>
+                <th class="tg-0pks">회원번호</th>
+                <th class="tg-0pky">1</th>
+            </tr>
+            <tr>
+                <td class="tg-0pks">아이디</td>
+                <td class="tg-0pky">no1</td>
+            </tr>
+            <tr>
+                <td class="tg-0pks">비밀번호</td>
+                <td class="tg-0pky">pass01</td>
+            </tr>
+            <tr>
+                <td class="tg-0pks">이름</td>
+                <td class="tg-0pky">김일번</td>
+            </tr>
+            <tr>
+                <td class="tg-0pks">전화번호</td>
+                <td class="tg-0pky">010-1111-1111</td>
+            </tr>
+            <tr>
+                <td class="tg-0pks">주소</td>
+                <td class="tg-0pky">서울특별시 종로구 인사동12길 12 대일빌딩</td>
+            </tr>
+            <tr>
+                <td class="tg-0pks">이메일</td>
+                <td class="tg-0pky">no1@greedy.com</td>
+            </tr>
+            <tr>
+                <td class="tg-0pks">성별</td>
+                <td class="tg-0pky">여</td>
+            </tr>
+            <tr>
+                <td class="tg-0pks">생년월일</td>
+                <td class="tg-0pky">2001-11-11</td>
+            </tr>
+            <tr>
+                <td class="tg-0pks">가입일</td>
+                <td class="tg-0pky">2011-11-11</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="btnwrapper">
+        <button class="btn-com">완료</button>
+        <button class="btn-del">삭제</button>
+    </div>
+</body>
+</html>

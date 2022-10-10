@@ -8,21 +8,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.greedy.goodeat.common.dto.MemberDTO;
+import com.greedy.goodeat.user.member.service.MailSendService;
 import com.greedy.goodeat.user.member.service.MemberService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class MemberController {
 	
 	private final PasswordEncoder passwordEncoder;
-	public final MemberService memberService;
-    private final MessageSourceAccessor messageSourceAccessor;
+	private final MemberService memberService;
+	private final MailSendService mailSendService;
+	private final MessageSourceAccessor messageSourceAccessor;
 	
-	public MemberController(MemberService memberService, PasswordEncoder passwordEncoder, MessageSourceAccessor messageSourceAccessor) {
+	public MemberController(MemberService memberService, PasswordEncoder passwordEncoder, 
+			MessageSourceAccessor messageSourceAccessor, MailSendService mailSendService) {
 		this.memberService = memberService;
 		this.passwordEncoder = passwordEncoder;
 		this.messageSourceAccessor = messageSourceAccessor;
+		this.mailSendService = mailSendService;
 	}
 	
 	@GetMapping("/login")
@@ -46,6 +54,14 @@ public class MemberController {
 		
 		return ResponseEntity.ok(result);
 	}
+	
+	@ResponseBody
+	@PostMapping(value = "/emailCheck", produces="text/html; charset=UTF-8")
+	public String emailCheck(@RequestBody MemberDTO member){
+		
+		return mailSendService.sendEmailForm(member.getEmail());
+	}
+	
 	
 	@PostMapping("/join")
 	public String joinMembership(@ModelAttribute MemberDTO member, String email, String email2, 

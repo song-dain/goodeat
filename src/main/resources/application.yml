@@ -32,21 +32,21 @@ spring:
       # 업로드 된 파일의 임시 저장 공간
       
       location: C:\Lecture\ShareFolder\project\goodeat
-  mail:
-    host: smtp.gmail.com
-    port: 8001
-    username: inhere31@gmail.com
-    password: goodeat1234!
-    properties:
-      mail:
-        smtp:
-          starttls:
-            enable: true
-            required: true
-          auth: true
-          connectiontimeout: 5000
-          timeout: 5000
-          writetimeout: 5000
+#  mail:
+#    host: smtp.gmail.com
+#    port: 8001
+#    username: goodeattest@gmail.com
+#    password: test1234!
+#    properties:
+#      mail:
+#        smtp:
+#          starttls:
+#            enable: true
+#            required: true
+#          auth: true
+#          connectiontimeout: 5000
+#          timeout: 5000
+#          writetimeout: 5000
     
 
 image:

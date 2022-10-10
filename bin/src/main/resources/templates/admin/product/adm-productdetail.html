@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품관리</title>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gamja+Flower&family=Gowun+Dodum&family=Poor+Story&display=swap" rel="stylesheet">
+   <link rel="stylesheet" th:href="@{/css/admin/product/product.css}">
+   <link rel="icon" type="image/x-icom" th:href="@{/images/common/HEQXSRYC.ico}">
+   <script>
+	const message = '[[${message}]]';
+	message && alert(message);
+</script>
+</head>
+<body>
+
+	<div th:replace="admin/common/header.html"></div>
+  
+    <section>
+        <div class="product-title">
+            <a>상품상세</a>
+        </div>
+            <table class="productTable1">
+                <tbody>
+                 <tr>
+                    <td class="td-left-class">상품코드</td>
+                    <td class="td-right-class">
+                        <p th:text="${ product.productCode}" id="detailProduct"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-left-class">상품명</td>
+                    <td class="td-right-class">
+                        <p th:text="${ product.productName }" id="detailProduct"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-left-class">카테고리</td>
+                    <td class="td-right-class">
+                        <p th:text="${ product.productCategory.categoryName }" id="detailProduct"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-left-class">상품가격</td>
+                    <td class="td-right-class">
+                        <p th:text="${ product.productPrice }" id="detailProduct"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-left-class">재고</td>
+                    <td class="td-right-class">
+                        <p th:text="${ product.productInventory }" id="detailProduct"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-left-class">상품설명</td>
+                    <td class="td-right-class">
+                        <p th:text="${ product.productDescription }" id="detailProduct"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-left-class">판매상태</td>
+                    <td class="td-right-class">
+                        <p th:text="${ product.productStatus }" id="detailProduct"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-left-class">대표사진</td>
+                    <td class="td-right-class">
+                        <input type="submit" value="파일첨부" id="productButton3"></td>
+                </tr>
+                <tr>
+                    <td class="td-left-class">상세사진</td>
+                    <td class="td-right-class">
+                        <input type="submit" value="파일첨부" id="productButton3"></td>
+                    </td>
+                </tr>           
+            </table>
+            <input type="submit" value="수정" id="productButtonSave" th:onclick= "|location.href='/admin/productModify?productCode=${product.productCode}'|">
+            <input type="submit" value="목록으로" id="productButtonList" onclick="location.href='/admin/productList'">
+            <input type="submit" value="삭제" id="productButtonDelete" th:onclick= "|location.href='/admin/productDelete?productCode=${product.productCode}'|">
+
+    </section>
+
+
+</body>
+</html>

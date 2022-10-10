@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주문관리</title>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gamja+Flower&family=Gowun+Dodum&family=Poor+Story&display=swap" rel="stylesheet">
+   <link rel="stylesheet" th:href="@{/css/admin/order/order.css}">
+   <link rel="icon" type="image/x-icom" th:href="@{/images/common/HEQXSRYC.ico}">
+</head>
+<body>
+    
+    	
+	<div th:replace="admin/common/header.html"></div>
+	
+    <section>
+        <div class="order-title">
+            <a>주문관리</a>
+        </div>
+        <div class="search-title">
+            <a>검색조건</a>
+        </div>
+            <table class="orderTable1">
+                <tbody>
+                
+                    <tr>
+                        <td class="td-left-class">주문날짜</td>
+                        <td class="td-right-class">
+                            <input type="date" id="searchbox1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-left-class">카테고리</td>
+                        <td class="td-right-class">
+                            <input type="checkbox" id="check1">
+                            결제완료 
+                            <input type="checkbox" id="check1">
+                            배송완료
+                            <input type="checkbox" id="check1">
+                            취소요청
+                            <input type="checkbox" id="check1">
+                            환불요청
+                            <input type="checkbox" id="check1">
+                            취소완료
+                            <input type="checkbox" id="check1">
+                            환불완료
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-left-class">검색어</td>
+                        <td class="td-right-class">
+                            <input type="text" placeholder="주문번호를 입력해주세요" id="searchbox1">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <input type="submit" value="주문검색" id="orderButton1">
+            <input type="submit" value="주문내역다운" id="orderButton2">
+
+            <table class="orderTable2">
+                <tr class="tr-top">
+                    <th>주문번호</th>
+                    <th>상품명</th>
+                    <th>결제금액</th>
+                    <th>주문일시</th>
+                    <th>주문자명</th>
+                    <th>
+                        <a href="javascript:openPop()">
+                                송장번호
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:openPopStatus()">
+                                 주문상태 
+                        </a>
+                    </th>
+                </tr>
+                <tr class="tr-body" th:each="order : ${ orderList }">
+                    <td>001</td>
+                    <td>닭가슴살 외 1 건</td>
+                    <td>28,000</td>
+                    <td>2022.09.27.15:48:52</td>
+                    <td>주문자1</td>
+                    <td>미입력</td>
+                    <td>결제완료</td>
+                </tr>
+                <tr class="tr-body">
+                    <td>002</td>
+                    <td>닭가슴살 외 1 건</td>
+                    <td>28,000</td>
+                    <td>2022.09.27.15:48:52</td>
+                    <td>주문자1</td>
+                    <td>미입력</td>
+                    <td>결제완료</td>
+                </tr>
+                <tr class="tr-body">
+                    <td>003</td>
+                    <td>닭가슴살 외 1 건</td>
+                    <td>28,000</td>
+                    <td>2022.09.27.15:48:52</td>
+                    <td>주문자1</td>
+                    <td>미입력</td>
+                    <td>결제완료</td>
+                </tr>
+                <tr class="tr-body">
+                    <td>004</td>
+                    <td>닭가슴살 외 1 건</td>
+                    <td>28,000</td>
+                    <td>2022.09.27.15:48:52</td>
+                    <td>주문자1</td>
+                    <td>미입력</td>
+                    <td>결제완료</td>
+                </tr>
+                <tr class="tr-body">
+                    <td>005</td>
+                    <td>닭가슴살 외 1 건</td>
+                    <td>28,000</td>
+                    <td>2022.09.27.15:48:52</td>
+                    <td>주문자1</td>
+                    <td>미입력</td>
+                    <td>결제완료</td>
+                </tr>
+            </table>
+    </section>
+
+    <div class="popup_layer" id="popup_layer" style="display: none;">
+        <div class="popup_box">
+            <div style="height: 10px; width: 375px; float: top;">
+              <a href="javascript:closePop();"><img th:src="@{/images/admin/ic_close.svg}" class="m_header-banner-close" width="70px" height="70px"></a>
+            </div>
+            <!--팝업 컨텐츠 영역-->
+            <div class="popup_cont">
+                <h2> 송장번호 입력 </h2>
+                    <h3 class="content">택배사</h3>
+                    <select id="selectBox">
+                        <option value="1">CJ대한통운</option>
+                        <option value="2">한진택배</option>
+                        <option value="3">롯데택배</option>
+                        <option value="4">로젠택배</option>
+                        <option value="5">우체국택배</option>
+                        <option value="5">CU편의점택배</option>
+                        <option value="5">CVSnet편의점택배(GS25)</option>
+                    </select>
+                    <h3>송장번호</h3>
+
+                    <input type="text" placeholder="송장번호를 입력해주세요" id="popup_searchbox">
+
+            </div>
+            <!--팝업 버튼 영역-->
+            <div class="popup_btn" style="float: bottom; margin-top: 13px;">
+                <a href="javascript:closePop();">저장</a>
+            </div>
+        </div>
+      </div>
+
+
+      <div class="popup_layer" id="popup_layer_status" style="display: none;">
+        <div class="popup_box">
+            <div style="height: 10px; width: 375px; float: top;">
+              <a href="javascript:closePopStatus();"><img th:src="@{/images/admin/ic_close.svg}" class="m_header-banner-close" width="70px" height="70px"></a>
+            </div>
+            <!--팝업 컨텐츠 영역-->
+            <div class="popup_cont">
+                <h2> 주문상태변경 </h2>
+                    <select id="selectBox">
+                        <option value="1">취소완료</option>
+                        <option value="2">환불완료</option>
+                    </select>
+            </div>
+            <!--팝업 버튼 영역-->
+            <div class="popup_btn" style="float: bottom; margin-top: 128px;">
+                <a href="javascript:closePopStatus();">저장</a>
+            </div>
+        </div>
+      </div>
+
+      <script>
+            //팝업 띄우기
+            function openPop() {
+                document.getElementById("popup_layer").style.display = "block";
+
+            }
+
+            //팝업 닫기
+            function closePop() {
+                document.getElementById("popup_layer").style.display = "none";
+            }
+
+            //팝업 띄우기
+            function openPopStatus() {
+            document.getElementById("popup_layer_status").style.display = "block";
+
+            }
+
+            //팝업 닫기
+            function closePopStatus() {
+                document.getElementById("popup_layer_status").style.display = "none";
+            }
+
+      </script>
+
+
+</body>
+</html>

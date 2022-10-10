@@ -1,0 +1,196 @@
+/* 검색조건 전체 위치 */
+.member-wrapper {
+    /* background-color:#293F54; */
+    position : fixed;
+    top: 200px;
+    left : 250px;
+    width: 80%;
+    height: 50px;
+    display: flex;
+}
+
+/* 회원정보 관리 폰트 */
+.member-management-message{
+    position: fixed;
+    color: #481BFF;
+    top : 80px;
+    left : 250px;
+    font-size: 2.5em;
+}
+
+/* 가입일 들어가는 박스 */
+.member-search-box-date {
+    border: 1px solid black;
+    width: 200px;
+    background-color: #293F54;
+    text-align: center;
+    padding-top: 7px;
+}
+
+/* 가입일 font */
+.member-search-box-date-message {
+    font-size: 25px;
+    color : white;
+    font-weight: bold;
+}
+
+/* 가입일 날짜박스 들어가는 박스 */
+.member-input {
+    border: 1px solid black;
+    width: 80%; 
+    display: flex;
+}    
+
+/* 가입일 날짜박스1(앞) */
+.member-inputbox1 {
+    margin-top: 7px;
+    height: 35px;
+    width: 150px;
+    margin-left: 25px;
+    margin-right: 25px;
+    font-size: 20px;
+}
+
+/* 가입일 날짜박스1(뒤) */
+.member-inputbox2 {
+    margin-top: 7px;
+    height: 35px;
+    width: 150px;
+    margin-left: 25px;
+    margin-right: 25px;
+    font-size: 20px;
+}
+
+/* 박스 사이 - 들어가는 박스*/
+.member-pbox {
+    font-size: 1.7em;
+    width: 80px;
+    text-align: center;
+}
+
+/* 검색어 들어가는 박스 */
+.member-wrapper2 {
+    position : fixed;
+    top: 251px;
+    left : 250px;
+    width: 80%;
+    height: 50px;
+    display: flex;
+    font-weight: bold;
+}
+
+/* 가입일 들어가는 박스 */
+.member-search-box-date2 {
+    border: 1px solid black;
+    width: 200px;
+    background-color: #293F54;
+    text-align: center;
+    padding-top: 6px;
+}
+
+/* 가입일 font */
+.member-search-box-date-message2 {
+    font-size: 25px;
+    color : white;
+}
+
+/* 가입일 날짜박스 들어가는 박스 */
+.member-input2 {
+    border: 1px solid black;
+    width: 80%; 
+    display: flex;
+    padding : 9px;
+}
+
+/* 검색어 박스 */
+.member-bar {
+    width: 550px;
+    margin-left: 15px;
+    font-size: 20px;
+    height: 30px;
+}
+
+/* 검색 버튼 */
+.member-button {
+    position : fixed;
+    top: 350px;
+    left : 850px;
+    width: 125px;
+    height: 50px;
+    font-size: 25px;
+    background-color :#293F54;
+    color: white;
+    box-shadow: 2px 2px 2px 2px rgb(0,0,0,0.5);
+    border-radius: 8px;
+}
+
+/* 검색버튼 마우스오버 */
+.member-button:hover{
+    background:whitesmoke;
+    color: #293F54;
+}
+
+/* 검색버튼 클릭*/
+.member-button:active {
+    font-size: 20px;
+    box-shadow: 1px 1px 0 rgb(0,0,0,0.5);
+    position: fixed;
+    top:352px;
+}
+
+/* 표 */
+.tg  {
+    border-collapse:collapse;
+    border-spacing:0;
+    top: 450px;
+    
+}
+
+
+.tg td{
+    border-color:black;
+    border-style:solid;
+    border-width:1px;
+    font-size:20px;
+    overflow:hidden;
+    padding:10px 5px;
+    word-break:normal;
+    height: 50px;
+}
+
+
+.tg th{
+    border-color:black;
+    border-style:solid;
+    border-width:1px;
+    font-size:20px;
+    font-weight:normal;
+    overflow:hidden;
+    padding:10px 5px;
+    word-break:normal;
+}
+
+
+.tg .tg-lboi{
+    font-size: 25px;
+    border-color:inherit;
+    text-align:center;
+    vertical-align:middle
+}
+
+
+.tg .tg-0pky{
+    border-color:inherit;
+    text-align:left;
+    vertical-align:top;
+    font-size:20px;
+    
+}
+
+
+.headline {
+    background-color: #293F54;
+    color: white;
+    text-align: center;
+    
+}

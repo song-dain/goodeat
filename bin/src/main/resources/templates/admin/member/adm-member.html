@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원관리</title>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gamja+Flower&family=Gowun+Dodum&family=Poor+Story&display=swap" rel="stylesheet">
+   <link rel="stylesheet" th:href="@{/css/admin/member/member.css}">
+   <link rel="icon" type="image/x-icom" th:href="@{/images/common/HEQXSRYC.ico}">
+</head>
+<body>
+    
+    <div th:replace="admin/common/header.html"></div>
+    
+    <div class="member-wrapper">
+        <a class="member-management-message">회원정보 관리</a>
+        <div class="member-search-box-date">
+          <a class="member-search-box-date-message">가입일</a>
+        </div>
+        <div class="member-input">
+            <input type="date" placeholder="yyyy-MM-DD" class="member-inputbox1">
+            <div class="member-pbox">
+                <p> - </p>
+            </div>    
+            <input type="date" placeholder="yyyy-MM-DD" class="member-inputbox2">
+        </div>
+    </div> 
+    <div class="member-wrapper2">
+        <div class="member-search-box-date2">
+          <a class="member-search-box-date-message2">검색어</a>
+        </div>
+        <div class="member-input2">
+            <input type="text" class="member-bar" placeholder="회원번호를 입력하세요">
+        </div>
+    </div>
+    <button class="member-button">검색</button>
+    
+    <div class="outer-board-list" style="border-collapse:collapse; left:250px;
+    border-spacing:0; top: 450px; background-color:red; position:fixed; width:75%; height:400px;">
+    	<div class="table-area" style="text-align: center; ">
+    		<table id="listArea" style="border-collapse:collapse; border-spacing:0;  border-color:red;">
+    			<tr style="background-color:#293F54; color:white;">
+    				<th style="width: 180px; size:2em; height:50px;">회원번호</th>
+    				<th style="width: 150px; size:2em; height:50px;">회원명</th>
+    				<th style="width: 200px; size:2em; height:50px;">아이디</th>
+    				<th style="width: 350px; size:2em; height:50px;">이메일</th>
+    				<th style="width: 330px; size:2em; height:50px;">전화번호</th>
+    				<th style="width: 230px; size:2em; height:50px;">가입일</th>
+    			</tr>
+    			
+    		</table>
+    	
+    	</div>
+    	
+    	
+    	
+    </div>
+    
+    
+       
+    
+
+    
+</body>
+</html>

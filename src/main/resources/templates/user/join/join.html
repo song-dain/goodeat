@@ -82,11 +82,10 @@
                     <tr>
                         <td align="right">이메일 <img src="/images/user/info/essential.png" width="5px"/></td>
                         <td align="left">
-                            <input type="text" name="email" class="text-field email-button button" id="email" placeholder="이메일 주소 인증"/>
-                            <select name="email2" id="emailAddress">
-                                <option> 직접입력</option>
+                            <input type="text" name="email1" class="text-field email-button button" id="email1" placeholder="이메일 입력"/>
+                            <select name="email2" id="email2">
+								<option>naver.com</option>
                                 <option>gmail.com</option>
-                                <option>naver.com</option>
                                 <option>daum.net</option>
                                 <option>nate.com</option>
                                 <option>yahoo.co.kr</option>
@@ -96,10 +95,11 @@
                     <tr>
                         <td></td>
                         <td align="left"><input type="text" name="emailCode" class="text-field" id="emailCode" placeholder="이메일로 전송된 인증번호 입력"/>
-                            <input type="button" class="email-button button check" value="이메일 인증"/></td>
+                            <input type="button" class="button check"  id="sendCodeBtn" value="이메일 인증"/></td>
                     </tr>
                     <tr>
                         <td></td>
+                        <td align="left" id="checkedEmail"></td>
                     </tr>
                     <tr>
                         <td align="right">성별</td>
@@ -223,7 +223,7 @@
     
     <div th:replace="user/common/footer.html"></div>
     
-     <script>
+     <script >
      
      const memberId = document.getElementById("memberId");
      const memberPwd = document.getElementById("password");
@@ -231,6 +231,7 @@
      const phone = document.getElementById("phone");
      const zipCode = document.getElementById("zipCode");
      const detailAddress = document.getElementById("detailAddress");
+     const emailCode = document.getElementById("emailCode");
      
      var id_RegExp = /^[a-zA-Z0-9]{4,10}$/; //아이디
      var pwd_RegExp = /(?=.*\d)(?=.*[a-zA-ZS]).{6,16}/; // 패스워드
@@ -245,7 +246,10 @@
      const checkedZipCode = document.getElementById("checkedZipCode");
      const checkedAddress = document.getElementById("checkedAddress");
      const checkedAgreement = document.getElementById("checkedAgreement");
+     const checkedEmail = document.getElementById("checkedEmail");
      
+	const $sendCode = document.getElementById("sendCodeBtn");
+
      function checkForm() {
     	 
     	 if(!id_RegExp.test(memberId.value.trim()) || document.getElementById("cannotUse")){
@@ -289,6 +293,12 @@
     		 detailAddress.focus();
     		 return false;
     	 }
+    	 
+    	 if(document.getElementById("discode")){
+			 alert('인증번호가 일치하지 않습니다.');
+			 emailCode.focus();
+			 return false;
+		 }
      }
      
      if(document.getElementById("memberId")){
@@ -391,6 +401,58 @@
     		 }
     	 }
      }
+     
+	let sendCode = '';
+     
+	if(document.getElementById("email1")){
+		 
+		$sendCode.onclick = function(){
+			
+			let email1 = document.getElementById("email1").value.trim();
+			let email2 = document.getElementById("email2").value.trim();
+			
+			let email = email1 + "@" + email2
+
+			
+			
+			console.log('완성된 이메일' + email)
+			
+			fetch("/emailCheck", {
+				method: "POST",
+	    		 headers: {
+	    			 'Content-Type': 'application/json;charset=UTF-8'
+	    		 },
+				body: JSON.stringify({email})
+			})
+				.then(result => result.text())
+				.then(result => sendCode = result)
+				.then(result => checkedEmail.innerHTML = '<div class="result"> 이메일로 인증번호가 전송되었습니다. <div>')
+				.catch((error) => error.text().then((res) => alert(res)));
+				return;
+		}
+	 } else {
+		 checkedEmail.innerHTML = '<div class="result"> 이메일을 입력하세요. <div>'
+	 } // ================== 여기서 이메일 코드 값이 있으면 실행된다고 했는데 없어도 실행함 ======================
+	 
+	 
+	 if(document.getElementById("emailCode"))
+	 
+		emailCode.onkeyup = function(){
+			 
+			 let emailCodeValue = emailCode.value.trim();
+			 console.log("send : " + sendCode);
+			 console.log("input : " + emailCodeValue);
+			 
+			 if(emailCodeValue != sendCode){
+				 checkedEmail.innerHTML = '<div class="result" id = "discord"> 인증번호가 일치하지 않습니다. <div>';
+				 return;
+			 } else {
+				 checkedId.innerHTML = '';
+				 return;
+			 }
+		 } // ================== 여기서 이메일 인증번호 일치해도 안 없어짐 ======================
+     
+
      
 
      const $searchAddress = document.getElementById("search");

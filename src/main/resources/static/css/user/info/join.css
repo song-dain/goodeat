@@ -49,7 +49,7 @@ a{
     width: 270px; 
 }
 
-#email, #emailCode {
+#email1, #emailCode {
     width: 230px
 }
 
@@ -74,7 +74,7 @@ a{
     font-size: 0.9em;
 }
 
-#emailAddress {
+#email2 {
     padding: 13px 1px;
 }
 
@@ -111,7 +111,7 @@ select {
     padding: 15.5px 24.3px;
 }
 
-.email-button {
+#sendCodeBtn {
     padding: 15.5px 24px;
 }
 
