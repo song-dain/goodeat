@@ -1,12 +1,12 @@
 package com.greedy.goodeat.common.entity;
 
-import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -20,15 +20,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "TBL_DELIVERY")
+@SequenceGenerator(name = "DELIVERY_SEQ_GENERATOR", sequenceName = "SEQ_DELIVERY_CODE", initialValue = 1, allocationSize = 1)
 @DynamicInsert
-public class Delivery implements Serializable {
-	
-	
-	@ManyToOne
-	@JoinColumn(name = "ORDER_NO")
-	private Order order;
+public class Delivery {
 	
 	@Id
+	@Column(name = "DELIVERY_CODE")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DELIVERY_SEQ_GENERATOR")
+	private Integer dliveryCode;
+	
 	@Column(name="INVOICE_NO")
 	private Integer invoiceNo;
 	

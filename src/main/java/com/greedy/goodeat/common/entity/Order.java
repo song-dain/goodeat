@@ -51,5 +51,9 @@ public class Order {
 	@ManyToOne
 	@JoinColumn(name = "PRODUCT_CODE")
 	private Product product;
+	
+	@ManyToOne
+	@JoinColumn(name = "DELIVERY_CODE")
+	private Delivery delivery;
 
 }

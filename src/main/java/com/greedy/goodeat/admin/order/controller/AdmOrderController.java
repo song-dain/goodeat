@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.greedy.goodeat.admin.order.service.AdmOrderService;
-import com.greedy.goodeat.common.dto.OrderDTO;
+import com.greedy.goodeat.common.dto.OrderProductDTO;
 import com.greedy.goodeat.common.paging.Pagenation;
 import com.greedy.goodeat.common.paging.PagingButtonInfo;
 
@@ -34,7 +34,7 @@ public class AdmOrderController {
 		
 		log.info("[OrderController] =======================");
 		
-		Page<OrderDTO> orderList = admOrderService.findOrderList(page, searchValue);
+		Page<OrderProductDTO> orderList = admOrderService.findOrderList(page, searchValue);
 		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(orderList);
 		
 		model.addAttribute("orderList", orderList);

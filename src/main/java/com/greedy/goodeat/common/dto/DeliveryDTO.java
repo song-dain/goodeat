@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class DeliveryDTO {
 	
-	private OrderDTO order;
+	private Integer deliveryCode;
 	private Integer invoiceNo;
 	private String invoiceInputType;
 	private String deliveryAddress;
