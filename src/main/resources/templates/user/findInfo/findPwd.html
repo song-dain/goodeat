@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/css/user/main.css">
+<link rel="stylesheet" href="/css/user/info/findPwd.css">
+<meta charset="UTF-8">
+<title>Find Password</title>
+</head>
+<body>
+
+	<script>
+	    const message = '[[${message}]]';
+	    message && alert(message);
+	</script>
+	
+	<div th:replace="user/common/header.html"></div>
+
+   <section id="con-wrap">
+        <h1 id="find-password" class="text">비밀번호 찾기</h1>
+            <form id="findform" method="post" onsubmit="return findInfo()">
+                <input type="text" name="memberId" id="memberId" class="text-field text" placeholder=" 아이디를 입력하세요"><br>
+                    <input type="email" name="email" id="email" class="text-field text" placeholder=" 이메일을 입력하세요"><br>
+                    <input type="text" name="emailCode" id="confirm-textbox" class="text-field text" placeholder=" 인증번호">
+                    <input type="button" value="인증번호 전송" id="confirm-button">
+
+                    <p name="confirm" class="text"></p>
+                <br><br>
+                <input type="image" src="/images/user/info/findbutton.png" id="submitButton"/>
+                <a href="/login"><img src="/images/user/info/cancelbutton.png" id="cancelButton"/>
+            </form>
+    </section>
+    
+    <div th:replace="user/common/footer.html"></div> 
+    
+    <script>
+    
+    var id_RegExp = /^[a-zA-Z0-9]{4,10}$/;
+    var e_RegExp = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    
+    const id = document.getElementById("memberId");
+    const email = document.getElementById("email");
+    
+    function findInfo(){
+    	
+	   	 if(!id_RegExp.test(id.value.trim()) || id.value.trim() == ''){
+			 alert('아이디 형식에 맞지 않습니다.');
+			 id.focus();
+			 return false;
+	   	 }
+	    
+	   	 if(!e_RegExp.test(email.value.trim()) || email.value.trim() == ''){
+			 alert('이메일 형식에 맞지 않습니다.');
+			 email.focus();
+			 return false;
+	   	 }
+    	
+    }
+    
+    
+    
+    </script>
+    
+
+</body>
+</html>

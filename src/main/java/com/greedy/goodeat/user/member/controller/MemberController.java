@@ -44,6 +44,11 @@ public class MemberController {
 		return "user/join/join";
 	}
 	
+	@GetMapping("/findPwd")
+	public String goFindPwd() {
+		return "user/findInfo/findPwd";
+	}
+	
 	@PostMapping("/idDupCheck")
 	public ResponseEntity<String> checkDuplication(@RequestBody MemberDTO member){
 		
@@ -84,6 +89,31 @@ public class MemberController {
 		
 		return "redirect:/login";
 	}
+
+	@PostMapping("/findPwd")
+	public String findPwd(@ModelAttribute MemberDTO member, RedirectAttributes rttr) {
+		
+		String result = "";
+		
+		if(memberService.selectMemberByIdAndEmail(member.getMemberId(), member.getEmail())) {
+		
+			MemberDTO findMember = memberService.findByMemberIdAndEmail(member);
+			
+			log.info("[MemberController] findMemberEmail : {}", findMember.getEmail());
+			log.info("[MemberController] findMemberPwd : {}", findMember.getMemberPwd());
+			
+			rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.found"));
+			result = "redirect:/changePwd";
+			
+		} else {
+			rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.notfound"));
+			result = "redirect:/findPwd";
+		}
+			
+		return result;
+	}
+	
+	
 
 	
 

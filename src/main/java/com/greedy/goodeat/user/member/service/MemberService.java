@@ -12,6 +12,7 @@ import com.greedy.goodeat.user.member.repository.MemberRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @Transactional
 public class MemberService {
@@ -34,5 +35,29 @@ public class MemberService {
 		memberRepository.save(modelMapper.map(member, Member.class));
 		
 	}
+
+	public boolean selectMemberByIdAndEmail(String memberId, String email) {
+		
+		boolean isExist = false;
+		
+		if(memberRepository.findByMemberIdAndMemberStatus(memberId, "Y").isPresent()
+				&& memberRepository.findByEmailAndMemberStatus(email, "Y").isPresent()) {
+			isExist = true;
+		}
+		
+		return isExist;
+	}
+	
+	public MemberDTO findByMemberIdAndEmail(MemberDTO member) {
+		
+		log.info("[MemberService] memberId : {}", member.getMemberId());
+		log.info("[MemberService] email : {}", member.getEmail());
+		
+		Member findmember = memberRepository.findByMemberIdAndEmail(member.getMemberId(), member.getEmail());
+		
+		return modelMapper.map(findmember, MemberDTO.class);
+	}
+	
+	
 
 }

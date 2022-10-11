@@ -45,6 +45,22 @@ public class MailSendService {
 		return Integer.toString(authNumber);
 	}
 	
+	public void findPwdEmailForm(String findPwd, String email) {
+		
+		log.info("[MailSendService] email : {} ", email);
+		log.info("[MailSendService] findPwd : {} ", findPwd);
+		
+		String setFrom = "goodeattest@gmail.com";
+		String toMail = email;
+		String title = "[Good Eat] 요청하신 비밀번호 안내드립니다";
+		String content = "<h3>요청하신 GoodEat 비밀번호 안내드립니다.</h3> " 
+					   + "<br>"
+					   + "회원님의 비밀번호는 <b>" + findPwd + "</b>입니다.";
+		mailSend(setFrom, toMail, title, content);
+		
+	}
+	
+	
 	public void mailSend(String setFrom, String toMail, String title, String content) {
 		
 		MimeMessage message = mailSender.createMimeMessage();
@@ -60,7 +76,10 @@ public class MailSendService {
 			e.printStackTrace();
 		}
 	}
-	
+
+
+
+
 	
 	
 	
