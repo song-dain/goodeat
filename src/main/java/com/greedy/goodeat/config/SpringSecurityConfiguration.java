@@ -14,9 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.greedy.goodeat.user.service.AuthenticationService;
-
-import lombok.extern.slf4j.Slf4j;
+import com.greedy.goodeat.user.member.service.AuthenticationService;
 
 @EnableWebSecurity
 public class SpringSecurityConfiguration {
