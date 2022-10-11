@@ -4,6 +4,7 @@ import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,6 +43,17 @@ public class MemberController {
 	@GetMapping("/join")
 	public String goJoin() {
 		return "user/join/join";
+	}
+	
+	@GetMapping("/findId")
+	public String goFindId() {
+		return "user/findInfo/findId";
+	}
+
+	
+	@GetMapping("/findPwd")
+	public String goFindPwd() {
+		return "user/findInfo/findId";
 	}
 	
 	@PostMapping("/idDupCheck")
@@ -84,6 +96,33 @@ public class MemberController {
 		
 		return "redirect:/login";
 	}
+	
+
+	@PostMapping("/findId")
+	public String findId(@ModelAttribute MemberDTO member, RedirectAttributes rttr) {
+		
+		String result = "";
+		
+		if(memberService.selectMemberByNameAndEmail(member.getMemberName(), member.getEmail())) {
+		
+			MemberDTO findMember = memberService.findByMemberNameAndEmail(member);
+			
+			log.info("[MemberController] findMember : {}", findMember);
+			log.info("[MemberController] findMemberId : {}", findMember.getMemberId());
+			
+			mailSendService.findIdEmailForm(findMember.getMemberId(), member.getEmail());
+			
+			rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.found"));
+			result = "redirect:/login";
+			
+		} else {
+			rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.notfound"));
+			result = "redirect:/findId";
+		}
+			
+		return result;
+	}
+	
 
 	
 
