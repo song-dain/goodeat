@@ -25,13 +25,13 @@ public class MailSendService {
 	public void makeRandomNumber() {
 		Random r = new Random();
 		int checkNum = r.nextInt(888888) + 111111;
-		log.info("[MailSendService] checkNum {} : ", checkNum);
+		log.info("[MailSendService] checkNum : {} ", checkNum);
 		authNumber = checkNum;
 	}
 	
 	public String sendEmailForm(String email) {
 		
-		log.info("[MailSendService] email {} : ", email);
+		log.info("[MailSendService] email : {} ", email);
 		
 		makeRandomNumber();
 		String setFrom = "goodeattest@gmail.com";

@@ -9,6 +9,12 @@
 </head>
 <body>
 
+	<script>
+	    const message = '[[${message}]]';
+	    console.log(message);
+	    message && alert(message);
+	</script>
+
 	<div th:replace="user/common/header.html"></div>
 
 		<section id="con-wrap">

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.greedy.goodeat.common.dto.MemberDTO;
 import com.greedy.goodeat.user.member.service.MailSendService;
@@ -65,15 +66,10 @@ public class MemberController {
 	
 	@PostMapping("/join")
 	public String joinMembership(@ModelAttribute MemberDTO member, String email, String email2, 
-				String year, String month, String day) {
+				String year, String month, String day, RedirectAttributes rttr) {
 		
 		member.setMemberPwd(passwordEncoder.encode(member.getMemberPwd()));
-		
-		if(email2.equals("직접입력")) {
-			member.setEmail(email);
-		} else {
-			member.setEmail(email + "@" + email2);
-		}
+		member.setEmail(email + "@" + email2);
 		
 		if(!year.equals("") && !month.equals("") && !day.equals("")) {
 			java.sql.Date birthDate = java.sql.Date.valueOf(year + "-" + month + "-" + day);
@@ -84,8 +80,9 @@ public class MemberController {
 		
 		memberService.joinMembership(member);
 		
-		return "/user/login/login";
+		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.join"));
 		
+		return "redirect:/login";
 	}
 
 	

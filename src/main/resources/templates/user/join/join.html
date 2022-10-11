@@ -232,11 +232,14 @@
      const zipCode = document.getElementById("zipCode");
      const detailAddress = document.getElementById("detailAddress");
      const emailCode = document.getElementById("emailCode");
+	 const email1 = document.getElementById("email1");
+	 const email2 = document.getElementById("email2");
      
      var id_RegExp = /^[a-zA-Z0-9]{4,10}$/; //아이디
      var pwd_RegExp = /(?=.*\d)(?=.*[a-zA-ZS]).{6,16}/; // 패스워드
      var n_RegExp = /^[가-힣]{2,}$/; // 이름
      var p_RegExp = /^[0-9]{11,}$/; // 번호 
+     var e_RegExp = /^[a-zA-Z0-9]{4,}$/; /// 이메일
      
      const checkedId = document.getElementById("checkedId");
      const checkedPwd = document.getElementById("checkedPwd");
@@ -294,8 +297,8 @@
     		 return false;
     	 }
     	 
-    	 if(document.getElementById("discode")){
-			 alert('인증번호가 일치하지 않습니다.');
+    	 if(emailCode.value.trim() == '' || document.getElementById("discord")){
+			 alert('인증번호를 확인해주세요.');
 			 emailCode.focus();
 			 return false;
 		 }
@@ -403,19 +406,21 @@
      }
      
 	let sendCode = '';
-     
-	if(document.getElementById("email1")){
-		 
+	
+	if(document.getElementById("email1")){ 
+		
 		$sendCode.onclick = function(){
 			
-			let email1 = document.getElementById("email1").value.trim();
-			let email2 = document.getElementById("email2").value.trim();
-			
-			let email = email1 + "@" + email2
-
-			
+			let email1Value = email1.value.trim();
+			let email2Value = email2.value.trim();
+			let email = email1Value + "@" + email2Value;
 			
 			console.log('완성된 이메일' + email)
+			
+  			if(!e_RegExp.test(email1Value)){
+				checkedEmail.innerHTML = '<div class="result"> 올바른 이메일 형식을 입력해주세요. <div>'
+				return;
+			}
 			
 			fetch("/emailCheck", {
 				method: "POST",
@@ -428,14 +433,11 @@
 				.then(result => sendCode = result)
 				.then(result => checkedEmail.innerHTML = '<div class="result"> 이메일로 인증번호가 전송되었습니다. <div>')
 				.catch((error) => error.text().then((res) => alert(res)));
-				return;
 		}
-	 } else {
-		 checkedEmail.innerHTML = '<div class="result"> 이메일을 입력하세요. <div>'
-	 } // ================== 여기서 이메일 코드 값이 있으면 실행된다고 했는데 없어도 실행함 ======================
+	}
+	// ================== 여기서 이메일 값이 있으면 실행된다고 했는데 없어도 실행함 ======================
 	 
-	 
-	 if(document.getElementById("emailCode"))
+	 if(document.getElementById("emailCode")){
 	 
 		emailCode.onkeyup = function(){
 			 
@@ -444,16 +446,16 @@
 			 console.log("input : " + emailCodeValue);
 			 
 			 if(emailCodeValue != sendCode){
-				 checkedEmail.innerHTML = '<div class="result" id = "discord"> 인증번호가 일치하지 않습니다. <div>';
+				 checkedEmail.innerHTML = '<div class="result" id ="discord"> 인증번호가 일치하지 않습니다. <div>';
 				 return;
 			 } else {
-				 checkedId.innerHTML = '';
+				 checkedEmail.innerHTML = '<div class="result"> 이메일이 인증되었습니다. <div>'
+				 email1.disabled = true;
+				 email2.disabled = true;
 				 return;
 			 }
 		 } // ================== 여기서 이메일 인증번호 일치해도 안 없어짐 ======================
-     
-
-     
+	 }
 
      const $searchAddress = document.getElementById("search");
      
