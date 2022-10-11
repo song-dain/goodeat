@@ -67,20 +67,16 @@
                     <th>주문자명</th>
                     <th>
                         <a href="javascript:openPop()">
-                            <div>
                                 송장번호
-                            </div>
                         </a>
                     </th>
                     <th>
                         <a href="javascript:openPopStatus()">
-                            <div>
                                  주문상태 
-                            </div>
                         </a>
                     </th>
                 </tr>
-                <tr class="tr-body">
+                <tr class="tr-body" th:each="order : ${ orderList }">
                     <td>001</td>
                     <td>닭가슴살 외 1 건</td>
                     <td>28,000</td>

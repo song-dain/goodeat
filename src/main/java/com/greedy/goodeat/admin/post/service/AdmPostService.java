@@ -13,17 +13,19 @@ import org.springframework.stereotype.Service;
 import com.greedy.goodeat.admin.post.repository.AdmPostRepository;
 import com.greedy.goodeat.common.dto.PostDTO;
 import com.greedy.goodeat.common.entity.Post;
-import com.greedy.goodeat.common.entity.Product;
+
+import lombok.extern.slf4j.Slf4j;
 
 
+@Slf4j
 @Transactional
 @Service
 public class AdmPostService {
 	
 	public static final int TEXT_PAGE_SIZE = 10;
 	public static final int THUMBNAIL_PAGE_SIZE = 9;
-	public static final int TEXT_BOARD_TYPE = 1;
-	public static final int THUMBNAIL_BOARD_TYPE = 2;
+	//public static final (String)PostType TEXT_POST_TYPE = "공지사항"; // Object<>??
+	public static final int THUMBNAIL_POST_TYPE = 2;
 	public static final String SORT_BY = "postCode";
 	public static final String ACTIVE_STATUS = "Y";
 	
@@ -55,5 +57,28 @@ public class AdmPostService {
 		admPostRepository.save(modelMapper.map(newPost, Post.class));
 		
 	}
+
+	public PostDTO selectPostDetail(Integer postCode) {
+		
+		Post post = admPostRepository.findByPostCode(postCode);
+		
+		
+		return modelMapper.map(post, PostDTO.class);
+	}
+
+	public void modifyPost(PostDTO post) {
+		log.info("[AdmPostService] foundPost:{} ", post);
+		Post foundPost = admPostRepository.findByPostCode(post.getPostCode());
+		
+		log.info("[AdmPostService] ========================================= ");
+		log.info("[AdmPostService] foundPost:{} ", foundPost);
+		
+		foundPost.setPostCode(post.getPostCode());
+		foundPost.setPostContent(post.getPostContent());
+		foundPost.setPostTitle(post.getPostTitle());
+		
+	}
+
+	
 
 }
