@@ -106,7 +106,7 @@ input[type=number]::-webkit-inner-spin-button {
 #product-bottom{
     position: relative;
     top: 40%;
-    height: 4300px;
+    height: 5000px;
     margin: auto;
    
     border-top: 1px solid black;
@@ -170,16 +170,6 @@ input[type=number]::-webkit-inner-spin-button {
     color: white;
 }
 
-.first-pt{
-    margin-top: 60px;
-    width: 1008px;
-    margin-left: 472px;
-}
-
-.first-pt>img{
-    width: 400px;
-}
-
 .con{
     font-size: 30px;
 }
@@ -215,8 +205,7 @@ table tr{
 .table-con{
     position: relative;
     width: 1000px;
-    max-width: 2000px;
-    min-width: 600px;
+    margin: auto;
 }
 
 .table-con .btn-box {
@@ -288,4 +277,13 @@ table tbody td {
 .rt-btn:hover{
     background: rgb(201, 201, 201);
     cursor: pointer;
+}
+
+#section4{
+	margin-top:200px;
+	height:60vh;
+}
+
+#section4>img{
+	margin-left:474px;
 }

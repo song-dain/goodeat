@@ -24,7 +24,7 @@
                 <img src="/images/user/product/milkit/채근담 떡국 10,000원.png" alt="밀키트">
             </li>
             <li class="right-te">
-                <h4>바쁜 직장인 강추 상품</h4>
+                <h4 th:text="${ product.productName }"></h4>
                 <p>그리운 어머니의 손맛이 깃든 빠르게 먹을수 있는 떡국</p>
                 <h1>16,900원</h1>
                 <input type="number" value="수량을 선택해주세요" min="1" max="999" placeholder="수량을 선택해주세요"/>
@@ -60,130 +60,73 @@
             <img src="/images/user/productDetail/vegan/비건도시락 사진1_상세.png" alt="">
         </div>
       </div>
-      <div id="section2" class="container-fluid bg-warning" >
+      
+
+     
+     <div id="section2" class="container-fluid bg-warning" >
         <section class="article-list">
           <div class="table-con">
             <p class="con">구매 후기</p>
-            <button type="button" onclick="location.href='/user/productdetail/product-regist'" class="btn-sel" >등록</button>
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>내용</th>
-                        <th>닉네임</th>
-                        <th>작성일자</th>
-                        <th><a href="#">신고</a></th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>매번 맛있게 잘 먹고 있습니다. 강추!!</td>
-                        <td>죽을맛</td>
-                        <td>2022.09.20</td>
-                        <td class="red-btn"><button>신고</button></td>
-                        
-                    </tr>
-                    <tr>
-                        <td>맛없음 사지마셈!</td>
-                        <td>봉천동 불주먹</td>
-                        <td>2022.09.19</td>
-                        <td class="red-btn"><button>신고</button></td>
-                        
-                    </tr>
-                    <tr>
-                        <td>아직도 안 드셔 보셨으면 한 번은 꼭 먹어보세요</td>
-                        <td>귀여운 늑대</td>
-                        <td>2022.09.18</td>
-                        <td><button class="wt-btn">수정</button><button class="rt-btn">삭제</button></td>
-                        
-                    </tr>
-                    <tr>
-                        <td>내공냠냠</td>
-                        <td>다이어트만 28년째</td>
-                        <td>2022.09.13</td>
-                        <td class="red-btn"><button>신고</button></td>
-                        
-                    </tr>
-                    <tr>
-                        <td>내공냠냠</td>
-                        <td>다이어트만 28년째</td>
-                        <td>2022.09.13</td>
-                        <td class="red-btn"><button>신고</button></td>
-                       
-                    </tr>
-                </tbody>
-            </table>
+            <button type="button" onclick="location.href='/productdetail/registReview.html'" class="btn-sel" >등록</button>
+            <table id="listArea" style="margin: auto;">
+				<tr>
+					<th style="width: 100px">글번호</th>
+					<th style="width: 300px">글제목</th>
+					<th style="width: 100px">작성자</th>
+					<th style="width: 100px">조회수</th>
+					<th style="width: 150px">작성일</th>
+				</tr>
+				<tr th:each="review : ${ reviewList }"
+				    th:onclick="|location.href='/user/productdetail/productDetailList?ProductCode=${product.productCode}'|"
+				    style="cursor:pointer;">
+					<td th:text="${ review.reviewCode }"></td>
+					<td th:text="${ review.reviewTitle }"></td>
+					<td th:text="${ review.member.memberName }"></td>
+					<td ></td>
+					<td th:text="${ review.reviewRegistDate }"></td>
+				</tr>
+			</table>
         </div>
         </section>
-
-      </div>
-      <div id="section3" class="container-fluid bg-secondary">
+	  </div>
+		<div id="section3" class="container-fluid bg-secondary">
         <section class="article-list">
             <div class="table-con">
             <p class="con">상품문의</p>
             <button type="button" onclick="location.href='support.html';" class="btn-sel">등록</button>
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>문의유형</th>
-                        <th>문의날짜</th>
-                        <th>제목</th>
-                        <th>회원</th>
-                        <th>답변상태</th>
-                    </tr>
-                </thead>
-                <tbody border="1">
-                    <tr>
-                        <th>배송문의</th>
-                        <th>2022.09.20</th>
-                        <th><a href="#">아직도 배송 안됬어요</a></th>
-                        <th>검냥공듀</th>
-                        <th>미답변</th>
-                    </tr>
-                    <tr>
-                        <th>상품문의</th>
-                        <th>2022.09.19</th>
-                        <th><a href="#">상품 재입고 언제되나요?</a></th>
-                        <th>발빠름</th>
-                        <th>답변</th>
-                    </tr>
-                    <tr>
-                        <a href="#">
-                            <th>환불/취소</th>
-                            <th>2022.09.13</th>
-                            <th><a href="#">결제 취소요청</a></th>
-                            <th>김나박</th>
-                            <th>미답변</th>
-                        </a>
-                    </tr>
-                    <tr>
-                        <th>기타문의</th>
-                        <th>2022.09.11</th>
-                        <th><a href="#">공휴일 고객센터 쉬나요?</a></th>
-                        <th>금희</th>
-                        <th>답변</th>
-                    </tr>
-                    <tr>
-                        <th>상품문의</th>
-                        <th>2022.09.03</th>
-                        <th><a href="#">취소 아직도 안되었어요</a></th>
-                        <th>댕청이</th>
-                        <th>미답변</th>
-                    </tr>
-                </tbody>
-            </table>
+            <table id="listArea" style="margin: auto;">
+				<tr>
+					<th style="width: 100px">글번호</th>
+					<th style="width: 300px">글제목</th>
+					<th style="width: 100px">작성자</th>
+					<th style="width: 100px">조회수</th>
+					<th style="width: 150px">작성일</th>
+				</tr>
+				<tr th:each="inquiry : ${ inquiryList }"
+				    th:onclick="|location.href='/productdetail/productDetaiList?productCode=${product.productCode}'|"
+				    style="cursor:pointer;">
+					<td th:text="${ inquiry.inquiryCode }"></td>
+					<td th:text="${ inquiry.inquiryTitle }"></td>
+					<td th:text="${ inquiry.member.memberName }"></td>
+					<td th:text="${ inquiry.inquiryRegistDate }"></td>
+				</tr>
+			</table>
+			</div>
+            </section> 
         </div>
-        </section>
-      </div>
-      <div id="section4" class="container-fluid bg-secondary">
-        <div class="first-pt">
-            <img src="/images/user/productDetail/etc/post_ss.PNG" alt="" style="width: 100%;">
-        </div>
-      </div>
-    </div>
+        <div id="section4" class="container-fluid bg-secondary">
+            <img src="/images/user/productDetail/etc/post_ss.PNG" alt="" style="width:50%;">
+      </div> 
+      <div th:replace="user/common/footer.html"></div>
+	  </div>
+	</div>
+		
+
+      
+     
  
     
-   <div th:replace="user/common/footer.html"></div>
+   
    
     
     
