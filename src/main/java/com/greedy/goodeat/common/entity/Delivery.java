@@ -27,7 +27,7 @@ public class Delivery {
 	@Id
 	@Column(name = "DELIVERY_CODE")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DELIVERY_SEQ_GENERATOR")
-	private Integer dliveryCode;
+	private Integer deliveryCode;
 	
 	@Column(name="INVOICE_NO")
 	private Integer invoiceNo;
