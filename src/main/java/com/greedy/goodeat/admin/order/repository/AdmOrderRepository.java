@@ -5,14 +5,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.greedy.goodeat.common.entity.OrderProduct;
+import com.greedy.goodeat.common.entity.Order;
 
-public interface AdmOrderRepository extends JpaRepository<OrderProduct, Integer>{
+
+public interface AdmOrderRepository extends JpaRepository<Order, Integer>{
 
 	@Query("SELECT o " +
-			"FROM OrderProduct o " + 
-			"WHERE o.order.orderNo LIKE '%' || :searchValue || '%'")
-	Page<OrderProduct> finBySearchValue(String searchValue, Pageable pageable);
+			"FROM Order o " + 
+			"WHERE o.orderNo LIKE '%' || :searchValue || '%'")
+	Page<Order> finBySearchValue(String searchValue, Pageable pageable);
 
 
 

@@ -1,6 +1,8 @@
 package com.greedy.goodeat.common.dto;
 
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -14,5 +16,6 @@ public class OrderDTO {
 	private MemberDTO member;
 	private ProductDTO product;
 	private DeliveryDTO delivery;
+	private List<OrderProductDTO> orderProduct;
 
 }

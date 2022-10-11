@@ -14,10 +14,12 @@ import org.hibernate.annotations.DynamicInsert;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "TBL_DELIVERY")
 @SequenceGenerator(name = "DELIVERY_SEQ_GENERATOR", sequenceName = "SEQ_DELIVERY_CODE", initialValue = 1, allocationSize = 1)
@@ -27,7 +29,7 @@ public class Delivery {
 	@Id
 	@Column(name = "DELIVERY_CODE")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "DELIVERY_SEQ_GENERATOR")
-	private Integer dliveryCode;
+	private Integer deliveryCode;
 	
 	@Column(name="INVOICE_NO")
 	private Integer invoiceNo;
