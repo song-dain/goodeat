@@ -173,7 +173,7 @@ dl {
 }
 
 .grid-area-span4 > .colum {
-    width: calc((100% - 13px) / 4);
+    width: 33%;
 }
 
 [class*="grid-area-"] > .colum,

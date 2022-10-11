@@ -5,12 +5,11 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.greedy.goodeat.common.dto.CartDTO;
 import com.greedy.goodeat.common.dto.CartListDTO;
-import com.greedy.goodeat.common.paging.Pagenation;
-import com.greedy.goodeat.common.paging.PagingButtonInfo;
 import com.greedy.goodeat.user.service.CartService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -37,9 +36,18 @@ public class CartController {
 		
 		model.addAttribute("cartList", cartList);
 		
+		
 		log.info("[CartController] ========================================= ");
 		
 		return "user/cart/cart";
+	}
+	
+	@PostMapping("/cart/update") 
+	public String updateCartPOST(CartDTO cart){
+		
+		
+		return "redirect:/user/cart/";
+		
 	}
 	
 }

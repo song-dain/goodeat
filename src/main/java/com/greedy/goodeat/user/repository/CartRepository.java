@@ -26,6 +26,5 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
 		    ,nativeQuery = true)
 	List<Cart> findByMember(@Param("memberid") int memberid);
 
-	
 
 }
