@@ -6,12 +6,9 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.greedy.goodeat.common.dto.CartDTO;
 import com.greedy.goodeat.common.dto.CartListDTO;
 import com.greedy.goodeat.common.entity.Cart;
 import com.greedy.goodeat.user.repository.CartRepository;
