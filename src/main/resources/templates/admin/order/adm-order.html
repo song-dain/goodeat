@@ -34,11 +34,17 @@
             function closePopStatus() {
                 document.getElementById("popup_layer_status").style.display = "none";
             }
-  
-  
+         
+            
+
       </script>
+      
+      
     
 	<div th:replace="admin/common/header.html"></div>
+	
+
+	
 	
     <section>
         <div class="order-title">
@@ -108,12 +114,12 @@
                 </tr>
                 <tr class="tr-body" th:each="order : ${ orderList }">
                     <td th:text ="${ order.orderNo }"></td>
-                    <td th:text ="${ order.product.productName }"></td>
+                    <td th:text ="${ order.product.productName}"></td>
                     <td th:text ="${ order.amountPay }"></td>
                     <td th:text ="${ order.orderDate}"></td>
                     <td th:text ="${ order.member.memberId}"></td>
                     <td><p th:text ="${ order.delivery?.invoiceNo }" th:if="${ order.delivery} ne null"></p>
-                    <p th:text = '미입력' th:if="${#strings.isEmpty(order.delivery.invoiceNo)}" onclick="javascript:openPop()"></p></td>
+                    <p th:text = "'미입력 :' + (${ order.delivery.deliveryCode })" th:if="${#strings.isEmpty(order.delivery.invoiceNo)}" onclick="javascript:openPop()"></p>
                     <td th:switch="${order.orderStatus}">
 					  <p th:case="'PAY_DONE'">결제완료</p>
 					  <p th:case="'DELIVERY_DONE'">배송완료</p>
@@ -173,7 +179,7 @@
                     <h3>송장번호</h3>
 
                     <input type="text" placeholder="송장번호를 입력해주세요" id="popup_searchbox"  name = "invoiceNo">
-                      <input type="hidden" placeholder="주문번호를 입력해주세요" id="popup_searchbox"  name = "deliveryCode">
+                      <input type="text" placeholder="배송번호를 입력해주세요" id="popup_searchbox"  name = "deliveryCode">
             </div>
             <!--팝업 버튼 영역-->
                 <input type="submit" value="저장" class="popup_btn" style="float: bottom; margin-top: 10px;">

@@ -3,6 +3,7 @@ package com.greedy.goodeat.common.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -61,9 +62,9 @@ public class Order {
 	@JoinColumn(name = "DELIVERY_CODE")
 	private Delivery delivery;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "ORDER_PRODUCT_CODE")
-	private List<OrderProduct> orderProductCode;
+	private List<OrderProduct> orderProduct;
 	
 
 }
