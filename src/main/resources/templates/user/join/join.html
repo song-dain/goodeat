@@ -435,7 +435,6 @@
 				.catch((error) => error.text().then((res) => alert(res)));
 		}
 	}
-	// ================== 여기서 이메일 값이 있으면 실행된다고 했는데 없어도 실행함 ======================
 	 
 	 if(document.getElementById("emailCode")){
 	 
@@ -454,7 +453,7 @@
 				 email2.disabled = true;
 				 return;
 			 }
-		 } // ================== 여기서 이메일 인증번호 일치해도 안 없어짐 ======================
+		 }
 	 }
 
      const $searchAddress = document.getElementById("search");
