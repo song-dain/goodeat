@@ -58,12 +58,12 @@ public class AdmEventController {
 			model.addAttribute("searchValue", searchValue);
 		}
 		
-		return "/admin/post/adm-event";
+		return "/admin/event/adm-event";
 	}
 	
 	@GetMapping("/event/regist")
 	public String goRegistEventPage() {
-		return "admin/post/adm-registevent";
+		return "admin/event/adm-registevent";
 	}
 	
 	@PostMapping("/event/regist")
@@ -94,6 +94,29 @@ public class AdmEventController {
 	
 	}
 	
+	@GetMapping("/event/modify")
+	public String getModify(Model model, Integer eventCode) {
+		
+		log.info("[EventController] modify ================");
+		
+		PostDTO event = admEventService.selectEventList(eventCode);
+		model.addAttribute("event", event);
+		
+		log.info("[EventController] Get event : {}", event);
+		
+		return "admin/event/adm-modifyevent";
+		
+	}
+	
+	@PostMapping("/event/modify")
+	public String postModify(Model model, PostDTO event) {
+		
+		admEventService.modifyEvent(event);
+		log.info("[EventController] Post event : {}", event);
+		model.addAttribute(event);
+		
+		return "redirect:/admin/event/detail?eventCode=" + event.getPostCode();
+	}
 	
 	
 	

@@ -28,7 +28,7 @@ public class AdmEventService {
 	public static final String SORT_BY = "postCode";
 //	public static final int POST_TYPE_CODE = 1;
 //	public static final int EVENT_TYPE_CODE = 2;
-	
+//	public static final int POST_TYPE_CODE = Post.postTypeCode;
 	
 	
 	
@@ -58,22 +58,31 @@ public class AdmEventService {
 	}
 
 	public void registEvent(PostDTO newEvent) {
-		
 		admEventRepository.save(modelMapper.map(newEvent, Post.class));
-		
-		log.info("[EventController] newEvent : {}", newEvent);
 	}
 
 	public PostDTO selectEventList(Integer eventCode) {
 		
-		log.info("[EventController] select ==============================");
+		log.info("[EventService] select ==============================");
 		
-		Post selectedEvnet = admEventRepository.findById(eventCode).get();
+		Post event = admEventRepository.findById(eventCode).get();
 		
-		log.info("[EventController] selectedEvnet : {}", selectedEvnet);
+		log.info("[EventService] selectedEvnet : {}", event);
 		
-		return modelMapper.map(selectedEvnet, PostDTO.class);
+		return modelMapper.map(event, PostDTO.class);
 		
+	}
+
+	public void modifyEvent(PostDTO event) {
+	
+		Post selectedEvent = admEventRepository.findById(event.getPostCode()).get();
+		selectedEvent.setPostContent(event.getPostContent());
+		selectedEvent.setPostTitle(event.getPostTitle());
+		selectedEvent.setPostModifyDate(event.getPostModifyDate());
+		selectedEvent.setPostType(modelMapper.map(event.getPostType(), PostType.class));
+		
+		log.info("[EventService] modify ==============================");
+		log.info("[EventService] selectedEvent : {}", selectedEvent);
 	}
 
 	
