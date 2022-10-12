@@ -164,15 +164,15 @@ public class MemberController {
 	}
 	
 	@PostMapping("/mypage")
-	public String pwdReinput(@RequestParam String inputPwd, @AuthenticationPrincipal MemberDTO loginMember, 
+	public String pwdReinput(@RequestParam String memberPwd, @AuthenticationPrincipal MemberDTO loginMember, 
 				RedirectAttributes rttr) {
 		
-		log.info("[memberController] inputPwd : {}", inputPwd);
+		log.info("[memberController] inputPwd : {}", memberPwd);
 		log.info("[memberController] loginMember : {}", loginMember);
 		
 		String result = "";
 		
-		if(passwordEncoder.matches(inputPwd, loginMember.getMemberPwd())) {
+		if(passwordEncoder.matches(memberPwd, loginMember.getMemberPwd())) {
 			result = "redirect:/mypage/info";
 		} else {
 			rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.enterMypageFail"));
