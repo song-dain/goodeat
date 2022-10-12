@@ -2,53 +2,38 @@
     margin-top: 100px;
     text-align: center;
     height: 1000px;
+    font-size: 24px;
 }
 
-.top-h2{
-    margin-bottom: 70px;
-    margin-right: 450px;
+table > td{
+	pading-right:10px;
 }
 
-.form1{
-    position: relative;
-    bottom:70px;
-    display: block;
+#textbox{
+	margin-left:25%;
 }
 
-input{
-    font-size: 20px;
+.filebox{
+	margin-left:20px;
+	float:left;
+	
 }
 
-.form-group{
-    margin: 14px auto;
+.titlebox{
+    font-size: 24px;
+    width:800px;
+    padding:10px;
+    margin:10px;
+    border-radius:8px;
 }
 
-.form-group > input{
-    width: 500px;
-}
-
-.form-group > textarea{
-    width: 500px;
-}
-
-.form-cont{
-    float: left;
-}
-
-.form-control{
+.postbox{
+	 font-size: 24px;
+    width:800px;
+    padding:10px;
+    margin:10px;
+    border-radius:8px;
     resize: none;
-    margin-top: 10px;
-}
-
-.lab{
-    position: relative;
-    top: 67px;
-}
-
-.form-group p{
-    margin-right: 500px;
-    
-
 }
 
 .btn-sl{
@@ -58,7 +43,7 @@ input{
     padding: 4px;
     width: 200px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 .btn-sl2{
@@ -68,7 +53,7 @@ input{
     padding: 4px;
     width: 200px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 .btn-sl:hover{
