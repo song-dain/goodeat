@@ -2,13 +2,14 @@ package com.greedy.goodeat.user.member.controller;
 
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -55,7 +56,17 @@ public class MemberController {
 	public String goFindPwd() {
 		return "user/findInfo/findPwd";
   }
-
+	
+   @GetMapping("/mypage")
+   public String goMypage() {
+	   return "user/mypage/mypage";
+   }
+   
+   @GetMapping("/mypage/info")
+   public String goInfo() {
+	   return "user/mypage/info";
+   }
+   
 	@PostMapping("/idDupCheck")
 	public ResponseEntity<String> checkDuplication(@RequestBody MemberDTO member){
 		
@@ -150,6 +161,26 @@ public class MemberController {
 		}
 			
 		return result;
+	}
+	
+	@PostMapping("/mypage")
+	public String pwdReinput(@RequestParam String inputPwd, @AuthenticationPrincipal MemberDTO loginMember, 
+				RedirectAttributes rttr) {
+		
+		log.info("[memberController] inputPwd : {}", inputPwd);
+		log.info("[memberController] loginMember : {}", loginMember);
+		
+		String result = "";
+		
+		if(passwordEncoder.matches(inputPwd, loginMember.getMemberPwd())) {
+			result = "redirect:/mypage/info";
+		} else {
+			rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.enterMypageFail"));
+			result = "redirect:/mypage";
+		}
+
+		return result;
+		
 	}
 	
 	

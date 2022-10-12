@@ -12,7 +12,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.greedy.goodeat.common.dto.MemberDTO;
-import com.greedy.goodeat.user.member.repository.MemberRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -21,12 +20,10 @@ import lombok.extern.slf4j.Slf4j;
 public class MailSendService {
 	
 	private final JavaMailSender mailSender;
-	private final MemberRepository memberRepository;
 	private int authNumber;
 	
-	public MailSendService(JavaMailSender mailSender, MemberRepository memberRepository) {
+	public MailSendService(JavaMailSender mailSender) {
 		this.mailSender = mailSender;
-		this.memberRepository = memberRepository;
 	}
 	
 	public void makeRandomNumber() {
