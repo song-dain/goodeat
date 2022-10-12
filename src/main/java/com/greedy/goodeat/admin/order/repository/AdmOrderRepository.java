@@ -6,16 +6,17 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.greedy.goodeat.common.entity.Order;
+import com.greedy.goodeat.admin.order.entity.JyOrder;
 
 
-public interface AdmOrderRepository extends JpaRepository<Order, Integer>{
 
-	@EntityGraph(attributePaths = {"orderProduct"})
+public interface AdmOrderRepository extends JpaRepository<JyOrder, Integer>{
+
+	@EntityGraph(attributePaths = {"product", "delivery", "orderProduct"})
 	@Query("SELECT o " +
-			"FROM Order o " + 
+			"FROM JyOrder o " + 
 			"WHERE o.orderNo LIKE '%' || :searchValue || '%'")
-	Page<Order> finBySearchValue(String searchValue, Pageable pageable);
+	Page<JyOrder> finBySearchValue(String searchValue, Pageable pageable);
 
 
 

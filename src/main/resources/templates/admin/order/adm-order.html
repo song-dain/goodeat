@@ -35,17 +35,29 @@
                 document.getElementById("popup_layer_status").style.display = "none";
             }
          
-            
-
+            //엑셀 내려받기
+            function excelUploadProcess(){
+				var f = new FormData(document.getElementById('form1'));
+				$.ajax({
+					url: "uploadExcel",
+					data: f,
+					processData: false,
+					contentType: false,
+					type: "POST",
+					success: function(data){
+						console.log(data);
+						document.getElementById('result').innerHTML = JSON.stringify(data);
+					}
+				});
+			}
+    
       </script>
       
       
     
 	<div th:replace="admin/common/header.html"></div>
-	
 
-	
-	
+
     <section>
         <div class="order-title">
             <a>주문관리</a>
@@ -100,8 +112,12 @@
                 </tr>
                 </tbody>
             </table>
-            <input type="submit" value="주문내역다운" id="orderButton2">
-
+            
+            <div>
+		        <form id="excelForm" name="excelForm" action="excel/download" method="post">
+		            <input id="orderButton2" type="submit" value="주문내역다운" name="fileName"/>
+		        </form>
+    		</div>
             <table class="orderTable2">
                 <tr class="tr-top">
                     <th>주문번호</th>
@@ -114,7 +130,8 @@
                 </tr>
                 <tr class="tr-body" th:each="order : ${ orderList }">
                     <td th:text ="${ order.orderNo }"></td>
-                    <td th:text ="${ order.product.productName}"></td>
+                    <td th:text ="${ order.product.productName}" th:onclick= "|location.href='/admin/orderDetail?orderNo=${order.orderNo}'|"
+					style="cursor:pointer;"></td>
                     <td th:text ="${ order.amountPay }"></td>
                     <td th:text ="${ order.orderDate}"></td>
                     <td th:text ="${ order.member.memberId}"></td>
@@ -210,10 +227,6 @@
       
        </section> 
       
-     
-      
-      
-
 
 </body>
 </html>

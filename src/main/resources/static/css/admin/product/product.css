@@ -184,6 +184,17 @@ ul > li {
     border-collapse:collapse;
     border-spacing:0;
   }
+  
+  .productTable6 {
+    width: 80%;
+    border: 1px ;
+    margin-left: 250px;
+    position: absolute;
+    top: 13.5%;
+    border-collapse:collapse;
+    border-spacing:0;
+  }
+  
 
   th, td {
     border: 1px solid #444444;
@@ -216,6 +227,13 @@ ul > li {
   .td-right-class{
     font-size: 25px;
   }
+  
+  
+  #td-right{
+    font-size: 25px;
+    margin-left: 15px;
+  }
+
 
   #check1{
     margin-left: 30px;
@@ -340,6 +358,19 @@ ul > li {
     position: absolute;
     top: 70%;
     left:76%;
+    background-color:#293F54;
+    color: white;
+    font-size: 25px;
+
+  }
+  
+   #orderButtonList{
+    width: 150px;
+    height: 40px;
+    border: 1px ;
+    position: absolute;
+    top: 95%;
+    left:50%;
     background-color:#293F54;
     color: white;
     font-size: 25px;

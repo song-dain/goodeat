@@ -1,4 +1,4 @@
-package com.greedy.goodeat.common.entity;
+package com.greedy.goodeat.admin.order.entity;
 
 
 import java.util.List;
@@ -20,7 +20,6 @@ import org.hibernate.annotations.DynamicInsert;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @Getter
 @Setter
@@ -29,7 +28,7 @@ import lombok.ToString;
 @Table(name = "TBL_ORDER")
 @SequenceGenerator(name = "ORDER_SEQ_GENERATOR", sequenceName = "SEQ_ORDER_NO", initialValue = 1, allocationSize = 1)
 @DynamicInsert
-public class Order {
+public class JyOrder {
 	
 
 	@Id
@@ -51,19 +50,23 @@ public class Order {
 	
 	@ManyToOne
 	@JoinColumn(name = "MEMBER_NO")
-	private Member member;
+	private JyMember member;
 	
 	@ManyToOne
 	@JoinColumn(name = "PRODUCT_CODE")
-	private Product product;
+	private JyProduct product;
 	
 	@ManyToOne
 	@JoinColumn(name = "DELIVERY_CODE")
-	private Delivery delivery;
+	private JyDelivery delivery;
 	
 	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "ORDER_NO")
-	private List<OrderProduct> orderProduct;
+	private List<JyOrderProduct> orderProduct;
+	
+	@OneToMany(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "ORDER_NO")
+	private List<JyPayment> payment;
 	
 
 }
