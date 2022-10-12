@@ -1,6 +1,9 @@
 package com.greedy.goodeat.admin.order.service;
 
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -66,6 +69,7 @@ public class AdmOrderService {
 		modifydelivery.setDeliveryCompany(delivery.getDeliveryCompany());
 		modifydelivery.setInvoiceNo(delivery.getInvoiceNo());
 
+
 	
 	}
 
@@ -74,6 +78,14 @@ public class AdmOrderService {
 		JyOrder order = admOrderRepository.findById(orderNo).get();
 		
 		return modelMapper.map(order, JyOrderDTO.class);
+	}
+
+	public List<JyOrderDTO> getOrderInfo() {
+		
+		List<JyOrder> orderList = admOrderRepository.findAll();
+		
+		return orderList.stream().map(order -> modelMapper.map(order, JyOrderDTO.class)).collect(Collectors.toList());
+		
 	}
 
 
