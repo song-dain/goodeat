@@ -11,9 +11,9 @@
     overflow:hidden;
     padding:10px 5px;
     word-break:normal;
-   
-    
+     
 }
+
 
 .tg th{
     border-color:black;
@@ -70,6 +70,11 @@
     width: 200px;
 }
 
+#paging {
+	position: fixed;
+	top: 5%;
+}
+
 /* 검색어 박스 */
 .member-bar {
     width: 550px;
@@ -77,6 +82,20 @@
     font-size: 20px;
     height: 30px;
     margin-left: 40px;
+}
+
+/* 검색박스 */
+#searchValue{
+	width:550px;
+	font-size: 20px;
+    height: 40px;
+	float:left;
+	margin-left:40px;
+}
+
+#searchValue:hover{
+	background:whitesmoke;
+    color: #293F54;
 }
 
 /* 검색 버튼 */
@@ -119,10 +138,14 @@
     border-style:solid;
     border-width:1px;
     font-size:20px;
-    overflow:hidden;
+    /* overflow:hidden; */
     padding:10px 5px;
     word-break:normal;
     height: 50px;
+    position:absolute;
+    top:200px;
+    z-index:1;
+    left:1000px;
 }
 
 
@@ -148,11 +171,12 @@
 
 
 .tg2 .tg2-0pky{
-    font-size: 25px;
+    font-size: 30px;
     border-color:inherit;
-    text-align:left;
-    vertical-align:top
-    
+    float:left;
+    vertical-align:top;
+    position:fixed;
+    left:550px;
 }
 
 
@@ -196,4 +220,6 @@
     height: 5px;
 }
 
-
+.contentline2{
+	width:1000px;
+}
