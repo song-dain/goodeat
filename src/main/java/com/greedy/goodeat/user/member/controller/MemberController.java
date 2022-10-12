@@ -96,25 +96,27 @@ public class MemberController {
 		String result = "";
 		
 		if(memberService.selectMemberByIdAndEmail(member.getMemberId(), member.getEmail())) {
-		
+			
 			MemberDTO findMember = memberService.findByMemberIdAndEmail(member);
 			
-			log.info("[MemberController] findMemberEmail : {}", findMember.getEmail());
-			log.info("[MemberController] findMemberPwd : {}", findMember.getMemberPwd());
+			String pwdIssue = mailSendService.findPwdEmailForm(findMember);
 			
-			rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.found"));
-			result = "redirect:/changePwd";
+			findMember.setMemberPwd(passwordEncoder.encode(pwdIssue));
+			
+			memberService.changeMemberPwd(findMember);
+			
+			rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.pwdIssue"));
+			result = "redirect:/login";
 			
 		} else {
+			
 			rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.notfound"));
 			result = "redirect:/findPwd";
+			
 		}
 			
 		return result;
 	}
 	
 	
-
-	
-
 }

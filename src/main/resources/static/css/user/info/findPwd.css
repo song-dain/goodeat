@@ -22,17 +22,23 @@
     font-size: 1em;
 }
 
+.result {
+	font-family: 'Cafe24SsurroundAir';
+	color: rgb(255, 128, 0);
+	font-size: 15px;
+}
+
 .text {
     font-family: 'Cafe24SsurroundAir';
     text-emphasis-color: black;
 }
 
-#confirm-button{
+#sendCodeBtn{
     font-family: 'Cafe24SsurroundAir';
     height: 43px;
 }
 
-#confirm-textbox{
+#inputCode{
     width: 210px;
     
 }

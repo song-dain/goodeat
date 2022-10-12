@@ -50,12 +50,18 @@ public class MemberService {
 	
 	public MemberDTO findByMemberIdAndEmail(MemberDTO member) {
 		
-		log.info("[MemberService] memberId : {}", member.getMemberId());
-		log.info("[MemberService] email : {}", member.getEmail());
-		
 		Member findmember = memberRepository.findByMemberIdAndEmail(member.getMemberId(), member.getEmail());
 		
 		return modelMapper.map(findmember, MemberDTO.class);
+	}
+
+	public void changeMemberPwd(MemberDTO findMember) {
+		
+		Member member = memberRepository.findByMemberIdAndEmail(findMember.getMemberId(), findMember.getEmail());
+		member.setMemberPwd(findMember.getMemberPwd());
+		
+		memberRepository.save(member);
+		
 	}
 	
 	
