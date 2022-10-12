@@ -64,10 +64,10 @@ public class hgProduct {
 	@JoinColumn(name = "CATEGORY_CODE")
 	private ProductCategory productCategory;
 	
-	/*
-	 * @OneToMany(cascade = CascadeType.PERSIST)
-	 * 
-	 * @JoinColumn(name = "ADDFILE_NO") private List<hgAddfile> addfileList;
-	 */
+	@ManyToOne
+	@JoinColumn(name = "ADDFILE_NO") 
+	private hgAddfile addfile;
+	 
+	 
 
 }

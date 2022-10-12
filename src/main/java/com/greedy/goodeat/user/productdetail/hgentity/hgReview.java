@@ -52,7 +52,7 @@ public class hgReview {
 	
 	@ManyToOne
 	@JoinColumn(name="ORDER_NO")
-	private Order order;
+	private hgOrder order;
 	
 	@ManyToOne
 	@JoinColumn(name="PRODUCT_CODE")
@@ -66,5 +66,6 @@ public class hgReview {
 	
 	@Column(name="REVIEW_MODIFYDATE")
 	private java.sql.Date reviewModifyDate;
+
 	
 }

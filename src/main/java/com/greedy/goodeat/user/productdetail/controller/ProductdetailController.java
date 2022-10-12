@@ -3,6 +3,7 @@ package com.greedy.goodeat.user.productdetail.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.greedy.goodeat.common.dto.MemberDTO;
 import com.greedy.goodeat.common.paging.Pagenation;
 import com.greedy.goodeat.common.paging.PagingButtonInfo;
 import com.greedy.goodeat.user.productdetail.hgdto.hgProductDTO;
@@ -68,15 +70,18 @@ public class ProductdetailController {
 	}
 	
 	@PostMapping("/regist")
-	public String registReview(Model model, hgReviewDTO newReview, RedirectAttributes rttr) {
+	public String registReview(Model model,
+							   hgReviewDTO review, RedirectAttributes rttr) {
 		
-		reviewService.registReview(newReview);
+		reviewService.registReview(review);
+		model.addAttribute("review", review);
+		log.info("review : {}", review);
+		/*
+		 * rttr.addFlashAttribute("message",
+		 * messageSourceAccessor.getMessage("review.regist"));
+		 */
 		
-		model.addAttribute("newReview", newReview);
-        rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("review.regist"));
-		
-		
-		return "redirect:/user/productdetail/product-list";
+		return "redirect:/user/productdetail/";
 	}
 	
 }

@@ -22,7 +22,7 @@
  <!-- 컨텐츠 부분 -->
  <div class="container">
     <h1>문의 등록</h1>
-    <form action="write.jsp" method="post">
+    <form action="/user/productdetail/regist" th:method="post" enctype="multipart/form-data">
         <select name="support" id="for-select">
             <option value="">유형선택</option>
             <option value="배송문의">배송문의</option>
@@ -35,8 +35,11 @@
             <input type="text" class="titlebox2" placeholder="제목을 입력하세요">
             <br>
         <input type="text" class="postbox" placeholder="내용을 입력하세요">
+        <input type="submit" class="btn-sl" value="등록">
     </form>    
-        <button type="submit" class="btn-sl" onclick="location.href='/user/productdetail/product-list';">등록</button>
+    
+    
+        
         <button type="submit" onclick="location.href='/user/productdetail/product-list';" class="btn-sl2">뒤로가기</button>
   </div>
 

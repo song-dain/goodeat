@@ -56,9 +56,9 @@ public class ReviewService {
 	}
 
 
-	public void registReview(hgReviewDTO newReview) {
+	public void registReview(hgReviewDTO review) {
 		
-		reviewRepository.save(modelMapper.map(newReview, hgReview.class));
+		reviewRepository.save(modelMapper.map(review, hgReview.class));
 		
 	}
 		

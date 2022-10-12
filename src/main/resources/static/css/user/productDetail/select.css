@@ -44,6 +44,7 @@ table > td{
     width: 200px;
     cursor: pointer;
     font-size: 30px;
+    margin-left:150px;
 }
 
 .btn-sl2{
@@ -57,17 +58,19 @@ table > td{
 }
 
 .btn-sl:hover{
-    background-color: #797979;
-    border: 5px solid #797979;
-    padding: 4px;
+ 	background-color: #e4ad7a;
+    border: 5px solid #e4ad7a;
+    padding: 14px;
     color: #fff;
+    font-size: 20px;
 }
 
 .btn-sl2:hover{
-    background-color: #797979;
-    border: 5px solid #797979;
-    padding: 4px;
+   	background-color: #e96969;
+    border: 5px solid #e96969;
+    padding: 14px;
     color: #fff;
+    font-size: 20px;
 }
 /*문의 등록*/
 
