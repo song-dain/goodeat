@@ -1,5 +1,8 @@
 package com.greedy.goodeat.admin.post.service;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -15,7 +18,6 @@ import com.greedy.goodeat.common.dto.PostDTO;
 import com.greedy.goodeat.common.entity.Post;
 import com.greedy.goodeat.common.entity.PostType;
 
-import antlr.debug.Event;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -30,6 +32,8 @@ public class AdmEventService {
 //	public static final int EVENT_TYPE_CODE = 2;
 //	public static final int POST_TYPE_CODE = Post.postTypeCode;
 	
+	 LocalDateTime now = LocalDateTime.now();
+	 Date zigum = new Date();
 	
 	
 	private final AdmEventRepository admEventRepository;
@@ -63,12 +67,7 @@ public class AdmEventService {
 
 	public PostDTO selectEventList(Integer eventCode) {
 		
-		log.info("[EventService] select ==============================");
-		
 		Post event = admEventRepository.findById(eventCode).get();
-		
-		log.info("[EventService] selectedEvnet : {}", event);
-		
 		return modelMapper.map(event, PostDTO.class);
 		
 	}
@@ -78,12 +77,22 @@ public class AdmEventService {
 		Post selectedEvent = admEventRepository.findById(event.getPostCode()).get();
 		selectedEvent.setPostContent(event.getPostContent());
 		selectedEvent.setPostTitle(event.getPostTitle());
-		selectedEvent.setPostModifyDate(event.getPostModifyDate());
 		selectedEvent.setPostType(modelMapper.map(event.getPostType(), PostType.class));
 		
-		log.info("[EventService] modify ==============================");
-		log.info("[EventService] selectedEvent : {}", selectedEvent);
 	}
+
+	
+	public void deleteEvent(Integer eventCode) {
+		Post deleteEvent = admEventRepository.findById(eventCode).get();
+		admEventRepository.delete(deleteEvent);
+		
+	}
+
+
+	
+
+	
+	
 
 	
 
