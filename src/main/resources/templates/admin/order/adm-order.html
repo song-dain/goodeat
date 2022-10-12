@@ -9,6 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gamja+Flower&family=Gowun+Dodum&family=Poor+Story&display=swap" rel="stylesheet">
    <link rel="stylesheet" th:href="@{/css/admin/order/order.css}">
    <link rel="icon" type="image/x-icom" th:href="@{/images/common/HEQXSRYC.ico}">
+   <script>
+		const message = '[[${message}]]';
+		message && alert(message);
+	</script>
 </head>
 <body>
 
@@ -35,22 +39,6 @@
                 document.getElementById("popup_layer_status").style.display = "none";
             }
          
-            //엑셀 내려받기
-            function excelUploadProcess(){
-				var f = new FormData(document.getElementById('form1'));
-				$.ajax({
-					url: "uploadExcel",
-					data: f,
-					processData: false,
-					contentType: false,
-					type: "POST",
-					success: function(data){
-						console.log(data);
-						document.getElementById('result').innerHTML = JSON.stringify(data);
-					}
-				});
-			}
-    
       </script>
       
       
@@ -114,7 +102,7 @@
             </table>
             
             <div>
-		        <form id="excelForm" name="excelForm" action="excel/download" method="post">
+		        <form id="excelForm" name="excelForm" action="excel/download" method="get">
 		            <input id="orderButton2" type="submit" value="주문내역다운" name="fileName"/>
 		        </form>
     		</div>
@@ -196,7 +184,7 @@
                     <h3>송장번호</h3>
 
                     <input type="text" placeholder="송장번호를 입력해주세요" id="popup_searchbox"  name = "invoiceNo">
-                      <input type="text" placeholder="배송번호를 입력해주세요" id="popup_searchbox"  name = "deliveryCode">
+                      <input type="text" placeholder="배송코드를 입력해주세요" id="popup_searchbox"  name = "deliveryCode">
             </div>
             <!--팝업 버튼 영역-->
                 <input type="submit" value="저장" class="popup_btn" style="float: bottom; margin-top: 10px;">

@@ -7,9 +7,35 @@
     <title>주문관리</title>
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gamja+Flower&family=Gowun+Dodum&family=Poor+Story&display=swap" rel="stylesheet">
    <link rel="stylesheet" th:href="@{/css/admin/product/product.css}">
+   <link rel="stylesheet" th:href="@{/css/admin/order/order.css}">
    <link rel="icon" type="image/x-icom" th:href="@{/images/common/HEQXSRYC.ico}">
 </head>
 <body>
+
+	<script>
+            //팝업 띄우기
+            function openPop() {
+                document.getElementById("popup_layer").style.display = "block";
+
+            }
+
+            //팝업 닫기
+            function closePop() {
+                document.getElementById("popup_layer").style.display = "none";
+            }
+
+            //팝업 띄우기
+            function openPopStatus() {
+            document.getElementById("popup_layer_status").style.display = "block";
+
+            }
+
+            //팝업 닫기
+            function closePopStatus() {
+                document.getElementById("popup_layer_status").style.display = "none";
+            }
+         
+      </script>
 
 	<div th:replace="admin/common/header.html"></div>
   
@@ -102,6 +128,8 @@
                     <td class="td-left-class">송장번호</td>
                     <td class="td-right-class">
                         <p th:text="${ order.delivery.invoiceNo }" id="detailProduct"/>
+                        <button th:onclick= "|location.href='/admin/send?orderNo=${order.orderNo}'|">문자발송</button>
+                        <button onclick="javascript:openPop()">송장번호입력</button>
                     </td>
                 </tr>
                   <tr>
@@ -117,8 +145,42 @@
                     </td>
                 </tr>
                  </table>
-            
+                 
+	                 
+	   <form action="/admin/deliveryModify" method="post">
+	    <div class="popup_layer" id="popup_layer" style="display: none;">
+	        <div class="popup_box">
+	            <div style="height: 10px; width: 375px; float: top;">
+	              <a href="javascript:closePop();"><img th:src="@{/images/admin/ic_close.svg}" class="m_header-banner-close" width="70px" height="70px"></a>
+	            </div>
+	            <!--팝업 컨텐츠 영역-->
+	            <div class="popup_cont">
+	                <h2> 송장번호 입력 </h2>
+	                    <h3 class="content">택배사</h3>
+	                    <select id="selectBox" name = "deliveryCompany">
+	                        <option value="CJ대한통운">CJ대한통운</option>
+	                        <option value="한진택배">한진택배</option>
+	                        <option value="롯데택배">롯데택배</option>
+	                        <option value="로젠택배">로젠택배</option>
+	                        <option value="우체국택배">우체국택배</option>
+	                        <option value="CU편의점택배">CU편의점택배</option>
+	                        <option value="CVSnet편의점택배(GS25)">CVSnet편의점택배(GS25)</option>
+	                    </select>
+	                    <h3>송장번호</h3>
+	
+	                    <input type="text" placeholder="송장번호를 입력해주세요" id="popup_searchbox"  name = "invoiceNo">
+	                    <p th:text="'배송코드' + (${order.delivery.deliveryCode})"></p>
+	                    <input type="text" placeholder="배송코드를 입력해주세요" id="popup_searchbox"  name = "deliveryCode">
+	            </div>
+	            <!--팝업 버튼 영역-->
+	                <input type="submit" value="저장" class="popup_btn" style="float: bottom; margin-top: 10px;">
+	        </div>
+	      </div>
+	      </form>
+	            
             <input type="submit" value="목록으로" id="orderButtonList" onclick="location.href='/admin/orderList'">
+
+
 
     </section>
 

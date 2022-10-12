@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주문관리</title>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gamja+Flower&family=Gowun+Dodum&family=Poor+Story&display=swap" rel="stylesheet">
+   <link rel="stylesheet" th:href="@{/css/admin/product/product.css}">
+   <link rel="icon" type="image/x-icom" th:href="@{/images/common/HEQXSRYC.ico}">
+</head>
+<body>
+
+	<div th:replace="admin/common/header.html"></div>
+  
+    <section>
+     <div class="product-title">
+            <a>문자보내기</a>
+        </div>
+    <form th:action="@{sms/send}" method="post">
+        <table class="productTable4">
+            <tr class="form-group">
+                <td class="td-left-class">전화번호</td>
+                <td>
+                    <input id="td-right" type="text" class="form-control" name="to" placeholder="전화번호를 입력해주세요">
+                    <p id="td-right" th:text= "${order.member.phone}"></p>
+                </td>
+            </tr>
+            <tr class="form-group">        
+                <td class="td-left-class">문자내용</td>
+                <td>
+                    <textarea id="td-right" class="form-control" name="content" style="width: 488px; height: 107px;" >안녕하세요 굿잇 입니다!송장번호: 택배사:</textarea>
+                    <p id="td-right" th:text= "${order.delivery.invoiceNo}"></p>
+                    <p id="td-right" th:text= "${order.delivery.deliveryCompany}"></p>
+                </td>
+            </tr>
+            
+        </table>
+        		<button class="btn btn-default" id="SmsSendBotton">발송</button>
+    </form>
+            <input type="submit" value="목록으로" id="SmsButtonList" onclick="location.href='/admin/orderList'">
+
+    </section>
+
+
+</body>
+</html>

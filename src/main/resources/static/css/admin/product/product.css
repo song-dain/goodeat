@@ -376,6 +376,33 @@ ul > li {
     font-size: 25px;
 
   }
+  
+   #SmsButtonList{
+    width: 150px;
+    height: 40px;
+    border: 1px ;
+    position: absolute;
+    top: 45%;
+    left:58%;
+    background-color:#293F54;
+    color: white;
+    font-size: 25px;
+
+  }
+  
+  
+   #SmsSendBotton{
+    width: 150px;
+    height: 40px;
+    border: 1px ;
+    position: absolute;
+    top: 45%;
+    left:45%;
+    background-color:#293F54;
+    color: white;
+    font-size: 25px;
+
+  }
   #productButtonSave{
     width: 150px;
     height: 40px;
