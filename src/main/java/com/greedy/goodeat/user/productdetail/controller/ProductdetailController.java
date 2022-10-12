@@ -7,15 +7,19 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 import com.greedy.goodeat.common.dto.MemberDTO;
-import com.greedy.goodeat.common.dto.ProductDTO;
-import com.greedy.goodeat.common.dto.ReviewDTO;
+import com.greedy.goodeat.common.dto.PostDTO;
 import com.greedy.goodeat.common.paging.Pagenation;
 import com.greedy.goodeat.common.paging.PagingButtonInfo;
+import com.greedy.goodeat.user.productdetail.hgdto.hgProductDTO;
+import com.greedy.goodeat.user.productdetail.hgdto.hgReviewDTO;
+
 import com.greedy.goodeat.user.productdetail.service.ProductService;
 import com.greedy.goodeat.user.productdetail.service.ReviewService;
 
@@ -41,39 +45,48 @@ public class ProductdetailController {
 		this.messageSourceAccessor = messageSourceAccessor;
 	}
 	
-	@GetMapping("/productdetail")
+	@GetMapping("/productdetail/list")
 	public String productdetailList(Integer productCode, @RequestParam(defaultValue="1") int page,
 								@RequestParam(required=false) String searchValue, Model model) {
+		//리뷰리스트
+		hgProductDTO hgproduct = productService.selecthgProduct(productCode);
 		
-		ProductDTO product = productService.selectProduct(productCode);
+		log.info("hgproduct : {}", hgproduct);
+		model.addAttribute("hgproduct", hgproduct);
 		
-		log.info("product : {}", product);
-		model.addAttribute("product", product);
+		Page<hgReviewDTO> hgreviewList = reviewService.selectReviewList(page, searchValue);
+		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(hgreviewList);
 		
-		Page<ReviewDTO> reviewList = reviewService.selectReviewList(page, searchValue);
-		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(reviewList);
-		
-		log.info("reviewList : {}", reviewList);
+		log.info("hgreviewList : {}", hgreviewList);
 		log.info("paing : {}", paging);
 		
-		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("hgreviewList", hgreviewList);
 		model.addAttribute("paging", paging);
 		
-		return "user/productdetail";
+		return "user/productdetail/product-list";
 	}
 
-	@GetMapping("/registReview")
-	public String registReview(ReviewDTO review, @AuthenticationPrincipal MemberDTO member, RedirectAttributes rttr ) {
+	@GetMapping("/productdetail/list/regist")
+	public String goRegist() {
 		
-		log.info("registRview request : {}", review );
+		return "user/productdetail/registReview";
+	}
+	
+	@PostMapping("/list/regist")
+	public String registReview(Model model, hgReviewDTO newReview, RedirectAttributes rttr) {
 		
-		review.setMember(member);
-		reviewService.registReview(review);
+		log.info("[PostController] =======================");
 		
-		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("review.regist"));
 		
-		return "redirect:/";
+		reviewService.registReview(newReview);
 		
+		model.addAttribute("newReview", newReview);
+		
+		log.info("[ReviewController] newReview : {} ", newReview);
+        rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("review.regist"));
+		
+		
+		return "redirect:/user/productdetail/product-list";
 	}
 		
 	
