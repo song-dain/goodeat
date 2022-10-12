@@ -90,4 +90,11 @@ public class MemberService {
 		
 	}
 
+	public void unjoinMembership(MemberDTO loginMember) {
+		
+		Member unjoinMember = memberRepository.findByMemberNo(loginMember.getMemberNo());
+		unjoinMember.setMemberStatus("N");
+		
+	}
+
 }

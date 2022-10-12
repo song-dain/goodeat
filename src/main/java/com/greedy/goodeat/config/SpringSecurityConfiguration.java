@@ -53,7 +53,7 @@ public class SpringSecurityConfiguration {
 				.formLogin()
 				.loginPage("/login")
 				.successForwardUrl("/")
-				.failureForwardUrl("/login")
+				.failureForwardUrl("/loginfail")
 			.and()
 				.logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))

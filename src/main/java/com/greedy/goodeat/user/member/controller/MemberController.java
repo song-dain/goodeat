@@ -3,6 +3,7 @@ package com.greedy.goodeat.user.member.controller;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +41,14 @@ public class MemberController {
 	public String goLogin() {
 		return "user/login/login";
 	}
+	
+    @PostMapping("/loginfail")
+    public String loginFailed(RedirectAttributes rttr) {
+    	
+    	rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.loginfail"));
+    	
+    	return "redirect:/login";
+    }
 	
 	@GetMapping("/join")
 	public String goJoin() {
@@ -181,6 +190,18 @@ public class MemberController {
 
 		return result;
 		
+	}
+
+	@GetMapping("/unjoin")
+	public String unjoin(@AuthenticationPrincipal MemberDTO loginMember, RedirectAttributes rttr) {
+		
+		memberService.unjoinMembership(loginMember);
+		
+        SecurityContextHolder.clearContext();
+		
+		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.unjoin"));
+		
+        return "redirect:/";
 	}
 	
 	
