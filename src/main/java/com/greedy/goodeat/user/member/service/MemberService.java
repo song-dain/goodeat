@@ -66,6 +66,9 @@ public class MemberService {
 	public MemberDTO findByMemberIdAndEmail(MemberDTO member) {
 		
 		Member findmember = memberRepository.findByMemberIdAndEmail(member.getMemberId(), member.getEmail());
+		
+		return modelMapper.map(findmember, MemberDTO.class);
+	}
 
 	public MemberDTO findByMemberNameAndEmail(MemberDTO member) {
 		
