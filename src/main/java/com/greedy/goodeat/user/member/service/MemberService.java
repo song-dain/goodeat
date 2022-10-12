@@ -50,15 +50,41 @@ public class MemberService {
 		
 	}
 
+
+	public boolean selectMemberByIdAndEmail(String memberId, String email) {
+		
+		boolean isExist = false;
+		
+		if(memberRepository.findByMemberIdAndMemberStatus(memberId, "Y").isPresent()
+				&& memberRepository.findByEmailAndMemberStatus(email, "Y").isPresent()) {
+			isExist = true;
+		}
+		
+		return isExist;
+	}
+	
+	public MemberDTO findByMemberIdAndEmail(MemberDTO member) {
+		
+		Member findmember = memberRepository.findByMemberIdAndEmail(member.getMemberId(), member.getEmail());
+
 	public MemberDTO findByMemberNameAndEmail(MemberDTO member) {
 		
 		log.info("[MemberService] memberName : {}", member.getMemberName());
 		log.info("[MemberService] email : {}", member.getEmail());
 		
 		Member findmember = memberRepository.findByMemberNameAndEmail(member.getMemberName(), member.getEmail());
+
 		
 		return modelMapper.map(findmember, MemberDTO.class);
 	}
 
+	public void changeMemberPwd(MemberDTO findMember) {
+		
+		Member member = memberRepository.findByMemberIdAndEmail(findMember.getMemberId(), findMember.getEmail());
+		member.setMemberPwd(findMember.getMemberPwd());
+		
+		memberRepository.save(member);
+		
+	}
 
 }

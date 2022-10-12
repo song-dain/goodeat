@@ -1,0 +1,55 @@
+@font-face {
+    font-family: 'Cafe24SsurroundAir';
+    src: url("/font/user/Cafe24SsurroundAir.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+#submitButton {
+    margin-bottom: 20em;
+    width:100px;
+}
+
+#cancelButton {
+    margin-bottom: 16.68em;
+    width:100px;
+}
+
+.text-field {
+    width: 300px; 
+    height: 45px;
+    margin-bottom: 0.5em;
+    font-size: 1em;
+}
+
+.result {
+	font-family: 'Cafe24SsurroundAir';
+	color: rgb(255, 128, 0);
+	font-size: 15px;
+}
+
+.text {
+    font-family: 'Cafe24SsurroundAir';
+    text-emphasis-color: black;
+}
+
+#sendCodeBtn{
+    font-family: 'Cafe24SsurroundAir';
+    height: 43px;
+}
+
+#inputCode{
+    width: 210px;
+    
+}
+
+#con-wrap{
+    text-align: center;
+    border-bottom: 1px solid gainsboro;
+}
+
+#find-password {
+    font-size: 3em;
+    margin-top: 3em;
+    margin-bottom: 1.3em;
+}

@@ -22,7 +22,9 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 	Optional<Member> findByMemberId(String memberId);
 
 	Optional<Member> findByMemberIdAndMemberStatus(String memberId, String memberStatus);
-	
+
+	public Member findByMemberIdAndEmail(String memberName, String email);
+
 	Optional<Member> findByEmailAndMemberStatus(String email, String memberStatus);
 	
 	Optional<Member> findByMemberNameAndMemberStatus(String memberName, String memberStatus);
