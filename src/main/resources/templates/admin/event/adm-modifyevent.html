@@ -43,6 +43,12 @@
 	    			</td>
 	    		</tr>
 	    		<tr>
+	    			<td class="eventTD">수정 게시글 번호</td>
+	    			<td class="eventTDtext">
+	    				<input type="text" th:placeholder="${ event.postCode }" class="eventP" name="postCode"/>
+	    			</td>
+	    		</tr>
+	    		<tr>
 	    			<td class="eventTD">postType</td>
 	    			<td class="eventTDtext">
 	    				<select th:selected="${ event.postType.postTypeCode }" class="eventP" name="postType.postTypeCode">
@@ -66,9 +72,12 @@
 	    	</tbody>
 	    	
     	</table>
-    	<button class="member-button" type="submit">등록</button>
+    	<!-- 
+    		<button class="member-button" type="submit">등록</button>
+    	 -->
     	<input type="submit" value="저장" class="member-button">
     </form>
+    
     <input type="submit" value="돌아가기" id="eventListButton" onclick="location.href='/admin/event'">
 </body>
 </html>

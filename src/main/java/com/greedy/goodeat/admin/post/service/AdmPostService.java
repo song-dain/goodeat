@@ -79,5 +79,11 @@ public class AdmPostService {
 		
 	}
 
+	public void deletePost(Integer postCode) {
+		Post deletePost = admPostRepository.findById(postCode).get();
+		admPostRepository.delete(deletePost);
+		
+	}
+
 
 }

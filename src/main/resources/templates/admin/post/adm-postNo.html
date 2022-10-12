@@ -33,9 +33,15 @@
     	<tr th:text="${ post.postTitle }" class="postTitle"> </tr>
     	<tr th:text="${ post.postContent }" class="postContent"> </tr>
     </table>
-        
+    
+    <!--    
     <button class="member-button" onclick="location.href='/admin/post/modify'">수정</button>
     <button class="btn-del">삭제</button>
-
+	 --> 
+	<input type="submit" class="member-button" value="수정" id="postModifyButton" th:onclick= "|location.href='/admin/post/modify?postCode=${post.postCode}'|">
+    <input type="submit" value="목록으로" id="eventButtonList" onclick="location.href='/admin/member'">
+    
+    <input type="submit" class="btn-del" value="삭제" id="postDeleteButton" th:onclick= "|location.href='/admin/post/delete?postCode=${post.postCode}'|"/>
+	
 </body>
 </html>
