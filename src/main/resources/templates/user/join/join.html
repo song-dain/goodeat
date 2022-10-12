@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<link rel="stylesheet" href="/css/user/main.css">
-	<link rel="stylesheet" href="css/user/slide.css">
 	<link rel="stylesheet" href="/css/user/info/join.css">
 	<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <meta charset="UTF-8">
@@ -449,8 +448,8 @@
 				 return;
 			 } else {
 				 checkedEmail.innerHTML = '<div class="result"> 이메일이 인증되었습니다. <div>'
-				 email1.disabled = true;
-				 email2.disabled = true;
+/*  				 email1.readonly = true;
+				 email2.readonly = true; */
 				 return;
 			 }
 		 }

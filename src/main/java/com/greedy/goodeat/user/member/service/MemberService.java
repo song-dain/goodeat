@@ -1,8 +1,10 @@
 package com.greedy.goodeat.user.member.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 
-import org.hibernate.annotations.DynamicInsert;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -29,12 +31,25 @@ public class MemberService {
 		
 		return memberRepository.findByMemberIdAndMemberStatus(memberId, "Y").isPresent();
 	}
+	
+	public boolean selectMemberByNameAndEmail(String memberName, String email) {
+		
+		boolean isExist = false;
+		
+		if(memberRepository.findByMemberNameAndMemberStatus(memberName, "Y").isPresent()
+				&& memberRepository.findByEmailAndMemberStatus(email, "Y").isPresent()) {
+			isExist = true;
+		}
+		
+		return isExist;
+	}
 
 	public void joinMembership(MemberDTO member) {
 		
 		memberRepository.save(modelMapper.map(member, Member.class));
 		
 	}
+
 
 	public boolean selectMemberByIdAndEmail(String memberId, String email) {
 		
@@ -51,6 +66,14 @@ public class MemberService {
 	public MemberDTO findByMemberIdAndEmail(MemberDTO member) {
 		
 		Member findmember = memberRepository.findByMemberIdAndEmail(member.getMemberId(), member.getEmail());
+
+	public MemberDTO findByMemberNameAndEmail(MemberDTO member) {
+		
+		log.info("[MemberService] memberName : {}", member.getMemberName());
+		log.info("[MemberService] email : {}", member.getEmail());
+		
+		Member findmember = memberRepository.findByMemberNameAndEmail(member.getMemberName(), member.getEmail());
+
 		
 		return modelMapper.map(findmember, MemberDTO.class);
 	}
@@ -63,7 +86,5 @@ public class MemberService {
 		memberRepository.save(member);
 		
 	}
-	
-	
 
 }

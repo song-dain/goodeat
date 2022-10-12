@@ -12,6 +12,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.greedy.goodeat.common.dto.MemberDTO;
+import com.greedy.goodeat.user.member.repository.MemberRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,10 +21,12 @@ import lombok.extern.slf4j.Slf4j;
 public class MailSendService {
 	
 	private final JavaMailSender mailSender;
+	private final MemberRepository memberRepository;
 	private int authNumber;
 	
-	public MailSendService(JavaMailSender mailSender) {
+	public MailSendService(JavaMailSender mailSender, MemberRepository memberRepository) {
 		this.mailSender = mailSender;
+		this.memberRepository = memberRepository;
 	}
 	
 	public void makeRandomNumber() {
@@ -84,6 +87,19 @@ public class MailSendService {
 		
 	}
 	
+	public void findIdEmailForm(String findId, String email) {
+		
+		log.info("[MailSendService] email : {} ", email);
+		log.info("[MailSendService] findId : {} ", findId);
+		
+		String setFrom = "goodeattest@gmail.com";
+		String toMail = email;
+		String title = "[Good Eat] 요청하신 아이디 안내드립니다";
+		String content = "<h3>요청하신 GoodEat 아이디 안내드립니다.</h3> " 
+					   + "<br>"
+					   + "회원님의 아이디는 <b>" + findId + "</b>입니다.";
+		mailSend(setFrom, toMail, title, content);
+	}
 	
 	public void mailSend(String setFrom, String toMail, String title, String content) {
 		
@@ -101,16 +117,4 @@ public class MailSendService {
 		}
 	}
 
-
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
