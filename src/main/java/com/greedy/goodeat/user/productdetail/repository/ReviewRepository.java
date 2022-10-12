@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.greedy.goodeat.common.dto.ReviewDTO;
+import com.greedy.goodeat.common.entity.Post;
 import com.greedy.goodeat.common.entity.Review;
 
 
@@ -25,9 +26,9 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
 	         "FROM Review r " +
 			"WHERE r.reviewCode = :reviewCode " +
 	          "AND (r.reviewTitle LIKE '%' || :searchValue || '%' )")
-	Page<Review> findBySearchValue(@Param("reviewCode") int reviewCode, @Param("searchValue") String searchValue, Pageable pageable);
+	Page<Review> findBySearchValue(@Param("reviewCode") Integer reviewCode, @Param("searchValue") String searchValue, Pageable pageable);
 	
-
+	Post findByReviewCode(Integer reviewCode);
 	
 
 }

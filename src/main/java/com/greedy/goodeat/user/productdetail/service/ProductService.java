@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.greedy.goodeat.common.dto.ProductDTO;
 import com.greedy.goodeat.common.entity.Product;
+import com.greedy.goodeat.user.productdetail.hgdto.hgProductDTO;
 import com.greedy.goodeat.user.productdetail.repository.ProductRepository;
 
 
@@ -19,11 +20,11 @@ public class ProductService {
 		this.modelMapper = modelMapper;
 	}
 	
-	public ProductDTO selectProduct(Integer productCode) {
+	public hgProductDTO selecthgProduct(Integer productCode) {
 		
 		Product product = productRepository.findByProductCode(productCode);
 		
-		return modelMapper.map(product, ProductDTO.class);
+		return modelMapper.map(product, hgProductDTO.class);
 	}
 
 }
