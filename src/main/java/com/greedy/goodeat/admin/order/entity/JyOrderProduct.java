@@ -1,4 +1,4 @@
-package com.greedy.goodeat.common.entity;
+package com.greedy.goodeat.admin.order.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +21,7 @@ import lombok.ToString;
 @Entity
 @Table(name = "TBL_ORDER_PRODUCT")
 @DynamicInsert
-public class OrderProduct {
+public class JyOrderProduct {
 	
 	@Id
 	@Column(name = "ORDER_PRODUCT_CODE")
@@ -33,9 +33,8 @@ public class OrderProduct {
 	@Column(name="ORDER_NO")
 	private Integer orderNo;
 	
-	
 	@ManyToOne
 	@JoinColumn(name = "PRODUCT_CODE")
-	private Product product;
+	private JyProduct product;
 
 }

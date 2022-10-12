@@ -1,8 +1,8 @@
-package com.greedy.goodeat.common.entity;
+package com.greedy.goodeat.admin.product.entity;
+
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +27,7 @@ import lombok.Setter;
 @Table(name = "TBL_PRODUCT")
 @SequenceGenerator(name = "PRODUCT_SEQ_GENERATOR", sequenceName = "SEQ_PRODUCT_CODE", initialValue = 1, allocationSize = 1)
 @DynamicInsert
-public class Product {
+public class KjyProduct {
 	
 	@Id
 	@Column(name="PRODUCT_CODE")
@@ -60,10 +60,10 @@ public class Product {
 	
 	@ManyToOne
 	@JoinColumn(name = "CATEGORY_CODE")
-	private ProductCategory productCategory;
+	private KjyProductCategory productCategory;
 	
-//	@OneToMany(cascade = CascadeType.PERSIST)
-//	@JoinColumn(name = "PRODUCT_CODE")
-//	private List<Addfile> addfileList;
+	@OneToMany
+	@JoinColumn(name = "PRODUCT_CODE")
+	private List<KjyAddfile> addfileList;
 
 }

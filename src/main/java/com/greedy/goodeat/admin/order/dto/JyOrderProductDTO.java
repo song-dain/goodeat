@@ -1,13 +1,13 @@
-package com.greedy.goodeat.common.dto;
+package com.greedy.goodeat.admin.order.dto;
 
 import lombok.Data;
 
 @Data
-public class OrderProductDTO {
+public class JyOrderProductDTO {
 	
 	private Integer orderProductCode;
 	private String orderAmount;
 	private Integer orderNo;
-	private ProductDTO product;
+	private JyProductDTO product;
 
 }

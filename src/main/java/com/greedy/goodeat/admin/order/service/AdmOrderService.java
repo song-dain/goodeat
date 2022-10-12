@@ -1,7 +1,5 @@
 package com.greedy.goodeat.admin.order.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -13,14 +11,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.greedy.goodeat.admin.order.dto.JyDeliveryDTO;
+import com.greedy.goodeat.admin.order.dto.JyOrderDTO;
+import com.greedy.goodeat.admin.order.entity.JyDelivery;
+import com.greedy.goodeat.admin.order.entity.JyOrder;
 import com.greedy.goodeat.admin.order.repository.AdmDeliveryRepository;
 import com.greedy.goodeat.admin.order.repository.AdmOrderRepository;
-import com.greedy.goodeat.common.dto.DeliveryDTO;
-import com.greedy.goodeat.common.dto.OrderDTO;
-import com.greedy.goodeat.common.dto.OrderProductDTO;
-import com.greedy.goodeat.common.entity.Delivery;
-import com.greedy.goodeat.common.entity.Order;
-import com.greedy.goodeat.common.entity.OrderProduct;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -42,12 +38,12 @@ public class AdmOrderService {
 		this.modelMapper = modelMapper;
 	}
 
-	public Page<OrderDTO> findOrderList(int page, String searchValue) {
+	public Page<JyOrderDTO> findOrderList(int page, String searchValue) {
 		
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		
 		Pageable pageable = PageRequest.of(page - 1, TEXT_PAGE_SIZE, Sort.by(SORT_BY).descending());
-		Page<Order> orderList = null;
+		Page<JyOrder> orderList = null;
 		
 		if(searchValue !=null && !searchValue.isEmpty()) {
 			orderList = admOrderRepository.finBySearchValue(searchValue, pageable);
@@ -55,21 +51,29 @@ public class AdmOrderService {
 			orderList = admOrderRepository.findAll(pageable);
 		}
 		
+		
 		log.info("orderList : {}", orderList.getContent());
 		
-		return orderList.map(order -> modelMapper.map(order, OrderDTO.class));
+		return orderList.map(order -> modelMapper.map(order, JyOrderDTO.class));
 		
 	}
 
 	@Transactional
-	public void modifyDelivery(DeliveryDTO delivery) {
+	public void modifyDelivery(JyDeliveryDTO delivery) {
 	
-		Delivery modifydelivery = admDeliveryRepository.findById(delivery.getDeliveryCode()).get();
+		JyDelivery modifydelivery = admDeliveryRepository.findById(delivery.getDeliveryCode()).get();
 		
 		modifydelivery.setDeliveryCompany(delivery.getDeliveryCompany());
 		modifydelivery.setInvoiceNo(delivery.getInvoiceNo());
 
 	
+	}
+
+	public JyOrderDTO selectOrderList(Integer orderNo) {
+		
+		JyOrder order = admOrderRepository.findById(orderNo).get();
+		
+		return modelMapper.map(order, JyOrderDTO.class);
 	}
 
 
