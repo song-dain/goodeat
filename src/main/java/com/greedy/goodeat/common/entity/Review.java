@@ -70,4 +70,7 @@ public class Review {
 	@Column(name="REVIEW_MODIFYDATE")
 	private java.sql.Date reviewModifyDate;
 	
+	@Column(name = "REASON_REPORTED")
+	private String reasonReported;
+	
 }

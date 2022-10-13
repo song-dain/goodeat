@@ -9,6 +9,10 @@
     <link rel="stylesheet" th:href="@{/css/admin/Adminstyle.css}">
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gamja+Flower&family=Gowun+Dodum&family=Poor+Story&display=swap" rel="stylesheet">
     <link rel ="icon" type="image/x-icom" th:href="@{/images/common/HEQXSRYC.ico}">
+    <script>
+		const message = '[[${message}]]';
+		message && alert(message);
+	</script>
 </head>
 <body>
    
@@ -16,7 +20,7 @@
    
     <div class="rq-head-box"></div>
     <div class="rev-head-box"></div>
-      <a class="rq-head" th:href="@{/admin/inquiry}">문의 관리</a>
+      <a class="rq-head" th:href="@{/admin/inquiry/list}">문의 관리</a>
       <a class="rev-head">리뷰 관리</a>
     <table class="tg">
         <tbody>
@@ -65,42 +69,14 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td class="tg2-0pky">001</td>
-            <td class="tg2-0pky">이 상품을 사는 사람은 도대체 어떤 사람일까?</td>
-            <td class="tg2-0pky">이일번</td>
-            <td class="tg2-0pky">답변완료</td>
-          </tr>
-          <tr>
-            <td class="tg2-0pky"></td>
-            <td class="tg2-0pky"></td>
-            <td class="tg2-0pky"></td>
-            <td class="tg2-0pky"></td>
-          </tr>
-          <tr>
-            <td class="tg2-0pky"></td>
-            <td class="tg2-0pky"></td>
-            <td class="tg2-0pky"></td>
-            <td class="tg2-0pky"></td>
-          </tr>
-          <tr>
-            <td class="tg2-0pky"></td>
-            <td class="tg2-0pky"></td>
-            <td class="tg2-0pky"></td>
-            <td class="tg2-0pky"></td>
-          </tr>
-          <tr>
-            <td class="tg2-0pky"></td>
-            <td class="tg2-0pky"></td>
-            <td class="tg2-0pky"></td>
-            <td class="tg2-0pky"></td>
-          </tr>
-          <tr>
-            <td class="tg2-0pky"></td>
-            <td class="tg2-0pky"></td>
-            <td class="tg2-0pky"></td>
-            <td class="tg2-0pky"></td>
-          </tr>
+        	<tr class="contentline2" th:each="review : ${ reviewList }"
+				th:onclick="|location.href='/admin/review/detail?reviewCode=${review.reviewCode}'|"
+				style="cursor:pointer;">
+				<td  th:text="${ review.reviewCode }"></td>
+				<td th:text="${ review.reviewTitle }"></td>
+				<td th:text="${ review.member.memberId }"></td>
+				<td th:text="${ review.reviewStatus }"></td>
+		    </tr>
         </tbody>
         </table>  
 </body>

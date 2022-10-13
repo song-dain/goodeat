@@ -22,5 +22,5 @@ public class ReviewDTO {
 	private java.sql.Date review_RegistDate;
 	private java.sql.Date review_DeleteDate;
 	private java.sql.Date review_ModifyDate;
-	
+	private String reasonReported;
 }

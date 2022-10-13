@@ -1,5 +1,7 @@
 package com.greedy.goodeat.admin.inquiry.entity;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -43,15 +45,23 @@ public class Reply {
 	@Column(name = "REF_INQUIRY_NO")
     private Integer refInquiryNo;
 	
-	@Column(name = "REPLY_INQUIRY")
-    private String replyInquiry;
+	@Column(name = "REF_REVIEW_NO")
+	private Integer refReviewNo;
+	
+	@Column(name = "REPLY_INQUIRY_CONTENT")
+    private String replyInquiryContent;
+	
+	@Column(name = "REPLY_REVIEW_CONTENT")
+    private String replyReviewContent;
 	
 	@ManyToOne
-	@JoinColumn(name = "REPLY_WRITER_MEMBER_NO")
-    private Member writer;	
+	@JoinColumn(name = "MEMBER_NO")
+    private Member member;	
 	
 	@Column(name = "REPLY_STATUS")
     private String replyStatus;
-
+	
+	@Column(name = "REPLY_REGISTDATE")
+	private Date replyRegistDate;
 
 }

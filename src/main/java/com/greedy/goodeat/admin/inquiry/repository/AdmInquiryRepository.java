@@ -1,5 +1,7 @@
 package com.greedy.goodeat.admin.inquiry.repository;
 
+
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,5 +17,6 @@ public interface AdmInquiryRepository extends JpaRepository<SYInquiry, Integer> 
 			   "OR i.inquiryContent LIKE '%' || :searchValue || '%'" +
 			   "OR i.member.memberId LIKE '%' || :searchValue || '%')")
 	Page<SYInquiry> finBySearchValue(String searchValue, Pageable pageable);
+
 
 }

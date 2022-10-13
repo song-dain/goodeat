@@ -9,6 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/admin/inquiry/detailinquiry.css}">
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gamja+Flower&family=Gowun+Dodum&family=Poor+Story&display=swap" rel="stylesheet">
     <link rel ="icon" type="image/x-icom" th:href="@{/images/common/HEQXSRYC.ico}">
+    <script type="text/javascript" th:src="@{/js/event.js}"></script>
 </head>
 <body>
    
@@ -29,13 +30,128 @@
     <div class="wrapper-down">
         <div class="msbox-down">
             <div class="ms-down">답변</div><br>
+            <!-- 
             <form th:action="@{/admin/inquiry/registReply}" method="post">
-            <textarea class="res-box" form="inform" cols="40" rows="10" autofocus required wrap="hard"
-            placeholder="답변을 입력하세ㅛㅇ">
-            </textarea>
-            <input type="submit" class="btn-com" value="완료">
-            </form> 
-        </div>
+            	<textarea class="res-box" form="inform" cols="40" rows="10" autofocus required wrap="hard"
+            	placeholder="답변을 입력하세ㅛㅇ"></textarea>
+            	<input type="submit" class="btn-com" value="완료">
+            </form>
+             -->
+           <table id="replyWrite" style="margin:auto;">
+				<input type="hidden" id="inquiryCode" th:value="${inquiry.inquiryCode}"/>
+				<tr>
+					<td>댓글</td>
+					<td><textarea cols="40" rows="3" id="replyInquiryContent" style="resize:none;"></textarea></td>
+					<td><button type="button" id="registReply">작성하기</button></td>
+				</tr>
+			</table>
+			
+			<table id="replyResult" style="margin:auto;"></table>
+	    </div>
     </div>
+     		
+	<script>
+		/* 댓글 관련 로직 - 비동기 요청 */
+		loadReply();
+		
+		/* 2. 댓글 로드 */
+		function loadReply() {
+			
+			if(document.getElementById("inquiryCode")) {
+				
+				fetch("/admin/inquiry/loadReply?refInquiryNo=" + document.getElementById("inquiryCode").value)
+				.then(result => result.json())
+				.then(data => {
+					makeReplyTable(data);
+				})
+				.catch(error => console.log(error));
+				
+			}
+			
+		}
+		/* 1. 댓글 작성 이벤트 */
+		if(document.getElementById("registReply")) {
+			
+			const $registReply = document.getElementById("registReply");
+			const $replyBody = document.getElementById("replyInquiryContent");
+			
+			$registReply.onclick = function() {
+				
+				if(!$replyBody.value.trim()) {
+					alert("댓글을 입력해주세요");
+					return;
+				}
+				
+				const inquiryCode = document.getElementById("inquiryCode").value;
+				const replyInquiryContent = $replyInquiryContent.value;
+				
+				fetch("/admin/inquiry/registReply", {
+					method: "POST",
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8'
+					},
+					body: JSON.stringify({
+						refInquiryNo: inquiryCode,
+						replyInquiryContent: replyInquiryContent
+					})
+				})
+				.then(data => {
+					console.log(data);
+					loadReply();
+				})
+				.catch(error => console.log(error));
+			}
+		}
+		
+		/* 3. 댓글 삭제 */
+		function removeReply(replyNo) {
+			
+			fetch("/board/removeReply", {
+				method: "POST",
+				headers: {
+					'Content-Type': 'application/json; charset=UTF-8'
+				},
+				body: JSON.stringify({
+					replyNo: replyNo
+				})
+			})
+			.then(result => {
+				console.log(result);
+				loadReply();
+			})
+			.catch(error => console.log(error));
+			
+		}
+		
+		
+		/* 댓글 데이터 테이블화 하는 함수 */
+		function makeReplyTable(replyList) {
+			
+			const $table = document.querySelector("#replyResult");
+			$table.innerHTML = '';
+			
+			replyList.forEach(reply => {
+				const $tr = document.createElement('tr');
+				const $replyInquiryContentTd = document.createElement('td');
+				const $memberNameTd = document.createElement('td');
+				const $replyRegistDateTd = document.createElement('td');
+				const $buttonTd = document.createElement('td');
+				
+				$replyInquiryContentTd.textContent = reply.replyInquiryContent;
+				$memberNameTd.textContent = reply.member.memberName;
+				$replyRegistDateTd.textContent = reply.replyRegistDate;
+				
+				
+				$buttonTd.innerHTML = `<button type='button' onclick='removeReply(${reply.replyNo})'>댓글삭제</button>`;
+				
+				$tr.append($replyInquiryContentTd, $memberNameTd, $replyRegistDateTd, $buttonTd);
+				$table.append($tr);
+			});
+			
+		}
+		
+		
+	</script> 
+
 </body>
 </html>
