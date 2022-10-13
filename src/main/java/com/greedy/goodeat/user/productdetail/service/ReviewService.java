@@ -9,11 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.greedy.goodeat.common.dto.PostDTO;
-import com.greedy.goodeat.common.dto.ReviewDTO;
-import com.greedy.goodeat.common.entity.Post;
-import com.greedy.goodeat.common.entity.Review;
 import com.greedy.goodeat.user.productdetail.hgdto.hgReviewDTO;
+import com.greedy.goodeat.user.productdetail.hgentity.hgReview;
 import com.greedy.goodeat.user.productdetail.repository.ReviewRepository;
 
 
@@ -26,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 public class ReviewService {
 	
-	public static final int TEXT_PAGE_SIZE = 5;
+	public static final int TEXT_PAGE_SIZE = 7;
 	public static final String SORT_BY = "reviewCode";
 	public static final String ACTIVE_STATUS = "정상";
 	
@@ -45,7 +42,7 @@ public class ReviewService {
 	public Page<hgReviewDTO> selectReviewList(int page, String searchValue) {
 		
 		Pageable pageable = PageRequest.of(page - 1, TEXT_PAGE_SIZE, Sort.by(SORT_BY).descending());
-		Page<Review> reviewList = null;
+		Page<hgReview> reviewList = null;
 		
 		if(searchValue != null && !searchValue.isEmpty()) {
 			
@@ -59,13 +56,13 @@ public class ReviewService {
 	}
 
 
-	public void registReview(hgReviewDTO newReview) {
+	public void registReview(hgReviewDTO review) {
 		
-		reviewRepository.save(modelMapper.map(newReview, Review.class));
+		reviewRepository.save(modelMapper.map(review, hgReview.class));
 		
 	}
 		
-	
+
 	
 
 }

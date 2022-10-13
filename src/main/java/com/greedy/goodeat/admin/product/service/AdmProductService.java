@@ -11,10 +11,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.greedy.goodeat.admin.product.dto.KjyProductDTO;
+import com.greedy.goodeat.admin.product.entity.KjyProduct;
+import com.greedy.goodeat.admin.product.entity.KjyProductCategory;
 import com.greedy.goodeat.admin.product.repository.AdmProductRepository;
-import com.greedy.goodeat.common.dto.ProductDTO;
-import com.greedy.goodeat.common.entity.Product;
-import com.greedy.goodeat.common.entity.ProductCategory;
 
 
 @Service
@@ -33,10 +33,10 @@ public class AdmProductService {
 		this.modelMapper = modelMapper;
 	}
 	@Transactional
-	public Page<ProductDTO> findProductList(int page, String searchValue) {
+	public Page<KjyProductDTO> findProductList(int page, String searchValue) {
 		
 		Pageable pageable = PageRequest.of(page - 1, TEXT_PAGE_SIZE, Sort.by(SORT_BY).descending());
-		Page<Product> productList = null;
+		Page<KjyProduct> productList = null;
 		
 		if(searchValue !=null && !searchValue.isEmpty()) {
 			productList = admProductRepository.finBySearchValue(searchValue, pageable);
@@ -44,40 +44,40 @@ public class AdmProductService {
 			productList = admProductRepository.findAll(pageable);
 		}
 		
-		return productList.map(product -> modelMapper.map(product, ProductDTO.class));
+		return productList.map(product -> modelMapper.map(product, KjyProductDTO.class));
 	}
 
 	
 	@Transactional
-	public void registProduct(ProductDTO newProduct) {
+	public void registProduct(KjyProductDTO newProduct) {
 		
-		admProductRepository.save(modelMapper.map(newProduct, Product.class));
+		admProductRepository.save(modelMapper.map(newProduct, KjyProduct.class));
 	}
 
 
 	@Transactional
-	public void deleteProduct(ProductDTO product) {
+	public void deleteProduct(KjyProductDTO product) {
 		
-		Product deleteProduct = admProductRepository.findById(product.getProductCode()).get();
+		KjyProduct deleteProduct = admProductRepository.findById(product.getProductCode()).get();
 		
-		admProductRepository.delete(modelMapper.map(deleteProduct, Product.class));
+		admProductRepository.delete(modelMapper.map(deleteProduct, KjyProduct.class));
 
 		
 	}
 
-	public ProductDTO selectProductList(Integer productCode) {
+	public KjyProductDTO selectProductList(Integer productCode) {
 		
-		Product product = admProductRepository.findById(productCode).get();
+		KjyProduct product = admProductRepository.findById(productCode).get();
 		
-		return modelMapper.map(product, ProductDTO.class);
+		return modelMapper.map(product, KjyProductDTO.class);
 	}
 
 	@Transactional
-	public void modifyProduct(ProductDTO product) {
+	public void modifyProduct(KjyProductDTO product) {
 		
-		Product selecetProduct = admProductRepository.findById(product.getProductCode()).get();
+		KjyProduct selecetProduct = admProductRepository.findById(product.getProductCode()).get();
 		selecetProduct.setProductName(product.getProductName());
-		selecetProduct.setProductCategory(modelMapper.map(product.getProductCategory(), ProductCategory.class));
+		selecetProduct.setProductCategory(modelMapper.map(product.getProductCategory(), KjyProductCategory.class));
 		selecetProduct.setProductPrice(product.getProductPrice());
 		selecetProduct.setProductInventory(product.getProductInventory());
 		selecetProduct.setProductStatus(product.getProductStatus());
