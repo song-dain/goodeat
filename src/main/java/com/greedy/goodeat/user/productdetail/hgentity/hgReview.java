@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.DynamicInsert;
 
 import com.greedy.goodeat.common.entity.Member;
-import com.greedy.goodeat.common.entity.Order;
+
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -66,6 +66,9 @@ public class hgReview {
 	
 	@Column(name="REVIEW_MODIFYDATE")
 	private java.sql.Date reviewModifyDate;
+
+	
+	// 리뷰 첨부파일 구현 시 파일 리스트 필요
 
 	
 }

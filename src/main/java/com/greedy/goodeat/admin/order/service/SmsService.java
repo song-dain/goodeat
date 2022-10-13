@@ -35,7 +35,7 @@ public class SmsService {
 	   private String secretKey = "";
 	   private String serviceId = "";
 	   private String phone = "";
-	
+
 	
 	public String makeSignature(Long time) throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException {
 		String space = " ";

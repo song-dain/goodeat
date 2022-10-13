@@ -55,14 +55,39 @@ public class ReviewService {
 		return reviewList.map(review -> modelMapper.map(review, hgReviewDTO.class));
 	}
 
-
+	//등록
 	public void registReview(hgReviewDTO review) {
 		
 		reviewRepository.save(modelMapper.map(review, hgReview.class));
 		
 	}
-		
-
 	
-
+	//상세
+	public hgReviewDTO selectReviewDetail(Integer reviewCode) {
+		
+		hgReview review = reviewRepository.findByReviewCode(reviewCode);
+		return modelMapper.map(review, hgReviewDTO.class);
+	}
+	
+	
+	 //수정 
+	public void modifyReview(hgReviewDTO review) {
+	
+	  log.info("[ReviewService] foundReview:{} ", review); 
+	  hgReview foundReview = reviewRepository.findByReviewCode(review.getReviewCode());
+	  
+	  //log.info("[ReviewService] foundReview:{} ", foundReview);
+	  
+	  foundReview.setReviewCode(review.getReviewCode());
+	  foundReview.setReviewContent(review.getReviewContent());
+	  foundReview.setReviewTitle(review.getReviewTitle());
+	  
+	  }
+	 
+	//삭제
+	public void deleteReview(Integer reviewCode) {
+		hgReview deleteReview = reviewRepository.findById(reviewCode).get();
+		reviewRepository.delete(deleteReview);
+	}
+	
 }
