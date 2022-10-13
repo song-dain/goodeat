@@ -21,7 +21,7 @@
    <section id="con-wrap">
         <div id="registPage">
             <div id="regist">회원 정보 변경</div><hr style="margin-bottom:2em">
-            <form name="regist" action="index.html" method="post" onsubmit="return checkForm()">
+            <form name="regist" th:action="@{/mypage/info}" method="post" onsubmit="return checkForm()">
                 <table>
                     <tr>
                         <td align="right">아이디</td>
@@ -36,7 +36,7 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td align="left"><input type="password" name="passwordCheck" class="text-field" id="passowrd2" placeholder="비밀번호 재입력"></td>
+                        <td align="left"><input type="password" class="text-field" id="password2" placeholder="비밀번호 재입력"></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -62,7 +62,7 @@
                         <td align="right">주소</td>
                         <td align="left">
                             <input class="text-field" name="zipCode" id="zipCode" th:value="${ #authentication.principal.zipCode }">
-                            <input class="text-field" name="searchAddress" id="searchAddress" th:value="${ #authentication.principal.address }">
+                            <input class="text-field" name="address" id="searchAddress" th:value="${ #authentication.principal.address }">
                         </td>
                     </tr>
                     <tr>
@@ -133,7 +133,7 @@
     	
     	 if(!pwd_RegExp.test(password1.value.trim())){
       		alert('비밀번호를 확인해주세요.');
-     		 memberPwd.focus();
+      		password1.focus();
      		 return false;
      	 }
     	 
@@ -186,7 +186,7 @@
     
     if(password2){
    	 
-		password2.onkeyup = function(){
+    	password2.onkeyup = function(){
    		 
 	   		 let memberPwdValue = password1.value.trim();
 	   		 let password2Value = password2.value.trim();
