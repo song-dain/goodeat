@@ -31,11 +31,11 @@ import com.greedy.goodeat.admin.order.dto.SmsResponseDTO;
 public class SmsService {
 	
 	//네이버 클라우드에서 발급받은 각자키를 이용하세요!!!
-	private String accessKey = "";
-	private String secretKey = "";;
-	private String serviceId = "";
-	private String phone = "";
-	
+	   private String accessKey = "";
+	   private String secretKey = "";
+	   private String serviceId = "";
+	   private String phone = "";
+
 	
 	public String makeSignature(Long time) throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException {
 		String space = " ";

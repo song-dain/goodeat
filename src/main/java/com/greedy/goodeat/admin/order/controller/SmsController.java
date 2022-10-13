@@ -38,16 +38,7 @@ public class SmsController {
 		
 	}
 	
-	@GetMapping("/send")
-	public String getSmsPage(Model model, Integer orderNo) {
-		
-		JyOrderDTO order = admOrderService.selectOrderList(orderNo);
-		
-		model.addAttribute("order", order);
-		
-		return "admin/order/adm-ordersms";
-	}
-	
+
 	@PostMapping("/sms/send")
 	public String sendSms(MessageDTO messageDto, Model model,RedirectAttributes rttr) throws JsonProcessingException, RestClientException, URISyntaxException, InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException {
 		SmsResponseDTO response = smsService.sendSms(messageDto);
