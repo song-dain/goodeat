@@ -25,4 +25,10 @@ public class PaymentController {
 		return "user/cart/payment";
 	}
 	
+	@GetMapping("/complete")
+	public String complete() {
+		
+		return "user/cart/complete";
+	}
+	
 }

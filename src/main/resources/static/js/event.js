@@ -75,10 +75,12 @@ window.onload = function() {
 		$(".quantity_modify_btn").on("click", function(){
 			let cartId = $(this).data("cartId");
 			let productCount = $(this).parent("div").find("input").val();
-			$(".update_cartId").val(cartId);
-			$(".update_productCount").val(productCount);
+			$(".update_cartCode").val(cartId);
+			$(".update_productAmount").val(productCount);
 			$(".quantity_update_form").submit();
 			
 		});
-
+		
+		
+	
 }

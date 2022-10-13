@@ -8,7 +8,6 @@ import javax.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import com.greedy.goodeat.common.dto.CartDTO;
 import com.greedy.goodeat.common.dto.CartListDTO;
 import com.greedy.goodeat.common.entity.Cart;
 import com.greedy.goodeat.user.repository.CartRepository;
@@ -32,6 +31,14 @@ public class CartService {
 		
 		return cartList.stream().map(cart -> modelMapper.map(cart, CartListDTO.class)).collect(Collectors.toList());
 	}
+
+	public void updateCartList(CartListDTO updateCart) {
+		
+		Cart savedCart = cartRepository.findBycartCode(updateCart.getCartCode());
+		savedCart.setProductAmount(updateCart.getProductAmount());
+		
+	}
+
 	
 	
 	

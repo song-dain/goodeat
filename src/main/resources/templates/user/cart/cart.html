@@ -69,7 +69,7 @@
 	                                    	<input type="text" class="quantity_input" th:value="${ cart.productAmount }">
 	                                    	<button class="quantity_btn plus_btn">+</button>
 											<button class="quantity_btn minus_btn">-</button>
-	                                    	<a class="quantity_modify_btn" data-cartId="${ cartId }">변경</a>
+	                                    	<button class="quantity_modify_btn" data-cartId="${ cart.cartCode }">변경</button>
                                     	</div>
                                     </div>
                                 </div>
@@ -141,6 +141,11 @@
             </div>
         </div>
         
+        <form th:action="@{/user/update}" method="post" class="quantity_update_form">
+				<input type="hidden" name="cartId" class="update_cartCode">
+				<input type="hidden" name="productCount" class="update_productAmount">
+		</form>
+		
         
         
         
@@ -148,7 +153,22 @@
 
 	<div th:replace="user/common/footer.html"></div>
 
+	<!-- <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+	
+	const $quantity_modify_btn = document.getElementsByClassName("quantity_modify_btn");
+	
+    $quantity_modify_btn.onclick = function() {
 
+        /* 다음 우편번호 검색 창을 오픈하면서 동작할 콜백 메소드를 포함한 객체를 매개변수로 전달한다. */
+        new daum.Postcode({
+            oncomplete: function(data){
+                /* 팝업에서 검색결과 항목을 클릭했을 시 실행할 코드를 작성하는 부분 */
+                document.getElementByClassName("quantity_input").value = data.quantitycode;
+            }
+        }).open();
+    }
+	</script> -->
 
 
 
