@@ -1,6 +1,6 @@
 package com.greedy.goodeat.user.productdetail.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/user/productdetail")
 public class ProductdetailController {
 	
-	@Autowired
+	
 	private final ReviewService reviewService;
 	private final ProductService productService;
 	private final MessageSourceAccessor messageSourceAccessor;
@@ -70,18 +70,66 @@ public class ProductdetailController {
 	}
 	
 	@PostMapping("/regist")
-	public String registReview(Model model,
-							   hgReviewDTO review, RedirectAttributes rttr) {
+	public String registReview(hgReviewDTO review, @AuthenticationPrincipal MemberDTO member, RedirectAttributes rttr) {
 		
-		reviewService.registReview(review);
-		model.addAttribute("review", review);
+		/* -------------------------- */
+		member = new MemberDTO();
+		member.setMemberNo(2);
+		/* -------------------------- */
+		
+		review.setMember(member);
 		log.info("review : {}", review);
-		/*
-		 * rttr.addFlashAttribute("message",
-		 * messageSourceAccessor.getMessage("review.regist"));
-		 */
+		reviewService.registReview(review);
 		
-		return "redirect:/user/productdetail/";
+		
+		 rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("review.regist"));
+		 
+		
+		return "redirect:/user/productdetail/list?productCode=1";
 	}
+	
+	//리뷰 상세확인
+	@GetMapping("/detail")
+	public String selectReviewDetail(Model model, Integer reviewCode) {
+		
+		hgReviewDTO review = reviewService.selectReviewDetail(reviewCode);
+		
+		log.info("review : {}", review);
+		model.addAttribute("review", review);
+		
+		return "user/productdetail/review/detailReview";
+		
+	}
+	
+	//수정
+	 @GetMapping("/review/modify") 
+	 public String midifyReview() { 
+		 
+		 return "user/productdetail/review/modifyReview"; 
+		 }
+	  
+	 @PostMapping("/review/modify") 
+	 public String modifyReview(Model model, hgReviewDTO review, RedirectAttributes rttr) {
+	 
+	 reviewService.modifyReview(review);
+		/*
+		 * rttr.addFlashAttribute("modifySuccessMessage",
+		 * messageSourceAccessor.getMessage("review.modify"));
+		 */
+	 	log.info("[ReviewController] review: {}", review);
+	  model.addAttribute("review", review);
+	  
+	  return "redirect:/user/productdetail/list?productCode=1";
+	  }
+	 
+	 //삭제
+	 @GetMapping("/review/delete")
+	 public String deleteReview(@RequestParam Integer reviewCode) {
+		 
+		 reviewService.deleteReview(reviewCode);
+		 
+		 return "redirect:/";
+	 }
+	 
 	
 }

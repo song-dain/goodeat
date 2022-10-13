@@ -2,7 +2,6 @@ package com.greedy.goodeat.user.productdetail.hgentity;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -64,9 +63,9 @@ public class hgProduct {
 	@JoinColumn(name = "CATEGORY_CODE")
 	private ProductCategory productCategory;
 	
-	@ManyToOne
-	@JoinColumn(name = "ADDFILE_NO") 
-	private hgAddfile addfile;
+	@OneToMany
+	@JoinColumn(name = "PRODUCT_CODE") 
+	private List<hgAddfile> addfile;
 	 
 	 
 

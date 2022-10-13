@@ -20,7 +20,7 @@
  <!-- 컨텐츠 부분 -->
   <div class="container">
   <form th:action="@{/user/productdetail/review/modify}" method="post" enctype="multipart/form-data">
-    <h1>리뷰 수정</h1>
+    <h1>문의 수정</h1>
         <table id="textbox" border="0">
         	<tr>
         		<tr>
@@ -31,12 +31,6 @@
         		<tr>
         		<td>제목</td>
         			<td><input type="text" class="titlebox" placeholder="제목을 입력하세요" name="reviewTitle"></td>
-        		</tr>
-        		<tr>
-        			<td>첨부파일</td>
-        			<td>	
-        				<input type="file" class="filebox"/>
-        			</td>
         		</tr>
         		<tr>
         			<td>주문 번호</td>
