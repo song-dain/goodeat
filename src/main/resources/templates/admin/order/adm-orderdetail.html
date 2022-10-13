@@ -134,10 +134,16 @@
                 <tr>
                     <td class="td-left-class">송장번호</td>
                     <td class="td-right-class">
-                        <p th:text="${ order.delivery.invoiceNo }" id="detailProduct"/>
-                        <button id= "orderButtonDelivery" th:onclick= "|location.href='/admin/send?orderNo=${order.orderNo}'|">문자발송</button>
+                        <p th:text="${ order.delivery.invoiceNo }" id="detailProduct" style="float:left;"/>
                         <button id= "orderButtonDelivery" onclick="javascript:openPop()">송장번호입력</button>
+                       <form th:action="@{sms/send}" method="post">
+                       		<p style="float:left; font-size:20px; margin-left:10px;">고객님께 송장번호를 전송하시려면 문자발송을 눌러주세요 </p>
+	                       		<input type="hidden" name = "to" th:value="${order.member.phone}"/>
+	                       		<input type="hidden" name = "content" th:value="'[굿잇] 송장번호 : ' + ${order.delivery.invoiceNo} + ' 택배사 : ' + ${order.delivery.deliveryCompany}"/>
+                        	<button id= "orderButtonDelivery" style="float:left;">문자발송</button>
+                       </form>
                     </td>
+                  
                 </tr>
                   <tr>
                     <td class="td-left-class">택배사</td>
@@ -176,8 +182,7 @@
 	                    <h3>송장번호</h3>
 	
 	                    <input type="text" placeholder="송장번호를 입력해주세요" id="popup_searchbox"  name = "invoiceNo">
-	                    <h3 th:text="'배송코드 : ' + (${order.delivery.deliveryCode})"></h3>
-	                    <input type="text" placeholder="배송코드를 입력해주세요" id="popup_searchbox"  name = "deliveryCode">
+	                    <input type="hidden" name = "deliveryCode" th:value="${order.delivery.deliveryCode}"/>
 	            </div>
 	            <!--팝업 버튼 영역-->
 	                <input type="submit" value="저장" class="popup_btn" style="float: bottom; margin-top: 10px;">
@@ -198,8 +203,7 @@
                         <option value="CANCEL_DONE">취소완료</option>
                         <option value="REFUND_DONE">환불완료</option>
                     </select>
-                     <h3 th:text="'주문번호 : ' + (${order.orderNo})"></h3>
-	                    <input type="text" placeholder="주문번호를 입력해주세요" id="popup_searchbox"  name="orderNo">
+                     <input type="hidden" name = "orderNo" th:value="${order.orderNo}"/>
             </div>
             <!--팝업 버튼 영역-->
             		<input type="submit" value="저장" class="popup_btn" >

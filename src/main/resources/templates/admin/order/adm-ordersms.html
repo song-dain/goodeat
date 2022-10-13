@@ -22,19 +22,11 @@
             <tr class="form-group">
                 <td class="td-left-class">전화번호</td>
                 <td>
-                    <input id="td-right" type="text" class="form-control" name="to" placeholder="전화번호를 입력해주세요">
+                    <input id="td-right" type="text" class="form-control" name="to" placeholder="전화번호를 입력해주세요" style="margin-top:10px;">
                     <p id="td-right" th:text= "${order.member.phone}"></p>
+                    <input type="hidden" name = "to" th:value="${order.member.phone}"/>
+                     <input type="hidden" name = "content" th:value="'[굿잇] 송장번호 : ' + ${order.delivery.invoiceNo} + ' 택배사 : ' + ${order.delivery.deliveryCompany}"/>
                 </td>
-            </tr>
-            <tr class="form-group">        
-                <td class="td-left-class">문자내용</td>
-                <td>
-                    <textarea id="td-right" class="form-control" name="content" style="width: 488px; height: 107px;" >안녕하세요 굿잇 입니다!송장번호: 택배사:</textarea>
-                    <p id="td-right" th:text= "${order.delivery.invoiceNo}"></p>
-                    <p id="td-right" th:text= "${order.delivery.deliveryCompany}"></p>
-                </td>
-            </tr>
-            
         </table>
         		<button class="btn btn-default" id="SmsSendBotton">발송</button>
     </form>

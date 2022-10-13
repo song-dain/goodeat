@@ -330,7 +330,7 @@ ul > li {
   top:50%;
   left:50%; 
   overflow: auto; 
-  height: 518px; 
+  height: 423px; 
   width:375px;
   transform:translate(-50%, -50%);
   z-index:1002;
@@ -456,7 +456,7 @@ ul > li {
   top:50%;
   left:50%; 
   overflow: auto; 
-  height: 405px; 
+  height: 298px; 
   width:375px;
   transform:translate(-50%, -50%);
   z-index:1002;
