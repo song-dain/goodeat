@@ -66,9 +66,11 @@ public class hgOrder {
 	@JoinColumn(name = "DELIVERY_CODE")
 	private Delivery delivery;
 	
-	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "ORDER_PRODUCT_CODE")
-	private List<OrderProduct> orderProduct;
-	
+	/*
+	 * @OneToMany(cascade = CascadeType.ALL)
+	 * 
+	 * @JoinColumn(name = "ORDER_PRODUCT_CODE") private List<OrderProduct>
+	 * orderProduct;
+	 */
 
 }
