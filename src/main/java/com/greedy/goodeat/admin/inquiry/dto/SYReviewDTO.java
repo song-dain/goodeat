@@ -1,6 +1,8 @@
-package com.greedy.goodeat.common.dto;
+package com.greedy.goodeat.admin.inquiry.dto;
 
-import java.util.List;
+
+
+import com.greedy.goodeat.common.dto.MemberDTO;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,16 +11,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ReviewDTO {
+public class SYReviewDTO {
 
 	private Integer reviewCode;
 	private String reviewTitle;
 	private String reviewContent;
 	private String reviewStatus;
 	private MemberDTO member;
-	private OrderDTO order;
-	private ProductDTO product;
-	private List<AddfileDTO> addfileList;
+	private SYOrderDTO order;
+	private SYProductDTO product;
 	private java.sql.Date review_RegistDate;
 	private java.sql.Date review_DeleteDate;
 	private java.sql.Date review_ModifyDate;

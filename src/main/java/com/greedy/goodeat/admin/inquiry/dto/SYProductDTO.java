@@ -1,6 +1,8 @@
-package com.greedy.goodeat.common.dto;
+package com.greedy.goodeat.admin.inquiry.dto;
 
 import java.util.List;
+
+import com.greedy.goodeat.common.dto.ProductCategoryDTO;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ProductDTO {
+public class SYProductDTO {
 	
 	private Integer productCode;
 	private String productName;
@@ -21,5 +23,5 @@ public class ProductDTO {
 	private java.sql.Date productModifyDate;
 	private java.sql.Date productDeleteDate;
 	private ProductCategoryDTO productCategory;
-	private List<AddfileDTO> AddfileList;
+	
 }
