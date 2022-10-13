@@ -31,10 +31,10 @@ import com.greedy.goodeat.admin.order.dto.SmsResponseDTO;
 public class SmsService {
 	
 	//네이버 클라우드에서 발급받은 각자키를 이용하세요!!!
-	private String accessKey = "8Ug55Zw5cEgFZM1aGRQn";
-	private String secretKey = "Pfk34fWE9ofljQjwBUwbM1Tq1uT4nfWKbDFreRyx";;
-	private String serviceId = "ncp:sms:kr:294056967268:porject_sms";
-	private String phone = "01041749212";
+	private String accessKey = "";
+	private String secretKey = "";;
+	private String serviceId = "";
+	private String phone = "";
 	
 	
 	public String makeSignature(Long time) throws NoSuchAlgorithmException, UnsupportedEncodingException, InvalidKeyException {
