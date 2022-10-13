@@ -21,14 +21,14 @@ import com.greedy.goodeat.admin.order.service.AdmOrderService;
 
 @Controller
 @RequestMapping("/admin")
-public class AdmOrderExcelDownController {
+public class AdmOrderExcelController {
 	
 	String paymentMethod = "";
 	String paymentDate = "";
 	
 	private final AdmOrderService admOrderService;
 		
-		public AdmOrderExcelDownController(AdmOrderService admOrderService) {
+		public AdmOrderExcelController(AdmOrderService admOrderService) {
 			
 			this.admOrderService = admOrderService;
 			
