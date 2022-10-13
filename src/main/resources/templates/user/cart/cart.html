@@ -53,7 +53,6 @@
                                 </div>
                                 <div class="column tit">
                                     <p class="desc" th:text="${ cart.productName }"></p>
-                                    <p class="desc"> </p>
                                     <ul class="price-item">
                                         <li>
                                             <span class="num" th:text="${ cart.productPrice }"></span>
@@ -170,6 +169,35 @@
     }
 	</script> -->
 
+	<script>
+	$("#order").on("click", function(){
+		
+		let form_contents ='';
+		let orderNumber = 0;
+		
+		$(".cart_info_div").each(function(index, element){
+			
+			if($(element).find(".individual_cart_checkbox").is(":checked") === true){	//체크여부
+				
+				let productName = $(element).find(".desc").val();
+				let productAmount = $(element).find(".quantity_input").val();
+				
+				let productName_input = "<input name='orders[" + orderNumber + "].productName' type='hidden' value='" + productName + "'>";
+				form_contents += bookId_input;
+				
+				let productAmount_input = "<input name='orders[" + orderNumber + "].productAmount' type='hidden' value='" + productAmount + "'>";
+				form_contents += productAmount_input;
+				
+				orderNumber += 1;
+				
+			}
+		});	
+
+		$(".order_form").html(form_contents);
+		$(".order_form").submit();
+		
+	});
+	</script>
 
 
 

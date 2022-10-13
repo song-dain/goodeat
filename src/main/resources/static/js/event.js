@@ -14,6 +14,8 @@ window.onload = function() {
 		}
 	}
 	
+	
+	
 	$(document).ready(function() {
 			
 			setTotalInfo();
