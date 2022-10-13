@@ -3,10 +3,12 @@ package com.greedy.goodeat.admin.inquiry.controller;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -72,7 +74,28 @@ public class AdmInquiryController {
 		return "redirect:/admin/inquiry/list";
 	}
 	
-	//@PostMapping("/registReply")
+	@PostMapping("/registReply") 
+	public ResponseEntity<String> registReply() {
+		
+		return ResponseEntity.ok("댓글 등록 완료");
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }
