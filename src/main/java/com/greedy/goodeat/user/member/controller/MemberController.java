@@ -1,5 +1,7 @@
 package com.greedy.goodeat.user.member.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -45,7 +47,11 @@ public class MemberController {
 	}
 	
 	@GetMapping("/login")
-	public String goLogin() {
+	public String goLogin(HttpServletRequest request) {
+		
+		String referrer = request.getHeader("Referer");
+		request.getSession().setAttribute("prevePage", referrer);
+
 		return "user/login/login";
 	}
 	
