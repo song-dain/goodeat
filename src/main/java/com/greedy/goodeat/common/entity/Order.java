@@ -25,7 +25,6 @@ import lombok.ToString;
 @Getter
 @Setter
 @NoArgsConstructor
-@ToString
 @Entity
 @Table(name = "TBL_ORDER")
 @SequenceGenerator(name = "ORDER_SEQ_GENERATOR", sequenceName = "SEQ_ORDER_NO", initialValue = 1, allocationSize = 1)
@@ -63,7 +62,7 @@ public class Order {
 	private Delivery delivery;
 	
 	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "ORDER_PRODUCT_CODE")
+	@JoinColumn(name = "ORDER_NO")
 	private List<OrderProduct> orderProduct;
 	
 

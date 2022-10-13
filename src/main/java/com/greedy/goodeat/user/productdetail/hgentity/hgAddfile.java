@@ -56,9 +56,11 @@ public class hgAddfile {
 	@JoinColumn(name ="POST_CODE")
 	private Post post;
 	
-	@ManyToOne
-	@JoinColumn(name ="PRODUCT_CODE")
-	private hgProduct product;
+	/*
+	 * @ManyToOne
+	 * 
+	 * @JoinColumn(name ="PRODUCT_CODE") private hgProduct product;
+	 */
 	
 	@Column(name = "THUMBNAIL_ROUTE")
 	private String thumbnailRoute;

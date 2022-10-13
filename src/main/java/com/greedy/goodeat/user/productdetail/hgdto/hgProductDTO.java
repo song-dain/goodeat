@@ -1,6 +1,6 @@
 package com.greedy.goodeat.user.productdetail.hgdto;
 
-import java.util.List;
+
 
 import com.greedy.goodeat.common.dto.ProductCategoryDTO;
 
@@ -19,5 +19,5 @@ public class hgProductDTO {
 	private java.sql.Date productModifyDate;
 	private java.sql.Date productDeleteDate;
 	private ProductCategoryDTO productCategory;
-	private List<hgAddfileDTO> addfileList;
+	/* private List<hgAddfileDTO> addfileList; */
 }

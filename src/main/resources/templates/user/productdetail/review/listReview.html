@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/main-contents.css">
+    <link rel="stylesheet" href="/css/user/productDetail/select.css">
+    <link rel="stylesheet" href="/font/Cafe24Ssurround.ttf">
+    
+</head>
+
+    <title>리뷰등록</title>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+    <!-- 헤더부분 -->
+     <div th:replace="user/common/header.html"></div>
+ 
+ <!-- 컨텐츠 부분 -->
+       <div id="section2" class="container-fluid bg-warning" >
+        <section class="article-list">
+          <div class="table-con">
+            <p class="con">구매 후기</p>
+            <button type="button" th:onclick="|location.href='/user/productdetail/regist'|" class="btn-sel" >등록</button>
+            <table id="listArea" style="margin: auto;">
+				<tr>
+					<th style="width: 100px">순번</th>
+					<th style="width: 300px">제목</th>
+					<th style="width: 100px">작성자</th>
+					<th style="width: 150px">작성일</th>
+					<th style="width: 150px">수정일</th>
+				</tr>
+				<tr th:each="review : ${ hgreviewList }"
+				    th:onclick="|location.href='/user/productdetail/list?productCode=${hgproduct.productCode}'|"
+				    style="cursor:pointer;">
+					<td th:text="${ review.reviewCode }"></td>
+					<td th:text="${ review.reviewTitle }"></td>
+					<td th:text="${ review.member.memberName }"></td>
+					<td th:text="${ review.reviewRegistDate }"></td>
+					<td th:text="${ review.reviewModifyDate }"></td>
+				</tr>
+			</table>
+        </div>
+        
+        </section>
+	  </div>
+       <!-- 푸터 부분 -->
+ <div th:replace="user/common/footer.html"></div>
+ </body>
+ </html>

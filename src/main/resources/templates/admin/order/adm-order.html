@@ -9,6 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gamja+Flower&family=Gowun+Dodum&family=Poor+Story&display=swap" rel="stylesheet">
    <link rel="stylesheet" th:href="@{/css/admin/order/order.css}">
    <link rel="icon" type="image/x-icom" th:href="@{/images/common/HEQXSRYC.ico}">
+   <script>
+		const message = '[[${message}]]';
+		message && alert(message);
+	</script>
 </head>
 <body>
 
@@ -35,17 +39,13 @@
                 document.getElementById("popup_layer_status").style.display = "none";
             }
          
-            
-
       </script>
       
       
     
 	<div th:replace="admin/common/header.html"></div>
-	
 
-	
-	
+
     <section>
         <div class="order-title">
             <a>주문관리</a>
@@ -100,8 +100,12 @@
                 </tr>
                 </tbody>
             </table>
-            <input type="submit" value="주문내역다운" id="orderButton2">
-
+            
+            <div>
+		        <form id="excelForm" name="excelForm" action="excel/download" method="get">
+		            <input id="orderButton2" type="submit" value="주문내역다운" name="fileName"/>
+		        </form>
+    		</div>
             <table class="orderTable2">
                 <tr class="tr-top">
                     <th>주문번호</th>
@@ -114,7 +118,8 @@
                 </tr>
                 <tr class="tr-body" th:each="order : ${ orderList }">
                     <td th:text ="${ order.orderNo }"></td>
-                    <td th:text ="${ order.product.productName}"></td>
+                    <td th:text ="${ order.product.productName}" th:onclick= "|location.href='/admin/orderDetail?orderNo=${order.orderNo}'|"
+					style="cursor:pointer;"></td>
                     <td th:text ="${ order.amountPay }"></td>
                     <td th:text ="${ order.orderDate}"></td>
                     <td th:text ="${ order.member.memberId}"></td>
@@ -179,7 +184,7 @@
                     <h3>송장번호</h3>
 
                     <input type="text" placeholder="송장번호를 입력해주세요" id="popup_searchbox"  name = "invoiceNo">
-                      <input type="text" placeholder="배송번호를 입력해주세요" id="popup_searchbox"  name = "deliveryCode">
+                      <input type="text" placeholder="배송코드를 입력해주세요" id="popup_searchbox"  name = "deliveryCode">
             </div>
             <!--팝업 버튼 영역-->
                 <input type="submit" value="저장" class="popup_btn" style="float: bottom; margin-top: 10px;">
@@ -210,10 +215,6 @@
       
        </section> 
       
-     
-      
-      
-
 
 </body>
 </html>

@@ -2,10 +2,10 @@ package com.greedy.goodeat.admin.order.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.greedy.goodeat.common.dto.DeliveryDTO;
-import com.greedy.goodeat.common.entity.Delivery;
+import com.greedy.goodeat.admin.order.entity.JyDelivery;
 
-public interface AdmDeliveryRepository extends JpaRepository<Delivery, Integer>{
+
+public interface AdmDeliveryRepository extends JpaRepository<JyDelivery, Integer>{
 
 
 
