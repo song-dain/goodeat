@@ -29,7 +29,6 @@ import lombok.Setter;
 @SequenceGenerator(name = "ORDER_SEQ_GENERATOR", sequenceName = "SEQ_ORDER_NO", initialValue = 1, allocationSize = 1)
 @DynamicInsert
 public class JyOrder {
-	
 
 	@Id
 	@Column(name="ORDER_NO")
@@ -56,7 +55,7 @@ public class JyOrder {
 	@JoinColumn(name = "PRODUCT_CODE")
 	private JyProduct product;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "DELIVERY_CODE")
 	private JyDelivery delivery;
 	

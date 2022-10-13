@@ -230,7 +230,11 @@ public class AdmProductController {
 		
 		admProductService.modifyProduct(product);
 		
+		log.info("[ProductController] ==========================================");
+		
+		
 		log.info("[ProductController] modifyproduct : {}" , product);
+		
 	
 		model.addAttribute(product);
 		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("product.modity"));

@@ -11,6 +11,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -57,6 +58,7 @@ public class JyDelivery {
 	
 	@Column(name="DELIVERY_COMPANY")
 	private String deliveryCompany;
+
 	
 	
 

@@ -58,14 +58,13 @@
                 <tr>
                     <td class="td-left-class">검색어</td>
                     <td class="td-right-class">
-                        <form id="searchForm" th:action="@{/admin/productList}" method="get"
-					style="display: inline-block">
+               <form id="searchForm" th:action="@{/admin/productList}" method="get">
 					<th:block th:if="${ searchValue != null }">
-					<input type="search" id="searchValue" name="searchValue"
+					<input type="search" id="searchValue" name="searchValue" placeholder="상품명을 입력해주세요"
 							th:value="${ searchValue }" class="searchbox1">
 					</th:block>
 					<th:block th:if="${ searchValue == null }">
-						<input type="search" id="searchValue" name="searchValue" class="searchbox1">
+						<input type="search" id="searchValue" name="searchValue" class="searchbox1" placeholder="상품명을 입력해주세요">
 					</th:block>
 					<button class="btn btn-bs" type="submit" id="productButton1">검색하기</button>
 			</form>

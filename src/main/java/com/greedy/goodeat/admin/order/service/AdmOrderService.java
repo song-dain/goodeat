@@ -20,6 +20,7 @@ import com.greedy.goodeat.admin.order.entity.JyDelivery;
 import com.greedy.goodeat.admin.order.entity.JyOrder;
 import com.greedy.goodeat.admin.order.repository.AdmDeliveryRepository;
 import com.greedy.goodeat.admin.order.repository.AdmOrderRepository;
+import com.greedy.goodeat.admin.product.entity.KjyProductCategory;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,7 +41,6 @@ public class AdmOrderService {
 		this.admDeliveryRepository = admDeliveryRepository;
 		this.modelMapper = modelMapper;
 	}
-
 	public Page<JyOrderDTO> findOrderList(int page, String searchValue) {
 		
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
@@ -62,6 +62,33 @@ public class AdmOrderService {
 	}
 
 	@Transactional
+	public JyOrderDTO selectOrderList(Integer orderNo) {
+		
+		JyOrder order = admOrderRepository.findById(orderNo).get();
+		
+		return modelMapper.map(order, JyOrderDTO.class);
+	}
+	
+	@Transactional
+	public List<JyOrderDTO> getOrderInfo() {
+		
+		List<JyOrder> orderList = admOrderRepository.findAll();
+		
+		return orderList.stream().map(order -> modelMapper.map(order, JyOrderDTO.class)).collect(Collectors.toList());
+		
+	}
+	
+	@Transactional
+	public void statusModify(JyOrderDTO order) {
+		
+		JyOrder statusModify = admOrderRepository.findById(order.getOrderNo()).get();
+		
+		statusModify.setOrderStatus(order.getOrderStatus());
+		
+		
+	}
+
+	@Transactional
 	public void modifyDelivery(JyDeliveryDTO delivery) {
 	
 		JyDelivery modifydelivery = admDeliveryRepository.findById(delivery.getDeliveryCode()).get();
@@ -72,22 +99,6 @@ public class AdmOrderService {
 
 	
 	}
-
-	public JyOrderDTO selectOrderList(Integer orderNo) {
-		
-		JyOrder order = admOrderRepository.findById(orderNo).get();
-		
-		return modelMapper.map(order, JyOrderDTO.class);
-	}
-
-	public List<JyOrderDTO> getOrderInfo() {
-		
-		List<JyOrder> orderList = admOrderRepository.findAll();
-		
-		return orderList.stream().map(order -> modelMapper.map(order, JyOrderDTO.class)).collect(Collectors.toList());
-		
-	}
-
 
 
 

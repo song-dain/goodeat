@@ -15,36 +15,8 @@
 	</script>
 </head>
 <body>
-
-   <script>
-            //팝업 띄우기
-            function openPop() {
-                document.getElementById("popup_layer").style.display = "block";
-
-            }
-
-            //팝업 닫기
-            function closePop() {
-                document.getElementById("popup_layer").style.display = "none";
-            }
-
-            //팝업 띄우기
-            function openPopStatus() {
-            document.getElementById("popup_layer_status").style.display = "block";
-
-            }
-
-            //팝업 닫기
-            function closePopStatus() {
-                document.getElementById("popup_layer_status").style.display = "none";
-            }
-         
-      </script>
       
-      
-    
 	<div th:replace="admin/common/header.html"></div>
-
 
     <section>
         <div class="order-title">
@@ -85,14 +57,13 @@
                 <tr>
                     <td class="td-left-class">검색어</td>
                     <td class="td-right-class">
-                        <form id="searchForm" action="/admin/orderList" method="get"
-					style="display: inline-block">
+                        <form id="searchForm" action="/admin/orderList" method="get">
 					<th:block th:if="${ searchValue != null }">
-					<input type="search" id="searchValue" name="searchValue"
+					<input type="search" id="searchValue" name="searchValue" placeholder="주문번호를 입력해주세요"
 							th:value="${ searchValue }" class="searchbox1">
 					</th:block>
 					<th:block th:if="${ searchValue == null }">
-						<input type="search" id="searchValue" name="searchValue" class="searchbox1">
+						<input type="search" id="searchValue" name="searchValue" class="searchbox1" placeholder="주문번호를 입력해주세요">
 					</th:block>
 					<button class="btn btn-bs" type="submit" id="orderButton1">검색하기</button>
 						</form>
@@ -116,22 +87,21 @@
                     <th>송장번호</th>
                     <th>주문상태</th>
                 </tr>
-                <tr class="tr-body" th:each="order : ${ orderList }">
+                <tr class="tr-body" th:each="order : ${ orderList }" th:onclick= "|location.href='/admin/orderDetail?orderNo=${order.orderNo}'|">
                     <td th:text ="${ order.orderNo }"></td>
-                    <td th:text ="${ order.product.productName}" th:onclick= "|location.href='/admin/orderDetail?orderNo=${order.orderNo}'|"
-					style="cursor:pointer;"></td>
+                    <td th:text ="${ order.product.productName}" ></td>
                     <td th:text ="${ order.amountPay }"></td>
                     <td th:text ="${ order.orderDate}"></td>
                     <td th:text ="${ order.member.memberId}"></td>
                     <td><p th:text ="${ order.delivery?.invoiceNo }" th:if="${ order.delivery} ne null"></p>
-                    <p th:text = "'미입력 :' + (${ order.delivery.deliveryCode })" th:if="${#strings.isEmpty(order.delivery.invoiceNo)}" onclick="javascript:openPop()"></p>
+                    <p th:text = "'미입력'" th:if="${#strings.isEmpty(order.delivery.invoiceNo)}" onclick="javascript:openPop()"></p>
                     <td th:switch="${order.orderStatus}">
 					  <p th:case="'PAY_DONE'">결제완료</p>
 					  <p th:case="'DELIVERY_DONE'">배송완료</p>
-					  <p th:case="'CANCLE_DONE'">취소완료</p>
+					  <p th:case="'CANCEL_DONE'">취소완료</p>
 					  <p th:case="'REFUND_DONE'">환불완료</p>
-					  <p th:case="'REQ_CANCEL'" onclick="javascript:openPopStatus()">취소요청</p>
-					  <p th:case="'REQ_REFUND'" onclick="javascript:openPopStatus()">환불요청</p>
+					  <p th:case="'REQ_CANCEL'">취소요청</p>
+					  <p th:case="'REQ_REFUND'">환불요청</p>
 					</td>
                 </tr>
             </table>
@@ -160,60 +130,7 @@
 		<!-- 맨 끝으로 이동 -->
 		<button th:onclick="'location.href=\'/admin/orderList?page=' + @{${paging.endPage}} + '\''"></button>			
 	</div>
-	
-
-   <form action="/admin/deliveryModify" method="post">
-    <div class="popup_layer" id="popup_layer" style="display: none;">
-        <div class="popup_box">
-            <div style="height: 10px; width: 375px; float: top;">
-              <a href="javascript:closePop();"><img th:src="@{/images/admin/ic_close.svg}" class="m_header-banner-close" width="70px" height="70px"></a>
-            </div>
-            <!--팝업 컨텐츠 영역-->
-            <div class="popup_cont">
-                <h2> 송장번호 입력 </h2>
-                    <h3 class="content">택배사</h3>
-                    <select id="selectBox" name = "deliveryCompany">
-                        <option value="CJ대한통운">CJ대한통운</option>
-                        <option value="한진택배">한진택배</option>
-                        <option value="롯데택배">롯데택배</option>
-                        <option value="로젠택배">로젠택배</option>
-                        <option value="우체국택배">우체국택배</option>
-                        <option value="CU편의점택배">CU편의점택배</option>
-                        <option value="CVSnet편의점택배(GS25)">CVSnet편의점택배(GS25)</option>
-                    </select>
-                    <h3>송장번호</h3>
-
-                    <input type="text" placeholder="송장번호를 입력해주세요" id="popup_searchbox"  name = "invoiceNo">
-                      <input type="text" placeholder="배송코드를 입력해주세요" id="popup_searchbox"  name = "deliveryCode">
-            </div>
-            <!--팝업 버튼 영역-->
-                <input type="submit" value="저장" class="popup_btn" style="float: bottom; margin-top: 10px;">
-        </div>
-      </div>
-      </form>
-
-
-      <div class="popup_layer" id="popup_layer_status" style="display: none;">
-        <div class="popup_box">
-            <div style="height: 10px; width: 375px; float: top;">
-              <a href="javascript:closePopStatus();"><img src="/images/admin/ic_close.svg" class="m_header-banner-close" width="70px" height="70px"></a>
-            </div>
-            <!--팝업 컨텐츠 영역-->
-            <div class="popup_cont">
-                <h2> 주문상태변경 </h2>
-                    <select id="selectBox">
-                        <option value="1">취소완료</option>
-                        <option value="2">환불완료</option>
-                    </select>
-            </div>
-            <!--팝업 버튼 영역-->
-            <div class="popup_btn" style="float: bottom; margin-top: 128px;">
-                <a href="javascript:closePopStatus();">저장</a>
-            </div>
-        </div>
-      </div>
-      
-       </section> 
+ </section> 
       
 
 </body>

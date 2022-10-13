@@ -12,10 +12,10 @@
 /* 회원정보 관리 폰트 */
 .member-management-message{
     position: fixed;
-    color: #481BFF;
+    color: black;
     top : 80px;
     left : 250px;
-    font-size: 2.5em;
+    font-size: 4em;
 }
 
 /* 가입일 들어가는 박스 */
@@ -113,8 +113,8 @@
 /* 검색 버튼 */
 .member-button {
     position : fixed;
-    top: 350px;
-    left : 850px;
+    top: 320px;
+    left : 700px;
     width: 125px;
     height: 50px;
     font-size: 25px;

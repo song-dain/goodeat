@@ -9,6 +9,11 @@
    <link rel="stylesheet" th:href="@{/css/admin/product/product.css}">
    <link rel="stylesheet" th:href="@{/css/admin/order/order.css}">
    <link rel="icon" type="image/x-icom" th:href="@{/images/common/HEQXSRYC.ico}">
+   
+    <script>
+		const message = '[[${message}]]';
+		message && alert(message);
+	</script>
 </head>
 <body>
 
@@ -69,10 +74,12 @@
                      <td th:switch="${order.orderStatus}">
 						  <p id="td-right" th:case="'PAY_DONE'">결제완료</p>
 						  <p id="td-right" th:case="'DELIVERY_DONE'">배송완료</p>
-						  <p id="td-right" th:case="'CANCLE_DONE'">취소완료</p>
+						  <p id="td-right" th:case="'CANCEL_DONE'">취소완료</p>
 						  <p id="td-right" th:case="'REFUND_DONE'">환불완료</p>
-						  <p id="td-right" th:case="'REQ_CANCEL'">취소요청</p>
-						  <p id="td-right" th:case="'REQ_REFUND'">환불요청</p>
+						  <p id="td-right" th:case="'REQ_CANCEL'">취소요청
+						   <button id="orderButtonCancel" onclick="javascript:openPopStatus()">취소처리</button></p>
+					  	  <p id="td-right" th:case="'REQ_REFUND'">환불요청
+					  	  <button id="orderButtonCancel" onclick="javascript:openPopStatus()">환불처리</button></p>
 					</td>
                 </tr>
                 <tr>
@@ -128,8 +135,8 @@
                     <td class="td-left-class">송장번호</td>
                     <td class="td-right-class">
                         <p th:text="${ order.delivery.invoiceNo }" id="detailProduct"/>
-                        <button th:onclick= "|location.href='/admin/send?orderNo=${order.orderNo}'|">문자발송</button>
-                        <button onclick="javascript:openPop()">송장번호입력</button>
+                        <button id= "orderButtonDelivery" th:onclick= "|location.href='/admin/send?orderNo=${order.orderNo}'|">문자발송</button>
+                        <button id= "orderButtonDelivery" onclick="javascript:openPop()">송장번호입력</button>
                     </td>
                 </tr>
                   <tr>
@@ -147,7 +154,7 @@
                  </table>
                  
 	                 
-	   <form action="/admin/deliveryModify" method="post">
+	      <form action="/admin/deliveryModify" method="post">
 	    <div class="popup_layer" id="popup_layer" style="display: none;">
 	        <div class="popup_box">
 	            <div style="height: 10px; width: 375px; float: top;">
@@ -169,7 +176,7 @@
 	                    <h3>송장번호</h3>
 	
 	                    <input type="text" placeholder="송장번호를 입력해주세요" id="popup_searchbox"  name = "invoiceNo">
-	                    <p th:text="'배송코드' + (${order.delivery.deliveryCode})"></p>
+	                    <h3 th:text="'배송코드 : ' + (${order.delivery.deliveryCode})"></h3>
 	                    <input type="text" placeholder="배송코드를 입력해주세요" id="popup_searchbox"  name = "deliveryCode">
 	            </div>
 	            <!--팝업 버튼 영역-->
@@ -177,6 +184,28 @@
 	        </div>
 	      </div>
 	      </form>
+	      
+	      <form action="/admin/statusModify" method="post">
+	       <div class="popup_layer" id="popup_layer_status" style="display: none;">
+        	<div class="popup_box2">
+            <div style="height: 10px; width: 375px; float: top;">
+              <a href="javascript:closePopStatus();"><img src="/images/admin/ic_close.svg" class="m_header-banner-close" width="70px" height="70px"></a>
+            </div>
+            <!--팝업 컨텐츠 영역-->
+            <div class="popup_cont">
+                <h2> 주문상태변경 </h2>
+                    <select id="selectBox" name = "orderStatus">
+                        <option value="CANCEL_DONE">취소완료</option>
+                        <option value="REFUND_DONE">환불완료</option>
+                    </select>
+                     <h3 th:text="'주문번호 : ' + (${order.orderNo})"></h3>
+	                    <input type="text" placeholder="주문번호를 입력해주세요" id="popup_searchbox"  name="orderNo">
+            </div>
+            <!--팝업 버튼 영역-->
+            		<input type="submit" value="저장" class="popup_btn" >
+	        </div>
+	      </div>
+      </form>
 	            
             <input type="submit" value="목록으로" id="orderButtonList" onclick="location.href='/admin/orderList'">
 
