@@ -11,40 +11,40 @@
     
 </head>
 
-    <title>리뷰등록</title>
+    <title>문의 등록</title>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
    
  
  <!-- 컨텐츠 부분 -->
-       <div id="section2" class="container-fluid bg-warning" >
+      <div id="section3" class="container-fluid bg-secondary">
         <section class="article-list">
-          <div class="table-con">
-            <p class="con">구매 후기</p>
-            <button type="button" th:onclick="|location.href='/user/productdetail/regist'|" class="btn-sel" >등록</button>
-            <button type="button" th:onclick="|location.href='/user/productdetail/list'|" class="btn-sel" >전체후기</button>
+            <div class="table-con">
+            <p class="con">상품문의</p>
+            <button type="button" th:onclick="@{/list/regist}" class="btn-sel">등록</button>
             <table id="listArea" style="margin: auto;">
 				<tr>
 					<th style="width: 100px">순번</th>
+					<th style="width: 100px">문의유형</th>
 					<th style="width: 300px">제목</th>
 					<th style="width: 100px">작성자</th>
 					<th style="width: 150px">작성일</th>
 					<th style="width: 150px">수정일</th>
 				</tr>
-				<tr th:each="review : ${ hgreviewList }"
-				    th:onclick="|location.href='/user/productdetail/detail?reviewCode=${review.reviewCode}'|"
-				    style="cursor:pointer;">
-					<td th:text="${ review.reviewCode }"></td>
-					<td th:text="${ review.reviewTitle }"></td>
-					<td th:text="${ review.member.memberName }"></td>
-					<td th:text="${ review.reviewRegistDate }"></td>
-					<td th:text="${ review.reviewModifyDate }"></td>
+				<tr th:each="inquiry : ${ inquiryList }"
+				    th:onclick="|location.href='/user/inquiry/list?inquiryCode=${inquiry.inquiryCode}'|"
+				    style="cursor: pointer;">
+					<td th:text="${ inquiry.inquiryCode }"></td>
+					<td th:text="${ inquiry.inquiryType }"></td>
+					<td th:text="${ inquiry.inquiryTitle }"></td>
+					<td th:text="${ inquiry.member.memberName }"></td>
+					<td th:text="${ inquiry.inquiryRegistDate }"></td>
+					<td th:text="${ inquiry.inquiryModifyDate }"></td>
 				</tr>
 			</table>
+			</div>
+            </section> 
         </div>
-        
-        </section>
-	  </div>
  
  </body>
  </html>
