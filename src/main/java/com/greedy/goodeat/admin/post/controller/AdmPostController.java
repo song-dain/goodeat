@@ -79,7 +79,7 @@ public class AdmPostController {
 	}
 	
 	@GetMapping("/post/detail")
-	public String selectBoardDetail(Model model, Integer postCode) {
+	public String selectPostDetail(Model model, Integer postCode) {
 		
 		log.info("[admPostController] ========================================= ");
 		log.info("[admpostController] postCode : {}", postCode);

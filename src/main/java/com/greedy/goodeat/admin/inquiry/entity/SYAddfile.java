@@ -47,6 +47,7 @@ public class SYAddfile {
 	@Column(name = "FILE_DIVISION")
 	private String fileDivision;
 	
+	/*
 	@ManyToOne
 	@JoinColumn(name ="REVIEW_CODE")
 	private SYReview review;
@@ -54,6 +55,13 @@ public class SYAddfile {
 	@ManyToOne
 	@JoinColumn(name ="POST_CODE")
 	private Post post;
+	*/
+	
+	@Column(name= "REVIEW_CODE")
+	private Integer reviewCode;
+	
+	@Column(name= "PRODUCT_CODE")
+	private Integer productCode;
 	
 	@Column(name = "THUMBNAIL_ROUTE")
 	private String thumbnailRoute;

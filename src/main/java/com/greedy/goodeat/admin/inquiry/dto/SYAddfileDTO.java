@@ -1,8 +1,5 @@
 package com.greedy.goodeat.admin.inquiry.dto;
 
-
-import com.greedy.goodeat.common.dto.PostDTO;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,9 +15,11 @@ public class SYAddfileDTO {
 	private String savedRoute;
 	private String fileType;
 	private String fileDivision;
-	private SYReviewDTO review;
-	private PostDTO post;
-	private SYProductDTO product;
+	/*
+	 * private SYReviewDTO review; 
+	 * private PostDTO post; 
+	 * private SYProductDTO product;
+	 */
 	private String thumbnailRoute;
 	
 }

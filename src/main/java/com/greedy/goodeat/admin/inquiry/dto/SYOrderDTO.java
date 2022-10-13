@@ -1,6 +1,6 @@
 package com.greedy.goodeat.admin.inquiry.dto;
 
-import java.util.List;
+
 
 import com.greedy.goodeat.common.dto.DeliveryDTO;
 import com.greedy.goodeat.common.dto.MemberDTO;

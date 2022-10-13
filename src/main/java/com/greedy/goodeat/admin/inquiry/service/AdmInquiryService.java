@@ -48,4 +48,15 @@ public class AdmInquiryService {
 		}
 		return inquiryList.map(inquiry -> modelMapper.map(inquiry, SYInquiryDTO.class));
 	}
+
+	public SYInquiryDTO selectInqDetail(Integer inquiryCode) {
+		SYInquiry inq = admInquiryRepository.findById(inquiryCode).get();
+		
+		return modelMapper.map(inq, SYInquiryDTO.class);
+	}
+
+	public void deleteInquiry(Integer inquiryCode) {
+		SYInquiry inquiry = admInquiryRepository.findById(inquiryCode).get();
+		admInquiryRepository.delete(inquiry);
+	}
 }
