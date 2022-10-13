@@ -12,7 +12,7 @@ import com.greedy.goodeat.admin.order.entity.JyOrder;
 
 public interface AdmOrderRepository extends JpaRepository<JyOrder, Integer>{
 
-	@EntityGraph(attributePaths = {"product", "delivery", "orderProduct"})
+	@EntityGraph(attributePaths = {"product","orderProduct"})
 	@Query("SELECT o " +
 			"FROM JyOrder o " + 
 			"WHERE o.orderNo LIKE '%' || :searchValue || '%'")

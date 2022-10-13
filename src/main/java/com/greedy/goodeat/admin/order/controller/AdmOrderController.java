@@ -1,12 +1,16 @@
 package com.greedy.goodeat.admin.order.controller;
 
+import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.greedy.goodeat.admin.order.dto.JyDeliveryDTO;
 import com.greedy.goodeat.admin.order.dto.JyOrderDTO;
 import com.greedy.goodeat.admin.order.service.AdmOrderService;
 import com.greedy.goodeat.common.paging.Pagenation;
@@ -20,10 +24,12 @@ import lombok.extern.slf4j.Slf4j;
 public class AdmOrderController {
 	
 	private final AdmOrderService admOrderService;
+	private final MessageSourceAccessor messageSourceAccessor;
 	
-	public AdmOrderController(AdmOrderService admOrderService) {
+	public AdmOrderController(AdmOrderService admOrderService, MessageSourceAccessor messageSourceAccessor) {
 		
 		this.admOrderService = admOrderService;
+		this.messageSourceAccessor = messageSourceAccessor;
 		
 	}
 	
@@ -65,6 +71,20 @@ public class AdmOrderController {
 		return "admin/order/adm-orderdetail";
 	}
 	
+	@PostMapping("/statusModify")
+	public String statusModify(Model model, JyOrderDTO order, RedirectAttributes rttr) {
+		
+		admOrderService.statusModify(order);
+		
+		model.addAttribute(order);
+		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("statusModify.success"));
+		
+		return "redirect:/admin/orderList";
+		
+		
+	}
+	
+
 
 	
 	
