@@ -89,5 +89,25 @@ public class MemberService {
 		memberRepository.save(member);
 		
 	}
+	
+	public void modifyInfo(MemberDTO updateMember) {
+		
+		Member saveMember = memberRepository.findByMemberNo(updateMember.getMemberNo());
+		saveMember.setMemberPwd(updateMember.getPassword());
+		saveMember.setMemberName(updateMember.getMemberName());
+		saveMember.setPhone(updateMember.getPhone());
+		saveMember.setZipCode(updateMember.getZipCode());
+		saveMember.setAddress(updateMember.getAddress());
+		saveMember.setDetailAddress(updateMember.getDetailAddress());
+		saveMember.setGender(updateMember.getGender());
+		
+	}
+
+	public void unjoinMembership(MemberDTO loginMember) {
+		
+		Member unjoinMember = memberRepository.findByMemberNo(loginMember.getMemberNo());
+		unjoinMember.setMemberStatus("N");
+		
+	}
 
 }

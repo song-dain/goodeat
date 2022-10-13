@@ -17,7 +17,7 @@
 
    <section id="con-wrap">
         <h1 id="mypage" class="text">내 정보 조회</h1>
-        <p class="text">회원님의 정보를 안전하게 보호하기 위해 계정 재인증을 해주세요.</p>
+        <p class="text">회원님의 정보 보호를 위한 확인 절차입니다. 비밀번호를 입력해주세요.</p>
         <br>
             <form id="findform" method="POST" action="/mypage" onsubmit="return checkInfo()">
                 <input type="password" id="inputPwd" name="memberPwd" class="text-field text" placeholder=" 비밀번호 재입력"><br><br><br>
@@ -27,21 +27,6 @@
     </section> 
     
 	<div th:replace="user/common/footer.html"></div>
-	
-	<script>
-	
-	const inputPwd = document.ElementById("inputPwd");
-	
-	function checkInfo(){
-		
-		if(inputPwd.value.trim() == ''){
-			alert('비밀번호를 입력해주세요.');
-			inputPwd.focus();
-			return false;
-		}
-	}
-	
-	</script>
 
 </body>
 </html>

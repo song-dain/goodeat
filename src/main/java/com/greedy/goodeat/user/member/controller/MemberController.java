@@ -2,7 +2,11 @@ package com.greedy.goodeat.user.member.controller;
 
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.greedy.goodeat.common.dto.MemberDTO;
+import com.greedy.goodeat.user.member.service.AuthenticationService;
 import com.greedy.goodeat.user.member.service.MailSendService;
 import com.greedy.goodeat.user.member.service.MemberService;
 
@@ -26,20 +31,31 @@ public class MemberController {
 	private final PasswordEncoder passwordEncoder;
 	private final MemberService memberService;
 	private final MailSendService mailSendService;
+	private final AuthenticationService authenticationService;
 	private final MessageSourceAccessor messageSourceAccessor;
 	
 	public MemberController(MemberService memberService, PasswordEncoder passwordEncoder, 
-			MessageSourceAccessor messageSourceAccessor, MailSendService mailSendService) {
+			MessageSourceAccessor messageSourceAccessor, MailSendService mailSendService,
+			AuthenticationService authenticationService) {
 		this.memberService = memberService;
 		this.passwordEncoder = passwordEncoder;
 		this.messageSourceAccessor = messageSourceAccessor;
 		this.mailSendService = mailSendService;
+		this.authenticationService = authenticationService;
 	}
 	
 	@GetMapping("/login")
 	public String goLogin() {
 		return "user/login/login";
 	}
+	
+    @PostMapping("/loginfail")
+    public String loginFailed(RedirectAttributes rttr) {
+    	
+    	rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.loginfail"));
+    	
+    	return "redirect:/login";
+    }
 	
 	@GetMapping("/join")
 	public String goJoin() {
@@ -97,9 +113,7 @@ public class MemberController {
 		if(!year.equals("") && !month.equals("") && !day.equals("")) {
 			java.sql.Date birthDate = java.sql.Date.valueOf(year + "-" + month + "-" + day);
 			member.setBirthDate(birthDate);
-		}	
-		
-		member.setPhone(member.getPhone().replace("-", ""));
+		}
 		
 		memberService.joinMembership(member);
 		
@@ -117,9 +131,6 @@ public class MemberController {
 		if(memberService.selectMemberByNameAndEmail(member.getMemberName(), member.getEmail())) {
 		
 			MemberDTO findMember = memberService.findByMemberNameAndEmail(member);
-			
-			log.info("[MemberController] findMember : {}", findMember);
-			log.info("[MemberController] findMemberId : {}", findMember.getMemberId());
 			
 			mailSendService.findIdEmailForm(findMember.getMemberId(), member.getEmail());
 			
@@ -164,7 +175,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("/mypage")
-	public String pwdReinput(@RequestParam String memberPwd, @AuthenticationPrincipal MemberDTO loginMember, 
+	public String pwdReinput(@RequestParam String memberPwd, @AuthenticationPrincipal MemberDTO loginMember,
 				RedirectAttributes rttr) {
 		
 		log.info("[memberController] inputPwd : {}", memberPwd);
@@ -183,5 +194,45 @@ public class MemberController {
 		
 	}
 	
+	@PostMapping("/mypage/info")
+	public String modifyInfo(@ModelAttribute MemberDTO member, String year, String month, String day,
+			@AuthenticationPrincipal MemberDTO loginMember, RedirectAttributes rttr) {
+		
+		log.info("[MemberController] update info : {}", member);
+		
+		member.setMemberNo(loginMember.getMemberNo());
+		member.setMemberPwd(passwordEncoder.encode(member.getMemberPwd()));
+		
+		memberService.modifyInfo(member);
+		
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    	SecurityContextHolder.getContext().setAuthentication(createNewAuthentication(authentication, loginMember.getMemberId()));
+		
+		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.modify"));
+		
+		return "redirect:/mypage/info";
+		
+	}
+	
+	@GetMapping("/unjoin")
+	public String unjoin(@AuthenticationPrincipal MemberDTO loginMember, RedirectAttributes rttr) {
+		
+		memberService.unjoinMembership(loginMember);
+		
+        SecurityContextHolder.clearContext();
+		
+		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.unjoin"));
+		
+        return "redirect:/";
+	}
+	
+    protected Authentication createNewAuthentication(Authentication currentAuth, String memberId) {
+    	
+    	UserDetails newPrincipal = authenticationService.loadUserByUsername(memberId);
+    	UsernamePasswordAuthenticationToken newAuth = new UsernamePasswordAuthenticationToken(newPrincipal, currentAuth.getCredentials(), newPrincipal.getAuthorities());
+    	newAuth.setDetails(currentAuth.getDetails());
+        return newAuth;
+        
+    }
 	
 }
