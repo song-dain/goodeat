@@ -21,13 +21,14 @@
  
  <!-- 컨텐츠 부분 -->
  <div class="container">
-    <h1>문의 등록</h1>
+    <h1>신고 등록</h1>
     <form action="/user/productdetail/regist" th:method="post" enctype="multipart/form-data">
         <select name="support" id="for-select">
             <option value="">유형선택</option>
             <option value="배송문의">배송문의</option>
             <option value="상품문의">상품문의</option>
             <option value="환불/결제취소">환불/결제취소</option>
+            <option value="신고">신고</option>
             <option value="기타문의">기타문의</option>
         </select>
         </form>

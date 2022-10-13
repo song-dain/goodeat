@@ -5,7 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import com.greedy.goodeat.common.entity.Review;
+
 import com.greedy.goodeat.user.productdetail.hgentity.hgReview;
 
 public interface ReviewRepository extends JpaRepository<hgReview, Integer> {
@@ -18,7 +18,11 @@ public interface ReviewRepository extends JpaRepository<hgReview, Integer> {
 
 	Page<hgReview> findByReviewStatus(String activeStatus, Pageable pageable);
 
-	void save(Review map);
+	hgReview findByReviewCode(Integer reviewCode); 
+
+	
+
+	
 
 	
 	
