@@ -64,8 +64,10 @@ public class hgProduct {
 	@JoinColumn(name = "CATEGORY_CODE")
 	private ProductCategory productCategory;
 	
-	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "REF_BOARD_NO")
-	private List<hgAddfile> addfileList;
+	/*
+	 * @OneToMany(cascade = CascadeType.PERSIST)
+	 * 
+	 * @JoinColumn(name = "ADDFILE_NO") private List<hgAddfile> addfileList;
+	 */
 
 }
