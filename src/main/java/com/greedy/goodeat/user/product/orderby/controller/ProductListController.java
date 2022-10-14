@@ -24,6 +24,19 @@ public class ProductListController {
 		this.productListService = productListService;
 	}
 	
+	@GetMapping("/productAll")
+	public String productAll(@RequestParam(defaultValue="1") int page, Model model) {
+	
+		Page<ProductDTO> productList = productListService.allProductList(page);
+		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(productList);
+		
+		model.addAttribute("productList", productList);
+		model.addAttribute("paging", paging);
+		
+		return "/user/product/productmain/productAll";
+		
+	}
+	
 	@GetMapping("/mil")
 	public String milMapping(@RequestParam(defaultValue="1") int page, Model model) {
 	

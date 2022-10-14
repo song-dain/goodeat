@@ -13,4 +13,6 @@ public interface ProductListRepository extends JpaRepository<Product, Long> {
 	@EntityGraph(attributePaths = {"AddfileList"})
 	Page<Product> findByProductCategoryAndProductStatus(ProductCategory category, String activeStatus,
 			Pageable pageable);
+
+	Page<Product> findByProductStatus(String activeStatus, Pageable pageable);
 }
