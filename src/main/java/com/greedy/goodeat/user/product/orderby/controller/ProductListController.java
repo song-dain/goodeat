@@ -66,7 +66,7 @@ public class ProductListController {
 		model.addAttribute("productList", productList);
 		model.addAttribute("paging", paging);
 		
-		return "/user/productmain/chickenbreast";
+		return "/user/product/productmain/chickenbreast";
 		
 	}
 	
@@ -100,7 +100,5 @@ public class ProductListController {
 		return "user/product/productmain/vegan";
 	}
 
-	
-	
 
 }

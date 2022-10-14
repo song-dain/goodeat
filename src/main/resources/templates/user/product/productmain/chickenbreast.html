@@ -1,27 +1,30 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" 
+	  xmlns:th="http://www.thymeleaf.org"  
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/user/product/categoy.css">
-    <link rel="stylesheet" href="/source/font/Cafe24Ssurround.ttf">
+    <link rel="stylesheet" href="../source/font/Cafe24Ssurround.ttf">
     <title>MainPage</title>
 </head>
 <body>
 
- 	<div th:replace="user/common/header.html"></div>
-
+   <div th:replace="user/common/header.html"></div>
+   
    <section id="con-wrap">
       <div class="con-wrap-frame">
-      
         <div class="page-title-area">
             <h2 class="title-page-type">닭가슴살</h2>
         </div>
-        
         <div class="page-title-image">
             <img src="/images/user/product/chicken/chicken_main.png">
         </div>
-        
+        <div class="grid-list-wrap">
+            <div class="page-sorting-box">            
+                
         <div class="grid-list-wrap">
             <div class="page-sorting-box">
             
@@ -51,20 +54,21 @@
 				th:disabled="${ productList.first }"></button>
 		
 		<th:block th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
-			<button th:onclick="'location.href=\'/user/chicken?page=' + @{${page}} + '\''"
+			<button th:onclick="'location.href=\'user/chicken?page=' + @{${page}} + '\''"
 					th:text="${ page }"
 					th:disabled="${ paging.currentPage eq page }">
 			</button>
 		</th:block>
 		
-		<button th:onclick="'location.href=\'/user/chicken?page=' + @{${paging.currentPage + 1}} + '\''"
+		<button th:onclick="'location.href=\'user/chicken?page=' + @{${paging.currentPage + 1}} + '\''"
 				th:disabled="${ productList.last }">></button>
 		
-		<button th:onclick="'location.href=\'/user/chicken?page=' + @{${paging.endPage}} + '\''">>></button>			
+		<button th:onclick="'location.href=\'user/chicken?page=' + @{${paging.endPage}} + '\''">>></button>			
 	</div>
-     
-</section> 
- 	
+	
+	</div>
+	</div>
+	</section>
 </body>
 </html>
 
