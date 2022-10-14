@@ -26,15 +26,14 @@
 		       <form action="/login" method="post" align="center">
 			       <input type="text" name="username" class="text-field text" placeholder=" 아이디"><br>
 			       <input type="password" name="password" class="text-field text" placeholder=" 비밀번호"><br>
-			       <input type="checkbox" name="rememberId"><label class="text"> 아이디 기억하기</label><br><br>
+			       <input type="checkbox" name="remember-me"><label class="text"> 자동로그인</label><br><br>
 			       <input type="image" src="/images/user/info/loginbutton.png" width="295px"/><br>
 		       </form>
-		       <a href="kakaoLogin" ><img src="/images/user/info/kakao.jpg" width=50px/></a>
-		       <a href="naverLogin" ><img src="/images/user/info/naver.jpg" width=43px /></a>
+		       <a th:href="@{/oauth2/authorization/google}"><img src="/images/user/info/googleBtn.png"/></a>
 		                
 		      <div id="links">
-		           <a href="/findId" class="text">아이디 찾기 |</a>
-		           <a href="findPwd" class="text">비밀번호 찾기</a><br><br>
+		           <a th:href="@{/findId}" class="text">아이디 찾기 |</a>
+		           <a th:href="@{findPwd}" class="text">비밀번호 찾기</a><br><br>
 		           <p class="text">아직 회원이 아니신가요? <a href="/join" class="text join">회원가입</a></p>
 		      </div>
 	      </div>

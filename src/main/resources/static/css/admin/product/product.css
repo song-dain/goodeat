@@ -184,6 +184,17 @@ ul > li {
     border-collapse:collapse;
     border-spacing:0;
   }
+  
+  .productTable6 {
+    width: 80%;
+    border: 1px ;
+    margin-left: 250px;
+    position: absolute;
+    top: 13.5%;
+    border-collapse:collapse;
+    border-spacing:0;
+  }
+  
 
   th, td {
     border: 1px solid #444444;
@@ -216,6 +227,13 @@ ul > li {
   .td-right-class{
     font-size: 25px;
   }
+  
+  
+  #td-right{
+    font-size: 25px;
+    margin-left: 15px;
+  }
+
 
   #check1{
     margin-left: 30px;
@@ -327,7 +345,20 @@ ul > li {
     height: 40px;
     border: 1px ;
     position: absolute;
-    top: 70%;
+    top: 8%;
+    left:67%;
+    background-color:red;
+    color: white;
+    font-size: 25px;
+  }
+  
+  
+  #productDetailButtonDelete{
+    width: 150px;
+    height: 40px;
+    border: 1px ;
+    position: absolute;
+    top: 8%;
     left:85%;
     background-color:red;
     color: white;
@@ -338,8 +369,95 @@ ul > li {
     height: 40px;
     border: 1px ;
     position: absolute;
-    top: 70%;
+    top: 8%;
     left:76%;
+    background-color:#293F54;
+    color: white;
+    font-size: 25px;
+
+  }
+  
+    #productDetailButtonList{
+    width: 150px;
+    height: 40px;
+    border: 1px ;
+    position: absolute;
+    top: 8%;
+    left:76%;
+    background-color:#293F54;
+    color: white;
+    font-size: 25px;
+
+  }
+  
+   #orderButtonList{
+    width: 150px;
+    height: 40px;
+    border: 1px ;
+    position: absolute;
+    top: 95%;
+    left:50%;
+    background-color:#293F54;
+    color: white;
+    font-size: 25px;
+
+  }
+  
+   #orderButtonCancel{
+    width: 60px;
+    height: 30px;
+    background-color:red;
+    color: white;
+    font-size: 15px;
+    border: 0;
+  
+  }
+  
+  #orderButtonDelivery{
+    width: 100px;
+    height: 30px;
+    background-color:#293F54;
+    color: white;
+    font-size: 15px;
+    border: 0;
+    margin-left: 10px;
+  
+  }
+  
+   #orderButtonSms{
+    width: 100px;
+    height: 30px;
+    background-color:red;
+    color: white;
+    font-size: 15px;
+    border: 0;
+    margin-left: 10px;
+  
+  }
+  
+
+  
+   #SmsButtonList{
+    width: 150px;
+    height: 40px;
+    border: 1px ;
+    position: absolute;
+    top: 45%;
+    left:58%;
+    background-color:#293F54;
+    color: white;
+    font-size: 25px;
+
+  }
+  
+  
+   #SmsSendBotton{
+    width: 150px;
+    height: 40px;
+    border: 1px ;
+    position: absolute;
+    top: 45%;
+    left:45%;
     background-color:#293F54;
     color: white;
     font-size: 25px;
@@ -350,13 +468,27 @@ ul > li {
     height: 40px;
     border: 1px ;
     position: absolute;
-    top: 70%;
+    top: 8%;
+    left:85%;
+    background-color:#293F54;
+    color: white;
+    font-size: 25px;
+
+  }
+  
+    #productDetailButtonSave{
+    width: 150px;
+    height: 40px;
+    border: 1px ;
+    position: absolute;
+    top: 8%;
     left:67%;
     background-color:#293F54;
     color: white;
     font-size: 25px;
 
   }
+  
   
   #paging{
   

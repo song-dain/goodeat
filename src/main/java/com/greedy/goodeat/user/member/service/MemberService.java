@@ -50,15 +50,64 @@ public class MemberService {
 		
 	}
 
+
+	public boolean selectMemberByIdAndEmail(String memberId, String email) {
+		
+		boolean isExist = false;
+		
+		if(memberRepository.findByMemberIdAndMemberStatus(memberId, "Y").isPresent()
+				&& memberRepository.findByEmailAndMemberStatus(email, "Y").isPresent()) {
+			isExist = true;
+		}
+		
+		return isExist;
+	}
+	
+	public MemberDTO findByMemberIdAndEmail(MemberDTO member) {
+		
+		Member findmember = memberRepository.findByMemberIdAndEmail(member.getMemberId(), member.getEmail());
+		
+		return modelMapper.map(findmember, MemberDTO.class);
+	}
+
 	public MemberDTO findByMemberNameAndEmail(MemberDTO member) {
 		
 		log.info("[MemberService] memberName : {}", member.getMemberName());
 		log.info("[MemberService] email : {}", member.getEmail());
 		
 		Member findmember = memberRepository.findByMemberNameAndEmail(member.getMemberName(), member.getEmail());
+
 		
 		return modelMapper.map(findmember, MemberDTO.class);
 	}
 
+	public void changeMemberPwd(MemberDTO findMember) {
+		
+		Member member = memberRepository.findByMemberIdAndEmail(findMember.getMemberId(), findMember.getEmail());
+		member.setMemberPwd(findMember.getMemberPwd());
+		
+		memberRepository.save(member);
+		
+	}
+	
+	public void modifyInfo(MemberDTO updateMember) {
+		
+		Member saveMember = memberRepository.findByMemberNo(updateMember.getMemberNo());
+		saveMember.setMemberPwd(updateMember.getPassword());
+		saveMember.setMemberName(updateMember.getMemberName());
+		saveMember.setPhone(updateMember.getPhone());
+		saveMember.setZipCode(updateMember.getZipCode());
+		saveMember.setAddress(updateMember.getAddress());
+		saveMember.setDetailAddress(updateMember.getDetailAddress());
+		saveMember.setGender(updateMember.getGender());
+		
+	}
+
+	public void unjoinMembership(MemberDTO loginMember) {
+		
+		Member unjoinMember = memberRepository.findByMemberNo(loginMember.getMemberNo());
+		unjoinMember.setMemberStatus("N");
+		
+	}
 
 }

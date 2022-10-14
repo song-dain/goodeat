@@ -24,7 +24,7 @@
                 <img src="/images/user/product/milkit/채근담 떡국 10,000원.png" alt="밀키트">
             </li>
             <li class="right-te">
-                <h4 th:text="${ product.productName }"></h4>
+                <h4 th:text="${ hgproduct.productName }"></h4>
                 <p>그리운 어머니의 손맛이 깃든 빠르게 먹을수 있는 떡국</p>
                 <h1>16,900원</h1>
                 <input type="number" value="수량을 선택해주세요" min="1" max="999" placeholder="수량을 선택해주세요"/>
@@ -61,59 +61,37 @@
         </div>
       </div>
       
-
+		<div th:replace="user/productdetail/review/listReview.html"></div>
      
-     <div id="section2" class="container-fluid bg-warning" >
-        <section class="article-list">
-          <div class="table-con">
-            <p class="con">구매 후기</p>
-            <button type="button" onclick="location.href='/productdetail/registReview.html'" class="btn-sel" >등록</button>
-            <table id="listArea" style="margin: auto;">
-				<tr>
-					<th style="width: 100px">글번호</th>
-					<th style="width: 300px">글제목</th>
-					<th style="width: 100px">작성자</th>
-					<th style="width: 100px">조회수</th>
-					<th style="width: 150px">작성일</th>
-				</tr>
-				<tr th:each="review : ${ reviewList }"
-				    th:onclick="|location.href='/user/productdetail/productDetailList?ProductCode=${product.productCode}'|"
-				    style="cursor:pointer;">
-					<td th:text="${ review.reviewCode }"></td>
-					<td th:text="${ review.reviewTitle }"></td>
-					<td th:text="${ review.member.memberName }"></td>
-					<td ></td>
-					<td th:text="${ review.reviewRegistDate }"></td>
-				</tr>
-			</table>
-        </div>
-        </section>
-	  </div>
-		<div id="section3" class="container-fluid bg-secondary">
+     	      <div id="section3" class="container-fluid bg-secondary">
         <section class="article-list">
             <div class="table-con">
             <p class="con">상품문의</p>
-            <button type="button" onclick="location.href='support.html';" class="btn-sel">등록</button>
+            <button type="button" th:onclick="@{/user/productdetail/inquiry/regist}" class="btn-sel">등록</button>
             <table id="listArea" style="margin: auto;">
 				<tr>
-					<th style="width: 100px">글번호</th>
-					<th style="width: 300px">글제목</th>
+					<th style="width: 100px">순번</th>
+					<th style="width: 100px">문의유형</th>
+					<th style="width: 300px">제목</th>
 					<th style="width: 100px">작성자</th>
-					<th style="width: 100px">조회수</th>
 					<th style="width: 150px">작성일</th>
+					<th style="width: 150px">수정일</th>
 				</tr>
 				<tr th:each="inquiry : ${ inquiryList }"
-				    th:onclick="|location.href='/productdetail/productDetaiList?productCode=${product.productCode}'|"
+				    th:onclick="|location.href='/user/productdetail/detail/inquiry?inquiryCode=${inquiry.inquiryCode}'|"
 				    style="cursor:pointer;">
 					<td th:text="${ inquiry.inquiryCode }"></td>
+					<td th:text="${ inquiry.inquiryType.inquiryTypeNo }"></td>
 					<td th:text="${ inquiry.inquiryTitle }"></td>
 					<td th:text="${ inquiry.member.memberName }"></td>
 					<td th:text="${ inquiry.inquiryRegistDate }"></td>
+					<td th:text="${ inquiry.inquiryModifyDate }"></td>
 				</tr>
 			</table>
 			</div>
             </section> 
         </div>
+		
         <div id="section4" class="container-fluid bg-secondary">
             <img src="/images/user/productDetail/etc/post_ss.PNG" alt="" style="width:50%;">
       </div> 

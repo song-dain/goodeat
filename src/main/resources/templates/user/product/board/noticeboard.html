@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <link rel="stylesheet" href="/css/user/product/board.css">
+    <link rel="stylesheet" href="/source/font/Cafe24Ssurround.ttf">
+    <title>MainPage</title>
+</head>
+<body>
+ <!-- 헤더부분 -->
+  	<div th:replace="user/common/header.html"></div>
+
+   <!-- 컨텐츠 부분 -->
+   
+   <div class="contents">
+       <div class="content-wrap">
+            <div class="page-title">
+                <div>
+                    <!-- <span><b>공지사항/이벤트</b></span>  -->
+                </div>
+            </div>
+            
+            <div class="page-contents">
+                <div class="aside-wrap">
+                    <nav class="menu-box">
+                        <ul>
+                            <li><a href="#" class="menu">공지사항</a></li>
+                            <li><a href="#" class="menu">이벤트</a></li>
+                            
+                        </ul>
+                    </nav>
+                    <div class="guide-box">
+                        <dl>
+                            <dt>Good Eat 고객센터</dt>
+                            <dt class="p-num">02-1234-5678</dt>
+                            <dd>평일 <span class="text1">00:00 ~ 00:00</span></dd>
+                            <dd>주말, 공휴일 휴무</dd>
+                        </dl>
+                    </div>
+                </div>
+            
+                <div class="main">
+                  
+                  
+                       
+
+                  
+                    <div class="board_sub">
+                        <div class="sub_title1">
+                            <span><b>공지사항</b></span> 
+                        </div>
+                        <div class="sub_title2">
+                            <a href="#">
+                                <!-- <span><b>더보기</b></span>  -->
+                            </a>
+                        </div>
+                        <table class="board_list">
+                            <caption>공지사항</caption>
+                            <thead>
+                                <tr>
+                                    <th>NO</th>
+                                    <th>제목</th>
+                                    <th>작성자</th>
+                                    <th>등록일</th>
+                                    <th>조회수</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="notice : ${noticeList}">
+                                    <td th:text="${notice.postCode}"></td>
+                                    <td th:text="${notice.postTitle}">
+                                        <a href="#"></a>
+                                    </td>
+                                    <td th:text="${notice.member.memberName}"></td>
+                                    <td th:text="${notice.postModifyDate}"></td>
+                                    <td></td>
+                                </tr>
+                              
+
+                            </tbody>
+                        </table>
+                        <div class="paging">
+                       
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        
+        </div>
+    </div>
+</section> 
+
+
+
+
+<!-- 푸터 부분 -->
+
+</body>
+</html>
+

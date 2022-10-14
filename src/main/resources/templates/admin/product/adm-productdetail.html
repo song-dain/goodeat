@@ -21,7 +21,7 @@
         <div class="product-title">
             <a>상품상세</a>
         </div>
-            <table class="productTable1">
+            <table class="productTable6">
                 <tbody>
                  <tr>
                     <td class="td-left-class">상품코드</td>
@@ -68,18 +68,25 @@
                 <tr>
                     <td class="td-left-class">대표사진</td>
                     <td class="td-right-class">
-                        <input type="submit" value="파일첨부" id="productButton3"></td>
+                       <div th:each="addfileList  : ${ product.addfileList }">
+                        <img th:if="${ addfileList.fileType == 'TITLE' }" 
+							 th:src="${addfileList.thumbnailRoute }" width="300px" height="300px"/>
+					   </div>
+					</td>
                 </tr>
                 <tr>
                     <td class="td-left-class">상세사진</td>
-                    <td class="td-right-class">
-                        <input type="submit" value="파일첨부" id="productButton3"></td>
-                    </td>
+                    <td> 
+                	<div class="td-right-class" th:if="${ product.addfileList.size() > 1}" th:each="index : ${ #numbers.sequence(1, product.addfileList.size() - 1 ) }" style="float:left;">
+                  		<img class="detailImg" width="250" height="180"
+					     th:src="${ product.addfileList[index].savedRoute + product.addfileList[index].savedFileName}"/><br>
+							<span th:text="${ product.addfileList[index].originalFileName }"></span>
+					</div>	
                 </tr>           
-            </table>
-            <input type="submit" value="수정" id="productButtonSave" th:onclick= "|location.href='/admin/productModify?productCode=${product.productCode}'|">
-            <input type="submit" value="목록으로" id="productButtonList" onclick="location.href='/admin/productList'">
-            <input type="submit" value="삭제" id="productButtonDelete" th:onclick= "|location.href='/admin/productDelete?productCode=${product.productCode}'|">
+            </table><br/>
+            <input type="submit" value="수정" id="productDetailButtonSave" th:onclick= "|location.href='/admin/productModify?productCode=${product.productCode}'|">
+            <input type="submit" value="목록으로" id="productDetailButtonList" onclick="location.href='/admin/productList'">
+            <input type="submit" value="삭제" id="productDetailButtonDelete" th:onclick= "|location.href='/admin/productDelete?productCode=${product.productCode}'|">
 
     </section>
 

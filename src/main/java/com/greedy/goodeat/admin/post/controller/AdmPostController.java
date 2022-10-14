@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.greedy.goodeat.admin.post.service.AdmPostService;
@@ -79,7 +79,7 @@ public class AdmPostController {
 	}
 	
 	@GetMapping("/post/detail")
-	public String selectBoardDetail(Model model, Integer postCode) {
+	public String selectPostDetail(Model model, Integer postCode) {
 		
 		log.info("[admPostController] ========================================= ");
 		log.info("[admpostController] postCode : {}", postCode);
@@ -112,6 +112,13 @@ public class AdmPostController {
 		return "redirect:/admin/post";
 	}
 	
+	@GetMapping("/post/delete")
+	public String deletePost(@RequestParam Integer postCode) {
+		
+		admPostService.deletePost(postCode);
+		
+		return "redirect:/admin/post";
+	}
 	
 	
 	

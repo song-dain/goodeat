@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>주문관리</title>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gamja+Flower&family=Gowun+Dodum&family=Poor+Story&display=swap" rel="stylesheet">
+   <link rel="stylesheet" th:href="@{/css/admin/product/product.css}">
+   <link rel="stylesheet" th:href="@{/css/admin/order/order.css}">
+   <link rel="icon" type="image/x-icom" th:href="@{/images/common/HEQXSRYC.ico}">
+   
+    <script>
+		const message = '[[${message}]]';
+		message && alert(message);
+	</script>
+</head>
+<body>
+
+	<script>
+            //팝업 띄우기
+            function openPop() {
+                document.getElementById("popup_layer").style.display = "block";
+
+            }
+
+            //팝업 닫기
+            function closePop() {
+                document.getElementById("popup_layer").style.display = "none";
+            }
+
+            //팝업 띄우기
+            function openPopStatus() {
+            document.getElementById("popup_layer_status").style.display = "block";
+
+            }
+
+            //팝업 닫기
+            function closePopStatus() {
+                document.getElementById("popup_layer_status").style.display = "none";
+            }
+         
+      </script>
+
+	<div th:replace="admin/common/header.html"></div>
+  
+    <section>
+        <div class="product-title">
+            <a>주문상세</a>
+        </div>
+            <table class="productTable4">
+                <tbody>
+                 <tr>
+                    <td class="td-left-class">주문번호</td>
+                    <td class="td-right-class">
+                        <p th:text="${ order.orderNo }" id="detailProduct"/>
+                    </td>
+                </tr>
+                  <tr>
+	                    <td class="td-left-class">주문상품</td>
+	                    <td>
+	                        <p id="td-right" th:each="orderProduct : ${ order.orderProduct }" th:text="${ orderProduct.product.productName }"/>
+	                    </td>
+	               </tr>
+	               <tr>
+	                    <td class="td-left-class">주문수량</td>
+	                    <td>
+	                        <p id="td-right" th:each="orderProduct : ${ order.orderProduct }" th:text="${ orderProduct.orderAmount } + '개'"/>
+	                    </td>
+	               </tr>
+                <tr>
+                    <td class="td-left-class">주문일시</td>
+                    <td class="td-right-class">
+                        <p th:text="${ order.orderDate }" id="detailProduct"/>
+                    </td>
+                </tr>
+                <tr>
+                 <tr>
+                    <td class="td-left-class">주문상태</td>
+                     <td th:switch="${order.orderStatus}">
+						  <p id="td-right" th:case="'PAY_DONE'">결제완료</p>
+						  <p id="td-right" th:case="'DELIVERY_DONE'">배송완료</p>
+						  <p id="td-right" th:case="'CANCEL_DONE'">취소완료</p>
+						  <p id="td-right" th:case="'REFUND_DONE'">환불완료</p>
+						  <p id="td-right" th:case="'REQ_CANCEL'">취소요청
+						   <button id="orderButtonCancel" onclick="javascript:openPopStatus()">취소처리</button></p>
+					  	  <p id="td-right" th:case="'REQ_REFUND'">환불요청
+					  	  <button id="orderButtonCancel" onclick="javascript:openPopStatus()">환불처리</button></p>
+					</td>
+                </tr>
+                <tr>
+                    <td class="td-left-class">결제금액</td>
+                    <td>
+                        <p id="td-right" th:text="${ order.amountPay } + '원'"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-left-class">결제수단</td>
+                    <td>
+                        <p id="td-right" th:each="payment : ${ order.payment }" th:text="${ payment.payMethod }"/>
+                    </td>
+	             </tr>
+	               <tr>
+	                    <td class="td-left-class">결제일</td>
+	                    <td>
+	                        <p id="td-right" th:each="payment : ${ order.payment }" th:text="${ payment.payDate }"/>
+	                    </td>
+	              </tr>
+                 <tr>
+                    <td class="td-left-class">회원아이디</td>
+                    <td class="td-right-class">
+                        <p th:text="${ order.member.memberId }" id="detailProduct"/>
+                    </td>
+                </tr>
+                 <tr>
+                    <td class="td-left-class">전화번호</td>
+                    <td class="td-right-class">
+                        <p th:text="${ order.member.phone }" id="detailProduct"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-left-class">수령인</td>
+                    <td class="td-right-class">
+                        <p th:text="${ order.delivery.recipient }" id="detailProduct"/>
+                    </td>
+                </tr>
+                 <tr>
+                    <td class="td-left-class">배송주소</td>
+                    <td class="td-right-class">
+                        <p th:text="${ order.delivery.deliveryAddress}" id="detailProduct"/>
+                    </td>
+                </tr>
+                 <tr>
+                    <td class="td-left-class">상세주소(우편번호)</td>
+                    <td class="td-right-class">
+                        <p th:text="${ order.delivery.deliveryDetailAddress } + '(' + ${ order.delivery.zipCode } + ')'" id="detailProduct"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-left-class">택배정보</td>
+                    <td class="td-right-class">
+                    	<button id= "orderButtonDelivery" onclick="javascript:openPop()">송장번호입력</button>
+                        <p th:text="'송장번호 : ' + ${ order.delivery?.invoiceNo } + ' / ' + ' 택배사 : ' + ${ order.delivery?.deliveryCompany }" 
+                           th:if="${ order.delivery } ne null" id="detailProduct"/>
+                    </td>
+                </tr>
+                  <tr>
+                    <td class="td-left-class">문자발송</td>
+                    <td class="td-right-class">
+                         <form th:action="@{sms/send}" method="post">
+	                       		<input type="hidden" name = "to" th:value="${order.member.phone}"/>
+	                       		<input type="hidden" name = "content" th:value="'[굿잇] 송장번호 : ' + ${order.delivery.invoiceNo} + ' 택배사 : ' + ${order.delivery.deliveryCompany}"/>
+                        	<button id= "orderButtonDelivery">문자발송</button>
+                        	<p style="font-size:13px; margin-left:10px; color:red; font-weight: bold;" >
+                        	고객님께 택배정보를 전송하시려면 문자발송을 눌러주세요.<br>문자발송 버튼 클릭시 바로 전송됩니다.</p>
+                       </form>
+                    </td>
+                </tr>
+             </table><br/>
+                 
+	                 
+	      <form action="/admin/deliveryModify" method="post">
+	    <div class="popup_layer" id="popup_layer" style="display: none;">
+	        <div class="popup_box">
+	            <div style="height: 10px; width: 375px; float: top;">
+	              <a href="javascript:closePop();"><img th:src="@{/images/admin/ic_close.svg}" class="m_header-banner-close" width="70px" height="70px"></a>
+	            </div>
+	            <!--팝업 컨텐츠 영역-->
+	            <div class="popup_cont">
+	                <h2> 송장번호 입력 </h2>
+	                    <h3 class="content">택배사</h3>
+	                    <select id="selectBox" name = "deliveryCompany">
+	                        <option value="CJ대한통운">CJ대한통운</option>
+	                        <option value="한진택배">한진택배</option>
+	                        <option value="롯데택배">롯데택배</option>
+	                        <option value="로젠택배">로젠택배</option>
+	                        <option value="우체국택배">우체국택배</option>
+	                        <option value="CU편의점택배">CU편의점택배</option>
+	                        <option value="CVSnet편의점택배(GS25)">CVSnet편의점택배(GS25)</option>
+	                    </select>
+	                    <h3>송장번호</h3>
+	
+	                    <input type="text" placeholder="송장번호를 입력해주세요" id="popup_searchbox"  name = "invoiceNo">
+	                    <input type="hidden" name = "deliveryCode" th:value="${order.delivery.deliveryCode}"/>
+	            </div>
+	            <!--팝업 버튼 영역-->
+	                <input type="submit" value="저장" class="popup_btn" style="float: bottom; margin-top: 10px;">
+	        </div>
+	      </div>
+	      </form>
+	      
+	      <form action="/admin/statusModify" method="post">
+	       <div class="popup_layer" id="popup_layer_status" style="display: none;">
+        	<div class="popup_box2">
+            <div style="height: 10px; width: 375px; float: top;">
+              <a href="javascript:closePopStatus();"><img src="/images/admin/ic_close.svg" class="m_header-banner-close" width="70px" height="70px"></a>
+            </div>
+            <!--팝업 컨텐츠 영역-->
+            <div class="popup_cont">
+                <h2> 주문상태변경 </h2>
+                    <select id="selectBox" name = "orderStatus">
+                        <option value="CANCEL_DONE">취소완료</option>
+                        <option value="REFUND_DONE">환불완료</option>
+                    </select>
+                     <input type="hidden" name = "orderNo" th:value="${order.orderNo}"/>
+            </div>
+            <!--팝업 버튼 영역-->
+            		<input type="submit" value="저장" class="popup_btn" >
+	        </div>
+	      </div>
+      </form>
+	            
+            <input type="submit" value="목록으로" id="productButtonSave" onclick="location.href='/admin/orderList'">
+
+
+
+    </section>
+
+
+</body>
+</html>

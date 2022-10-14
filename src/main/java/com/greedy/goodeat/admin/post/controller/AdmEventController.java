@@ -9,7 +9,10 @@ import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,7 +50,6 @@ public class AdmEventController {
 							@RequestParam(required=false) String searchValue,
 							Model model) {
 		
-		log.info("[EventController] /event =================");
 		Page<PostDTO> eventList = admEventService.findEventList(page, searchValue);
 		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(eventList);
 		
@@ -71,8 +73,6 @@ public class AdmEventController {
 							   List<MultipartFile> attachImage) {
 		
 		admEventService.registEvent(newEvent);
-		log.info("[EventController] regist ================");
-		log.info("[EventController] newEvent : {}", newEvent);
 		
 		model.addAttribute("newEvent", newEvent);
 		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("event.regist"));
@@ -84,12 +84,10 @@ public class AdmEventController {
 	@GetMapping("/event/detail")
 	public String detailEvent(Model model, Integer eventCode) {
 		
-		log.info("[EventController] select ================");
 		
 		PostDTO event = admEventService.selectEventList(eventCode);
 		model.addAttribute("event", event);
 		
-		log.info("[EventController] event : {}", event);
 		return "admin/event/adm-detailevent";	
 	
 	}
@@ -97,12 +95,10 @@ public class AdmEventController {
 	@GetMapping("/event/modify")
 	public String getModify(Model model, Integer eventCode) {
 		
-		log.info("[EventController] modify ================");
 		
 		PostDTO event = admEventService.selectEventList(eventCode);
 		model.addAttribute("event", event);
 		
-		log.info("[EventController] Get event : {}", event);
 		
 		return "admin/event/adm-modifyevent";
 		
@@ -112,16 +108,18 @@ public class AdmEventController {
 	public String postModify(Model model, PostDTO event) {
 		
 		admEventService.modifyEvent(event);
-		log.info("[EventController] Post event : {}", event);
 		model.addAttribute(event);
 		
 		return "redirect:/admin/event/detail?eventCode=" + event.getPostCode();
 	}
 	
 	
-	
-	
-	
+	@GetMapping("/event/delete")
+	public String deleteEvent(Integer eventCode) {
+		admEventService.deleteEvent(eventCode);
+		
+		return "redirect:/admin/event";
+	}
 	
 	
 	

@@ -18,51 +18,45 @@
             <a>상품수정</a>
         </div>
          <form action="/admin/productModify" method="post">
-                 <table class="productTable4">
-           
-                <tbody>
-                  <tr>
-                    <td class="td-left-class">상품코드</td>
-                    <td class="td-right-class">
-                        <input type="text" th:placeholder= "${ product.productCode }" id="inputBox" name="productCode">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="td-left-class">상품명</td>
-                    <td class="td-right-class">
-                        <input type="text" th:placeholder= "${ product.productName }" id="inputBox" name="productName">
-                    </td>
-                </tr>
-                <tr>
-                    <td class="td-left-class">카테고리</td>
-                    <td class="td-right-class">
-                        <select class="selectBox" name="productCategory.categoryCode">
-                            <option value="1">닭가슴살</option>
-                            <option value="2">도시락</option>
-                            <option value="3">밀키트</option>
-                            <option value="4">간편식</option>
-                            <option value="5">비건</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="td-left-class">상품가격</td>
-                    <td class="td-right-class">
-                        <input type="text" th:placeholder= "${ product.productPrice }"  id="inputBox" name="productPrice">원
-                    </td>
-                </tr>
-                <tr>
-                    <td class="td-left-class">재고</td>
-                    <td class="td-right-class">
-                        <input type="text" th:placeholder="${ product.productInventory }" id="inputBox" name="productInventory">개
-                    </td>
-                </tr>
-                <tr>
-                    <td class="td-left-class">상품설명</td>
-                    <td class="td-right-class">
-                        <input type="text" th:placeholder="${ product.productDescription }"  id="searchbox2" name="productDescription">
-                    </td>
-                </tr>
+	       <table class="productTable4">
+	            <tbody>
+                  
+	                <tr>
+	                    <td class="td-left-class">상품명</td>
+	                    <td class="td-right-class">
+	                        <input type="text" th:placeholder= "${ product.productName }" id="inputBox" name="productName">
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td class="td-left-class">카테고리</td>
+	                    <td class="td-right-class">
+	                        <select class="selectBox" name="productCategory.categoryCode">
+	                            <option value="1">닭가슴살</option>
+	                            <option value="2">도시락</option>
+	                            <option value="3">밀키트</option>
+	                            <option value="4">간편식</option>
+	                            <option value="5">비건</option>
+	                        </select>
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td class="td-left-class">상품가격</td>
+	                    <td class="td-right-class">
+	                        <input type="text" th:placeholder= "${ product.productPrice }"  id="inputBox" name="productPrice">원
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td class="td-left-class">재고</td>
+	                    <td class="td-right-class">
+	                        <input type="text" th:placeholder="${ product.productInventory }" id="inputBox" name="productInventory">개
+	                    </td>
+	                </tr>
+	                <tr>
+	                    <td class="td-left-class">상품설명</td>
+	                    <td class="td-right-class">
+	                        <input type="text" th:placeholder="${ product.productDescription }"  id="searchbox2" name="productDescription">
+	                    </td>
+	                </tr>
                 <tr>
                     <td class="td-left-class">판매상태</td>
                     <td class="td-right-class">
@@ -73,26 +67,15 @@
                         <input type="checkbox" id="check1" value="HIDDEN"name="productStatus">
                         숨김
                     </td>
-                </tr>
-                <tr>
-                    <td class="td-left-class">대표사진</td>
-                    <td class="td-right-class">
-                        <input type="submit" value="파일첨부" id="productButton3"></td>
-                </tr>
-                <tr>
-                    <td class="td-left-class">상세사진</td>
-                    <td class="td-right-class">
-                        <input type="submit" value="파일첨부" id="productButton3"></td>
-                </tr>           
+                </tr>    
             </table>
+            <input type="hidden" name = "productCode" th:value="${product.productCode}"/>
             <input type="submit" value="저장" id="productButtonSave">
-            </form>
+            <button type="reset" id="productButtonDelete">취소하기</button>
+          </form>
             <input type="submit" value="목록으로" id="productButtonList" onclick="location.href='/admin/productList'">
-            <input type="submit" value="삭제" id="productButtonDelete">
-
-
     </section>
-
+    
 
 </body>
 </html>

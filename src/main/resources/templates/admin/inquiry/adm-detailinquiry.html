@@ -1,84 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/goodeat//src/main/resources/static/css/admin/Adminstyle.css">
-    <link rel="stylesheet" href="/goodeat//src/main/resources/static/css/admin/requeiry/detailrequeiry.css">
+    <link rel="stylesheet" th:href="@{/css/admin/Adminstyle.css}">
+    <link rel="stylesheet" th:href="@{/css/admin/inquiry/detailinquiry.css}">
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gamja+Flower&family=Gowun+Dodum&family=Poor+Story&display=swap" rel="stylesheet">
-    <link rel ="icon" type="image/x-icom" href="/goodeat/src/main/resources/static/images/common/HEQXSRYC.ico">
+    <link rel ="icon" type="image/x-icom" th:href="@{/images/common/HEQXSRYC.ico}">
+    <script type="text/javascript"></script>
 </head>
 <body>
-    <header>
-        <div id="container">
-            <div id="top-menu">
-                <div class="logo-menu">
-                    <img class="logo" src="/goodeat/src/main/resources/static/images/main-logo.PNG">
-                </div>
-                
-                <div class="box">
-                    <img class="profile" src="/goodeat/src/main/resources/static/images/admin/TeamReder.PNG" alt="리더">
-                </div>
-                <div class="name-menu">
-                    <p>welcome!</p>
-                    <h3>관리자</h3>
-                </div>
-            </div>
-                <!--세로형 메뉴-->
-                <div class="menu-base">
-                    <ul>
-                    <li class="sub-menu">
-                        <a href="/goodeat/src/main/resources/templates/admin/member/adm-member.html" id="menu-base-a">회원관리</a></li>
-                    <li class="sub-menu">
-                        <a href="#" id="menu-base-a">상품관리</a></li>
-                    <li class="sub-menu">
-                        <a href="#" id="menu-base-a">주문관리</a></li>
-                    <li class="sub-menu-select">
-                        <a href="#" id="menu-base-a">문의/리뷰관리</a></li>
-                    <li class="sub-menu">
-                        <a href="/goodeat/src/main/resources/templates/admin/post/adm-post.html" id="menu-base-a">게시판관리</a></li>
-                </ul> 
-                </div>
-            <div class="clear"></div>
-        </div>
-    </header>
+   
+   <div th:replace="admin/common/header.html"></div>
     
-    
-    <a class="rq-head">문의 관리</a>
-    <a class="rev-head">리뷰 관리</a>
     <div class="rq-head-box"></div>
     <div class="rev-head-box"></div>
-    
-    <section>
-        <div class="head-top">
-            <div class="logout-content">
-                <a>로그아웃</a>
-            </div>
-            <div class="logout-img">
-                <a><img src="/goodeat/src/main/resources/static/images/admin/logout.png"></a>
-            </div>
-        </div>
-    </section>
-    
+    <a class="rq-head">문의 관리</a>
+    <a class="rev-head" th:href="@{/admin/review/list}">리뷰 관리</a>
+   
     <div class="wrapper-up">
         <div class="msbox-up">
             <div class="ms-up">문의 내역</div><br>
-            <textarea class="rq-box" form="inform" cols="30" rows="10">
-                
-            </textarea>
-            <button class="btn-del">삭제</button>     
+            <div class="rq-box" th:text="${ inquiry.inquiryContent}"></div>
+            <input type="submit" class="btn-del" value="삭제" th:onclick="|location.href='/admin/inquiry/delete?inquiryCode=${inquiry.inquiryCode}'|">     
         </div>
     </div>
     <div class="wrapper-down">
         <div class="msbox-down">
             <div class="ms-down">답변</div><br>
-            <textarea class="res-box" form="inform" cols="40" rows="10" autofocus required wrap="hard"
-            placeholder="답변을 입력하세ㅛㅇ">
-            </textarea>
-            <button class="btn-com">완료</button> 
-        </div>
-    </div>
+            <table id="replyWrite" class="">
+		<input type="hidden" id="inquiryCode" th:value="${inquiry.inquiryCode}"/>
+		<input type="hidden" id="member.memberNo" th:value="${inquiry.member.memberNo}"/>
+			<tr>
+				<td style="border:none;"><textarea cols="40" rows="3" id="replyInquiryContent" 
+				style="resize:none;
+					   width: 110%;
+					   margin-left:5px;
+					   height: 150px;"></textarea></td>
+				<td style="border:none;
+						   float: right;
+						   margin-top:50%;"><button type="button" class="" id="registReply">작성하기</button></td>
+			</tr>
+	</table>
+	
+	<table id="replyResult" style="margin-top: 200px;
+								   float: left;"></table>
+         </div>
+    </div>   
+     
+    
+	    
+     		
+	<script>
+		loadReply();
+		
+		function loadReply() {
+			
+			if(document.getElementById("inquiryCode")) {
+				
+				fetch("/admin/inquiry/loadReply?refInquiryNo=" + document.getElementById("inquiryCode").value)
+				.then(result => result.json())
+				.then(data => {
+					makeReplyTable(data);
+				})
+				.catch(error => console.log(error));
+				
+			}
+			
+		}
+		
+		if(document.getElementById("registReply")) {
+			
+			const $registReply = document.getElementById("registReply");
+			const $replyInquiryContent = document.getElementById("replyInquiryContent");
+			
+			$registReply.onclick = function() {
+				
+				const inquiryCode = document.getElementById("inquiryCode").value;
+				const replyInquiryContent = $replyInquiryContent.value;
+				
+				fetch("/admin/inquiry/registReply", {
+					method: "POST",
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8'
+					},
+					body: JSON.stringify({
+						refInquiryNo: inquiryCode,
+						replyInquiryContent: replyInquiryContent
+					})
+				})
+				.then(data => {
+					console.log(data);
+					loadReply();
+				})
+				.catch(error => console.log(error));
+			}
+		}
+		
+		
+		function removeReply(replyNo) {
+			
+			fetch("/admin/inquiry/removeReply", {
+				method: "POST",
+				headers: {
+					'Content-Type': 'application/json; charset=UTF-8'
+				},
+				body: JSON.stringify({
+					replyNo: replyNo
+				})
+			})
+			.then(result => {
+				console.log(result);
+				loadReply();
+			})
+			.catch(error => console.log(error));
+			
+		}
+		
+		
+		
+		function makeReplyTable(replyList) {
+			
+			const $table = document.querySelector("#replyResult");
+			$table.innerHTML = '';
+			
+			replyList.forEach(reply => {
+				const $tr = document.createElement('tr');
+				const $replyInquiryContentTd = document.createElement('td');
+				const $memberNameTd = document.createElement('td');
+				const $replyRegistDateTd = document.createElement('td');
+				const $buttonTd = document.createElement('td');
+				
+				$replyInquiryContentTd.textContent = reply.replyInquiryContent;
+				$memberNameTd.textContent = reply.member.memberName;
+				$replyRegistDateTd.textContent = reply.replyRegistDate;
+				
+				if('[[${#authentication.principal.memberNo}]]' == reply.member.memberNo) {
+					$buttonTd.innerHTML = `<button type='button' onclick='removeReply(${reply.replyNo})'>댓글삭제</button>`;
+				}
+				
+				$tr.append($replyInquiryContentTd, $memberNameTd, $replyRegistDateTd, $buttonTd);
+				$table.append($tr);
+			});
+			
+		}
+		
+		
+	</script> 
+
 </body>
 </html>

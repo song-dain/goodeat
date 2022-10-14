@@ -9,6 +9,10 @@
     <link rel="stylesheet" th:href="@{/css/admin/Adminstyle.css}">
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gamja+Flower&family=Gowun+Dodum&family=Poor+Story&display=swap" rel="stylesheet">
     <link rel ="icon" type="image/x-icom" th:href="@{/images/common/HEQXSRYC.ico}">
+    <script>
+	const message = '[[${message}]]';
+	message && alert(message);
+	</script>
 </head>
 <body>
     
@@ -17,7 +21,7 @@
     <div class="rq-head-box"></div>
     <div class="rev-head-box"></div>
     <a class="rq-head">문의 관리</a>
-    <a class="rev-head" th:href="@{/admin/review}">리뷰 관리</a>
+    <a class="rev-head" th:href="@{/admin/review/list}">리뷰 관리</a>
 
     <table class="tg">
         <tbody>
@@ -68,14 +72,22 @@
           <tr>
             <td class="tg-0pky">검색어</td>
             <td class="tg-0lax">
-                <input type="text" class="member-bar" placeholder="고객 아이디를 입력하세요">
+                <div class="search-area" align="center">
+                	<form id="searchForm" th:action="@{/admin/inquiry/list}" method="get">
+                		<th:block th:if="${ searchValue != null}">
+                			<input type="search" id="searchValue" name="searchValue" th:value="${ searchValue }">
+                		</th:block>
+                		<th:block th:if="${ searchValue == null}">
+                			<input type="search" id="searchValue" name="searchValue" placeholder="제목, 내용, 또는 회원ID로 검색하세요">
+                		</th:block>
+                		<button class="member-button" type="submit">검색</button>
+                	</form>
+                </div>
             </td>
           </tr>
         </tbody>
     </table>
-    <button class="member-button">검색</button>
     <table class="tg2">
-        <thead>
           <tr class="headline2">
             <th class="tg2-lboi">번호</th>
             <th class="tg2-lboi">문의유형</th>
@@ -84,49 +96,81 @@
             <th class="tg2-lboi">회원ID</th>
             <th class="tg2-lboi">답변상태</th>
           </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="tg2-0pky">001</td>
-            <td class="tg2-0pky">배송문의</td>
-            <td class="tg2-0pky">2022-09-19</td>
-            <td class="tg2-0pky">배송 문의 합니다.</td>
-            <td class="tg2-0pky">user01</td>
-            <td class="tg2-0pky">미완료</td>
-          </tr>
-          <tr>
-            <td class="tg2-0pky">002</td>
-            <td class="tg2-0pky">환불/취소</td>
-            <td class="tg2-0pky">2022-09-18</td>
-            <td class="tg2-0pky">환불/취소 문의 합니다.</td>
-            <td class="tg2-0pky">user02</td>
-            <td class="tg2-0pky">답변완료</td>
-          </tr>
-          <tr>
-            <td class="tg2-0pky">003</td>
-            <td class="tg2-0pky">상품문의</td>
-            <td class="tg2-0pky">2022-09-17</td>
-            <td class="tg2-0pky">상품 문의 합니다.</td>
-            <td class="tg2-0pky">user03</td>
-            <td class="tg2-0pky">미완료</td>
-          </tr>
-          <tr>
-            <td class="tg2-0pky">004</td>
-            <td class="tg2-0pky">기타문의</td>
-            <td class="tg2-0pky">2022-09-16</td>
-            <td class="tg2-0pky">기타 문의 합니다.</td>
-            <td class="tg2-0pky">user04</td>
-            <td class="tg2-0pky">답변완료</td>
-          </tr>
-          <tr>
-            <td class="tg2-0pky"></td>
-            <td class="tg2-0pky"></td>
-            <td class="tg2-0pky"></td>
-            <td class="tg2-0pky"></td>
-            <td class="tg2-0pky"></td>
-            <td class="tg2-0pky"></td>
-          </tr>
-        </tbody>
-        </table>  
+          <tr class="contentline2" th:each="inquiry : ${ inquiryList }"
+				th:onclick="|location.href='/admin/inquiry/detail?inquiryCode=${inquiry.inquiryCode}'|"
+				style="cursor:pointer;">
+				<td  th:text="${ inquiry.inquiryCode }"></td>
+				<td th:text="${ inquiry.inquiryType.inquiryTypeName }"></td>
+				<td th:text="${ inquiry.inquiryRegistDate }"></td>
+				<td th:text="${ inquiry.inquiryTitle }"></td>
+				<td th:text="${ inquiry.member.memberId }"></td>
+				<td th:text="${ inquiry.inquiryStatus }"></td>
+		  </tr>
+        </table>
+        
+        <!-- 페이징 바 --> 
+		<div id="paging" align="center">
+
+			<th:block th:if="${ searchValue != null }">
+				<!-- 맨 앞으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/inquiry/list?page=' + @{${paging.startPage}} + '&searchValue=' + @{${searchValue}} + '\''"><<</button>
+
+				<!-- 이전 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/inquiry/list?page=' + @{${paging.currentPage - 1}} + '&searchValue=' + @{${searchValue}} + '\''"
+					th:disabled="${ inquiryList.first }"><</button>
+
+				<!-- 숫자 버튼 -->
+				<th:block
+					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+					<button
+						th:onclick="'location.href=\'/admin/inquiry/list?page=' + @{${page}} + '&searchValue=' + @{${searchValue}} + '\''"
+						th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
+					</button>
+				</th:block>
+
+				<!-- 다음 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/inquiry/list?page=' + @{${paging.currentPage + 1}} + '&searchValue=' + @{${searchValue}} + '\''"
+					th:disabled="${ inquiryList.last }">></button>
+
+				<!-- 맨 끝으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/inquiry/list?page=' + @{${paging.endPage}} + '&searchValue=' + @{${searchValue}} + '\''">>></button>
+
+			</th:block>
+			
+			<th:block th:if="${ param.searchValue == null || param.searchValue.isEmpty() }">
+				<!-- 맨 앞으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/inquiry/list?page=' + @{${paging.startPage}} + '\''"><<</button>
+
+				<!-- 이전 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/inquiry/list?page=' + @{${paging.currentPage - 1}} + '\''"
+					th:disabled="${ inquiryList.first }"><</button>
+				
+				<!-- 숫자 버튼 -->
+				<th:block
+					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+					<button
+						th:onclick="'location.href=\'/admin/inquiry/list?page=' + @{${page}} + '\''"
+						th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
+					</button>
+				</th:block>
+
+				<!-- 다음 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/inquiry/list?page=' + @{${paging.currentPage + 1}} + '\''"
+					th:disabled="${ inquiryList.last }">></button>
+				
+				<!-- 맨 끝으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/inquiry/list?page=' + @{${paging.endPage}} + '\''">>></button>
+			</th:block>
+			
+		</div>
+		
 </body>
 </html>

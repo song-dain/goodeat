@@ -76,7 +76,8 @@
     margin-left: 2%;
     font-size: 20px;
     text-align: center;
-    
+    color:  #293F54;
+    font-size: 1.5em;
 }
 
 
@@ -86,9 +87,40 @@
     left : 250px;
     width: 80%;
     height: 260px;
-    background-color: #d8d6d6;
     
 }
+
+#replyWrite {
+	height: 150px;
+	width:100%;
+	
+	margin-left: -2px;
+	margin-top: 20px;
+}
+
+#replyResult tr {
+	
+}
+
+#replyResult tr td:nth-child(1){
+	width: 70%;
+	height: 30px;
+}
+
+#replyResult tr td:nth-child(2){
+	
+} 
+
+#replyResult tr td:nth-child(3){
+	width: 150px;
+} 
+
+#replyResult tr td:nth-child(4){
+	border: none;
+	float: right;
+	width: 100px;
+	
+}  
 
 .ms-down {
     justify-content: center;
@@ -99,12 +131,13 @@
     background-color: #293F54;
     color: rgb(255, 255, 255);
     text-shadow: 1px 0 black, 0 1px black, 1px 0 black, 0 1px black;
-
+	
 }
 
 .res-box {
     height: 175px;
     width: 96%;
+    resize: none;
     margin-left: 2%;
     font-size: 20px;
     text-align: center;
@@ -117,11 +150,12 @@
     height: 50px;
     font-size: 25px;
     background-color :#FF0000;
-    color: white;
     margin: 20px;
+    color: white;
+    float :right;
     box-shadow: 2px 2px 2px 2px rgb(0,0,0,0.5);
     border-radius: 8px;
-    float: right;
+    
 }
 
 /* 삭제 버튼 마우스오버 */

@@ -3,19 +3,19 @@ package com.greedy.goodeat.admin.product.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.greedy.goodeat.common.entity.Product;
+import com.greedy.goodeat.admin.product.entity.KjyProduct;
 
 
-public interface AdmProductRepository extends JpaRepository<Product, Integer>{
+
+public interface AdmProductRepository extends JpaRepository<KjyProduct, Integer>{
 
 	@Query("SELECT p " +
-			 "FROM Product p " + 
+			 "FROM KjyProduct p " + 
 			"WHERE p.productName LIKE '%' || :searchValue || '%'")
-	Page<Product> finBySearchValue(String searchValue, Pageable pageable);
+	Page<KjyProduct> finBySearchValue(String searchValue, Pageable pageable);
 	
 	
 

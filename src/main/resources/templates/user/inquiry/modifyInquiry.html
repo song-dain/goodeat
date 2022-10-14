@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/main-contents.css">
+    <link rel="stylesheet" href="/css/user/productDetail/select.css">
+    <link rel="stylesheet" href="/font/Cafe24Ssurround.ttf">
+    
+</head>
+
+    <title>리뷰수정</title>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+    <!-- 헤더부분 -->
+     <div th:replace="user/common/header.html"></div>
+ 
+ <!-- 컨텐츠 부분 -->
+  <div class="container">
+  <form th:action="@{/user/productdetail/review/modify}" method="post" enctype="multipart/form-data">
+    <h1>문의 수정</h1>
+        <table id="textbox" border="0">
+        	<tr>
+        		<tr>
+        		<td>게시글번호</td>
+        			<td><input type="number" class="titlebox" placeholder="게시물번호를 입력하세요" name="reviewCode"></td>
+        		</tr>
+        	
+        		<tr>
+        		<td>제목</td>
+        			<td><input type="text" class="titlebox" placeholder="제목을 입력하세요" name="reviewTitle"></td>
+        		</tr>
+        		<tr>
+        			<td>주문 번호</td>
+        			<td>	
+        				<input type="number" name="order.orderNo" class="filebox"/>
+        			</td>
+        		</tr>
+        		<tr>
+        			<td>상품 번호</td>
+        			<td>	
+        				<input type="number" name="product.productCode" class="filebox"/>
+        			</td>
+        		</tr>
+        		<tr>
+        			<td>내용</td>
+        			<td>
+        				<textarea class="postbox" rows="20" placeholder="내용을 입력하세요" name="reviewContent"></textarea>
+        			</td>
+        		</tr>
+        	
+        </table>
+         <input type="submit" value="수정" class="btn-sl">
+        </form>
+  </div>
+       <!-- 푸터 부분 -->
+ <div th:replace="user/common/footer.html"></div>
+ </body>
+ </html>

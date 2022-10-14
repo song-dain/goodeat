@@ -222,7 +222,7 @@
     
     <div th:replace="user/common/footer.html"></div>
     
-     <script >
+     <script>
      
      const memberId = document.getElementById("memberId");
      const memberPwd = document.getElementById("password");
@@ -250,7 +250,7 @@
      const checkedAgreement = document.getElementById("checkedAgreement");
      const checkedEmail = document.getElementById("checkedEmail");
      
-	const $sendCode = document.getElementById("sendCodeBtn");
+	const sendCodeBtn = document.getElementById("sendCodeBtn");
 
      function checkForm() {
     	 
@@ -408,7 +408,7 @@
 	
 	if(document.getElementById("email1")){ 
 		
-		$sendCode.onclick = function(){
+		sendCodeBtn.onclick = function(){
 			
 			let email1Value = email1.value.trim();
 			let email2Value = email2.value.trim();

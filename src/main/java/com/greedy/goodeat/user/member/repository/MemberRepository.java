@@ -18,15 +18,17 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 			+ "JOIN TBL_MEMBER_AUTHORITY C ON (B.AUTHORITY_CODE = C.AUTHORITY_CODE) "
 			+ "WHERE C.AUTHORITY_NAME = :authorityName", nativeQuery = true)
 	public List<String> findPermitList(@Param("authorityName") String authorityName);
-	
-	Optional<Member> findByMemberId(String memberId);
 
 	Optional<Member> findByMemberIdAndMemberStatus(String memberId, String memberStatus);
-	
+
+	public Member findByMemberIdAndEmail(String memberName, String email);
+
 	Optional<Member> findByEmailAndMemberStatus(String email, String memberStatus);
 	
 	Optional<Member> findByMemberNameAndMemberStatus(String memberName, String memberStatus);
 	
 	public Member findByMemberNameAndEmail(String memberName, String email);
+
+	public Member findByMemberNo(Integer memberNo);
 	
 }
