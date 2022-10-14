@@ -17,7 +17,7 @@ public class ProductListService {
 	
 	public static final int THUMBNAIL_PAGE_SIZE = 9;
 	public static final String SORT_BY = "productCode";
-	public static final String ACTIVE_STATUS = "Y";
+	public static final String ACTIVE_STATUS = "NOMAL";
 	
 	private final ModelMapper modelMapper;
 	private final ProductListRepository productListRepository;

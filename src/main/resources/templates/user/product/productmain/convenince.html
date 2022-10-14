@@ -13,10 +13,8 @@
 
 <body>
 
- <!-- 헤더부분 -->
    <div th:replace="user/common/header.html"></div>
    
-    <!-- 메인 메뉴 -->
    <section id="con-wrap">
       <div class="con-wrap-frame">
         <div class="page-title-area">
@@ -26,162 +24,53 @@
             <img src="/images/user/product/convenince/con_main.png">
         </div>
         <div class="grid-list-wrap">
+            <div class="page-sorting-box">            
+                
+        <div class="grid-list-wrap">
             <div class="page-sorting-box">
-                <p class="total">
-                    <span>간편식</span> 상품
-                </p>
-                <div class="right-func">
-                    <div class="select-box" data-value="100">
-                        
-                        <select name="option" id="option">
-                            <option value="p-high">가격높은순</option>
-                            <option value="p-low">가격낮은순</option>
-                            <option value="k-high">오름차순</option>
-                            <option value="k-low">내림차순</option>
-                         </select>
-                         
-                    </div>
+            
+            <th:block th:each="product : ${ productList }">
+            	<div align="center">
+            		<div>
+            			<th:block th:each="attachment : ${ product.AddfileList }">
+            			
+            			<img th:if="${ attachment.fileType == 'TITLE' }"
+            				 th:src="${ attachment.thumbnailRoute }">
+            			</th:block>
+            		</div>
+            		<span th:text="${ product.productName }"></span>
+            		<span th:text="${ product.productPrice } + '원'"></span>
+            	</div>	
+            </th:block>
 
-                    <button type="button" class="btn-detail-search ui-toggle-btn">
-                        <a  title="select" class="select-value">
-                            <span>상세검색</span>
-                        </a>
-                    </button>
-                </div> 
-
-            </div>
-<!--        상세검색 입력 폼?
-            <div class="detail-search-box hide">
-                <form></form>
-            </div>
-!-->
-
-        <!-- 상품 list -->
-        <div class="product-list row">
-            <div class="product-box cell">
-                <div class="img-box">
-                    <a href="#">
-                        <img class="milkit" src="/images/user/product/convenince/con1.png">
-                    </a>
-                </div>
-                <div class="text-box"></div>
-                    <span class="mil-text1">닭가슴살 스테이크 한끼 브리또 </span>
-                <div class="price-box">
-                    <span class="mil-price1"><b>22,900원</b></span>
-                </div>
-            </div>
-            <div class="product-box cell">
-                <div class="img-box">
-                    <a href="#">
-                        <img class="milkit" src="/images/user/product/convenince/con2.png">
-                    </a>
-                </div>
-                <div class="text-box"></div>
-                    <span class="mil-text2">구워먹는 닭가슴살 탕수육 오리지널</span>
-                <div class="price-box">
-                    <span class="mil-price2"><b>19,500원</b></span>
-                </div>
-            </div>
-            <div class="product-box cell">
-                <div class="img-box">
-                    <a href="#">
-                        <img class="milkit" src="/images/user/product/convenince/con3.png">
-                    </a>
-                </div>
-                <div class="text-box"></div>
-                    <span class="mil-text3">다이어트 떡볶이닭 오리지널볼 </span>
-                <div class="price-box">
-                    <span class="mil-price3"><b>22,500원</b></span>
-                </div>
-            </div>
-            <div class="product-box cell">
-                <div class="img-box">
-                    <a href="#">
-                        <img class="milkit" src="/images/user/product/convenince/con4.png">
-                    </a>
-                </div>
-                <div class="text-box"></div>
-                    <span class="mil-text1">다이어트 라면 해물맛 </span>
-                <div class="price-box">
-                    <span class="mil-price1"><b>11,000원</b></span>
-                </div>
-            </div>
-
-            <div class="product-box cell">
-                <div class="img-box">
-                    <a href="#">
-                        <img class="milkit" src="/images/user/product/convenince/con5.png">
-                    </a>
-                </div>
-                <div class="text-box"></div>
-                    <span class="mil-text5">닭가슴살 크리스피 한끼 핫도그 </span>
-                <div class="price-box">
-                    <span class="mil-price5"><b>16,650원</b></span>
-                </div>
-            </div>
-            <div class="product-box cell">
-                <div class="img-box">
-                    <a href="#">
-                        <img class="milkit" src="/images/user/product/convenince/con6.png">
-                        >
-                    </a>
-                </div>
-                <div class="text-box"></div>
-                    <span class="mil-text6">닭가슴살 한끼 만두 오리지널 </span>
-                <div class="price-box">
-                    <span class="mil-price6"><b>16,000원</b></span>
-                </div>
-            </div>
-            <div class="product-box cell">
-                <div class="img-box">
-                    <a href="#">
-                        <img class="milkit" src="/images/user/product/convenince/con7.png">
-                    </a>
-                </div>
-                <div class="text-box"></div>
-                    <span class="mil-text7">닭가슴살 한끼 만두 짬뽕</span>
-                <div class="price-box">
-                    <span class="mil-price7"><b>16,000원</b></span>
-                </div>
-            </div>
-            <div class="product-box cell">
-                <div class="img-box">
-                    <a href="#">
-                        <img class="milkit" src="/images/user/product/convenince/con8.png">
-                    </a>
-                </div>
-                <div class="text-box"></div>
-                    <span class="mil-text1">닭가슴살 한끼 삼계탕</span>
-                <div class="price-box">
-                    <span class="mil-price1"><b>30,000원</b></span>
-                </div>
-            </div>
-         
-            <div class="product-box cell">
-                <div class="img-box">
-                    <a href="#">
-                        <img class="milkit" src="/images/user/product/convenince/con9.png">
-                    </a>
-                </div>
-                <div class="text-box"></div>
-                    <span class="mil-text1">닭가슴살 한끼 순대</span>
-                <div class="price-box">
-                    <span class="mil-price1"><b>20,500원</b></span>
-                </div>
-            </div>
-            <div class="product-box cell">
-                <div class="img-box">
-                    <a href="#">
-                        <img class="milkit" src="/images/user/product/convenince/con10.png">
-                    </a>
-                </div>
-                <div class="text-box"></div>
-                    <span class="mil-text1">닭가슴살 한끼피자 오리지널</span>
-                <div class="price-box">
-                    <span class="mil-price1"><b>16,650원</b></span>
-                </div>
-            </div>
+			</div>
         </div>
+     </div>
+     
+     <div id="paging" align="center">
+
+		<button th:onclick="'location.href=\'/user/convenince?page=' + @{${paging.startPage}} + '\''">&lt;&lt;</button>
+		
+		<button th:onclick="'location.href=\'/user/convenince?page=' + @{${paging.currentPage - 1}} + '\''"
+				th:disabled="${ productList.first }"></button>
+		
+		<th:block th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+			<button th:onclick="'location.href=\'user/convenince?page=' + @{${page}} + '\''"
+					th:text="${ page }"
+					th:disabled="${ paging.currentPage eq page }">
+			</button>
+		</th:block>
+		
+		<button th:onclick="'location.href=\'user/convenince?page=' + @{${paging.currentPage + 1}} + '\''"
+				th:disabled="${ productList.last }">></button>
+		
+		<button th:onclick="'location.href=\'user/convenince?page=' + @{${paging.endPage}} + '\''">>></button>			
+	</div>
+	
+	</div>
+	</div>
+	</section>
+                         
 </body>
 </html>
 

@@ -9,12 +9,9 @@
     <title>MainPage</title>
 </head>
 <body>
- <!-- 헤더부분 -->
-<div th:replace="user/common/header.html"></div>
 
-    <!-- 메인 메뉴 -->
-    
-   <!-- 컨텐츠 부분 -->
+   <div th:replace="user/common/header.html"></div>
+   
    <section id="con-wrap">
       <div class="con-wrap-frame">
         <div class="page-title-area">
@@ -24,169 +21,52 @@
             <img src="/images/user/product/milkit/mill_main.png">
         </div>
         <div class="grid-list-wrap">
+            <div class="page-sorting-box">            
+                
+        <div class="grid-list-wrap">
             <div class="page-sorting-box">
-                <p class="total">
-                    <span>밀키트</span> 상품
-                </p>
-                <div class="right-func">
-                     <div class="select-box" data-value="100">
-                        
-                        <select name="option" id="option">
-                            <option value="p-high">가격높은순</option>
-                            <option value="p-low">가격낮은순</option>
-                            <option value="k-high">오름차순</option>
-                            <option value="k-low">내림차순</option>
-                         </select>
-                         
-                    </div>
-
-                    <button type="button" class="btn-detail-search ui-toggle-btn">
-                        <a  title="select" class="select-value">
-                            <span>상세검색</span>
-                        </a>
-                    </button>
-                </div> 
-
-            </div>
-<!--        상세검색 입력 폼?
-            <div class="detail-search-box hide">
-                <form></form>
-            </div>
-!-->
-
-            <!-- 상품 list -->
-            <div class="product-list row">
-                <div class="product-box cell">
-                    <div class="img-box">
-
-                        <a href="#">
-                            <img class="milkit" src="/images/user/product/milkit/mill1.png">
-
-                        <a th:text="@{/list?productCode=${hgproduct.productCode}}">
-                            <img class="milkit" src="../source/images/밀키트/밀키트 사진 1.png">
-
-                        </a>
-                    </div>
-                    <div class="text-box"></div>
-                        <span class="mil-text1">주말 닭가슴살 식단 패키지A </span>
-                    <div class="price-box">
-                        <span class="mil-price1"><b>21,400원</b></span>
-                    </div>
-                </div>
-                <div class="product-box cell">
-                    <div class="img-box">
-                        <a href="#">
-                            <img class="milkit" src="/images/user/product/milkit/mill2.png">
-                        </a>
-                    </div>
-                    <div class="text-box"></div>
-                        <span class="mil-text2">주말 닭가슴살 식단 패키지B </span>
-                    <div class="price-box">
-                        <span class="mil-price2"><b>22,000원</b></span>
-                    </div>
-                </div>
-                <div class="product-box cell">
-                    <div class="img-box">
-                        <a href="#">
-                            <img class="milkit" src="/images/user/product/milkit/mill3.png">
-                        </a>
-                    </div>
-                    <div class="text-box"></div>
-                        <span class="mil-text3">주말 닭가슴살 식단 패키지A </span>
-                    <div class="price-box">
-                        <span class="mil-price3"><b>49,400원</b></span>
-                    </div>
-                </div>
-                <div class="product-box cell">
-                    <div class="img-box">
-                        <a href="#">
-                            <img class="milkit" src="/images/user/product/milkit/mill4.png">
-                        </a>
-                    </div>
-                    <div class="text-box"></div>
-                        <span class="mil-text1">평일 닭가슴살 식단 패키지B </span>
-                    <div class="price-box">
-                        <span class="mil-price1"><b>52,000원</b></span>
-                    </div>
-                </div>
-
-                <div class="product-box cell">
-                    <div class="img-box">
-                        <a href="#">
-                            <img class="milkit" src="/images/user/product/milkit/mill5.png">
-                        </a>
-                    </div>
-                    <div class="text-box"></div>
-                        <span class="mil-text5">돼지고기 숙주볶음 </span>
-                    <div class="price-box">
-                        <span class="mil-price5"><b>13,000원</b></span>
-                    </div>
-                </div>
-                <div class="product-box cell">
-                    <div class="img-box">
-                        <a href="#">
-                            <img class="milkit" src="/images/user/product/milkit/mill6.png">
-                        </a>
-                    </div>
-                    <div class="text-box"></div>
-                        <span class="mil-text6">채근담 떡국 </span>
-                    <div class="price-box">
-                        <span class="mil-price6"><b>10,000원</b></span>
-                    </div>
-                </div>
-                <div class="product-box cell">
-                    <div class="img-box">
-                        <a href="#">
-                            <img class="milkit" src="/images/user/product/milkit/mill7.png">
-                        </a>
-                    </div>
-                    <div class="text-box"></div>
-                        <span class="mil-text7">차돌박이 순두부 찌개 </span>
-                    <div class="price-box">
-                        <span class="mil-price7"><b>14,000원</b></span>
-                    </div>
-                </div>
-                <div class="product-box cell">
-                    <div class="img-box">
-                        <a href="#">
-                            <img class="milkit" src="/images/user/product/milkit/mill8.png">
-                        </a>
-                    </div>
-                    <div class="text-box"></div>
-                        <span class="mil-text1">바삭한 해물부추전 </span>
-                    <div class="price-box">
-                        <span class="mil-price1"><b>13,900원</b></span>
-                    </div>
-                </div>
             
-            </div>
+            <th:block th:each="product : ${ productList }">
+            	<div align="center">
+            		<div>
+            			<th:block th:each="attachment : ${ product.AddfileList }">
+            			
+            			<img th:if="${ attachment.fileType == 'TITLE' }"
+            				 th:src="${ attachment.thumbnailRoute }">
+            			</th:block>
+            		</div>
+            		<span th:text="${ product.productName }"></span>
+            		<span th:text="${ product.productPrice } + '원'"></span>
+            	</div>	
+            </th:block>
 
-
+			</div>
         </div>
-    </section> 
+     </div>
+     
+     <div id="paging" align="center">
 
-
-
-
-<!-- 푸터 부분 -->
-<!-- <footer>
-    <div id="foot-wrap">
-
-        <div class="foot-logo">
-            <a href="#" ><img src="../source/images/Logo.PNG" style="width: 150px;" /></a>
-        </div>
-        <div class="foot-menu">
-            <ul>
-                <li><a href="#">공지사항</a></li>
-                <li>|</li>
-                <li><a href="#">이벤트</a></li>
-                <li>|</li>
-                <li><a href="#">TOP</a></li>
-            </ul>
-        </div>
-        <p class="cop">Copyright LetsGoodEat 2022 <img src="../source/images/copy.PNG" style="width: 10px;">All Right Reserved</p>
-    </div>
-</footer> -->
+		<button th:onclick="'location.href=\'/user/mil?page=' + @{${paging.startPage}} + '\''">&lt;&lt;</button>
+		
+		<button th:onclick="'location.href=\'/user/mil?page=' + @{${paging.currentPage - 1}} + '\''"
+				th:disabled="${ productList.first }"></button>
+		
+		<th:block th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+			<button th:onclick="'location.href=\'user/mil?page=' + @{${page}} + '\''"
+					th:text="${ page }"
+					th:disabled="${ paging.currentPage eq page }">
+			</button>
+		</th:block>
+		
+		<button th:onclick="'location.href=\'user/mil?page=' + @{${paging.currentPage + 1}} + '\''"
+				th:disabled="${ productList.last }">></button>
+		
+		<button th:onclick="'location.href=\'user/mil?page=' + @{${paging.endPage}} + '\''">>></button>			
+	</div>
+	
+	</div>
+	</div>
+	</section>
  
 </body>
 </html>
