@@ -35,6 +35,7 @@ public class PaymentController {
 		MemberDTO member = paymentService.selectMember(memberNo);
 		
 		model.addAttribute("order", opd.getOrders());
+		model.addAttribute("ordertotal", opd.getTotalPrice());
 		
 		model.addAttribute("member", member);
 		
