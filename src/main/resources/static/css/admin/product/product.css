@@ -345,7 +345,20 @@ ul > li {
     height: 40px;
     border: 1px ;
     position: absolute;
-    top: 70%;
+    top: 8%;
+    left:67%;
+    background-color:red;
+    color: white;
+    font-size: 25px;
+  }
+  
+  
+  #productDetailButtonDelete{
+    width: 150px;
+    height: 40px;
+    border: 1px ;
+    position: absolute;
+    top: 8%;
     left:85%;
     background-color:red;
     color: white;
@@ -356,7 +369,20 @@ ul > li {
     height: 40px;
     border: 1px ;
     position: absolute;
-    top: 70%;
+    top: 8%;
+    left:76%;
+    background-color:#293F54;
+    color: white;
+    font-size: 25px;
+
+  }
+  
+    #productDetailButtonList{
+    width: 150px;
+    height: 40px;
+    border: 1px ;
+    position: absolute;
+    top: 8%;
     left:76%;
     background-color:#293F54;
     color: white;
@@ -394,7 +420,17 @@ ul > li {
     color: white;
     font-size: 15px;
     border: 0;
-    margin-bottom: 10px;
+    margin-left: 10px;
+  
+  }
+  
+   #orderButtonSms{
+    width: 100px;
+    height: 30px;
+    background-color:red;
+    color: white;
+    font-size: 15px;
+    border: 0;
     margin-left: 10px;
   
   }
@@ -432,13 +468,27 @@ ul > li {
     height: 40px;
     border: 1px ;
     position: absolute;
-    top: 70%;
+    top: 8%;
+    left:85%;
+    background-color:#293F54;
+    color: white;
+    font-size: 25px;
+
+  }
+  
+    #productDetailButtonSave{
+    width: 150px;
+    height: 40px;
+    border: 1px ;
+    position: absolute;
+    top: 8%;
     left:67%;
     background-color:#293F54;
     color: white;
     font-size: 25px;
 
   }
+  
   
   #paging{
   
