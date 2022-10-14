@@ -43,43 +43,9 @@
                 </div>
             
                 <div class="main">
-                    <div class="board_sub">
-                        <div class="sub_title1">
-                            <b>이벤트</b>
-                            <a href="#">
-                                <!-- <span>전체보기</span>  -->
-                            </a>
-                        </div>
-                    <!-- <div class="sub_title2">
-                        <a href="#">
-                            <span><b>더보기</b></span> 
-                        </a>
-                    </div> -->
-
-                        <table class="board_list">
-                            <caption>이벤트</caption>
-                            <thead>
-                                <tr>
-                                    <th>NO</th>
-                                    <th>제목</th>
-                                    <th>작성자</th>
-                                    <th>등록일</th>
-                                   
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="event:${eventList}">
-                                    <td th:text="${event.postCode}"></td>
-                                    <td th:text="${event.postTitle}">
-                                        <a href="../main/boarddetail.html"></a>
-                                    </td>
-                                    <td th:text="${event.member.memberName}"></td>
-                                    <td th:text="${event.postModifyDate}"></td>
-                                    <td></td>
-                                </tr>
-
-                            </tbody>
-                        </table>
+                  
+                  
+                       
 
                   
                     <div class="board_sub">
@@ -99,7 +65,7 @@
                                     <th>제목</th>
                                     <th>작성자</th>
                                     <th>등록일</th>
-                                   
+                                    <th>조회수</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -116,8 +82,8 @@
 
                             </tbody>
                         </table>
-                       <!-- 페이징 바 처리 --> 
-               
+                        <div class="paging">
+                       
                         </div>
                     </div>
 
