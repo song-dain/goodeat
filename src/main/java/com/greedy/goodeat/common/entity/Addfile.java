@@ -1,7 +1,5 @@
 package com.greedy.goodeat.common.entity;
 
-
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,39 +23,36 @@ import lombok.Setter;
 @Table(name = "TBL_ADDFILE")
 @DynamicInsert
 public class Addfile {
-	
+
 	@Id
 	@Column(name = "ADDFILE_NO")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ADDFILE_SEQ_GENERATOR")
 	private Integer addfileNo;
-	
+
 	@Column(name = "ORIGINALFILE_NAME")
 	private String originalFileName;
-	
+
 	@Column(name = "SAVEDFILE_NAME")
 	private String savedFileName;
-	
+
 	@Column(name = "SAVED_ROUTE")
 	private String savedRoute;
-	
+
 	@Column(name = "FILE_TYPE")
 	private String fileType;
-	
+
 	@Column(name = "FILE_DIVISION")
 	private String fileDivision;
+
+	@Column(name ="REVIEW_CODE") 
+	private Integer reviewCode;
 	
-  @ManyToOne
-	@JoinColumn(name ="REVIEW_CODE")
-	private Review review;
+	@Column(name = "POST_CODE")
+	private Integer postCode;
 	
-	@ManyToOne
-	@JoinColumn(name ="POST_CODE")
-	private Post post;
-	
-	@ManyToOne
-	@JoinColumn(name ="PRODUCT_CODE")
-	private Product product;
-	
+	@Column(name= "PRODUCT_CODE")
+	private Integer productCode;
+
 	@Column(name = "THUMBNAIL_ROUTE")
 	private String thumbnailRoute;
 

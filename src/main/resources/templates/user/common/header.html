@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,37 +10,32 @@
     <script type="text/javascript" th:src="@{/js/product.js}"></script>
     <title>Document</title>
 </head>
+
 <body>
-              <header>
+	<header>
         <!-- 메인 메뉴 -->
         <div class="main-nav">
-            <ul><th:block sec:authorize="isAnonymous()">
+        	<th:block sec:authorize="isAnonymous()">
+            <ul>
                 <li><a th:href="@{/login}">로그인</a></li>
-                <li><a th:href="@{/join}">회원가입</a></li>
-                <li><a th:href="@{/board}">고객센터</a></li>
-                <li><button onclick="location.href='/admin/productList'">관리자 - 상품</button>
-                <br>
-                <br>
-					<button onclick="location.href='/admin/member'">관리자 - 회원</button>
-				<br>
-				</li>
-            </ul> -->
-            <div class="login-area" align="right">
-                <div class="btns">
-                    <input type="button" value="로그인" id="login">
-                </div>
+                <li><a th:href="@{join}">회원가입</a></li>
+                <li><a href="help-main">고객센터</a></li>
+            </ul>
             </th:block>
-
-            <th:block sec:authorize="isAuthenticated()">
-                <div class="login-info">
-                    <h3><span sec:authentication="principal.nickname"></span>님의 방문을 환영합니다.</h3>
-                    <div class="btns">
-                        <input type="button" class="btn btn-yg" value="정보수정" id="updateMember">
-                        <input type="button" class="btn btn-or" value="로그아웃" id="logout">
-                    </div>
-                </div>
+            
+        	<th:block sec:authorize="isAuthenticated()">
+            <ul>
+                <li><a th:href="@{/member/logout}">로그아웃</a></li>
+                <th:block sec:authorize="hasRole('MEMBER')">
+	                <li><a th:href="@{mypage}">My Page</a></li>
+                </th:block>
+                <th:block sec:authorize="hasRole('ADMIN')">
+                <li><a th:href="@{/admin/member}">관리 메뉴</a></li>
+                </th:block>
+                <li><a href="help-main">고객센터</a></li>
+            </ul>
             </th:block>
-        </div>
+            
             <ul class="img-link">
                 <li>
                     <a href="">
@@ -47,9 +43,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <button id="Cart">
                         <img src="/images/user/main/cart.png" style="width: 60px; height: 60px;">
-                    </a>
+                    </button>
                 </li>
             </ul>
         </div>
@@ -57,7 +53,7 @@
         <!-- 로고 부분 -->
         <div id="head-con">
             <div class="logo">
-                <a href="#" ><img src="/images/user/main/Logo.PNG" style="width: 300px;" /></a>
+                <a href="/" ><img src="/images/user/main/Logo.PNG" style="width: 300px;" /></a>
                 <div class="serch-center">
                     <input type="search">
                     <button class="img-btn" type="submit" name="search">검색</button>
@@ -71,7 +67,7 @@
                     <p>카테고리</p>
                     <!-- 드롭 다운 -->
                     <ul class="item-menu">
-                        <li><a href="">밀키트</a></li>
+                        <li><a th:href="@{user/productdetail}">밀키트</a></li>
                         <li><a href="">도시락</a></li>
                         <li><a href="">닭가슴살</a></li>
                         <li><a href="">간편식</a></li>
@@ -80,7 +76,11 @@
                     </ul>
                 </li>
                 <li class="item">
+
                     <a id="mil1">밀키트</a> 
+
+                    <a th:href="@{/user/productdetail}">밀키트</a>
+
                 </li>
                 <li class="item">
                     <a id="lunch1" >도시락</a>

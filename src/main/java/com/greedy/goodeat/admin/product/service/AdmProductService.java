@@ -1,5 +1,7 @@
 package com.greedy.goodeat.admin.product.service;
 
+
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -9,77 +11,83 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.greedy.goodeat.admin.product.repository.AdmProductCategoryRepository;
+import com.greedy.goodeat.admin.product.dto.KjyProductDTO;
+import com.greedy.goodeat.admin.product.entity.KjyProduct;
+import com.greedy.goodeat.admin.product.entity.KjyProductCategory;
 import com.greedy.goodeat.admin.product.repository.AdmProductRepository;
-import com.greedy.goodeat.common.dto.ProductDTO;
-import com.greedy.goodeat.common.entity.Product;
 
-@Transactional
+
 @Service
 public class AdmProductService {
 		
 	public static final int TEXT_PAGE_SIZE = 10;
 	public static final int THUMBNAIL_PAGE_SIZE = 9;
-	public static final int TEXT_PRODUCT_TYPE = 1;
-	public static final int THUMBNAIL_PRODUCT_TYPE = 2;
-	public static final String SORT_BY = "produceCode";
-	public static final String PRODUCT_STATUS = "Y";
+	public static final String SORT_BY = "productCode";
 	
 	private final AdmProductRepository admProductRepository;
-	private final AdmProductCategoryRepository admPproductCategoryRepository;
 	private final ModelMapper modelMapper;
 	
-	public AdmProductService (AdmProductRepository admProductRepository, AdmProductCategoryRepository admPproductCategoryRepository, ModelMapper modelMapper) {
+	public AdmProductService (AdmProductRepository admProductRepository, ModelMapper modelMapper) {
 		
 		this.admProductRepository = admProductRepository;
-		this.admPproductCategoryRepository = admPproductCategoryRepository;
 		this.modelMapper = modelMapper;
 	}
-
-	public Page<ProductDTO> findProductList(Pageable pageable) {
+	@Transactional
+	public Page<KjyProductDTO> findProductList(int page, String searchValue) {
 		
-		pageable = PageRequest.of(pageable.getPageNumber() <= 0 ? 0 : pageable.getPageNumber() - 1,
-				pageable.getPageSize(), 
-				Sort.by("productCode").descending());
+		Pageable pageable = PageRequest.of(page - 1, TEXT_PAGE_SIZE, Sort.by(SORT_BY).descending());
+		Page<KjyProduct> productList = null;
 		
-		Page<Product> productList = admProductRepository.findAll(pageable);
+		if(searchValue !=null && !searchValue.isEmpty()) {
+			productList = admProductRepository.finBySearchValue(searchValue, pageable);
+		} else {
+			productList = admProductRepository.findAll(pageable);
+		}
 		
-		return productList.map(product -> modelMapper.map(product, ProductDTO.class));
+		return productList.map(product -> modelMapper.map(product, KjyProductDTO.class));
 	}
-
-	public void registProduct(ProductDTO newProduct) {
-		
-		admProductRepository.save(modelMapper.map(newProduct, Product.class));
-	}
-
-	public Page<ProductDTO> selectThumbnailList(int page) {
-		Pageable pageable = PageRequest.of(page - 1 , THUMBNAIL_PAGE_SIZE, Sort.by(SORT_BY).descending());
-		Page<Product> thumbnailList = admProductRepository.findByProductStatus(PRODUCT_STATUS, pageable);
-		
-		return thumbnailList.map(product -> modelMapper.map(product, ProductDTO.class));
-	}
-
-	public void registThumbnail(ProductDTO product) {
-		
-		product.setProductStatus(PRODUCT_STATUS);
-		admProductRepository.save(modelMapper.map(product, Product.class));
-		
-	}
-
-
-
-//	public List<ProductCategoryDTO> findAllCategory(){
-//		
-//		List<ProductCategory> categoryList = productCategoryRepository.findAll();
-//		
-//		return categoryList.stream().map(productCategory -> modelMapper.map(productCategory, ProductCategoryDTO.class)).collect(Collectors.toList());
-//	}
-//	
-
-
 
 	
+	@Transactional
+	public void registProduct(KjyProductDTO newProduct) {
+		
+		admProductRepository.save(modelMapper.map(newProduct, KjyProduct.class));
+	}
+
+
+	@Transactional
+	public void deleteProduct(KjyProductDTO product) {
+		
+		KjyProduct deleteProduct = admProductRepository.findById(product.getProductCode()).get();
+		
+		admProductRepository.delete(modelMapper.map(deleteProduct, KjyProduct.class));
+
+		
+	}
+
+	public KjyProductDTO selectProductList(Integer productCode) {
+		
+		KjyProduct product = admProductRepository.findById(productCode).get();
+		
+		return modelMapper.map(product, KjyProductDTO.class);
+	}
+
+	@Transactional
+	public void modifyProduct(KjyProductDTO product) {
+		
+		KjyProduct selecetProduct = admProductRepository.findById(product.getProductCode()).get();
+		selecetProduct.setProductName(product.getProductName());
+		selecetProduct.setProductCategory(modelMapper.map(product.getProductCategory(), KjyProductCategory.class));
+		selecetProduct.setProductPrice(product.getProductPrice());
+		selecetProduct.setProductInventory(product.getProductInventory());
+		selecetProduct.setProductStatus(product.getProductStatus());
 	
-	
+		
+		
+	}
+
+
+
+
 	
 }

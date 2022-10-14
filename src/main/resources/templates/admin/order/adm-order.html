@@ -2,18 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>주문관리</title>
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gamja+Flower&family=Gowun+Dodum&family=Poor+Story&display=swap" rel="stylesheet">
    <link rel="stylesheet" th:href="@{/css/admin/order/order.css}">
    <link rel="icon" type="image/x-icom" th:href="@{/images/common/HEQXSRYC.ico}">
+   <script>
+		const message = '[[${message}]]';
+		message && alert(message);
+	</script>
 </head>
 <body>
-    
-    	
+      
 	<div th:replace="admin/common/header.html"></div>
-	
+
     <section>
         <div class="order-title">
             <a>주문관리</a>
@@ -47,17 +51,32 @@
                             환불완료
                         </td>
                     </tr>
-                    <tr>
-                        <td class="td-left-class">검색어</td>
-                        <td class="td-right-class">
-                            <input type="text" placeholder="주문번호를 입력해주세요" id="searchbox1">
-                        </td>
-                    </tr>
                 </tbody>
             </table>
-            <input type="submit" value="주문검색" id="orderButton1">
-            <input type="submit" value="주문내역다운" id="orderButton2">
-
+               <table class="orderTable5">
+                <tr>
+                    <td class="td-left-class">검색어</td>
+                    <td class="td-right-class">
+                        <form id="searchForm" action="/admin/orderList" method="get">
+					<th:block th:if="${ searchValue != null }">
+					<input type="search" id="searchValue" name="searchValue" placeholder="주문번호를 입력해주세요"
+							th:value="${ searchValue }" class="searchbox1">
+					</th:block>
+					<th:block th:if="${ searchValue == null }">
+						<input type="search" id="searchValue" name="searchValue" class="searchbox1" placeholder="주문번호를 입력해주세요">
+					</th:block>
+					<button class="btn btn-bs" type="submit" id="orderButton1">검색하기</button>
+						</form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            
+            <div>
+		        <form id="excelForm" name="excelForm" action="excel/download" method="get">
+		            <input id="orderButton2" type="submit" value="주문내역다운" name="fileName"/>
+		        </form>
+    		</div>
             <table class="orderTable2">
                 <tr class="tr-top">
                     <th>주문번호</th>
@@ -65,145 +84,54 @@
                     <th>결제금액</th>
                     <th>주문일시</th>
                     <th>주문자명</th>
-                    <th>
-                        <a href="javascript:openPop()">
-                            <div>
-                                송장번호
-                            </div>
-                        </a>
-                    </th>
-                    <th>
-                        <a href="javascript:openPopStatus()">
-                            <div>
-                                 주문상태 
-                            </div>
-                        </a>
-                    </th>
+                    <th>송장번호</th>
+                    <th>주문상태</th>
                 </tr>
-                <tr class="tr-body">
-                    <td>001</td>
-                    <td>닭가슴살 외 1 건</td>
-                    <td>28,000</td>
-                    <td>2022.09.27.15:48:52</td>
-                    <td>주문자1</td>
-                    <td>미입력</td>
-                    <td>결제완료</td>
-                </tr>
-                <tr class="tr-body">
-                    <td>002</td>
-                    <td>닭가슴살 외 1 건</td>
-                    <td>28,000</td>
-                    <td>2022.09.27.15:48:52</td>
-                    <td>주문자1</td>
-                    <td>미입력</td>
-                    <td>결제완료</td>
-                </tr>
-                <tr class="tr-body">
-                    <td>003</td>
-                    <td>닭가슴살 외 1 건</td>
-                    <td>28,000</td>
-                    <td>2022.09.27.15:48:52</td>
-                    <td>주문자1</td>
-                    <td>미입력</td>
-                    <td>결제완료</td>
-                </tr>
-                <tr class="tr-body">
-                    <td>004</td>
-                    <td>닭가슴살 외 1 건</td>
-                    <td>28,000</td>
-                    <td>2022.09.27.15:48:52</td>
-                    <td>주문자1</td>
-                    <td>미입력</td>
-                    <td>결제완료</td>
-                </tr>
-                <tr class="tr-body">
-                    <td>005</td>
-                    <td>닭가슴살 외 1 건</td>
-                    <td>28,000</td>
-                    <td>2022.09.27.15:48:52</td>
-                    <td>주문자1</td>
-                    <td>미입력</td>
-                    <td>결제완료</td>
+                <tr class="tr-body" th:each="order : ${ orderList }" th:onclick= "|location.href='/admin/orderDetail?orderNo=${order.orderNo}'|">
+                    <td th:text ="${ order.orderNo }"></td>
+                    <td th:text ="${ order.product.productName}" ></td>
+                    <td th:text ="${ order.amountPay }"></td>
+                    <td th:text ="${ order.orderDate}"></td>
+                    <td th:text ="${ order.member.memberId}"></td>
+                    <td><p th:text ="${ order.delivery?.invoiceNo }" th:if="${ order.delivery} ne null"></p>
+                    <p th:text = "'미입력'" th:if="${#strings.isEmpty(order.delivery.invoiceNo)}" onclick="javascript:openPop()"></p>
+                    <td th:switch="${order.orderStatus}">
+					  <p th:case="'PAY_DONE'">결제완료</p>
+					  <p th:case="'DELIVERY_DONE'">배송완료</p>
+					  <p th:case="'CANCEL_DONE'">취소완료</p>
+					  <p th:case="'REFUND_DONE'">환불완료</p>
+					  <p th:case="'REQ_CANCEL'">취소요청</p>
+					  <p th:case="'REQ_REFUND'">환불요청</p>
+					</td>
                 </tr>
             </table>
-    </section>
-
-    <div class="popup_layer" id="popup_layer" style="display: none;">
-        <div class="popup_box">
-            <div style="height: 10px; width: 375px; float: top;">
-              <a href="javascript:closePop();"><img th:src="@{/images/admin/ic_close.svg}" class="m_header-banner-close" width="70px" height="70px"></a>
-            </div>
-            <!--팝업 컨텐츠 영역-->
-            <div class="popup_cont">
-                <h2> 송장번호 입력 </h2>
-                    <h3 class="content">택배사</h3>
-                    <select id="selectBox">
-                        <option value="1">CJ대한통운</option>
-                        <option value="2">한진택배</option>
-                        <option value="3">롯데택배</option>
-                        <option value="4">로젠택배</option>
-                        <option value="5">우체국택배</option>
-                        <option value="5">CU편의점택배</option>
-                        <option value="5">CVSnet편의점택배(GS25)</option>
-                    </select>
-                    <h3>송장번호</h3>
-
-                    <input type="text" placeholder="송장번호를 입력해주세요" id="popup_searchbox">
-
-            </div>
-            <!--팝업 버튼 영역-->
-            <div class="popup_btn" style="float: bottom; margin-top: 13px;">
-                <a href="javascript:closePop();">저장</a>
-            </div>
-        </div>
-      </div>
-
-
-      <div class="popup_layer" id="popup_layer_status" style="display: none;">
-        <div class="popup_box">
-            <div style="height: 10px; width: 375px; float: top;">
-              <a href="javascript:closePopStatus();"><img th:src="@{/images/admin/ic_close.svg}" class="m_header-banner-close" width="70px" height="70px"></a>
-            </div>
-            <!--팝업 컨텐츠 영역-->
-            <div class="popup_cont">
-                <h2> 주문상태변경 </h2>
-                    <select id="selectBox">
-                        <option value="1">취소완료</option>
-                        <option value="2">환불완료</option>
-                    </select>
-            </div>
-            <!--팝업 버튼 영역-->
-            <div class="popup_btn" style="float: bottom; margin-top: 128px;">
-                <a href="javascript:closePopStatus();">저장</a>
-            </div>
-        </div>
-      </div>
-
-      <script>
-            //팝업 띄우기
-            function openPop() {
-                document.getElementById("popup_layer").style.display = "block";
-
-            }
-
-            //팝업 닫기
-            function closePop() {
-                document.getElementById("popup_layer").style.display = "none";
-            }
-
-            //팝업 띄우기
-            function openPopStatus() {
-            document.getElementById("popup_layer_status").style.display = "block";
-
-            }
-
-            //팝업 닫기
-            function closePopStatus() {
-                document.getElementById("popup_layer_status").style.display = "none";
-            }
-
-      </script>
-
+            
+            
+      <div id="paging" align="center">
+		<!-- 맨 앞으로 이동 -->
+		<button th:onclick="'location.href=\'/admin/orderList?page=' + @{${paging.startPage}} + '\''"></button>
+		
+		<!-- 이전 페이지로 이동 -->
+		<button th:onclick="'location.href=\'/admin/orderList?page=' + @{${paging.currentPage - 1}} + '\''"
+				th:disabled="${ orderList.first }"></button>
+		
+		<!-- 숫자버튼 -->
+		<th:block th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+			<button th:onclick="'location.href=\'/admin/orderList?page=' + @{${page}} + '\''"
+					th:text="${ page }"
+					th:disabled="${ paging.currentPage eq page }">
+			</button>
+		</th:block>
+		
+		<!-- 다음 페이지로 이동 -->
+		<button th:onclick="'location.href=\'/admin/orderList?page=' + @{${paging.currentPage + 1}} + '\''"
+				th:disabled="${ orderList.last }">></button>
+		
+		<!-- 맨 끝으로 이동 -->
+		<button th:onclick="'location.href=\'/admin/orderList?page=' + @{${paging.endPage}} + '\''"></button>			
+	</div>
+ </section> 
+      
 
 </body>
 </html>

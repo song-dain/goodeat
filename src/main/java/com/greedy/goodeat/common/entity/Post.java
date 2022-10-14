@@ -15,6 +15,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 
+import com.greedy.goodeat.common.dto.MemberDTO;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -44,7 +46,7 @@ public class Post {
 
 	@OneToMany
 	@JoinColumn(name="POST_CODE")
-	private List<Addfile> addfileList;
+	private List<Addfile> AddfileList;
 
 	@ManyToOne
 	@JoinColumn(name="MEMBER_NO")
@@ -65,5 +67,6 @@ public class Post {
 	
 	@Column(name="POST_STATUS")
 	private String postStatus;
+	
 	
 }

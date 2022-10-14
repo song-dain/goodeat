@@ -1,6 +1,8 @@
 package com.greedy.goodeat.common.entity;
 
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,12 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
-
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -56,6 +57,10 @@ public class Review {
 	@JoinColumn(name="PRODUCT_CODE")
 	private Product product;
 	
+	@OneToMany
+	@JoinColumn(name= "REVIEW_CODE")
+	private List<Addfile> AddfileList;
+	
 	@Column(name="REVIEW_REGISTDATE")
 	private java.sql.Date reviewRegistDate;
 	
@@ -64,5 +69,8 @@ public class Review {
 	
 	@Column(name="REVIEW_MODIFYDATE")
 	private java.sql.Date reviewModifyDate;
+	
+	@Column(name = "REASON_REPORTED")
+	private String reasonReported;
 	
 }

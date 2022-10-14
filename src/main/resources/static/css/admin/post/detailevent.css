@@ -28,11 +28,72 @@
     border-radius: 8px;
 }
 
+.modify-button {
+    position : fixed;
+    top: 760px;
+    left : 50%;
+    width: 125px;
+    height: 50px;
+    font-size: 25px;
+    background-color :#293F54;
+    color: white;
+    box-shadow: 2px 2px 2px 2px rgb(0,0,0,0.5);
+    border-radius: 8px;
+}
+
+/* 등록버튼 마우스오버 */
+.modify-button:hover{
+    background:whitesmoke;
+    color: #293F54;
+}
+
+/* 등록버튼 클릭*/
+.modify-button:active {
+    font-size: 20px;
+    box-shadow: 1px 1px 0 rgb(0,0,0,0.5);
+    position: fixed;
+    top:762px;
+}
+
 /* 등록버튼 마우스오버 */
 .member-button:hover{
     background:whitesmoke;
     color: #293F54;
 }
+
+.modifybutton {
+    position : fixed;
+    top: 760px;
+    left : 30%;
+    width: 125px;
+    height: 50px;
+    font-size: 25px;
+    background-color :#293F54;
+    color: white;
+    box-shadow: 2px 2px 2px 2px rgb(0,0,0,0.5);
+    border-radius: 8px;
+}
+
+/* 등록버튼 마우스오버 */
+.modifybutton:hover{
+    background:whitesmoke;
+    color: #293F54;
+}
+
+/* 등록버튼 클릭*/
+.modifybutton:active {
+    font-size: 20px;
+    box-shadow: 1px 1px 0 rgb(0,0,0,0.5);
+    position: fixed;
+    top:762px;
+}
+
+/* 등록버튼 마우스오버 */
+.member-button:hover{
+    background:whitesmoke;
+    color: #293F54;
+}
+
 
 /* 등록버튼 클릭*/
 .member-button:active {

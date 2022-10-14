@@ -23,26 +23,25 @@
    
     <div class="gong-head-box"></div>
     <div class="event-head-box"></div>
-      <a class="gong-head" th:href="@{admin/event}">이벤트</a>
+      <a class="gong-head" th:href="@{/admin/event}">이벤트</a>
       <a class="event-head">공지사항</a>
     
-    <button class="member-button">등록</button>
-    <button class="btn-del">삭제</button>
     
-    <form id="textbox">
-        <input type="text" class="titlebox" placeholder="제목을 입력하세요">
-        <div id="summernote"></div>
-        <script>
-        $(document).ready(function() {
-            $('#summernote').summernote({
-                focus: true,
-                disableResizeEditor: true
-            });
-            $(".note-editable").height(420);
-        });
-        </script>
+    <form id="textbox" action="/admin/post/regist" method="post">
+    	<input type="number" placeholder="관리자 번호를 입력해" name="member.memberNo">
+    	<input type="number" placeholder="게시글 번호" name="post.postCode">
+    	<select name="postType.postTypeCode">
+    		<option value="1">공지사항</option>
+    		<option value="2">이벤트</option>
+    	</select>
+        <input type="text" class="titlebox" placeholder="제목을 입력하세요" name="postTitle">
+        
+        <textarea style="width: 100%; height: 70%; resize: none;" 
+        		  placeholder="냐용을 입력해 주세요" id=textbody name="postContent">
+        </textarea>
+       		<button class="member-button" type="submit">등록</button>
+    		<button class="btn-del">삭제</button>
     </form>    
-
-
+	
 </body>
 </html>

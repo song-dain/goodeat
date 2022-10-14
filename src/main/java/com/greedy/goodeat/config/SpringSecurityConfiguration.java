@@ -12,11 +12,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import com.greedy.goodeat.user.service.AuthenticationService;
-
-import lombok.extern.slf4j.Slf4j;
+import com.greedy.goodeat.user.member.service.AuthenticationService;
 
 @EnableWebSecurity
 public class SpringSecurityConfiguration {
@@ -49,23 +48,37 @@ public class SpringSecurityConfiguration {
 				.disable()
 			.authorizeHttpRequests()
 				.antMatchers(memberPermitList.toArray(new String [memberPermitList.size()])).hasAnyRole("MEMBER", "ADMIN")
-				.antMatchers(adminPermitList.toArray(new String [adminPermitList.size()])).hasRole("ADMIN")
+				.antMatchers(adminPermitList.toArray(new String[adminPermitList.size()])).hasRole("ADMIN")
 				.anyRequest().permitAll()
 			.and()
 				.formLogin()
 				.loginPage("/login")
-				.successForwardUrl("/")
-				.failureForwardUrl("/user/main")
+				.successHandler(successHandler())
+				.failureForwardUrl("/loginfail")
 			.and()
 				.logout()
-				.logoutRequestMatcher(new AntPathRequestMatcher("/user"))
+				.logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
 				.deleteCookies("JSESSIONID")
 				.invalidateHttpSession(true)
 				.logoutSuccessUrl("/")
 			.and()
+				.rememberMe()
+				.key("goodeatRememberMe")
+				.rememberMeCookieName("remember-me")
+				.tokenValiditySeconds(60 * 60 *24 * 7)
+				.userDetailsService(authenticationService)
+			.and()
+				.oauth2Login()
+				.loginPage("/login")
+				.defaultSuccessUrl("/")
+			.and()
 				.build();
 	}
 	
+	private AuthenticationSuccessHandler successHandler() {
+		return new CustomLoginSuccessHandler();
+	}
+
 	@Bean
 	public AuthenticationManager authManager(HttpSecurity http) throws Exception {
 		
@@ -77,5 +90,4 @@ public class SpringSecurityConfiguration {
 				.build();
 	}
 	
-
 }

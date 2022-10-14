@@ -41,14 +41,15 @@
             <td class="tg2-0pky">새 공지사항을 등록하려면 위의 등록 버튼을 클릭하세요</td>
             <td class="tg2-0pky">작성자</td>
           </tr>
-          <tr th:each="post : ${ postList }">
+          <tr th:each="post : ${ postList }"
+          	  th:onclick="|location.href='/admin/post/detail?postCode=${post.postCode}'|">
 			<td class="tg2-0pkq">
               <input type="checkbox" id="cb2">
               <label for="cb1"></label>
             </td>
 			<td th:text="${ post.postCode }"></td>
 			<td th:text="${ post.postTitle }"></td>
-			<td th:text="${ post.Member.memberName }"></td>
+			<td th:text="${ post.member.memberName }"></td>
 		  </tr>
         </tbody>
         </table>

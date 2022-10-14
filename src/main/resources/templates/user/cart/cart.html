@@ -1,22 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../source/css/cart.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="/css/user/cart/cart.css">
+    <link rel="stylesheet" href="/css/font/Cafe24Ssurround.ttf">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/event.js}"></script>
+    <title>장바구니 페이지</title>
+    
+    <script>
+	    const message = '[[${message}]]';
+	    message && alert(message);
+	</script>
+	
 </head>
 <body>
+
+	<div th:replace="user/common/header.html"></div>
+    
     <section id="content" class="container">
         <div class="content-wrap frame-sm">
             <div class="page-title-area">
                 <h2 class="title-page">장바구니</h2>
                 <div class="cart-option">
-                    <div class="custom-checkbox">
-                        <input type="checkbox" id="checkAll" class="checkbox checkboxGroup" checked>
-                        <label for="checkAll">전체해제</label>
-                    </div>
+                    <!-- 체크박스 전체 여부 -->
+					<div class="all_check_input_div">
+						<input type="checkbox" name="chk" class="all_check_input input_size_20" checked="checked"><span class="all_chcek_span">전체선택</span>
+					</div>
                     <button type="button" id="deleteUserCartList" class="btn-option btn-default">
                         <span>선택삭제</span>
                     </button>
@@ -27,36 +38,47 @@
                 <ul class="cart-list">
                     <li id="cart-list-img">
                         <div class="prd-info-area cart-info-area">
-                            <div class="inner">
-                                <div class="column img">
+                        	<div>
+                        		
+                        	</div>
+                            <div class="inner" th:each="cart : ${ cartList }">
+                         		<div class="cart_info_div">
+                         			<input type="checkbox" name="chk" class="individual_cart_checkbox input_size_20" checked="checked">
+                         			<input type="hidden" class="individual_productPrice_input" th:value="${ cart.productPrice }">
+                         			<input type="hidden" class="individual_productAmount_input" th:value="${ cart.productAmount }">
+                         			<input type="hidden" class="individual_totalPrice_input" th:value="(${cart.productPrice} * ${ cart.productAmount})">
+                         		</div>   
+                            	<div class="column img">
                                     <img src="../source/images/dosi_md.png" alt="상품이미지">
                                 </div>
                                 <div class="column tit">
-                                    <p class="desc">비건 도시락 맛있어요</p>
+                                    <p class="desc" th:text="${ cart.productName }"></p>
                                     <p class="desc"> </p>
                                     <ul class="price-item">
                                         <li>
-                                            <span class="num">22,900</span>
+                                            <span class="num" th:text="${ cart.productPrice }"></span>
                                             원
                                         </li>
 
                                     </ul>
                                 </div>
+                                
                                 <div class="column qty">
                                     <div class="qty-group">
-                                        <button type="button" class="btn-qty cart"></button>
-                                        <input type="text" value="1">
-                                        <button type="button" class="btn-qty cart"></button>
+                                    	<div>
+	                                    	<input type="text" class="quantity_input" th:value="${ cart.productAmount }">
+	                                    	<button class="quantity_btn plus_btn">+</button>
+											<button class="quantity_btn minus_btn">-</button>
+	                                    	<a class="quantity_modify_btn" data-cartId="${ cartId }">변경</a>
+                                    	</div>
                                     </div>
                                 </div>
+                                
                                 <div class="column price">
                                     <div class="price-div">
-                                        <span class="num cart-price">22,900</span>
+                                        <span class="num cart-price" th:text="(${cart.productPrice} * ${ cart.productAmount})"></span>
                                         원
                                     </div>
-                                </div>
-                                <div class="column btn">
-                                    <button type="button"></button>
                                 </div>
                             </div>
                         </div>
@@ -70,17 +92,10 @@
                     <dl class="price-info">
                         <dt class="tit">상품금액</dt>
                         <dd class="price">
-                            <em class="num" id="totalProductPrice">22,900</em>
-                            "원 "
-                        </dd>
-                    </dl>
-                </div>
-                <div class="colum">
-                    <dl class="price-info">
-                        <dt class="tit">할인금액</dt>
-                        <dd class="price">
-                            <em class="num" id="totalDiscountPrice">0</em>
-                            "원 "
+                            <em class="num" id="totalProductPrice">
+                            	<span class="totalPrice_span">0</span>
+                            </em>
+                            원
                         </dd>
                     </dl>
                 </div>
@@ -88,17 +103,19 @@
                     <dl class="price-info">
                         <dt class="tit">배송비</dt>
                         <dd class="price">
-                            <em class="num" id="totalDeliveryPrice">22,900</em>
-                            "원 "
+                            <em class="num" id="totalDeliveryPrice">2,500</em>
+                            원
                         </dd>
                     </dl>
                 </div>
                 <div class="colum">
                     <dl class="price-info">
-                        <dt class="tit">총 결제금액</dt>
+                        <dt>총 결제금액</dt>
                         <dd class="price">
-                            <em class="num" id="totalOrderProductPrice">22,900</em>
-                            "원 "
+                            <em class="num" id="totalOrderProductPrice">
+                            	<span class="totalPrice_span">0</span>
+                            </em>
+                            원
                         </dd>
                     </dl>
                 </div>
@@ -116,22 +133,20 @@
                 <a class="btn-basic-xxlg btn-default-ex">
                     <span>쇼핑계속하기</span>
                 </a>
-                <a class="btn-basic-xxlg btn-primary-ex" id="order">
-                    <span>
-                        <em class="text-num-bold totalOrderPrice">22,990</em>
-                        원 주문하기
-                    </span>
-                </a>
+                <button  class="btn-basic-xxlg btn-primary-ex" id="order">
+                <span>
+                	<em class="text-num-bold totalOrderPrice">결제하기</em>
+                </span>
+                </button>
             </div>
         </div>
+        
+        
+        
+        
     </section>
 
-
-
-
-
-
-
+	<div th:replace="user/common/footer.html"></div>
 
 
 

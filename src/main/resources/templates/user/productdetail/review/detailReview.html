@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/main-contents.css">
+    <link rel="stylesheet" href="/css/user/productDetail/review.css">
+    <link rel="stylesheet" href="/css/user/productDetail/select.css">
+    <link rel="stylesheet" href="/font/Cafe24Ssurround.ttf">
+    
+</head>
+
+    <title>Let'sGE</title>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+    <!-- 헤더부분 -->
+     <div th:replace="user/common/header.html"></div>
+ 
+ 	<!-- 컨텐츠 부분 -->
+
+	        <div id="decontainer">
+	        <h1>게시글 보기</h1>
+	        	<table id="tbdetail" action="/user/productDetail/list" border="0" method="post">
+	        		<tr>
+	        			<td>작성자</td>
+	        			<td th:text="${ review.member.memberName }"></td>
+	        		</tr>
+	        		<tr>
+	        			<td>제목</td>
+	        			<td th:text="${ review.reviewTitle }"></td>
+	        		</tr>
+	        		<tr>
+	        			<td>내용</td>
+	        			<td th:text="${ review.reviewContent }"></td>
+	        		</tr>
+	        		<tr>
+	        			<td>첨부파일</td>
+	        			<td>
+	        				<input type="file"/>
+	        			</td>
+	        		</tr>
+	        	</table>
+	        	<button type="submit" th:onclick="|location.href='/user/productdetail/review/modify?reviewCode=${review.reviewCode}'|" class="btn-sl">수정</button>
+        		<button type="submit" th:onclick="|location.href='/user/productdetail/review/delete?reviewCode=${review.reviewCode}'|" class="btn-sl2">삭제</button>
+        		<button type="submit" value="메인으로" class="btn-sl2">뒤로가기</button>
+	        </div>
+
+    <!-- 푸터 부분 -->
+ <div th:replace="user/common/footer.html"></div>
+ </body>
+ </html>

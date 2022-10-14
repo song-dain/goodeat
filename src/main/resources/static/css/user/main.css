@@ -7,7 +7,7 @@
 }
 @font-face {
     font-family: "Cafe24Ssurround";
-    src: url("/font/user/cartCafe24Ssurround.ttf") format("truetype");
+    src: url("/font/user/Cafe24Ssurround.ttf") format("truetype");
     font-weight: normal;
   }
 
@@ -30,7 +30,7 @@ a{
 header{
     background: rgb(253, 253, 253);
     height: 218px;
-    border-bottom: 1px solid#000;
+    border-bottom: 1px solid #000;
 }
 
 .main-nav{

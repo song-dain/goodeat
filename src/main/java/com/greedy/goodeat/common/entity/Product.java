@@ -32,7 +32,7 @@ public class Product {
 	@Id
 	@Column(name="PRODUCT_CODE")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PRODUCT_SEQ_GENERATOR")
-	private int productCode;
+	private Integer productCode;
 	
 	@Column(name="PRODUCT_NAME")
 	private String productName;
@@ -62,8 +62,8 @@ public class Product {
 	@JoinColumn(name = "CATEGORY_CODE")
 	private ProductCategory productCategory;
 	
-	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "REF_BOARD_NO")
-	private List<Addfile> addfileList;
+	@OneToMany
+	@JoinColumn(name = "PRODUCT_CODE")
+	private List<Addfile> AddfileList;
 
 }
