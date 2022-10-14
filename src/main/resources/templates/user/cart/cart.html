@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/font/Cafe24Ssurround.ttf">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/js/event.js}"></script>
+    <script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
     <title>장바구니 페이지</title>
     
     <script>
@@ -47,6 +48,8 @@
                          			<input type="hidden" class="individual_productPrice_input" th:value="${ cart.productPrice }">
                          			<input type="hidden" class="individual_productAmount_input" th:value="${ cart.productAmount }">
                          			<input type="hidden" class="individual_totalPrice_input" th:value="(${cart.productPrice} * ${ cart.productAmount})">
+                         			<input type="hidden" class="individual_productCode_input" th:value="${cart.productCode}">
+                         			<input type="hidden" class="individual_productName_input" th:value="${cart.productName}">
                          		</div>   
                             	<div class="column img">
                                     <img src="../source/images/dosi_md.png" alt="상품이미지">
@@ -132,7 +135,7 @@
                 <a class="btn-basic-xxlg btn-default-ex">
                     <span>쇼핑계속하기</span>
                 </a>
-                <button  class="btn-basic-xxlg btn-primary-ex" id="order">
+                <button  class="order_btn" id="order">
                 <span>
                 	<em class="text-num-bold totalOrderPrice">결제하기</em>
                 </span>
@@ -140,10 +143,55 @@
             </div>
         </div>
         
-        <form th:action="@{/user/update}" method="post" class="quantity_update_form">
-				<input type="hidden" name="cartId" class="update_cartCode">
-				<input type="hidden" name="productCount" class="update_productAmount">
-		</form>
+        <!-- 주문 form -->
+			<form action="/user/payment" method="post" class="order_form">
+				<input type="hidden" name="orders[0].productCode"  value="${ cart.productCode }">
+				<input type="hidden" name="orders[0].productName"  value="${ cart.productName }">
+				<input type="hidden"  name="orders[0].productAmount" value="${ cart.productAmount }">
+			</form>
+        
+    <script>
+    $(".order_btn").on("click", function() {
+		
+    	let form_contents = '';
+    	let orderNumber = 0;
+    	let totalprice;
+    	$(".inner").each(function(index, element){
+    	
+    		if($(element).find(".individual_cart_checkbox").is(":checked") === true){	//체크여부
+    		
+   			let productCode = $(element).find(".individual_productCode_input").val();
+    		let productName = $(element).find(".individual_productName_input").val();
+    		let productCount = $(element).find(".individual_productAmount_input").val();
+    		let productPrice = $(element).find(".individual_totalPrice_input").val();
+    		
+    		let productCode_input = "<input name='orders[" + orderNumber + "].productCode' type='hidden' value='" + productCode + "'>";
+    		form_contents += productCode_input;
+    		
+    		let productName_input = "<input name='orders[" + orderNumber + "].productName' type='hidden' value='" + productName + "'>";
+    		form_contents += productName_input;
+    		
+    		let productCount_input = "<input name='orders[" + orderNumber + "].productAmount' type='hidden' value='" + productCount + "'>";
+    		form_contents += productCount_input;
+    		let productPrice_input = "<input name='orders[" + orderNumber + "].productPrice' type='hidden' value='" + productPrice + "'>";
+    		form_contents += productPrice_input;
+    		
+    		totalprice += parseInt(productPrice);
+    		orderNumber += 1;
+    		
+    		}
+    		
+    		let totalprice_input = "<input name='totalprice' type='hidden' value='" + totalprice + "'>";
+    		form_contents += totalprice_input;
+    	});
+    	
+    		$(".order_form").html(form_contents);
+    		
+    		$(".order_form").submit();
+    		
+    	});
+    	
+    </script>
 		
         
         
@@ -169,35 +217,7 @@
     }
 	</script> -->
 
-	<script>
-	$("#order").on("click", function(){
-		
-		let form_contents ='';
-		let orderNumber = 0;
-		
-		$(".cart_info_div").each(function(index, element){
-			
-			if($(element).find(".individual_cart_checkbox").is(":checked") === true){	//체크여부
-				
-				let productName = $(element).find(".desc").val();
-				let productAmount = $(element).find(".quantity_input").val();
-				
-				let productName_input = "<input name='orders[" + orderNumber + "].productName' type='hidden' value='" + productName + "'>";
-				form_contents += bookId_input;
-				
-				let productAmount_input = "<input name='orders[" + orderNumber + "].productAmount' type='hidden' value='" + productAmount + "'>";
-				form_contents += productAmount_input;
-				
-				orderNumber += 1;
-				
-			}
-		});	
-
-		$(".order_form").html(form_contents);
-		$(".order_form").submit();
-		
-	});
-	</script>
+	
 
 
 

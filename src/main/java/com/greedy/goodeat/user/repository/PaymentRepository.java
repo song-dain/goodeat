@@ -7,5 +7,6 @@ import com.greedy.goodeat.common.entity.Member;
 public interface PaymentRepository extends JpaRepository<Member, Integer> {
 
 	Member findById(int memberNo);
+	
 
 }

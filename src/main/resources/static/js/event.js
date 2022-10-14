@@ -7,12 +7,7 @@ window.onload = function() {
 		}
 	}
 	
-	if(document.getElementById("order")) {
-		const $Cart = document.getElementById("order");
-		$Cart.onclick = function() {
-			location.href = "/user/payment";
-		}
-	}
+	
 	
 	
 	

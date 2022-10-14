@@ -32,12 +32,11 @@ public class CartService {
 		return cartList.stream().map(cart -> modelMapper.map(cart, CartListDTO.class)).collect(Collectors.toList());
 	}
 
-	public void updateCartList(CartListDTO updateCart) {
-		
-		Cart savedCart = cartRepository.findBycartCode(updateCart.getCartCode());
-		savedCart.setProductAmount(updateCart.getProductAmount());
-		
-	}
+//	public void updateCartList(CartListDTO updateCart) {
+//		
+//		Cart savedCart = cartRepository.findBycartCode(updateCart.getCartCode());
+//		
+//	}
 
 	
 	

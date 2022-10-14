@@ -1,5 +1,7 @@
 package com.greedy.goodeat.user.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.greedy.goodeat.common.dto.MemberDTO;
+import com.greedy.goodeat.common.dto.OrderPageDTO;
 import com.greedy.goodeat.common.dto.OrderPageItemDTO;
 import com.greedy.goodeat.user.service.PaymentService;
 
@@ -24,14 +27,19 @@ public class PaymentController {
 	}
 	
 
-	@GetMapping("/payment")
-	public String memberList(Model model) {
+	@PostMapping("/payment")
+	public String memberList(OrderPageDTO opd, Model model,OrderPageItemDTO orders) {
 		
 		int memberNo = 2;
 		
 		MemberDTO member = paymentService.selectMember(memberNo);
 		
+		model.addAttribute("order", opd.getOrders());
+		
 		model.addAttribute("member", member);
+		
+		System.out.println("orders : " + opd.getOrders());
+		System.out.println(opd.getTotalPrice());
 		
 		return "user/cart/payment";
 	}
