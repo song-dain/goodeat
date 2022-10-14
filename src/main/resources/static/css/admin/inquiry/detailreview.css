@@ -6,6 +6,10 @@
     font-size: 2.5em;
 }
 
+.flexdiv {
+	float: left;
+}
+
 .ms-requeiry {
     color: #481BFF;
 }

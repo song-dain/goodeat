@@ -73,7 +73,7 @@
             <td class="tg-0pky">검색어</td>
             <td class="tg-0lax">
                 <div class="search-area" align="center">
-                	<form id="searchForm" th:action="@{/inquiry/detail}" method="get">
+                	<form id="searchForm" th:action="@{/admin/inquiry/list}" method="get">
                 		<th:block th:if="${ searchValue != null}">
                 			<input type="search" id="searchValue" name="searchValue" th:value="${ searchValue }">
                 		</th:block>
@@ -87,7 +87,6 @@
           </tr>
         </tbody>
     </table>
-    <button class="member-button">검색</button>
     <table class="tg2">
           <tr class="headline2">
             <th class="tg2-lboi">번호</th>
@@ -106,7 +105,7 @@
 				<td th:text="${ inquiry.inquiryTitle }"></td>
 				<td th:text="${ inquiry.member.memberId }"></td>
 				<td th:text="${ inquiry.inquiryStatus }"></td>
-		    </tr>
+		  </tr>
         </table>
         
         <!-- 페이징 바 --> 

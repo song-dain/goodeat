@@ -1,5 +1,8 @@
 package com.greedy.goodeat.admin.inquiry.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -10,9 +13,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.greedy.goodeat.admin.inquiry.dto.ReplyDTO;
 import com.greedy.goodeat.admin.inquiry.dto.SYInquiryDTO;
+import com.greedy.goodeat.admin.inquiry.entity.Reply;
 import com.greedy.goodeat.admin.inquiry.entity.SYInquiry;
 import com.greedy.goodeat.admin.inquiry.repository.AdmInquiryRepository;
+import com.greedy.goodeat.admin.inquiry.repository.AdmReplyRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,10 +33,12 @@ public class AdmInquiryService {
 
 	private final ModelMapper modelMapper;
 	private final AdmInquiryRepository admInquiryRepository;
+	private final AdmReplyRepository admReplyRepository;
 	
 	public AdmInquiryService (ModelMapper modelMapper,
-			AdmInquiryRepository admInquiryRepository) {
-		
+			AdmInquiryRepository admInquiryRepository,
+			AdmReplyRepository admReplyRepository) {
+		this.admReplyRepository = admReplyRepository;
 		this.admInquiryRepository = admInquiryRepository;
 		this.modelMapper = modelMapper;
 		
@@ -58,5 +66,24 @@ public class AdmInquiryService {
 	public void deleteInquiry(Integer inquiryCode) {
 		SYInquiry inquiry = admInquiryRepository.findById(inquiryCode).get();
 		admInquiryRepository.delete(inquiry);
+	}
+
+	public void registReply(ReplyDTO registReply) {
+		admReplyRepository.save(modelMapper.map(registReply, Reply.class));
+		
+	}
+
+	public List<ReplyDTO> loadReply(ReplyDTO loadReply) {
+		List<Reply> replyList
+		= admReplyRepository.findByRefInquiryNo(loadReply.getRefInquiryNo());
+	
+	return replyList.stream().map(reply -> modelMapper.map(reply, ReplyDTO.class)).collect(Collectors.toList());
+	}
+
+	public void removeReply(ReplyDTO removeReply) {
+		
+		Reply foundReply = admReplyRepository.findByReplyNo(removeReply.getReplyNo());
+		foundReply.setReplyStatus("N");
+		
 	}
 }
