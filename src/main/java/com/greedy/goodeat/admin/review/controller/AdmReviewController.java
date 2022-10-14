@@ -3,12 +3,16 @@ package com.greedy.goodeat.admin.review.controller;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.greedy.goodeat.admin.inquiry.dto.ReplyDTO;
 import com.greedy.goodeat.admin.review.service.AdmReviewService;
 import com.greedy.goodeat.common.dto.ReviewDTO;
 import com.greedy.goodeat.common.paging.Pagenation;

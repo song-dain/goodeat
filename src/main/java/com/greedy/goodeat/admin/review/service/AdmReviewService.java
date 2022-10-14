@@ -9,7 +9,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.greedy.goodeat.admin.inquiry.dto.ReplyDTO;
 import com.greedy.goodeat.admin.inquiry.dto.SYInquiryDTO;
+import com.greedy.goodeat.admin.inquiry.entity.Reply;
 import com.greedy.goodeat.admin.inquiry.repository.AdmReplyRepository;
 import com.greedy.goodeat.admin.review.repository.AdmReviewRepository;
 import com.greedy.goodeat.common.dto.ReviewDTO;
@@ -57,6 +59,8 @@ public class AdmReviewService {
 		Review reivew = admReviewRepository.findById(reviewCode).get();
 		return modelMapper.map(reivew, ReviewDTO.class);
 	}
+
+
 	
 	
 	

@@ -87,9 +87,40 @@
     left : 250px;
     width: 80%;
     height: 260px;
-    background-color: #d8d6d6;
     
 }
+
+#replyWrite {
+	height: 150px;
+	width:100%;
+	
+	margin-left: -2px;
+	margin-top: 20px;
+}
+
+#replyResult tr {
+	
+}
+
+#replyResult tr td:nth-child(1){
+	width: 70%;
+	height: 30px;
+}
+
+#replyResult tr td:nth-child(2){
+	
+} 
+
+#replyResult tr td:nth-child(3){
+	width: 150px;
+} 
+
+#replyResult tr td:nth-child(4){
+	border: none;
+	float: right;
+	width: 100px;
+	
+}  
 
 .ms-down {
     justify-content: center;

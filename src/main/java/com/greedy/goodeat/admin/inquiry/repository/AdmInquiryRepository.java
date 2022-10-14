@@ -12,7 +12,7 @@ import com.greedy.goodeat.admin.inquiry.entity.SYInquiry;
 public interface AdmInquiryRepository extends JpaRepository<SYInquiry, Integer> {
 
 	@Query("SELECT i " +
-			 "FROM Inquiry i " +
+			 "FROM SYInquiry i " +
 			"WHERE (i.inquiryTitle LIKE '%' || :searchValue || '%' " +
 			   "OR i.inquiryContent LIKE '%' || :searchValue || '%'" +
 			   "OR i.member.memberId LIKE '%' || :searchValue || '%')")
