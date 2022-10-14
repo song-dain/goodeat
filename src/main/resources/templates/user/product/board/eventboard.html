@@ -64,7 +64,7 @@
                                     <th>제목</th>
                                     <th>작성자</th>
                                     <th>등록일</th>
-                                   
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -79,53 +79,14 @@
                                 </tr>
 
                             </tbody>
-                        </table>
+                           </table>
+                         <div class="paging">
+                       		
+                         </div>
 
                   
-                    <div class="board_sub">
-                        <div class="sub_title1">
-                            <span><b>공지사항</b></span> 
-                        </div>
-                        <div class="sub_title2">
-                            <a href="#">
-                                <!-- <span><b>더보기</b></span>  -->
-                            </a>
-                        </div>
-                        <table class="board_list">
-                            <caption>공지사항</caption>
-                            <thead>
-                                <tr>
-                                    <th>NO</th>
-                                    <th>제목</th>
-                                    <th>작성자</th>
-                                    <th>등록일</th>
-                                   
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="notice : ${noticeList}">
-                                    <td th:text="${notice.postCode}"></td>
-                                    <td th:text="${notice.postTitle}">
-                                        <a href="#"></a>
-                                    </td>
-                                    <td th:text="${notice.member.memberName}"></td>
-                                    <td th:text="${notice.postModifyDate}"></td>
-                                    <td></td>
-                                </tr>
-                              
-
-                            </tbody>
-                        </table>
-                       <!-- 페이징 바 처리 --> 
-               
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        
-        </div>
-    </div>
+                   
+       
 </section> 
 
 
