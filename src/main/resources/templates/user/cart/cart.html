@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/font/Cafe24Ssurround.ttf">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/js/event.js}"></script>
+    <script type="text/javascript" src="js/jquery-1.8.1.min.js"></script>
     <title>장바구니 페이지</title>
     
     <script>
@@ -47,13 +48,14 @@
                          			<input type="hidden" class="individual_productPrice_input" th:value="${ cart.productPrice }">
                          			<input type="hidden" class="individual_productAmount_input" th:value="${ cart.productAmount }">
                          			<input type="hidden" class="individual_totalPrice_input" th:value="(${cart.productPrice} * ${ cart.productAmount})">
+                         			<input type="hidden" class="individual_productCode_input" th:value="${cart.productCode}">
+                         			<input type="hidden" class="individual_productName_input" th:value="${cart.productName}">
                          		</div>   
                             	<div class="column img">
                                     <img src="../source/images/dosi_md.png" alt="상품이미지">
                                 </div>
                                 <div class="column tit">
                                     <p class="desc" th:text="${ cart.productName }"></p>
-                                    <p class="desc"> </p>
                                     <ul class="price-item">
                                         <li>
                                             <span class="num" th:text="${ cart.productPrice }"></span>
@@ -69,7 +71,7 @@
 	                                    	<input type="text" class="quantity_input" th:value="${ cart.productAmount }">
 	                                    	<button class="quantity_btn plus_btn">+</button>
 											<button class="quantity_btn minus_btn">-</button>
-	                                    	<a class="quantity_modify_btn" data-cartId="${ cartId }">변경</a>
+	                                    	<button class="quantity_modify_btn" data-cartId="${ cart.cartCode }">변경</button>
                                     	</div>
                                     </div>
                                 </div>
@@ -133,7 +135,7 @@
                 <a class="btn-basic-xxlg btn-default-ex">
                     <span>쇼핑계속하기</span>
                 </a>
-                <button  class="btn-basic-xxlg btn-primary-ex" id="order">
+                <button  class="order_btn" id="order">
                 <span>
                 	<em class="text-num-bold totalOrderPrice">결제하기</em>
                 </span>
@@ -141,6 +143,60 @@
             </div>
         </div>
         
+        <!-- 주문 form -->
+			<form action="/user/payment" method="post" class="order_form">
+				<input type="hidden" name="orders[0].productCode"  value="${ cart.productCode }">
+				<input type="hidden" name="orders[0].productName"  value="${ cart.productName }">
+				<input type="hidden"  name="orders[0].productAmount" value="${ cart.productAmount }">
+				<input type="hidden" name="totalprice" value="${totalprice}">
+			</form>
+        
+    <script>
+    $(".order_btn").on("click", function() {
+		
+    	let form_contents = '';
+    	let orderNumber = 0;
+    	let totalprice = 0;
+    	$(".inner").each(function(index, element){
+    	
+    		if($(element).find(".individual_cart_checkbox").is(":checked") === true){	//체크여부
+    		
+   			let productCode = $(element).find(".individual_productCode_input").val();
+    		let productName = $(element).find(".individual_productName_input").val();
+    		let productCount = $(element).find(".individual_productAmount_input").val();
+    		let productPrice = $(element).find(".individual_totalPrice_input").val();
+    		
+    		let productCode_input = "<input name='orders[" + orderNumber + "].productCode' type='hidden' value='" + productCode + "'>";
+    		form_contents += productCode_input;
+    		
+    		let productName_input = "<input name='orders[" + orderNumber + "].productName' type='hidden' value='" + productName + "'>";
+    		form_contents += productName_input;
+    		
+    		let productCount_input = "<input name='orders[" + orderNumber + "].productAmount' type='hidden' value='" + productCount + "'>";
+    		form_contents += productCount_input;
+    		let productPrice_input = "<input name='orders[" + orderNumber + "].productPrice' type='hidden' value='" + productPrice + "'>";
+    		form_contents += productPrice_input;
+    		
+    		
+    		totalprice += parseInt(productPrice);
+    		
+    		orderNumber += 1;
+    		
+    		}
+    		
+    		let totalprice_input = "<input name='totalprice' type='hidden' value='" + totalprice + "'>";
+    		form_contents += totalprice_input;
+    	});
+    	
+    		console.log(form_contents);
+    		$(".order_form").html(form_contents);
+    		
+    		$(".order_form").submit();
+    		
+    	});
+    	
+    </script>
+		
         
         
         
@@ -148,8 +204,24 @@
 
 	<div th:replace="user/common/footer.html"></div>
 
+	<!-- <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+	
+	const $quantity_modify_btn = document.getElementsByClassName("quantity_modify_btn");
+	
+    $quantity_modify_btn.onclick = function() {
 
+        /* 다음 우편번호 검색 창을 오픈하면서 동작할 콜백 메소드를 포함한 객체를 매개변수로 전달한다. */
+        new daum.Postcode({
+            oncomplete: function(data){
+                /* 팝업에서 검색결과 항목을 클릭했을 시 실행할 코드를 작성하는 부분 */
+                document.getElementByClassName("quantity_input").value = data.quantitycode;
+            }
+        }).open();
+    }
+	</script> -->
 
+	
 
 
 

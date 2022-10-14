@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class PaymentDTO {
 	
-	private Integer payHistoryCode;
+	private String payHistoryCode;
 	private String payMethod;
 	private String payStatus;
 	private java.sql.Date payDate;

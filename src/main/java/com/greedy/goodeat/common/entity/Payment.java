@@ -23,7 +23,7 @@ public class Payment {
 	
 	@Id
 	@Column(name="PAY_HISTORY_CODE")
-	private Integer payHistoryCode;
+	private String payHistoryCode;
 	
 	@Column(name="PAY_METHOD")
 	private String payMethod;
