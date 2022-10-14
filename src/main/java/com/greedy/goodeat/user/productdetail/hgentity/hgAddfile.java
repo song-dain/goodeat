@@ -47,18 +47,16 @@ public class hgAddfile {
 	
 	@Column(name = "FILE_DIVISION")
 	private String fileDivision;
+
+	@Column(name ="REVIEW_CODE")
+	private Integer reviewCode;
 	
-	@ManyToOne
-	@JoinColumn(name ="REVIEW_CODE")
-	private hgReview review;
+	@Column(name ="POST_CODE")
+	private Integer postCode;
 	
-	@ManyToOne
-	@JoinColumn(name ="POST_CODE")
-	private Post post;
-	
-	@ManyToOne
-	@JoinColumn(name ="PRODUCT_CODE")
-	private hgProduct product;
+	@Column(name ="PRODUCT_CODE") 
+	private Integer productCode;
+	 
 	
 	@Column(name = "THUMBNAIL_ROUTE")
 	private String thumbnailRoute;

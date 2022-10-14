@@ -11,23 +11,19 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.greedy.goodeat.admin.product.dto.KjyAddfileDTO;
+import com.greedy.goodeat.admin.product.dto.KjyProductDTO;
 import com.greedy.goodeat.admin.product.service.AdmProductService;
-import com.greedy.goodeat.common.dto.AddfileDTO;
-import com.greedy.goodeat.common.dto.ProductDTO;
 import com.greedy.goodeat.common.paging.Pagenation;
 import com.greedy.goodeat.common.paging.PagingButtonInfo;
 
@@ -57,7 +53,7 @@ public class AdmProductController {
 		
 		log.info("[ProductController] =======================");
 		
-		Page<ProductDTO> productList = admProductService.findProductList(page, searchValue);
+		Page<KjyProductDTO> productList = admProductService.findProductList(page, searchValue);
 		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(productList);
 		
 		model.addAttribute("productList", productList);
@@ -83,7 +79,7 @@ public class AdmProductController {
 	
 	
 	@PostMapping("/productRegist")
-	public String productRegist(Model model, ProductDTO newProduct, RedirectAttributes rttr, List<MultipartFile> attachImage) {
+	public String productRegist(Model model, KjyProductDTO newProduct, RedirectAttributes rttr, List<MultipartFile> attachImage) {
 		
 		log.info("[ProductController] =======================");
 	
@@ -115,7 +111,7 @@ public class AdmProductController {
 		}
 		
 		/* 업로드 파일에 대한 정보를 담을 리스트 */
-		List<AddfileDTO> addfileList = new ArrayList<>();
+		List<KjyAddfileDTO> addfileList = new ArrayList<>();
 		
 		try {
 			
@@ -136,7 +132,7 @@ public class AdmProductController {
 					attachImage.get(i).transferTo(new File(fileUploadDirectory + "/" + savedFileName));
 	
 					/* DB에 저장할 파일의 정보 */
-					AddfileDTO fileInfo = new AddfileDTO();
+					KjyAddfileDTO fileInfo = new KjyAddfileDTO();
 					fileInfo.setOriginalFileName(originalFileName);
 					fileInfo.setSavedFileName(savedFileName);
 					fileInfo.setSavedRoute("/upload/original/");
@@ -165,7 +161,7 @@ public class AdmProductController {
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 			/* 실패 시 이미 저장 된 파일을 삭제해야 한다. */
-			for(AddfileDTO attachment : addfileList) {
+			for(KjyAddfileDTO attachment : addfileList) {
 				
 				File deleteFile = new File(attachment.getSavedRoute() + "/" + attachment.getSavedFileName());
 				deleteFile.delete();
@@ -189,7 +185,7 @@ public class AdmProductController {
 	@GetMapping("/productDetail")
 	public String detailProduct(Model model,Integer productCode) {
 		
-		ProductDTO product = admProductService.selectProductList(productCode);
+		KjyProductDTO product = admProductService.selectProductList(productCode);
 		
 		model.addAttribute("product", product);
 		
@@ -200,7 +196,7 @@ public class AdmProductController {
 	
 	
 	@GetMapping("/productDelete")
-	public String deleteProduct(Integer productCode, @ModelAttribute ProductDTO product, RedirectAttributes rttr ) {
+	public String deleteProduct(Integer productCode, @ModelAttribute KjyProductDTO product, RedirectAttributes rttr ) {
 		
 		log.info("[ProductController] ==========================================");
 		
@@ -220,7 +216,7 @@ public class AdmProductController {
 	@GetMapping("/productModify")
 	public String modifyPage(Model model,Integer productCode) {
 		
-		ProductDTO product = admProductService.selectProductList(productCode);
+		KjyProductDTO product = admProductService.selectProductList(productCode);
 		
 		model.addAttribute("product", product);
 		
@@ -230,11 +226,15 @@ public class AdmProductController {
 	}
 	
 	@PostMapping("/productModify")
-	public String modifyProduct(Model model, ProductDTO product, RedirectAttributes rttr) {
+	public String modifyProduct(Model model, KjyProductDTO product, RedirectAttributes rttr) {
 		
 		admProductService.modifyProduct(product);
 		
+		log.info("[ProductController] ==========================================");
+		
+		
 		log.info("[ProductController] modifyproduct : {}" , product);
+		
 	
 		model.addAttribute(product);
 		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("product.modity"));

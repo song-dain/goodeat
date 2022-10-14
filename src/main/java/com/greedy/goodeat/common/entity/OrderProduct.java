@@ -30,6 +30,10 @@ public class OrderProduct {
 	@Column(name="ORDER_AMOUNT")
 	private String orderAmount;
 	
+	@Column(name="ORDER_NO")
+	private Integer orderNo;
+	
+	
 	@ManyToOne
 	@JoinColumn(name = "PRODUCT_CODE")
 	private Product product;

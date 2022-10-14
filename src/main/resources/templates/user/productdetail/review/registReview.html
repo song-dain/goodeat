@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/main-contents.css">
+    <link rel="stylesheet" href="/css/user/productDetail/select.css">
+    <link rel="stylesheet" href="/font/Cafe24Ssurround.ttf">
+    
+</head>
+
+    <title>리뷰등록</title>
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
+    <!-- 헤더부분 -->
+     <div th:replace="user/common/header.html"></div>
+ 
+ <!-- 컨텐츠 부분 -->
+  <div class="container">
+  
+  <form th:action="@{/user/productdetail/regist}" method="post" enctype="multipart/form-data">
+  
+    <h1>리뷰 등록</h1>
+        <table id="textbox" border="0">
+        	<tr>
+        		<tr>
+        		<td>제목</td>
+        			<td><input type="text" class="titlebox" placeholder="제목을 입력하세요" name="reviewTitle"></td>
+        		</tr>
+        		<tr>
+        			<td>첨부파일</td>
+        			<td>	
+        				<input type="file" class="filebox"/>
+        			</td>
+        		</tr>
+        		<tr>
+        			<td>주문 번호</td>
+        			<td>	
+        				<input type="number" name="order.orderNo" class="filebox"/>
+        			</td>
+        		</tr>
+        		<tr>
+        			<td>상품 번호</td>
+        			<td>	
+        				<input type="number" name="product.productCode" class="filebox"/>
+        			</td>
+        		</tr>
+        		<tr>
+        			<td>내용</td>
+        			<td>
+        				<textarea class="postbox" rows="20" placeholder="내용을 입력하세요" name="reviewContent"></textarea>
+        			</td>
+        		</tr>
+        	
+        </table>
+         <input type="submit" value="등록" class="btn-sl">
+         <input type="submit" value="메인으로" class="btn-sl2">
+  </form>
+  <!-- <button onclick="location.href='/'" class="btn-sl2">메인으로</button>  -->     
+  </div>
+       <!-- 푸터 부분 -->
+ <div th:replace="user/common/footer.html"></div>
+ </body>
+ </html>

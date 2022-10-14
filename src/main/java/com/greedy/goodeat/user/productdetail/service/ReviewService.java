@@ -9,11 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.greedy.goodeat.common.dto.PostDTO;
-import com.greedy.goodeat.common.dto.ReviewDTO;
-import com.greedy.goodeat.common.entity.Post;
-import com.greedy.goodeat.common.entity.Review;
 import com.greedy.goodeat.user.productdetail.hgdto.hgReviewDTO;
+import com.greedy.goodeat.user.productdetail.hgentity.hgReview;
 import com.greedy.goodeat.user.productdetail.repository.ReviewRepository;
 
 
@@ -26,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @Transactional
 public class ReviewService {
 	
-	public static final int TEXT_PAGE_SIZE = 5;
+	public static final int TEXT_PAGE_SIZE = 7;
 	public static final String SORT_BY = "reviewCode";
 	public static final String ACTIVE_STATUS = "정상";
 	
@@ -45,7 +42,7 @@ public class ReviewService {
 	public Page<hgReviewDTO> selectReviewList(int page, String searchValue) {
 		
 		Pageable pageable = PageRequest.of(page - 1, TEXT_PAGE_SIZE, Sort.by(SORT_BY).descending());
-		Page<Review> reviewList = null;
+		Page<hgReview> reviewList = null;
 		
 		if(searchValue != null && !searchValue.isEmpty()) {
 			
@@ -58,14 +55,39 @@ public class ReviewService {
 		return reviewList.map(review -> modelMapper.map(review, hgReviewDTO.class));
 	}
 
-
-	public void registReview(hgReviewDTO newReview) {
+	//등록
+	public void registReview(hgReviewDTO review) {
 		
-		reviewRepository.save(modelMapper.map(newReview, Review.class));
+		reviewRepository.save(modelMapper.map(review, hgReview.class));
 		
 	}
+	
+	//상세
+	public hgReviewDTO selectReviewDetail(Integer reviewCode) {
 		
+		hgReview review = reviewRepository.findByReviewCode(reviewCode);
+		return modelMapper.map(review, hgReviewDTO.class);
+	}
 	
 	
-
+	 //수정 
+	public void modifyReview(hgReviewDTO review) {
+	
+	  log.info("[ReviewService] foundReview:{} ", review); 
+	  hgReview foundReview = reviewRepository.findByReviewCode(review.getReviewCode());
+	  
+	  //log.info("[ReviewService] foundReview:{} ", foundReview);
+	  
+	  foundReview.setReviewCode(review.getReviewCode());
+	  foundReview.setReviewContent(review.getReviewContent());
+	  foundReview.setReviewTitle(review.getReviewTitle());
+	  
+	  }
+	 
+	//삭제
+	public void deleteReview(Integer reviewCode) {
+		hgReview deleteReview = reviewRepository.findById(reviewCode).get();
+		reviewRepository.delete(deleteReview);
+	}
+	
 }
