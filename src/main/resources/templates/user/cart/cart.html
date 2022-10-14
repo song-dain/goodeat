@@ -148,6 +148,7 @@
 				<input type="hidden" name="orders[0].productCode"  value="${ cart.productCode }">
 				<input type="hidden" name="orders[0].productName"  value="${ cart.productName }">
 				<input type="hidden"  name="orders[0].productAmount" value="${ cart.productAmount }">
+				<input type="hidden" name="totalprice" value="${totalprice}">
 			</form>
         
     <script>
@@ -155,7 +156,7 @@
 		
     	let form_contents = '';
     	let orderNumber = 0;
-    	let totalprice;
+    	let totalprice = 0;
     	$(".inner").each(function(index, element){
     	
     		if($(element).find(".individual_cart_checkbox").is(":checked") === true){	//체크여부
@@ -176,7 +177,9 @@
     		let productPrice_input = "<input name='orders[" + orderNumber + "].productPrice' type='hidden' value='" + productPrice + "'>";
     		form_contents += productPrice_input;
     		
+    		
     		totalprice += parseInt(productPrice);
+    		
     		orderNumber += 1;
     		
     		}
@@ -185,6 +188,7 @@
     		form_contents += totalprice_input;
     	});
     	
+    		console.log(form_contents);
     		$(".order_form").html(form_contents);
     		
     		$(".order_form").submit();

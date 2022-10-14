@@ -45,6 +45,11 @@ public class PaymentController {
 	}
 	
 	@GetMapping("/complete")
+	public String goComplete() {
+		
+		return "user/cart/complete";
+	}
+	@PostMapping("/complete")
 	public String complete() {
 		
 		return "user/cart/complete";
