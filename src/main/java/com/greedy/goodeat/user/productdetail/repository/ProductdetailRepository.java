@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.greedy.goodeat.common.entity.Product;
 
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+public interface ProductdetailRepository extends JpaRepository<Product, Integer> {
 
 	Product findByProductCode(Integer productCode);
 

@@ -18,7 +18,7 @@ import com.greedy.goodeat.common.paging.PagingButtonInfo;
 import com.greedy.goodeat.user.productdetail.hgdto.hgProductDTO;
 import com.greedy.goodeat.user.productdetail.hgdto.hgReviewDTO;
 import com.greedy.goodeat.user.productdetail.service.InquiryService;
-import com.greedy.goodeat.user.productdetail.service.ProductService;
+import com.greedy.goodeat.user.productdetail.service.ProductdetailService;
 import com.greedy.goodeat.user.productdetail.service.ReviewService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,33 +30,47 @@ public class ProductdetailController {
 	
 
 	private final ReviewService reviewService;
-	private final ProductService productService;
+	private final InquiryService inquiryService; 
+	private final ProductdetailService productdetailService;
 	private final MessageSourceAccessor messageSourceAccessor;
 
-	public ProductdetailController(ReviewService reviewService, ProductService productService,
+	public ProductdetailController(ReviewService reviewService, InquiryService inquiryService , ProductdetailService productdetailService,
 			MessageSourceAccessor messageSourceAccessor) {
 		this.reviewService = reviewService;
-		this.productService = productService;
+		this.productdetailService = productdetailService;
+		this.inquiryService = inquiryService;
 		this.messageSourceAccessor = messageSourceAccessor;
 	}
 
 	@GetMapping("/list")
-	public String productdetailList(Integer productCode, @RequestParam(defaultValue = "1") int page,
+	public String productdetailList(Integer productCode,
+			@RequestParam(defaultValue = "1") int page,
 			@RequestParam(required = false) String searchValue, Model model) {
 		// 리뷰리스트
-		hgProductDTO hgproduct = productService.selecthgProduct(productCode);
-
+		hgProductDTO hgproduct = productdetailService.selecthgProduct(productCode);
+		
 		log.info("hgproduct : {}", hgproduct);
 		model.addAttribute("hgproduct", hgproduct);
 
 		Page<hgReviewDTO> hgreviewList = reviewService.selectReviewList(page, searchValue);
+		Page<InquiryDTO> inquiryList = inquiryService.selectInquiryList(page, searchValue);
+		
+		PagingButtonInfo pagingin = Pagenation.getPagingButtonInfo(inquiryList);
 		PagingButtonInfo paging = Pagenation.getPagingButtonInfo(hgreviewList);
-
+		
+		//리뷰
 		log.info("hgreviewList : {}", hgreviewList);
 		log.info("paing : {}", paging);
 
 		model.addAttribute("hgreviewList", hgreviewList);
 		model.addAttribute("paging", paging);
+		
+		//문의
+		log.info("inquiryList : {}", inquiryList);
+		log.info("paingin : {}", pagingin);
+		
+		model.addAttribute("inquiryList", inquiryList);
+		model.addAttribute("pagingin", pagingin);
 
 		return "user/productdetail/product-list";
 	}
@@ -64,9 +78,11 @@ public class ProductdetailController {
 	
 	  //리뷰 등록
 	  
-	  @GetMapping("/regist") public String goRegist() {
+	  @GetMapping("/regist") 
+	  public String goRegist() {
 	  
-	  return "user/productdetail/review/registReview"; }
+	  return "user/productdetail/review/registReview"; 
+	  }
 	  
 	  @PostMapping("/regist") public String registReview(hgReviewDTO
 	  review, @AuthenticationPrincipal MemberDTO member, RedirectAttributes rttr) {
@@ -128,6 +144,45 @@ public class ProductdetailController {
 	 return "redirect:/"; 
 	 }
 	 
-
+	  //문의 상세확인
+	  
+	  @GetMapping("/detail/inquiry") public String selectInquiryDetail(Model model, Integer
+	  inquiryCode) {
+	  
+		  InquiryDTO inquiry = inquiryService.selectInquiryDetail(inquiryCode);
+	  
+	  log.info("inquiry : {}", inquiry); 
+	  model.addAttribute("inquiry", inquiry);
+	  
+	 return "user/inquiry/detailInquiry";
+	  
+	  }
+	  
+	  //문의 등록
+	  
+	  @GetMapping("/inquiry/regist") 
+	  public String goRegistInquiry() {
+	  
+	  return "user/inquiry/registInquiry"; 
+	  }
+	  
+	  @PostMapping("/inquiry/regist") 
+	  public String registInquiry(InquiryDTO inquiry, @AuthenticationPrincipal MemberDTO member, RedirectAttributes rttr) {
+	  
+	  member = new MemberDTO(); 
+	  member.setMemberNo(2);
+	  
+	  
+	  inquiry.setMember(member); 
+	  log.info("inquiry : {}", inquiry);
+	  inquiryService.registInquiry(inquiry);
+	  
+	  
+	  rttr.addFlashAttribute("message",
+	 messageSourceAccessor.getMessage("review.regist"));
+	  
+	  
+	  return "redirect:/user/productdetail/list?productCode=1"; }
+	  
 
 }

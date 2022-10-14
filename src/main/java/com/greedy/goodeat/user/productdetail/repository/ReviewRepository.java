@@ -15,7 +15,7 @@ public interface ReviewRepository extends JpaRepository<hgReview, Integer> {
 			"WHERE (r.reviewTitle LIKE '%' || :searchValue || '%' " +
 			   "OR r.reviewContent LIKE '%' || :searchValue || '%')")
 	Page<hgReview> findBySearchValue(@Param("searchValue") String searchValue, Pageable pageable);
-
+	
 	Page<hgReview> findByReviewStatus(String activeStatus, Pageable pageable);
 
 	hgReview findByReviewCode(Integer reviewCode); 
