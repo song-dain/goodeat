@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,7 +28,7 @@ public class AdmInquiryService {
 	
 	public static final int TEXT_PAGE_SIZE = 5;
 	public static final int THUMBNAIL_PAGE_SIZE = 9;
-	public static final String SORT_BY = "InquiryCode";
+	public static final String SORT_BY = "inquiryCode";
 
 	private final ModelMapper modelMapper;
 	private final AdmInquiryRepository admInquiryRepository;
@@ -83,7 +82,7 @@ public class AdmInquiryService {
 	public void removeReply(ReplyDTO removeReply) {
 		
 		Reply foundReply = admReplyRepository.findByReplyNo(removeReply.getReplyNo());
-		foundReply.setReplyStatus("N");
+		admReplyRepository.delete(foundReply);
 		
 	}
 }

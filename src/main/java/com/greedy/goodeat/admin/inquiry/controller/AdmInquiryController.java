@@ -10,7 +10,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +42,7 @@ public class AdmInquiryController {
 		this.messageSourceAccessor = messageSourceAccessor;
 	}
 	
-	@GetMapping("list")
+	@GetMapping("/list")
 	public String inquiryList(@RequestParam(defaultValue="1") int page, 
 			@RequestParam(required=false) String searchValue, Model model) {
 		

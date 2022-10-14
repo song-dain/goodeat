@@ -23,12 +23,13 @@
 	    
 		    <h1 id="login" class="text">로그인</h1>
 		        
-		       <form action="/login" method="post" align="center">
-			       <input type="text" name="username" class="text-field text" placeholder=" 아이디"><br>
-			       <input type="password" name="password" class="text-field text" placeholder=" 비밀번호"><br>
+		       <form action="/login" method="post" onsubmit="return checkInfo()">
+			       <input type="text" name="username" id="memberId" class="text-field text" placeholder=" 아이디"><br>
+			       <input type="password" name="password" id="memberPwd" class="text-field text" placeholder=" 비밀번호"><br>
 			       <input type="checkbox" name="remember-me"><label class="text"> 자동로그인</label><br><br>
 			       <input type="image" src="/images/user/info/loginbutton.png" width="295px"/><br>
 		       </form>
+		       
 		       <a th:href="@{/oauth2/authorization/google}"><img src="/images/user/info/googleBtn.png"/></a>
 		                
 		      <div id="links">
@@ -36,10 +37,36 @@
 		           <a th:href="@{findPwd}" class="text">비밀번호 찾기</a><br><br>
 		           <p class="text">아직 회원이 아니신가요? <a href="/join" class="text join">회원가입</a></p>
 		      </div>
+		      
 	      </div>
+	      
 	    </section>
     
     <div th:replace="user/common/footer.html"></div>
+    
+    <script>
+    
+    const memberId = document.getElementById("memberId");
+    const memberPwd = document.getElementById("memberPwd");
+    
+    
+    function checkInfo(){
+    	
+	   	 if(memberId.value.trim() == ''){
+			 alert('아이디를 확인해주세요.');
+			 memberId.focus();
+			 return false;
+	   	 }
+	   	 
+	   	 if(memberPwd.value.trim() == ''){
+			 alert('비밀번호를 확인해주세요.');
+			 memberPwd.focus();
+			 return false;
+	   	 }
+    	
+    }
+
+    </script>
 
 </body>
 </html>

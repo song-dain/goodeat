@@ -1,12 +1,16 @@
 package com.greedy.goodeat.user.productdetail.controller;
 
+
+
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.data.domain.Page;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -99,7 +103,8 @@ public class ProductdetailController {
 	 messageSourceAccessor.getMessage("review.regist"));
 	  
 	  
-	  return "redirect:/user/productdetail/list?productCode=1"; }
+	  return "redirect:/user/productdetail/list?productCode=1"; 
+	  }
 	  
 	  //리뷰 상세확인
 	  
@@ -116,20 +121,22 @@ public class ProductdetailController {
 	  
 	  //수정
 	  
-	  @GetMapping("/review/modify") public String midifyReview() {
+	  @GetMapping("/review/modify") 
+	  public String midifyReview() {
 	  
-	  return "user/productdetail/review/modifyReview"; }
+	  return "user/productdetail/review/modifyReview"; 
+	  }
 	  
-	  @PostMapping("/review/modify") public String modifyReview(Model model,
-	  hgReviewDTO review, RedirectAttributes rttr) {
+	  @PostMapping("/review/modify") 
+	  public String modifyReview(Model model, hgReviewDTO review, RedirectAttributes rttr) {
 	  
-	  reviewService.modifyReview(review);
+		  reviewService.modifyReview(review);
 	  
-	  rttr.addFlashAttribute("modifySuccessMessage",
-	  messageSourceAccessor.getMessage("review.modify"));
+		  rttr.addFlashAttribute("modifySuccessMessage",
+		  messageSourceAccessor.getMessage("review.modify"));
 	  
-	  log.info("[ReviewController] review: {}", review);
-	  model.addAttribute("review", review);
+		  log.info("[ReviewController] review: {}", review);
+		  model.addAttribute("review", review);
 	  
 	 return "redirect:/user/productdetail/list?productCode=1"; }
 	  
@@ -161,7 +168,7 @@ public class ProductdetailController {
 	  //문의 등록
 	  
 	  @GetMapping("/inquiry/regist") 
-	  public String goRegistInquiry() {
+	  public String goInquiryRegist() {
 	  
 	  return "user/inquiry/registInquiry"; 
 	  }
@@ -179,10 +186,48 @@ public class ProductdetailController {
 	  
 	  
 	  rttr.addFlashAttribute("message",
-	 messageSourceAccessor.getMessage("review.regist"));
+			  			messageSourceAccessor.getMessage("inquiry.regist"));
 	  
 	  
 	  return "redirect:/user/productdetail/list?productCode=1"; }
 	  
+	  //수정
+	  
+	  @GetMapping("/inquiry/modify") 
+	  public String goInquiryMidify(Model model, Integer
+			  inquiryCode) {
+		  
+		  InquiryDTO inquiry = inquiryService.selectInquiryDetail(inquiryCode);
+		  
+		  log.info("inquiry : {}", inquiry); 
+		  model.addAttribute("inquiry", inquiry);
+	  
+	  return "user/inquiry/modifyInquiry"; 
+	  }
+	  
+	  @PostMapping("/inquiry/modify") 
+	  public String modifyInquiry(Model model, InquiryDTO inquiry, RedirectAttributes rttr) {
+	  
+		  inquiryService.modifyInquiry(inquiry);
+	  
+		  rttr.addFlashAttribute("modifySuccessMessage",
+		  messageSourceAccessor.getMessage("inquiry.modify"));
+	  
+		  log.info("inquiry: {}", inquiry);
+		  model.addAttribute("inquiry", inquiry);
+	  
+	 return "redirect:/user/productdetail/list?productCode=1"; 
+	 }
 
+	  //삭제
+	  
+	  @GetMapping("/inquiry/delete") 
+	  public String deleteInquiry(@RequestParam
+	  Integer inquiryCode) {
+	  
+		  inquiryService.deleteInquiry(inquiryCode);
+	 
+		  return "redirect:/user/productdetail/list?productCode=1"; 
+	 }
+	  
 }

@@ -13,6 +13,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.greedy.goodeat.admin.inquiry.dto.ReplyDTO;
+
+import com.greedy.goodeat.admin.inquiry.dto.SYInquiryDTO;
+
 import com.greedy.goodeat.admin.inquiry.entity.Reply;
 import com.greedy.goodeat.admin.inquiry.repository.AdmReplyRepository;
 import com.greedy.goodeat.admin.review.repository.AdmReviewRepository;
@@ -62,6 +65,7 @@ public class AdmReviewService {
 		return modelMapper.map(reivew, ReviewDTO.class);
 	}
 
+
 	public void deleteReview(Integer reviewCode) {
 		Review deleteReview = admReviewRepository.findById(reviewCode).get();
 		admReviewRepository.delete(deleteReview);
@@ -85,14 +89,9 @@ public class AdmReviewService {
 		admReplyRepository.delete(foundReply);
 		
 	}
+
 	
-	
-	
-	
-	
-	
-	
-	
+
 	
 
 }

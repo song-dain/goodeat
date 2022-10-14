@@ -21,7 +21,7 @@
                 <input type="text" name="memberName" id="name" class="text-field text" placeholder=" 이름 2자 이상 입력"><br>
                 <input type="email" name="email" id="email" class="text-field text" placeholder=" 이메일 주소"><br><br><br>
                 <input type="image" src="/images/user/info/findbutton.png" id="findIdBtn"/>
-                <a href="/login"><img src="/images/user/info/cancelbutton.png" id="cancelBtn"/></a>
+                <a th:href="@{/login}"><img src="/images/user/info/cancelbutton.png" id="cancelBtn"/></a>
             </form>
     </section> 
     
@@ -48,8 +48,7 @@
 			 email.focus();
 			 return false;
 	   	 }
-	    	 
-	    	 
+ 
 	 }    
     </script>
  
