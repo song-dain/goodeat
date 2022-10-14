@@ -13,8 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.greedy.goodeat.user.member.service.AuthenticationService;
@@ -24,8 +22,7 @@ public class SpringSecurityConfiguration {
 	
 	private final AuthenticationService authenticationService;
 	
-	public SpringSecurityConfiguration(AuthenticationService authenticationService,
-			javax.sql.DataSource dataSource) {
+	public SpringSecurityConfiguration(AuthenticationService authenticationService) {
 		this.authenticationService = authenticationService;
 	}
 	
@@ -70,6 +67,10 @@ public class SpringSecurityConfiguration {
 				.rememberMeCookieName("remember-me")
 				.tokenValiditySeconds(60 * 60 *24 * 7)
 				.userDetailsService(authenticationService)
+			.and()
+				.oauth2Login()
+				.loginPage("/login")
+				.defaultSuccessUrl("/")
 			.and()
 				.build();
 	}

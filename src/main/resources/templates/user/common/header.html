@@ -16,23 +16,21 @@
         <div class="main-nav">
         	<th:block sec:authorize="isAnonymous()">
             <ul>
-                <li><a href="/login">로그인</a></li>
-                <li><a href="join">회원가입</a></li>
+                <li><a th:href="@{/login}">로그인</a></li>
+                <li><a th:href="@{join}">회원가입</a></li>
                 <li><a href="help-main">고객센터</a></li>
             </ul>
             </th:block>
             
-            <th:block sec:authorize="hasRole('ADMIN')">
-            <ul>
-            	<li><a th:href="@{/member/logout}" >로그아웃</a></li>
-                <li><a th:href="@{/admin/member}">관리 메뉴</a></li>
-            </ul>
-            </th:block>
-            
-        	<th:block sec:authorize="hasRole('MEMBER')">
+        	<th:block sec:authorize="isAuthenticated()">
             <ul>
                 <li><a th:href="@{/member/logout}">로그아웃</a></li>
-                <li><a href="mypage">My Page</a></li>
+                <th:block sec:authorize="hasRole('MEMBER')">
+	                <li><a th:href="@{mypage}">My Page</a></li>
+                </th:block>
+                <th:block sec:authorize="hasRole('ADMIN')">
+                <li><a th:href="@{/admin/member}">관리 메뉴</a></li>
+                </th:block>
                 <li><a href="help-main">고객센터</a></li>
             </ul>
             </th:block>

@@ -240,5 +240,6 @@ public class MemberController {
         return newAuth;
         
     }
+
 	
 }
