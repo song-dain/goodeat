@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +10,7 @@
     <link rel="stylesheet" th:href="@{/css/admin/inquiry/detailinquiry.css}">
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gamja+Flower&family=Gowun+Dodum&family=Poor+Story&display=swap" rel="stylesheet">
     <link rel ="icon" type="image/x-icom" th:href="@{/images/common/HEQXSRYC.ico}">
-    <script type="text/javascript" th:src="@{/js/event.js}"></script>
+    <script type="text/javascript"></script>
 </head>
 <body>
    
@@ -37,24 +38,25 @@
             	<input type="submit" class="btn-com" value="완료">
             </form>
              -->
-           <table id="replyWrite" style="margin:auto;">
-				<input type="hidden" id="inquiryCode" th:value="${inquiry.inquiryCode}"/>
-				<tr>
-					<td>댓글</td>
-					<td><textarea cols="40" rows="3" id="replyInquiryContent" style="resize:none;"></textarea></td>
-					<td><button type="button" id="registReply">작성하기</button></td>
-				</tr>
-			</table>
-			
-			<table id="replyResult" style="margin:auto;"></table>
-	    </div>
-    </div>
+         </div>
+    </div>   
+     
+    <table id="replyWrite">
+		<input type="hidden" id="inquiryCode" th:value="${inquiry.inquiryCode}"/>
+		<input type="hidden" id="member.memberNo" th:value="${inquiry.member.memberNo}"/>
+			<tr>
+				<td>댓글</td>
+				<td><textarea cols="40" rows="3" id="replyInquiryContent" style="resize:none;"></textarea></td>
+				<td><button type="button" id="registReply">작성하기</button></td>
+			</tr>
+	</table>
+	
+	<table id="replyResult" style="margin:auto;"></table>
+	    
      		
 	<script>
-		/* 댓글 관련 로직 - 비동기 요청 */
 		loadReply();
 		
-		/* 2. 댓글 로드 */
 		function loadReply() {
 			
 			if(document.getElementById("inquiryCode")) {
@@ -69,18 +71,13 @@
 			}
 			
 		}
-		/* 1. 댓글 작성 이벤트 */
+		
 		if(document.getElementById("registReply")) {
 			
 			const $registReply = document.getElementById("registReply");
-			const $replyBody = document.getElementById("replyInquiryContent");
+			const $replyInquiryContent = document.getElementById("replyInquiryContent");
 			
 			$registReply.onclick = function() {
-				
-				if(!$replyBody.value.trim()) {
-					alert("댓글을 입력해주세요");
-					return;
-				}
 				
 				const inquiryCode = document.getElementById("inquiryCode").value;
 				const replyInquiryContent = $replyInquiryContent.value;
@@ -103,10 +100,10 @@
 			}
 		}
 		
-		/* 3. 댓글 삭제 */
+		
 		function removeReply(replyNo) {
 			
-			fetch("/board/removeReply", {
+			fetch("/admin/inquiry/removeReply", {
 				method: "POST",
 				headers: {
 					'Content-Type': 'application/json; charset=UTF-8'
@@ -124,7 +121,7 @@
 		}
 		
 		
-		/* 댓글 데이터 테이블화 하는 함수 */
+		
 		function makeReplyTable(replyList) {
 			
 			const $table = document.querySelector("#replyResult");
@@ -141,8 +138,9 @@
 				$memberNameTd.textContent = reply.member.memberName;
 				$replyRegistDateTd.textContent = reply.replyRegistDate;
 				
-				
-				$buttonTd.innerHTML = `<button type='button' onclick='removeReply(${reply.replyNo})'>댓글삭제</button>`;
+				if('[[${#authentication.principal.memberNo}]]' == reply.member.memberNo) {
+					$buttonTd.innerHTML = `<button type='button' onclick='removeReply(${reply.replyNo})'>댓글삭제</button>`;
+				}
 				
 				$tr.append($replyInquiryContentTd, $memberNameTd, $replyRegistDateTd, $buttonTd);
 				$table.append($tr);

@@ -92,7 +92,7 @@ public class AdmInquiryController {
 	public ResponseEntity<List<ReplyDTO>> loadReply(ReplyDTO loadReply) {
 	
 		List<ReplyDTO> replyList = admInquiryService.loadReply(loadReply);
-		
+		log.info("[ReplyController] replyList : {}", replyList);
 		return ResponseEntity.ok(replyList);
 		
 	}

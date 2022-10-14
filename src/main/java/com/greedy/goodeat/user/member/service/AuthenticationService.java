@@ -47,7 +47,7 @@ public class AuthenticationService implements UserDetailsService {
         authorites.add(new SimpleGrantedAuthority(selectedMember.getMemberAuthority().getAuthorityName()));
         
         
-        return new User(selectedMember.getMemberId(), selectedMember.getMemberPwd(), authorites);
+        return new User(selectedMember.getMemberId(), selectedMember.getMemberPwd(),  authorites);
 
 	}
 
