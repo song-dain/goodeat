@@ -1,5 +1,8 @@
 package com.greedy.goodeat.admin.review.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -10,7 +13,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.greedy.goodeat.admin.inquiry.dto.ReplyDTO;
+
 import com.greedy.goodeat.admin.inquiry.dto.SYInquiryDTO;
+
 import com.greedy.goodeat.admin.inquiry.entity.Reply;
 import com.greedy.goodeat.admin.inquiry.repository.AdmReplyRepository;
 import com.greedy.goodeat.admin.review.repository.AdmReviewRepository;
@@ -61,14 +66,32 @@ public class AdmReviewService {
 	}
 
 
+	public void deleteReview(Integer reviewCode) {
+		Review deleteReview = admReviewRepository.findById(reviewCode).get();
+		admReviewRepository.delete(deleteReview);
+		
+	}
+
+	public void registReply(ReplyDTO registReply) {
+		admReplyRepository.save(modelMapper.map(registReply, Reply.class));
+		
+	}
+
+	public List<ReplyDTO> loadReply(ReplyDTO loadReply) {
+		List<Reply> replyList
+		= admReplyRepository.findByRefInquiryNo(loadReply.getRefInquiryNo());
+		
+		return replyList.stream().map(reply -> modelMapper.map(reply, ReplyDTO.class)).collect(Collectors.toList());
+	}
+
+	public void removeReply(ReplyDTO removeReply) {
+		Reply foundReply = admReplyRepository.findByReplyNo(removeReply.getReplyNo());
+		admReplyRepository.delete(foundReply);
+		
+	}
+
 	
-	
-	
-	
-	
-	
-	
-	
+
 	
 
 }

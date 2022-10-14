@@ -136,12 +136,41 @@
 }
 
 /* 삭제 버튼 클릭*/
+.btn-Nodel:active {
+    font-size: 20px;
+    box-shadow: 1px 1px 0 rgb(0,0,0,0.5);
+    position: relative;
+    top:2px;
+}
+
+.btn-Nodel {
+    width: 125px;
+    height: 50px;
+    font-size: 25px;
+    background-color :#FF0000;
+    color: white;
+    margin: 20px;
+    box-shadow: 2px 2px 2px 2px rgb(0,0,0,0.5);
+    border-radius: 8px;
+    float: right;
+}
+
+/* 삭제 버튼 마우스오버 */
+.btn-Nodel:hover{
+    background:whitesmoke;
+    color:#FF0000;
+    font-weight: bold;
+    
+}
+
+/* 삭제 버튼 클릭*/
 .btn-del:active {
     font-size: 20px;
     box-shadow: 1px 1px 0 rgb(0,0,0,0.5);
     position: relative;
     top:2px;
 }
+
 
 /* 완료 버튼 */
 .btn-com {
