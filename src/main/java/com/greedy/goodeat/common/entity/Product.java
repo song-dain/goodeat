@@ -63,7 +63,7 @@ public class Product {
 	private ProductCategory productCategory;
 	
 	@OneToMany(cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "REF_PRODUCT_CODE")
+	@JoinColumn(name = "PRODUCT_CODE")
 	private List<Addfile> AddfileList;
 
 }
