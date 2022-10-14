@@ -28,10 +28,10 @@ public class InquiryType {
 	@Id
 	@Column(name = "INQUIRY_TYPE_NO")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "INQUIRY_TYPE_SEQ_GENERATOR")
-	private Integer InquiryTypeNo;
+	private Integer inquiryTypeNo;
 	
 	@Column(name = "INQUIRY_TYPE_NAME")
-	private String InquiryTypeName;
+	private String inquiryTypeName;
 
 }
 	
