@@ -20,7 +20,7 @@
         	 <form id="productRegistForm" th:action="@{/admin/productRegist}"
 					th:method="post" enctype="multipart/form-data">
 			<div class="thumbnail-insert-area">
-            <table class="productTable1">
+            <table class="productTable6">
                 <tbody>
                 <tr>
                     <td class="td-left-class">상품명</td>
@@ -72,19 +72,20 @@
 	                <tr>
 	                    <td class="td-left-class">대표사진</td>
 	                    <td class="td-right-class">
-		                   <input type="file" id="productButton3" 
-		                   name="attachImage"accept="image/gif,image/jpeg,image/png">
+		                   <input type="file" name="attachImage"accept="image/gif,image/jpeg,image/png">
 		                 </td>
 	                </tr>
 	                <tr>
 	                    <td class="td-left-class">상세사진</td>
 	                    <td class="td-right-class">
-	                        <input type="file" id="productButton3"
-	                        name="attachImage"accept="image/gif,image/jpeg,image/png">
+	                        <input type="file" name="attachImage"accept="image/gif,image/jpeg,image/png">
+	                        <input type="file" name="attachImage"accept="image/gif,image/jpeg,image/png">
+	                        <input type="file" name="attachImage"accept="image/gif,image/jpeg,image/png">
 	                    </td>
 	                </tr>
 	                </tbody>
 	               </table>
+	               		<button type="reset" id="productButtonDelete">취소하기</button>
 	                    <input type="submit" value="저장" id="productButtonSave">
 	             </div>
              </form>

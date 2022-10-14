@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -20,6 +21,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "TBL_ADDFILE")
+@SequenceGenerator(name = "ADDFILE_SEQ_GENERATOR", sequenceName = "SEQ_ADDFILE_NO", initialValue = 1, allocationSize = 1)
 @DynamicInsert
 public class KjyAddfile {
 	
@@ -39,9 +41,6 @@ public class KjyAddfile {
 	
 	@Column(name = "FILE_TYPE")
 	private String fileType;
-	
-	@Column(name = "FILE_DIVISION")
-	private String fileDivision;
 	
 	@Column(name = "THUMBNAIL_ROUTE")
 	private String thumbnailRoute;
