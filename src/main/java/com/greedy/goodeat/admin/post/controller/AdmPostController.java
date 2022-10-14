@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/post")
 public class AdmPostController {
 	
 	private final AdmPostService admPostService;
@@ -38,7 +38,7 @@ public class AdmPostController {
 		this.messageSourceAccessor = messageSourceAccessor;
 	}
 	
-	@GetMapping("/post")
+	@GetMapping("/list")
 	public String fintPostList(Model model, @PageableDefault Pageable pageable) {
 		
 		log.info("[PostController] =======================");
