@@ -83,8 +83,8 @@
                         <td align="left">
                             <input type="text" name="email1" class="text-field email-button button" id="email1" placeholder="이메일 입력"/>
                             <select name="email2" id="email2">
-								<option>naver.com</option>
                                 <option>gmail.com</option>
+								<option>naver.com</option>
                                 <option>daum.net</option>
                                 <option>nate.com</option>
                                 <option>yahoo.co.kr</option>
@@ -94,7 +94,8 @@
                     <tr>
                         <td></td>
                         <td align="left"><input type="text" name="emailCode" class="text-field" id="emailCode" placeholder="이메일로 전송된 인증번호 입력"/>
-                            <input type="button" class="button check"  id="sendCodeBtn" value="이메일 인증"/></td>
+                            <input type="button" class="button check"  id="sendCodeBtn" value="이메일 인증"/>
+                        </td>
                     </tr>
                     <tr>
                         <td></td>
@@ -103,10 +104,10 @@
                     <tr>
                         <td align="right">성별</td>
                         <td align="left">
-                        <label for="man">남자</label>
-                        <input type="radio" name="gender" value="남" id="man">
-                        <label for="woman">여자</label>
-                        <input type="radio" name="gender" value="여" id="woman">
+	                        <label for="man">남자</label>
+	                        <input type="radio" name="gender" value="남" id="man">
+	                        <label for="woman">여자</label>
+	                        <input type="radio" name="gender" value="여" id="woman">
                         </td> 
                     </tr>
                     <tr>
@@ -203,9 +204,9 @@
                     <tr>
                         <td align="right">이용약관 <img src="/images/user/info/essential.png" width="5px" /></td>
                         <td align="left">
-                            <a href="https://dshop.dietshin.com/union_privacy.asp" class="links check">개인정보처리방침(필수)</a>
+                            <a th:href="@{https://dshop.dietshin.com/union_privacy.asp}" class="links check">개인정보처리방침(필수)</a>
                             <input type="checkbox" id="checkedAgreement" checked name="checkedAgreement" disabled/>
-                            <a href="https://dshop.dietshin.com/union_privacy.asp" class="links">마케팅정보제공</a>
+                            <a th:href="@{https://dshop.dietshin.com/union_privacy.asp}" class="links">마케팅정보제공</a>
                             <input type="checkbox" />
                         </td>
                     </tr>
@@ -303,7 +304,7 @@
 		 }
      }
      
-     if(document.getElementById("memberId")){
+     if(memberId){
 	     
 	     memberId.onkeyup = function () {
 	    	 
@@ -337,7 +338,7 @@
      }
     
 
-     if(document.getElementById("password")){
+     if(password){
     	 
     	 memberPwd.onkeyup = function() {
     		 
@@ -354,7 +355,7 @@
      }
      
      
-     if(document.getElementById("password2")){
+     if(password2){
     	 
     	 password2.onkeyup = function(){
     		 
@@ -373,7 +374,7 @@
      }
      
 
-     if(document.getElementById("memberName")){
+     if(memberName){
     	 
     	 memberName.onkeyup = function() {
     		 
@@ -389,7 +390,7 @@
      }
      
 
-     if(document.getElementById("phone")){
+     if(phone){
     	 
     	 phone.onkeyup = function() {
     		 
@@ -406,7 +407,7 @@
      
 	let sendCode = '';
 	
-	if(document.getElementById("email1")){ 
+	if(email1){ 
 		
 		sendCodeBtn.onclick = function(){
 			
@@ -429,13 +430,15 @@
 				body: JSON.stringify({email})
 			})
 				.then(result => result.text())
-				.then(result => sendCode = result)
-				.then(result => checkedEmail.innerHTML = '<div class="result"> 이메일로 인증번호가 전송되었습니다. <div>')
+				.then(result => {
+					sendCode = result
+					checkedEmail.innerHTML = '<div class="result"> 이메일로 인증번호가 전송되었습니다. <div>'
+				})
 				.catch((error) => error.text().then((res) => alert(res)));
 		}
 	}
 	 
-	 if(document.getElementById("emailCode")){
+	 if(emailCode){
 	 
 		emailCode.onkeyup = function(){
 			 
@@ -448,8 +451,6 @@
 				 return;
 			 } else {
 				 checkedEmail.innerHTML = '<div class="result"> 이메일이 인증되었습니다. <div>'
-/*  				 email1.readonly = true;
-				 email2.readonly = true; */
 				 return;
 			 }
 		 }

@@ -50,7 +50,6 @@ public class MemberService {
 		
 	}
 
-
 	public boolean selectMemberByIdAndEmail(String memberId, String email) {
 		
 		boolean isExist = false;
