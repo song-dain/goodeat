@@ -35,6 +35,15 @@ public class ProductListService {
 		
 		return productList.map(product -> modelMapper.map(product, ProductDTO.class));
 	}
+
+	public Page<ProductDTO> allProductList(int page) {
+		
+		Pageable pageable = PageRequest.of(page -1,  THUMBNAIL_PAGE_SIZE, Sort.by(SORT_BY).descending());
+		
+		Page<Product> productList = productListRepository.findByProductStatus(ACTIVE_STATUS, pageable);
+		
+		return productList.map(product -> modelMapper.map(product, ProductDTO.class));
+	}
 	
 
 
