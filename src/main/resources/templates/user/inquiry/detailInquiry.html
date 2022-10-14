@@ -40,8 +40,8 @@
 	        			<td th:text="${ inquiry.inquiryContent }"></td>
 	        		</tr>
 	        	</table>
-	        	<button type="submit" onclick="" class="btn-sl">수정</button>
-        		<button type="submit" value="메인으로" class="btn-sl2">뒤로가기</button>
+	        	<button type="submit" th:onclick="|location.href='/user/productdetail/inquiry/modify?inquiryCode=${inquiry.inquiryCode}'|" class="btn-sl">수정</button>
+        		<button type="submit" th:onclick="|location.href='/user/productdetail/inquiry/delete?inquiryCode=${inquiry.inquiryCode}'|" class="btn-sl2">삭제</button>
 	        </div>
 
     <!-- 푸터 부분 -->

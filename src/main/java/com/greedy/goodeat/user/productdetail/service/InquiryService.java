@@ -22,9 +22,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class InquiryService {
 	
-	public static final int TEXT_PAGE_SIZE = 5;
+	public static final int TEXT_PAGE_SIZE = 10;
 	public static final String SORT_BY = "inquiryCode";
-	public static final String ACTIVE_STATUS = "정상";
+	public static final String ACTIVE_STATUS = "답변";
 	
 	private final ModelMapper modelMapper;
 	private final InquiryRepository inquiryRepository;
@@ -61,13 +61,32 @@ public Page<InquiryDTO> selectInquiryList(int page, String searchValue) {
 	}
 
 	//등록
-		public void registInquiry(InquiryDTO inquiry) {
+	public void registInquiry(InquiryDTO inquiry) {
 			
 			inquiryRepository.save(modelMapper.map(inquiry, Inquiry.class));
 			
 		}
+	
+	//수정
+	public void modifyInquiry(InquiryDTO inquiry) {
+		
+		  log.info("[InquiryService] foundInquiry:{} ", inquiry); 
+		  Inquiry foundInquiry = inquiryRepository.findByInquiryCode(inquiry.getInquiryCode());
+		  
+		//log.info("[ReviewService] foundReview:{} ", foundReview);
+		  
+		  foundInquiry.setInquiryCode(inquiry.getInquiryCode());
+		  foundInquiry.setInquiryTitle(inquiry.getInquiryTitle());
+		  foundInquiry.setInquiryContent(inquiry.getInquiryContent());
+		  
+		  
+		  }
 
-
+	//삭제
+		public void deleteInquiry(Integer inquiryCode) {
+			Inquiry deleteInquiry = inquiryRepository.findById(inquiryCode).get();
+			inquiryRepository.delete(deleteInquiry);
+		}
 
 
 

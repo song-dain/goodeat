@@ -10,7 +10,6 @@ public class KjyAddfileDTO {
 	private String savedFileName;
 	private String savedRoute;
 	private String fileType;
-	private String fileDivision;
 	private String thumbnailRoute;
 	private Integer productCode;
 	

@@ -84,14 +84,13 @@ public class AdmProductController {
 		log.info("[ProductController] =======================");
 	
 		log.info("[ProductController] newProduct : {}",newProduct );
-		admProductService.registProduct(newProduct);
 		
 		log.info("[ProductController] =======================");
 		
 		
 		log.info("[ThumbnailController] ==========================================");
 		
-		log.info("[ThumbnailController] board request : {}", newProduct);
+		log.info("[ThumbnailController] product request : {}", newProduct);
 		log.info("[ThumbnailController] attachImage request : {}", attachImage);
 		
 		String rootLocation = IMAGE_DIR;
@@ -150,13 +149,9 @@ public class AdmProductController {
 					addfileList.add(fileInfo);
 				}
 			}
-			
-			log.info("[ThumbnailController] attachmentList : {}", addfileList);
-			
+		
 			newProduct.setAddfileList(addfileList);
 			
-			log.info("[ThumbnailController] thumbnail : {}", newProduct);
-		
 			
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
@@ -170,10 +165,16 @@ public class AdmProductController {
 				deleteThumbnail.delete();
 			}
 		}
+		
 
+		
+		admProductService.registProduct(newProduct);
+		
+		log.info("[ThumbnailController] FinlanewProduct : {}", newProduct);
 		
 		model.addAttribute("newProduct", newProduct);
 		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("product.regist"));
+		
 		
 		log.info("[ThumbnailController] ==========================================");
 		

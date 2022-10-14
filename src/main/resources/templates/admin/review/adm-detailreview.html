@@ -46,18 +46,137 @@
             	<div class="flexdiv">
             		<div id="reportdiv">신고 사유 : </div><div th:text="${ review.reasonReported}" id="detailReview"></div>
             	</div>
-                 <input type="submit" class="btn-del" value="삭제" th:onclick="|location.href='/admin/review/delete?reviewCode=${review.reviewCode}'|"> 
             </div>
+            <div id="deleteBox">
+            
+            <span th:if="${review.getReviewStatus().toString().equals('Y')}">
+        		<!-- 
+        		
+        		 -->
+        		<button class="btn-Nodel" type="button">삭제 불가</button>
+        	</span>
+            
+        	<span th:if="${review.getReviewStatus().toString().equals('N')}">
+        		<button class="btn-del" type="button" th:onclick="|location.href='/admin/review/delete?reviewCode=${review.reviewCode}'|">삭제</button>
+        	</span>
+        	
         </div>
     </div>
     <div class="wrapper-down">
         <div class="msbox-down">
             <div class="ms-down">답변</div><br>
-            <textarea class="res-box" form="inform" cols="40" rows="10" autofocus required wrap="hard"
-            placeholder="답변을 입력하세ㅛㅇ">
-            </textarea>
-            <button class="btn-com">등록</button> 
         </div>
     </div>
+    
+    <table id="replyWrite">
+		<input type="hidden" id="reviewCode" th:value="${review.reviewCode}"/>
+		<input type="hidden" id="member.memberNo" th:value="${review.member.memberNo}"/>
+			<tr>
+				<td>댓글</td>
+				<td><textarea cols="40" rows="3" id="replyReviewContent" style="resize:none;"></textarea></td>
+				<td><button type="button" id="registReply">작성하기</button></td>
+			</tr>
+	</table>
+	
+	<table id="replyResult" style="margin:auto;"></table>
+    
+    <script>
+		loadReply();
+		
+		function loadReply() {
+			
+			if(document.getElementById("reviewCode")) {
+				
+				fetch("/admin/review/loadReply?refReviewNo=" + document.getElementById("reviewCode").value)
+				.then(result => result.json())
+				.then(data => {
+					makeReplyTable(data);
+				})
+				.catch(error => console.log(error));
+				
+			}
+			
+		}
+		
+		if(document.getElementById("registReply")) {
+			
+			const $registReply = document.getElementById("registReply");
+			const $replyReviewContent = document.getElementById("replyReviewContent");
+			
+			$registReply.onclick = function() {
+				
+				const reviewCode = document.getElementById("reviewCode").value;
+				const replyReviewContent = $replyReviewContent.value;
+				
+				fetch("/admin/review/registReply", {
+					method: "POST",
+					headers: {
+						'Content-Type': 'application/json;charset=UTF-8'
+					},
+					body: JSON.stringify({
+						refReviewNo: reviewCode,
+						replyReviewContent: replyReviewContent
+					})
+				})
+				.then(data => {
+					console.log(data);
+					loadReply();
+				})
+				.catch(error => console.log(error));
+			}
+		}
+		
+		
+		function removeReply(replyNo) {
+			
+			fetch("/admin/review/removeReply", {
+				method: "POST",
+				headers: {
+					'Content-Type': 'application/json; charset=UTF-8'
+				},
+				body: JSON.stringify({
+					replyNo: replyNo
+				})
+			})
+			.then(result => {
+				console.log(result);
+				loadReply();
+			})
+			.catch(error => console.log(error));
+			
+		}
+		
+		
+		
+		function makeReplyTable(replyList) {
+			
+			const $table = document.querySelector("#replyResult");
+			$table.innerHTML = '';
+			
+			replyList.forEach(reply => {
+				const $tr = document.createElement('tr');
+				const $replyReviewContentTd = document.createElement('td');
+				const $memberNameTd = document.createElement('td');
+				const $replyRegistDateTd = document.createElement('td');
+				const $buttonTd = document.createElement('td');
+				
+				$replyReviewContentTd.textContent = reply.replyReviewContent;
+				$memberNameTd.textContent = reply.member.memberName;
+				$replyRegistDateTd.textContent = reply.replyRegistDate;
+				
+				if('[[${#authentication.principal.memberNo}]]' == reply.member.memberNo) {
+					$buttonTd.innerHTML = `<button type='button' onclick='removeReply(${reply.replyNo})'>댓글삭제</button>`;
+				}
+				
+				$tr.append($replyReviewContentTd, $memberNameTd, $replyRegistDateTd, $buttonTd);
+				$table.append($tr);
+			});
+			
+		}
+		
+		
+	</script> 
+    
+    
 </body>
 </html>

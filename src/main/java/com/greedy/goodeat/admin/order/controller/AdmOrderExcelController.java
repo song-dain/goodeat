@@ -63,34 +63,28 @@ public class AdmOrderExcelController {
 	  headerCell5.setCellValue("결제금액");
 	  
 	  Cell headerCell6 = headerRow.createCell(5);
-	  headerCell6.setCellValue("결제수단");
+	  headerCell6.setCellValue("회원아이디");
 	  
 	  Cell headerCell7 = headerRow.createCell(6);
-	  headerCell7.setCellValue("결제일");
+	  headerCell7.setCellValue("전화번호");
 	  
 	  Cell headerCell8 = headerRow.createCell(7);
-	  headerCell8.setCellValue("회원아이디");
+	  headerCell8.setCellValue("수령인");
 	  
 	  Cell headerCell9 = headerRow.createCell(8);
-	  headerCell9.setCellValue("전화번호");
+	  headerCell9.setCellValue("배송주소");
 	  
 	  Cell headerCell10 = headerRow.createCell(9);
-	  headerCell10.setCellValue("수령인");
+	  headerCell10.setCellValue("상세주소");
 	  
 	  Cell headerCell11 = headerRow.createCell(10);
-	  headerCell11.setCellValue("배송주소");
+	  headerCell11.setCellValue("우편번호");
 	  
 	  Cell headerCell12 = headerRow.createCell(11);
-	  headerCell12.setCellValue("상세주소");
+	  headerCell12.setCellValue("송장번호");
 	  
 	  Cell headerCell13 = headerRow.createCell(12);
-	  headerCell13.setCellValue("우편번호");
-	  
-	  Cell headerCell14 = headerRow.createCell(13);
-	  headerCell14.setCellValue("송장번호");
-	  
-	  Cell headerCell15 = headerRow.createCell(14);
-	  headerCell15.setCellValue("택배사");
+	  headerCell13.setCellValue("택배사");
 	
 	  // 바디에 데이터를 넣어줍니다
 	  for (JyOrderDTO dto : orderExcel) {
@@ -111,58 +105,36 @@ public class AdmOrderExcelController {
 	    Cell bodyCell5 = bodyRow.createCell(4);
 	    bodyCell5.setCellValue(dto.getAmountPay());
 
-	    // 아직 미해결
 	    Cell bodyCell6 = bodyRow.createCell(5);
-	    dto.getPayment().forEach(payment -> {
-    		 paymentMethod += payment.getPayMethod() + "\n";
- 	    });
-	    if(paymentMethod != null ) {
-	    	bodyCell6.setCellValue(paymentMethod);
-	    }else {
-	    	bodyCell6.setCellValue("내용없음");
-	    }
-	  
-	    // 아직 미해결
+	    bodyCell6.setCellValue(dto.getMember().getMemberId());
+	    
 	    Cell bodyCell7 = bodyRow.createCell(6);
-	    dto.getPayment().forEach(payment -> {
-   		 paymentDate += payment.getPayDate() + "\n";
-	    });
-	    if(paymentDate != null ) {
-	    	bodyCell7.setCellValue(paymentDate);
-	    }else {
-	    	bodyCell7.setCellValue("내용없음");
-	    }
-	  
+	    bodyCell7.setCellValue(dto.getMember().getPhone());
+	    
 	    Cell bodyCell8 = bodyRow.createCell(7);
-	    bodyCell8.setCellValue(dto.getMember().getMemberId());
+	    bodyCell8.setCellValue(dto.getDelivery().getRecipient());
 	    
 	    Cell bodyCell9 = bodyRow.createCell(8);
-	    bodyCell9.setCellValue(dto.getMember().getPhone());
+	    bodyCell9.setCellValue(dto.getDelivery().getDeliveryAddress());
 	    
 	    Cell bodyCell10 = bodyRow.createCell(9);
-	    bodyCell10.setCellValue(dto.getDelivery().getRecipient());
+	    bodyCell10.setCellValue(dto.getDelivery().getDeliveryDetailAddress());
 	    
 	    Cell bodyCell11 = bodyRow.createCell(10);
-	    bodyCell11.setCellValue(dto.getDelivery().getDeliveryAddress());
+	    bodyCell11.setCellValue(dto.getDelivery().getZipCode());
 	    
 	    Cell bodyCell12 = bodyRow.createCell(11);
-	    bodyCell12.setCellValue(dto.getDelivery().getDeliveryDetailAddress());
-	    
-	    Cell bodyCell13 = bodyRow.createCell(12);
-	    bodyCell13.setCellValue(dto.getDelivery().getZipCode());
-	    
-	    Cell bodyCell14 = bodyRow.createCell(13);
 	    if(dto.getDelivery().getInvoiceNo() != null ) {
-	    	 bodyCell14.setCellValue(dto.getDelivery().getInvoiceNo());
+	    	 bodyCell12.setCellValue(dto.getDelivery().getInvoiceNo());
 	    }else {
-	    	 bodyCell14.setCellValue("미입력");
+	    	 bodyCell12.setCellValue("미입력");
 	    }
 	    
-	    Cell bodyCell15 = bodyRow.createCell(14);
+	    Cell bodyCell13 = bodyRow.createCell(12);
 	    if(dto.getDelivery().getInvoiceNo() != null ) {
-	    	bodyCell15.setCellValue(dto.getDelivery().getDeliveryCompany());
+	    	bodyCell13.setCellValue(dto.getDelivery().getDeliveryCompany());
 	    }else {
-	    	 bodyCell15.setCellValue("미입력");
+	    	 bodyCell13.setCellValue("미입력");
 	    }
 	    	 
 	  }

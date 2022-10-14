@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.greedy.goodeat.common.dto.CartListDTO;
 import com.greedy.goodeat.common.entity.Cart;
 
 public interface CartRepository extends JpaRepository<Cart, Long> {
@@ -25,6 +26,12 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
 		    "WHERE MEMBER_NO = :memberid "
 		    ,nativeQuery = true)
 	List<Cart> findByMember(@Param("memberid") int memberid);
+
+	Cart findBycartCode(Integer cartCode);
+
+	
+
+	
 
 
 }

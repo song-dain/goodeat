@@ -3,6 +3,7 @@ package com.greedy.goodeat.admin.product.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -62,7 +63,7 @@ public class KjyProduct {
 	@JoinColumn(name = "CATEGORY_CODE")
 	private KjyProductCategory productCategory;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PRODUCT_CODE")
 	private List<KjyAddfile> addfileList;
 

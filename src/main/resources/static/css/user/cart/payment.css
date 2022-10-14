@@ -318,7 +318,7 @@ input[type="radio"] {
 }
 
 [class*="grid-area-"] > .colum, .grid-area > .colum {
-    float: left; */
+    float: left;
     display: inline-block;
     vertical-align: top;
     font-size: 14px;

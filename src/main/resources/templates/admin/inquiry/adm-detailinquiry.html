@@ -31,27 +31,27 @@
     <div class="wrapper-down">
         <div class="msbox-down">
             <div class="ms-down">답변</div><br>
-            <!-- 
-            <form th:action="@{/admin/inquiry/registReply}" method="post">
-            	<textarea class="res-box" form="inform" cols="40" rows="10" autofocus required wrap="hard"
-            	placeholder="답변을 입력하세ㅛㅇ"></textarea>
-            	<input type="submit" class="btn-com" value="완료">
-            </form>
-             -->
-         </div>
-    </div>   
-     
-    <table id="replyWrite">
+            <table id="replyWrite" class="">
 		<input type="hidden" id="inquiryCode" th:value="${inquiry.inquiryCode}"/>
 		<input type="hidden" id="member.memberNo" th:value="${inquiry.member.memberNo}"/>
 			<tr>
-				<td>댓글</td>
-				<td><textarea cols="40" rows="3" id="replyInquiryContent" style="resize:none;"></textarea></td>
-				<td><button type="button" id="registReply">작성하기</button></td>
+				<td style="border:none;"><textarea cols="40" rows="3" id="replyInquiryContent" 
+				style="resize:none;
+					   width: 110%;
+					   margin-left:5px;
+					   height: 150px;"></textarea></td>
+				<td style="border:none;
+						   float: right;
+						   margin-top:50%;"><button type="button" class="" id="registReply">작성하기</button></td>
 			</tr>
 	</table>
 	
-	<table id="replyResult" style="margin:auto;"></table>
+	<table id="replyResult" style="margin-top: 200px;
+								   float: left;"></table>
+         </div>
+    </div>   
+     
+    
 	    
      		
 	<script>

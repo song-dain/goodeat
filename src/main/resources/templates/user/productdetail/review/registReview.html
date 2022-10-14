@@ -38,13 +38,13 @@
         		<tr>
         			<td>주문 번호</td>
         			<td>	
-        				<input type="number" name="order.orderNo" class="filebox"/>
+        				<input type="text" name="order.orderNo" class="titlebox"/>
         			</td>
         		</tr>
         		<tr>
         			<td>상품 번호</td>
         			<td>	
-        				<input type="number" name="product.productCode" class="filebox"/>
+        				<input type="text" name="product.productCode" class="titlebox" />
         			</td>
         		</tr>
         		<tr>
@@ -57,8 +57,7 @@
         </table>
          <input type="submit" value="등록" class="btn-sl">
          <input type="submit" value="메인으로" class="btn-sl2">
-  </form>
-  <!-- <button onclick="location.href='/'" class="btn-sl2">메인으로</button>  -->     
+  </form>   
   </div>
        <!-- 푸터 부분 -->
  <div th:replace="user/common/footer.html"></div>

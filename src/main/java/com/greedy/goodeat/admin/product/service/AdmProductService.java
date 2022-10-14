@@ -2,6 +2,8 @@ package com.greedy.goodeat.admin.product.service;
 
 
 
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -12,6 +14,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.greedy.goodeat.admin.product.dto.KjyProductDTO;
+import com.greedy.goodeat.admin.product.entity.KjyAddfile;
 import com.greedy.goodeat.admin.product.entity.KjyProduct;
 import com.greedy.goodeat.admin.product.entity.KjyProductCategory;
 import com.greedy.goodeat.admin.product.repository.AdmProductRepository;
@@ -48,7 +51,6 @@ public class AdmProductService {
 	}
 
 	
-	@Transactional
 	public void registProduct(KjyProductDTO newProduct) {
 		
 		admProductRepository.save(modelMapper.map(newProduct, KjyProduct.class));
@@ -81,13 +83,6 @@ public class AdmProductService {
 		selecetProduct.setProductPrice(product.getProductPrice());
 		selecetProduct.setProductInventory(product.getProductInventory());
 		selecetProduct.setProductStatus(product.getProductStatus());
-	
-		
-		
 	}
 
-
-
-
-	
 }
