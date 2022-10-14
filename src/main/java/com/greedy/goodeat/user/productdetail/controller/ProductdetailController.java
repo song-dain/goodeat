@@ -108,7 +108,8 @@ public class ProductdetailController {
 	  
 	  //리뷰 상세확인
 	  
-	  @GetMapping("/detail") public String selectReviewDetail(Model model, Integer
+	  @GetMapping("/detail")
+	  public String selectReviewDetail(Model model, Integer
 	  reviewCode) {
 	  
 	  hgReviewDTO review = reviewService.selectReviewDetail(reviewCode);
@@ -122,8 +123,11 @@ public class ProductdetailController {
 	  //수정
 	  
 	  @GetMapping("/review/modify") 
-	  public String midifyReview() {
-	  
+	  public String midifyReview(Model model, Integer
+			  reviewCode) {
+		  hgReviewDTO review = reviewService.selectReviewDetail(reviewCode);
+		  
+		  log.info("review : {}", review); model.addAttribute("review", review);
 	  return "user/productdetail/review/modifyReview"; 
 	  }
 	  
