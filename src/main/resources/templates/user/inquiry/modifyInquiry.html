@@ -19,38 +19,36 @@
  
  <!-- 컨텐츠 부분 -->
   <div class="container">
-  <form th:action="@{/user/productdetail/review/modify}" method="post" enctype="multipart/form-data">
+  <form th:action="@{/user/productdetail/inquiry/modify}" method="post" enctype="multipart/form-data">
     <h1>문의 수정</h1>
         <table id="textbox" border="0">
         	<tr>
         		<tr>
-        		<td>게시글번호</td>
-        			<td><input type="number" class="titlebox" placeholder="게시물번호를 입력하세요" name="reviewCode"></td>
+	        		<td>문의번호</td>
+	        		<td><input name="inquiryCode" th:value="${inquiry.inquiryCode}"></td>
         		</tr>
-        	
         		<tr>
         		<td>제목</td>
-        			<td><input type="text" class="titlebox" placeholder="제목을 입력하세요" name="reviewTitle"></td>
+        			<td><input type="text" class="titlebox" placeholder="제목을 입력하세요" name="inquiryTitle"></td>
         		</tr>
         		<tr>
-        			<td>주문 번호</td>
-        			<td>	
-        				<input type="number" name="order.orderNo" class="filebox"/>
-        			</td>
+        		<td>문의 유형 번호</td>
+        			<td><input type="number" class="titlebox" placeholder="유형번호를 입력하세요" name="inquiryType.inquiryTypeNo"></td>
         		</tr>
         		<tr>
-        			<td>상품 번호</td>
-        			<td>	
-        				<input type="number" name="product.productCode" class="filebox"/>
-        			</td>
+        		<td>상품 번호</td>
+        			<td><input type="number" class="titlebox" placeholder="번호를 입력하세요" name="product.productCode"></td>
+        		</tr>
+        		<tr>
+	        		<td></td>
+	        		<td>#배송문의: 1, #상품문의:1, #결제문의:1, #환불/취소문의:1, #계정문의:1, #기타문의:1</td>
         		</tr>
         		<tr>
         			<td>내용</td>
         			<td>
-        				<textarea class="postbox" rows="20" placeholder="내용을 입력하세요" name="reviewContent"></textarea>
+        				<textarea class="postbox" rows="20" placeholder="내용을 입력하세요" name="inquiryContent"></textarea>
         			</td>
         		</tr>
-        	
         </table>
          <input type="submit" value="수정" class="btn-sl">
         </form>
