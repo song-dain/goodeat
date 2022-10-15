@@ -29,11 +29,13 @@
             <th:block th:each="product : ${ productList }">
             	<div align="center">
             		<div>
+            		<a href="/user/productdetail/list?productCode=1">
             			<th:block th:each="attachment : ${ product.AddfileList }">
             			
             			<img th:if="${ attachment.fileType == 'TITLE' }"
             				 th:src="${ attachment.thumbnailRoute }">
             			</th:block>
+            			</a>
             		</div>
             		<span th:text="${ product.productName }"></span>
             		<span th:text="${ product.productPrice } + '원'"></span>
