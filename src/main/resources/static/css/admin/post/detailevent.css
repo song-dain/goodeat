@@ -3,7 +3,7 @@
     left : 250px;
     top: 200px;
     width: 80%;
-    height: 60%;
+    height: 50%;
 }
 
 .titlebox {
@@ -13,7 +13,9 @@
     width: 100%;
 }
 
-
+#eventButtonList {
+	margin-left: 155px;
+}
 /* 등록 버튼 */
 .member-button {
     position : fixed;
@@ -211,6 +213,34 @@
     left : 250px;
     width: 160px;
     height: 5px;
+}
+
+#modifyTextArea {
+	width: 90%;
+	height: 250px;
+}
+
+.eventP {
+	margin-left: 50px;
+	font-size: 1.5em;
+}
+
+.eventTD {
+	height: 60px;
+	width: 13%;
+	font-size: 1.8em;
+	background-color: #293F54;
+	color: white;
+	border: 1px groove white;
+}
+
+#eventListButton {
+	margin-left:250px;
+}
+
+.textbox {
+	height: 500px;
+	width: 1000px;
 }
 
 .gong-head{

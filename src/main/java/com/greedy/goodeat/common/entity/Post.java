@@ -57,7 +57,7 @@ public class Post {
 	private PostType postType;
 
 	@Column(name="POST_REGISTDATE")
-	private java.sql.Date postResistDate;
+	private java.sql.Date postRegistDate;
 	
 	@Column(name="POST_MODIFYDATE")
 	private java.sql.Date postModifyDate;

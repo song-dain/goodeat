@@ -72,13 +72,20 @@
 		<input type="hidden" id="reviewCode" th:value="${review.reviewCode}"/>
 		<input type="hidden" id="member.memberNo" th:value="${review.member.memberNo}"/>
 			<tr>
-				<td>댓글</td>
-				<td><textarea cols="40" rows="3" id="replyReviewContent" style="resize:none;"></textarea></td>
-				<td><button type="button" id="registReply">작성하기</button></td>
+				<td style="border:none;"><textarea cols="40" rows="3" id="replyReviewContent" 
+				style="resize:none;
+					   width: 122.5%;
+					   margin-left:5px;
+					   height: 130px;"></textarea ></td>
+				<td style="border:none;
+						   float: right;
+						   margin-top:50%;"><button type="button" id="registReply" class="member-button"
+					 >작성하기</button></td>
 			</tr>
 	</table>
 	
-	<table id="replyResult" style="margin:auto;"></table>
+	<table id="replyResult" style="margin-top: 200px;
+								   float: left;"></table>
     
     <script>
 		loadReply();

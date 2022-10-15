@@ -24,22 +24,33 @@
     <div class="gong-head-box"></div>
     <div class="event-head-box"></div>
       <a class="gong-head" th:href="@{/admin/event/list}">이벤트</a>
-      <a class="event-head">공지사항</a>
+      <a class="event-head" th:href="@{/admin/post/list}">공지사항</a>
     
     
     <div id="textbox">
-    	<a class="a-memberNo">작성자 번호 : </a>
-	    <span th:text="${ post.member.memberNo }" class="memberNo"></span>
-	    <a class="a-postType">게시글 종류 : </a>
-	    <span th:text="${ post.postType.postType }" class="postType"> </span>
-	    <a class="a-postType">제목 : </a>
-	    <div th:text="${ post.postTitle }" class="postTitle"> </div>
-	    <a class="a-postContent">내용 </a>
+    	<div class="title-No">
+    		<div class="a-textContent">제목</div>
+		    <div th:text="${ post.postTitle }" class="postTitle" id="textContent"> </div>
+		    
+		    <div class="a-textContent" id="second-a">작성자 번호</div>
+			<div th:text="${ post.member.memberNo }" class="memberNo" id="textContent"></div>
+	    </div>
+	    
+	    <div class="type-date">
+		    <div class="a-textContent">게시글 종류</div>
+		    <div th:text="${ post.postType.postType }" class="postType" id="textContent"> </div>
+		    
+		    <div class="a-textContent" id="second-a">등록일</div>
+		    <div th:text="${ post.postRegistDate }" class="registDate" id="textContent"> </div>
+	    </div>
+	    
+	    <br>
+	    <div class="a-postContent">내용</div><br>
 	    <div th:text="${ post.postContent }" class="postContent"> </div>
     </div>
     
 	<input type="submit" class="member-button" value="수정" id="postModifyButton" th:onclick= "|location.href='/admin/post/modify?postCode=${post.postCode}'|">
-    <input type="submit" value="목록으로" id="eventButtonList" onclick="location.href='/admin/member'">
+    <input type="submit" class="member-button" value="목록으로" id="eventButtonList" onclick="location.href='/admin/post/list'">
     
     <input type="submit" class="btn-del" value="삭제" id="postDeleteButton" th:onclick= "|location.href='/admin/post/delete?postCode=${post.postCode}'|"/>
 	

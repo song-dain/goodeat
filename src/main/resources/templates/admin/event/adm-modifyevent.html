@@ -23,61 +23,59 @@
    
     <div class="gong-head-box"></div>
     <div class="event-head-box"></div>
-      <a class="gong-head">이벤트</a>
+      <a class="gong-head" th:href="@{/admin/post/list}">이벤트</a>
       <a class="event-head" th:href="@{/admin/post/list}">공지사항</a>
     	
     	
     <form action="/admin/event/modify" method="post">	
-    	<table id="textbox">
-	   		<tbody>
-	    		<tr>
-	    			<td class="eventTD">작성자</td>
-	    			<td class="eventTDtext">
-	    				<input type="text" th:placeholder="${ event.member.memberName }" class="eventP" name="member.memberName"/>
-	    			</td>
-	    		</tr>
-	    		<tr>
-	    			<td class="eventTD">작성자 번호</td>
-	    			<td class="eventTDtext">
-	    				<input type="number" th:placeholder="${ event.member.memberNo }" class="eventP" name="member.memberNo"/>
-	    			</td>
-	    		</tr>
-	    		<tr>
-	    			<td class="eventTD">수정 게시글 번호</td>
-	    			<td class="eventTDtext">
-	    				<input type="text" th:placeholder="${ event.postCode }" class="eventP" name="postCode"/>
-	    			</td>
-	    		</tr>
-	    		<tr>
-	    			<td class="eventTD">postType</td>
-	    			<td class="eventTDtext">
-	    				<select th:selected="${ event.postType.postTypeCode }" class="eventP" name="postType.postTypeCode">
-	    					<option value="1">공지사항</option>
-	    					<option value="2">이벤트</option>
-	    				</select>
-	    			</td>
-	    		</tr>
-	    		<tr>
-	    			<td class="eventTD">제목</td>
-	    			<td class="eventTDtext">
-	    				<input type="text" th:placeholder="${ event.postTitle }" class="eventP" name="postTitle"/>
-	    			</td>
-	    		</tr>
-	    		<tr>
-	    			<td class="eventTD">내용</td>
-	    			<td class="eventTDtext">
-	    				<textarea th:placeholder="${ event.postContent }" class="eventP" name="postContent" id="modifyTextArea"></textarea>
-	    			</td>
-	    		</tr>
-	    	</tbody>
-	    	
-    	</table>
-    	<!-- 
-    		<button class="member-button" type="submit">등록</button>
-    	 -->
-    	<input type="submit" value="저장" class="member-button">
+    	
+	    	<table id="textbox">
+		   		<tbody>
+		    		<tr>
+		    			<td class="eventTD">작성자</td>
+		    			<td class="eventTDtext">
+		    				<input type="text" th:placeholder="${ event.member.memberName }" class="eventP" name="member.memberName"/>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td class="eventTD">작성자 번호</td>
+		    			<td class="eventTDtext">
+		    				<input type="number" th:placeholder="${ event.member.memberNo }" class="eventP" name="member.memberNo"/>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td class="eventTD">수정 게시글 번호</td>
+		    			<td class="eventTDtext">
+		    				<input type="text" th:placeholder="${ event.postCode }" class="eventP" name="postCode"/>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td class="eventTD">postType</td>
+		    			<td class="eventTDtext">
+		    				<select th:selected="${ event.postType.postTypeCode }" class="eventP" name="postType.postTypeCode">
+		    					<option value="1">공지사항</option>
+		    					<option value="2">이벤트</option>
+		    				</select>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td class="eventTD">제목</td>
+		    			<td class="eventTDtext">
+		    				<input type="text" th:placeholder="${ event.postTitle }" class="eventP" name="postTitle"/>
+		    			</td>
+		    		</tr>
+		    		<tr>
+		    			<td class="eventTD">내용</td>
+		    			<td class="eventTDtext">
+		    				<textarea th:placeholder="${ event.postContent }" class="eventP" name="postContent" id="modifyTextArea"></textarea>
+		    			</td>
+		    		</tr>
+		    	</tbody>
+	    	</table>
+	    	<input type="submit" value="저장" class="member-button">
     </form>
+    <input type="submit" value="돌아가기" id="eventListButton" class="member-button" onclick="location.href='/admin/event/list'">
     
-    <input type="submit" value="돌아가기" id="eventListButton" onclick="location.href='/admin/event'">
+    
 </body>
 </html>
