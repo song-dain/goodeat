@@ -28,10 +28,14 @@
     
     
     <div id="textbox">
+    	<a class="a-memberNo">작성자 번호 : </a>
 	    <span th:text="${ post.member.memberNo }" class="memberNo"></span>
+	    <a class="a-postType">게시글 종류 : </a>
 	    <span th:text="${ post.postType.postType }" class="postType"> </span>
-	    <span th:text="${ post.postTitle }" class="postTitle"> </span>
-	    <span th:text="${ post.postContent }" class="postContent"> </span>
+	    <a class="a-postType">제목 : </a>
+	    <div th:text="${ post.postTitle }" class="postTitle"> </div>
+	    <a class="a-postContent">내용 </a>
+	    <div th:text="${ post.postContent }" class="postContent"> </div>
     </div>
     
 	<input type="submit" class="member-button" value="수정" id="postModifyButton" th:onclick= "|location.href='/admin/post/modify?postCode=${post.postCode}'|">
