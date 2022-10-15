@@ -27,8 +27,16 @@
 	
 }
 
-.postType {
+.a-memberNo {
+	font-size: 2em;
+}
+
+.a-postType {
 	margin-left:20%;
+}
+
+.postType {
+	
 }
 
 .postTitle {
