@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/user/main.css">
     <link rel="stylesheet" href="/css/user/main-contents.css">
     <script type="text/javascript" th:src="@{/js/product.js}"></script>
-    <title>Document</title>
+    <title>Main</title>
 </head>
 
 <body>
@@ -19,7 +19,6 @@
             <ul>
                 <li><a th:href="@{/login}">로그인</a></li>
                 <li><a th:href="@{/join}">회원가입</a></li>
-                <li><a href="help-main">고객센터</a></li>
             </ul>
             </th:block>
             
@@ -38,14 +37,14 @@
             
             <ul class="img-link">
                 <li>
-                    <a href="">
+                    <a >
                     <img src="/images/user/main/post.png"  style="width: 60px; height: 60px;">
                     </a>
                 </li>
                 <li>
-                    <button id="Cart">
+                    <a th:href="@{/user/cartList}">
                         <img src="/images/user/main/cart.png" style="width: 60px; height: 60px;">
-                    </button>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -77,22 +76,22 @@
                     </ul>
                 </li>
                 <li class="item">
-                    <a id="mil1">밀키트</a> 
+                    <a id="mil1" th:href="@{/user/mil}">밀키트</a> 
                 </li>
                 <li class="item">
-                    <a id="lunch1" >도시락</a>
+                    <a id="lunch1" th:href="@{/user/lunchbox}">도시락</a>
                 </li>
                 <li class="item">
-                    <a id="chicken1">닭가슴살</a>
+                    <a id="chicken1" th:href="@{/user/chicken}">닭가슴살</a>
                 </li>
                 <li class="item">
-                   <a id="convenince">간편식</a>
+                   <a id="convenince" th:href="@{/user/convenince}">간편식</a>
                 </li>
                 <li class="item">
-                  <a id= "vegan">비건</a>
+                  <a id= "vegan" th:href="@{/user/vegan}">비건</a>
                 </li>
                 <li class="item">
-                    <a id="post">공지사항/이벤트</a>
+                    <a id="post" th:href="@{/post/list}">공지사항/이벤트</a>
                     <!-- 드롭 다운 -->
                     <ul class="item-menu">
                         <li><a id="notice">공지사항</a></li>

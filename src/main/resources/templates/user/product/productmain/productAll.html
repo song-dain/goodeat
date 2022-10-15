@@ -29,8 +29,7 @@
             <th:block th:each="product : ${ productList }">
             	<div align="center">
             		<div>
-            			<th:block th:each="attachment : ${ product.AddfileList }">
-            			
+            			<th:block th:each="attachment : ${ product.AddfileList }" >        			
             			<img th:if="${ attachment.fileType == 'TITLE' }"
             				 th:src="${ attachment.thumbnailRoute }">
             			</th:block>

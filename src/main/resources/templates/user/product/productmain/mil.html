@@ -30,9 +30,9 @@
             	<div align="center">
             		<div>
             			<th:block th:each="attachment : ${ product.AddfileList }">
-            			
             			<img th:if="${ attachment.fileType == 'TITLE' }"
             				 th:src="${ attachment.thumbnailRoute }">
+
             			</th:block>
             		</div>
             		<span th:text="${ product.productName }"></span>
