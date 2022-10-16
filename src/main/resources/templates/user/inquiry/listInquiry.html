@@ -17,36 +17,35 @@
    
  
  <!-- 컨텐츠 부분 -->
-     <div id="section3" class="container-fluid bg-secondary">
+     <div id="section3" class="container-fluid bg-warning" >
         <section class="article-list">
-            <div class="table-con">
-            <p class="con">상품문의</p>
-            <button type="button" th:onclick="|location.href='/user/productdetail/inquiry/regist'|" class="btn-sel">등록</button>
+          <div class="table-con">
+            <p class="con">상품 문의</p>
+            <button type="button" th:onclick="|location.href='/user/productdetail/inquiry/regist'|" class="btn-sel" >등록</button>
             <table id="listArea" style="margin: auto;">
 				<tr>
 					<th style="width: 100px">순번</th>
-					<th style="width: 100px">문의유형</th>
 					<th style="width: 300px">제목</th>
+					<th style="width: 300px">문의유형</th>
 					<th style="width: 100px">작성자</th>
-					<th style="width: 100px">답변상태</th>
 					<th style="width: 150px">작성일</th>
-					<th style="width: 150px">수정일</th>
+					<th style="width: 300px">답변상태</th>
 				</tr>
 				<tr th:each="inquiry : ${ inquiryList }"
 				    th:onclick="|location.href='/user/productdetail/detail/inquiry?inquiryCode=${inquiry.inquiryCode}'|"
 				    style="cursor:pointer;">
 					<td th:text="${ inquiry.inquiryCode }"></td>
-					<td th:text="${ inquiry.inquiryType.inquiryTypeNo }"></td>
 					<td th:text="${ inquiry.inquiryTitle }"></td>
+					<td th:text="${ inquiry.inquiryType.inquiryTypeNo }"></td>
 					<td th:text="${ inquiry.member.memberName }"></td>
-					<td th:text="${ inquiry.inquiryStatus }"></td>
 					<td th:text="${ inquiry.inquiryRegistDate }"></td>
-					<td th:text="${ inquiry.inquiryModifyDate }"></td>
+					<td th:text="${ inquiry.inquiryStatus }"></td>
 				</tr>
 			</table>
-			</div>
-            </section> 
         </div>
+        
+        </section>
+	  </div>
  
  </body>
  </html>
