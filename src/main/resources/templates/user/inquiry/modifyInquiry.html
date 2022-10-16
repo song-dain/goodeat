@@ -24,29 +24,25 @@
         <table id="textbox" border="0">
         	<tr>
         		<tr>
-	        		<td>문의번호</td>
-	        		<td><input name="inquiryCode" th:value="${inquiry.inquiryCode}"></td>
+	        		<td></td>
+	        		<td><input name="inquiryCode" th:value="${inquiry.inquiryCode}" style="border:none" readonly type="hidden"/></td>
         		</tr>
         		<tr>
         		<td>제목</td>
-        			<td><input type="text" class="titlebox" placeholder="제목을 입력하세요" name="inquiryTitle"></td>
+        			<td><input type="text" class="titlebox" name="inquiryTitle" th:value="${inquiry.inquiryTitle}"></td>
         		</tr>
         		<tr>
-        		<td>문의 유형 번호</td>
-        			<td><input type="number" class="titlebox" placeholder="유형번호를 입력하세요" name="inquiryType.inquiryTypeNo"></td>
+        		<td></td>
+        			<td><input type="hidden" name="inquiryType.inquiryTypeNo" th:value="${inquiry.inquiryType.inquiryTypeNo}" style="border:none"readonly/></td>
         		</tr>
         		<tr>
-        		<td>상품 번호</td>
-        			<td><input type="number" class="titlebox" placeholder="번호를 입력하세요" name="product.productCode"></td>
-        		</tr>
-        		<tr>
-	        		<td></td>
-	        		<td>#배송문의: 1, #상품문의:1, #결제문의:1, #환불/취소문의:1, #계정문의:1, #기타문의:1</td>
+        		<td></td>
+        			<td><input type="hidden" name="product.productCode" th:value="${inquiry.product.productCode}" style="border:none"readonly></td>
         		</tr>
         		<tr>
         			<td>내용</td>
         			<td>
-        				<textarea class="postbox" rows="20" placeholder="내용을 입력하세요" name="inquiryContent"></textarea>
+        				<textarea class="postbox" rows="22" placeholder=" 1(배송문의) | 2(상품문의) | 3(결제문의) | 4(환불/취소문의) | 5(계정문의) | 6(기타문의) | 상세하게 작성 부탁드립니다.(최대 2000자)" name="inquiryContent" th:value="${inquiry.inquiryContent}" ></textarea>
         			</td>
         		</tr>
         </table>

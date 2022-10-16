@@ -25,6 +25,141 @@
                 
         <div class="grid-list-wrap">
             <div class="page-sorting-box">
+
+                <p class="total">
+                    <span>밀키트</span> 상품
+                </p>
+                <div class="right-func">
+                     <div class="select-box" data-value="100">
+                        
+                        <select name="option" id="option">
+                            <option value="p-high">가격높은순</option>
+                            <option value="p-low">가격낮은순</option>
+                            <option value="k-high">오름차순</option>
+                            <option value="k-low">내림차순</option>
+                         </select>
+                         
+                    </div>
+
+                    <button type="button" class="btn-detail-search ui-toggle-btn">
+                        <a  title="select" class="select-value">
+                            <span>상세검색</span>
+                        </a>
+                    </button>
+                </div> 
+
+            </div>
+<!--        상세검색 입력 폼?
+            <div class="detail-search-box hide">
+                <form></form>
+            </div>
+!-->
+
+            <!-- 상품 list -->
+            <div class="product-list row">
+                <div class="product-box cell">
+                    <div class="img-box">
+
+                        <a href="#">
+                            <img class="milkit" src="/images/user/product/milkit/mill1.png">
+
+                        <a th:text="@{/list?productCode=${hgproduct.productCode}}">
+                            <img class="milkit" src="../source/images/밀키트/밀키트 사진 1.png">
+
+                        </a>
+                    </div>
+                    <div class="text-box"></div>
+                        <span class="mil-text1">주말 닭가슴살 식단 패키지A </span>
+                    <div class="price-box">
+                        <span class="mil-price1"><b>21,400원</b></span>
+                    </div>
+                </div>
+                <div class="product-box cell">
+                    <div class="img-box">
+                        <a href="#">
+                            <img class="milkit" src="/images/user/product/milkit/mill2.png">
+                        </a>
+                    </div>
+                    <div class="text-box"></div>
+                        <span class="mil-text2">주말 닭가슴살 식단 패키지B </span>
+                    <div class="price-box">
+                        <span class="mil-price2"><b>22,000원</b></span>
+                    </div>
+                </div>
+                <div class="product-box cell">
+                    <div class="img-box">
+                        <a href="#">
+                            <img class="milkit" src="/images/user/product/milkit/mill3.png">
+                        </a>
+                    </div>
+                    <div class="text-box"></div>
+                        <span class="mil-text3">주말 닭가슴살 식단 패키지A </span>
+                    <div class="price-box">
+                        <span class="mil-price3"><b>49,400원</b></span>
+                    </div>
+                </div>
+                <div class="product-box cell">
+                    <div class="img-box">
+                        <a href="#">
+                            <img class="milkit" src="/images/user/product/milkit/mill4.png">
+                        </a>
+                    </div>
+                    <div class="text-box"></div>
+                        <span class="mil-text1">평일 닭가슴살 식단 패키지B </span>
+                    <div class="price-box">
+                        <span class="mil-price1"><b>52,000원</b></span>
+                    </div>
+                </div>
+
+                <div class="product-box cell">
+                    <div class="img-box">
+                        <a href="#">
+                            <img class="milkit" src="/images/user/product/milkit/mill5.png">
+                        </a>
+                    </div>
+                    <div class="text-box"></div>
+                        <span class="mil-text5">돼지고기 숙주볶음 </span>
+                    <div class="price-box">
+                        <span class="mil-price5"><b>13,000원</b></span>
+                    </div>
+                </div>
+                <div class="product-box cell">
+                    <div class="img-box">
+                        <a th:href="@{}">
+                            <img class="milkit" src="/images/user/product/milkit/mill6.png">
+                        </a>
+                    </div>
+                    <div class="text-box"></div>
+                        <span class="mil-text6">채근담 떡국 </span>
+                    <div class="price-box">
+                        <span class="mil-price6"><b>10,000원</b></span>
+                    </div>
+                </div>
+                <div class="product-box cell">
+                    <div class="img-box">
+                        <a href="#">
+                            <img class="milkit" src="/images/user/product/milkit/mill7.png">
+                        </a>
+                    </div>
+                    <div class="text-box"></div>
+                        <span class="mil-text7">차돌박이 순두부 찌개 </span>
+                    <div class="price-box">
+                        <span class="mil-price7"><b>14,000원</b></span>
+                    </div>
+                </div>
+                <div class="product-box cell">
+                    <div class="img-box">
+                        <a href="#">
+                            <img class="milkit" src="/images/user/product/milkit/mill8.png">
+                        </a>
+                    </div>
+                    <div class="text-box"></div>
+                        <span class="mil-text1">바삭한 해물부추전 </span>
+                    <div class="price-box">
+                        <span class="mil-price1"><b>13,900원</b></span>
+                    </div>
+                </div>
+
             
             <th:block th:each="product : ${ productList }">
             	<div align="center">

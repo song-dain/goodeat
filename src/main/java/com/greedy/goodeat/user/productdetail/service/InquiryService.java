@@ -88,6 +88,11 @@ public Page<InquiryDTO> selectInquiryList(int page, String searchValue) {
 			inquiryRepository.delete(deleteInquiry);
 		}
 
+		public InquiryDTO selectInquiry(Integer inquiryCode) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
 
 
 
