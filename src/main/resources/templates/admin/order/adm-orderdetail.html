@@ -62,6 +62,12 @@
 	                        <p id="td-right" th:each="orderProduct : ${ order.orderProduct }" th:text="${ orderProduct.product.productName }"/>
 	                    </td>
 	               </tr>
+	               <tr>
+	                    <td class="td-left-class">주문수량</td>
+	                    <td>
+	                        <p id="td-right" th:each="orderProduct : ${ order.orderProduct }" th:text="${ orderProduct.orderAmount } + '개'"/>
+	                    </td>
+	               </tr>
                 <tr>
                     <td class="td-left-class">주문일시</td>
                     <td class="td-right-class">
@@ -84,20 +90,20 @@
                 </tr>
                 <tr>
                     <td class="td-left-class">결제금액</td>
-                    <td class="td-right-class">
-                        <p th:text="${ order.amountPay }" id="detailProduct"/>
+                    <td>
+                        <p id="td-right" th:text="${ order.amountPay } + '원'"/>
                     </td>
                 </tr>
                 <tr>
                     <td class="td-left-class">결제수단</td>
-                    <td class="td-right-class">
-                        <p th:each="payment : ${ order.payment }" th:text="${ payment.payMethod }"/>
+                    <td>
+                        <p id="td-right" th:each="payment : ${ order.payment }" th:text="${ payment.payMethod }"/>
                     </td>
 	             </tr>
 	               <tr>
 	                    <td class="td-left-class">결제일</td>
-	                    <td class="td-right-class">
-	                        <p th:each="payment : ${ order.payment }" th:text="${ payment.payDate }"/>
+	                    <td>
+	                        <p id="td-right" th:each="payment : ${ order.payment }" th:text="${ payment.payDate }"/>
 	                    </td>
 	              </tr>
                  <tr>
@@ -137,7 +143,6 @@
                         <p th:text="'송장번호 : ' + ${ order.delivery?.invoiceNo } + ' / ' + ' 택배사 : ' + ${ order.delivery?.deliveryCompany }" 
                            th:if="${ order.delivery } ne null" id="detailProduct"/>
                     </td>
-                  
                 </tr>
                   <tr>
                     <td class="td-left-class">문자발송</td>
@@ -145,13 +150,13 @@
                          <form th:action="@{sms/send}" method="post">
 	                       		<input type="hidden" name = "to" th:value="${order.member.phone}"/>
 	                       		<input type="hidden" name = "content" th:value="'[굿잇] 송장번호 : ' + ${order.delivery.invoiceNo} + ' 택배사 : ' + ${order.delivery.deliveryCompany}"/>
-                        	<button id= "orderButtonSms">문자발송</button>
+                        	<button id= "orderButtonDelivery">문자발송</button>
                         	<p style="font-size:13px; margin-left:10px; color:red; font-weight: bold;" >
                         	고객님께 택배정보를 전송하시려면 문자발송을 눌러주세요.<br>문자발송 버튼 클릭시 바로 전송됩니다.</p>
                        </form>
                     </td>
                 </tr>
-             </table>
+             </table><br/>
                  
 	                 
 	      <form action="/admin/deliveryModify" method="post">

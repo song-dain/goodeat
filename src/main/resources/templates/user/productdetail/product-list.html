@@ -21,7 +21,12 @@
     <div class="product-top">
         <ul>
             <li class="pt-img">
-                <img src="/images/user/product/milkit/mill6.png" alt="밀키트">
+
+             
+
+                <img th:if="${ attachment.fileType == 'TITLE' }"
+            				 th:src="${ attachment.thumbnailRoute }" alt="밀키트">
+
             </li>
             <li class="right-te">
                 <h4 th:text="${ hgproduct.productName }"></h4>

@@ -13,6 +13,42 @@
     width: 100%;
 }
 
+#textbox {
+	
+	position : fixed;
+	top : 250px;
+	left : 250px;
+	background-color : grey;
+	height: 450px;
+}
+
+.memberNo {
+	font-size: 2em;
+	
+}
+
+.a-memberNo {
+	font-size: 2em;
+}
+
+.a-postType {
+	margin-left:20%;
+}
+
+.postType {
+	
+}
+
+.postTitle {
+	
+}
+
+.postContent {
+	
+}
+
+
+
 
 /* 등록 버튼 */
 .member-button {

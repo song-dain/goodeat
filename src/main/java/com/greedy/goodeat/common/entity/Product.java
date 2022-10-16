@@ -62,7 +62,7 @@ public class Product {
 	@JoinColumn(name = "CATEGORY_CODE")
 	private ProductCategory productCategory;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "PRODUCT_CODE")
 	private List<Addfile> AddfileList;
 

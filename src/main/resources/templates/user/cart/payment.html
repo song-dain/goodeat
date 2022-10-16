@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/user/cart/payment.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" th:src="@{/js/event.js}"></script>
+     
     <title>결제페이지</title>
 </head>
 <body>
@@ -25,7 +26,11 @@
                 </div>
                 <div class="order-address">
                     <ul class="info-txt">
-                        <li>홍길동 01012345678 lee@naver.com</li>
+                        <li> 
+                        <p th:text="${ member.memberName }"></p>
+                        <p th:text="${ member.phone }"></p>
+                        <p th:text="${ member.email }"></p>
+                       	</li>
                     </ul>
                     <span>주문자 정보변경</span>
                 </div>
@@ -40,16 +45,23 @@
                         </colgroup>
                         <tbody>
                             <tr>
-                                <th scope="row">받는분</th>
+                                <th scope="row">
+                                	<p th:text="${ member.memberName }"></p>
+                                </th>
                                 <td>홍길동</td>
                             </tr>
                             <tr>
                                 <th scope="row">주소</th>
-                                <td>서울시 종로구 종로3가</td>
+                                <td>
+                                <p th:text="${ member.address }"></p><br>
+                                <p th:text="${ member.detailAddress }"></p>
+                                </td>
                             </tr>
                             <tr>
                                 <th scope="row">휴대전화</th>
-                                <td> 010-1234-5678</td>
+                                <td>
+                                	<p th:text="${ member.phone }"></p>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -59,40 +71,23 @@
                     <ul class="cart-list">
                         <li id="cart-list-img">
                             <div class="prd-info-area cart-info-area">
-                                <div class="inner">
-                                    <div class="column img">
-                                        <img src="../source/images/dosi_md.png" alt="상품이미지">
-                                    </div>
-                                    <div class="column tit">
-                                        <p class="desc">비건 도시락 맛있어요</p>
-                                        <p class="desc"> </p>
-                                        <ul class="price-item">
-                                            <li>
-                                                <span class="num">22,900</span>
-                                                원
-                                            </li>
-    
-                                        </ul>
-                                    </div>
-                                    <div class="column qty">
-                                        <div class="qty-group">
-                                            <button type="button" class="btn-qty cart"></button>
-                                            <input type="text" value="1">
-                                            <button type="button" class="btn-qty cart"></button>
-                                        </div>
-                                    </div>
-                                    <div class="column price">
-                                        <div class="price-div">
-                                            <span class="num cart-price">22,900</span>
+                                <div class="inner" th:each="ord : ${ order }">   
+                            	<div class="column img">
+                                    <img src="../source/images/dosi_md.png" alt="상품이미지">
+                                </div>
+                                <div class="column tit">
+                                    <p class="desc" th:text="${ ord.productName }"></p>
+                                    <p class="desc"> </p>
+                                    <ul class="price-item">
+                                        <li>
+                                            <span class="num" th:text="${ ord.productPrice }"></span>
                                             원
-                                        </div>
-                                    </div>
-                                    <div class="column btn">
-                                        <button type="button"></button>
-                                    </div>
+                                        </li>
+
+                                    </ul>
                                 </div>
                             </div>
-                            
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -178,10 +173,12 @@
                 </div>
 
                 <div class="btn-bottom-area">
-                    <a class="btn-basic-xxlg btn-primary-ex" id="order">
+                    <a class="btn-basic-xxlg btn-primary-ex">
                         <span>
-                            <em class="text-num-bold totalOrderPrice">22,990</em>
-                            원 주문하기
+                            <em class="text-num-bold totalOrderPrice">
+                            <button onclick="requestPay()">결제하기</button>
+                            </em>
+                            
                         </span>
                     </a>
                 </div>
@@ -193,5 +190,52 @@
     </div>
     
     <div th:replace="user/common/footer.html"></div>
+    
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+    <script>
+    
+    function requestPay() {
+        // IMP.request_pay(param, callback) 결제창 호출
+        const IMP = window.IMP; // 생략 가능
+      	IMP.init("imp22150463"); // Example: imp00000000
+      	
+        IMP.request_pay({ // param
+      	  pg: "kakaopay.TC0ONETIME",
+            pay_method: "card",
+            merchant_uid: 'merchant_'+new Date().getTime(),
+            name: "GOODEAT결제요청",
+            amount: '[[${ordertotal}]]',
+            buyer_email: '[[${member.email}]]',
+            buyer_name: '[[${member.memberName}]]',
+            buyer_tel: '[[${member.phone}]]',
+            buyer_addr: '[[${member.address}]]',
+            buyer_postcode: "01181"
+            
+        }, function(rsp) {
+            if ( rsp.success ) {
+            	jQuery.ajax({
+                    url: "/user/complete", // 예: https://www.myservice.com/payments/complete
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    data: {
+                        payHistoryCode: rsp.merchant_uid,
+                        payMethod: rsp.pay_method
+                        
+                    }
+                }).done(function (data) {
+                  // 가맹점 서버 결제 API 성공시 로직
+                	alert("결제에 성공하였습니다.");
+                	location.href = "/user/complete";
+                })
+              } else {
+                alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+              }
+        });
+      }
+    
+  </script>
 </body>
 </html>

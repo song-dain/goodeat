@@ -53,18 +53,32 @@
           <tr>
             <td class="tg-0pky">검색어</td>
             <td class="tg-0lax">
-                <input type="text" class="member-bar" placeholder="고객 아이디를 입력하세요">
+                <!-- 
+                	<input type="text" class="member-bar" placeholder="고객 아이디를 입력하세요">
+                 -->
+                 <form id="searchForm" th:action="@{/admin/review/list}" method="get">
+                	<th:block th:if="${ searchValue != null}">
+                		<input type="search" id="searchValue" name="searchValue" th:value="${ searchValue }">
+                	</th:block>
+                	<th:block th:if="${ searchValue == null}">
+                		<input type="search" id="searchValue" name="searchValue" placeholder="리뷰 제목, 내용, 또는 회원 아이디로 검색하세요"
+                		style="width:97%;
+                			   height:40px;
+                			   font-size: 1.1em;">
+                	</th:block>
+                	<button class="member-button" type="submit">검색</button>
+                </form>
             </td>
           </tr>
         </tbody>
     </table>
-    <button class="member-button">검색</button>
+    
     <table class="tg2">
         <thead>
           <tr class="headline2">
             <th class="tg2-lboi">번호</th>
             <th class="tg2-lboi">제목</th>
-            <th class="tg2-lboi" id="manager">관리자</th>
+            <th class="tg2-lboi" id="manager">작성자</th>
             <th class="tg2-lboi">상태</th>
           </tr>
         </thead>
@@ -78,6 +92,70 @@
 				<td th:text="${ review.reviewStatus }"></td>
 		    </tr>
         </tbody>
-        </table>  
+        </table>
+	 
+        <!-- 페이징 바 --> 
+		<div id="paging" align="center">
+
+			<th:block th:if="${ searchValue != null }">
+				<!-- 맨 앞으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/review/list?page=' + @{${paging.startPage}} + '&searchValue=' + @{${searchValue}} + '\''"><<</button>
+
+				<!-- 이전 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/review/list?page=' + @{${paging.currentPage - 1}} + '&searchValue=' + @{${searchValue}} + '\''"
+					th:disabled="${ reviewList.first }"><</button>
+
+				<!-- 숫자 버튼 -->
+				<th:block
+					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+					<button
+						th:onclick="'location.href=\'/admin/review/list?page=' + @{${page}} + '&searchValue=' + @{${searchValue}} + '\''"
+						th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
+					</button>
+				</th:block>
+
+				<!-- 다음 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/review/list?page=' + @{${paging.currentPage + 1}} + '&searchValue=' + @{${searchValue}} + '\''"
+					th:disabled="${ reviewList.last }">></button>
+
+				<!-- 맨 끝으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/review/list?page=' + @{${paging.endPage}} + '&searchValue=' + @{${searchValue}} + '\''">>></button>
+
+			</th:block>
+			
+			<th:block th:if="${ param.searchValue == null || param.searchValue.isEmpty() }">
+				<!-- 맨 앞으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/review/list?page=' + @{${paging.startPage}} + '\''"><<</button>
+
+				<!-- 이전 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/review/list?page=' + @{${paging.currentPage - 1}} + '\''"
+					th:disabled="${ reviewList.first }"><</button>
+				
+				<!-- 숫자 버튼 -->
+				<th:block
+					th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+					<button
+						th:onclick="'location.href=\'/admin/review/list?page=' + @{${page}} + '\''"
+						th:text="${ page }" th:disabled="${ paging.currentPage eq page }">
+					</button>
+				</th:block>
+
+				<!-- 다음 페이지로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/review/list?page=' + @{${paging.currentPage + 1}} + '\''"
+					th:disabled="${ reviewList.last }">></button>
+				
+				<!-- 맨 끝으로 이동 -->
+				<button
+					th:onclick="'location.href=\'/admin/review/list?page=' + @{${paging.endPage}} + '\''">>></button>
+			</th:block>
+		</div>  	
+		
 </body>
 </html>

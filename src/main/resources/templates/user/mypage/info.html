@@ -44,7 +44,7 @@
                     </tr>
                     <tr>
                         <td align="right">이름</td>
-                        <td align="left"><input type="text" name="memberName" class="text-field" id="name" th:value="${ #authentication.principal.memberName }"/></td>
+                        <td align="left"><input type="text" class="text-field" id="name" th:value="${ #authentication.principal.memberName }"/></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -52,7 +52,7 @@
                     </tr>
                     <tr>
                         <td align="right">휴대전화</td>
-                        <td align="left"><input text="text" name="phone" class="text-field" id="phone" th:value="${ #authentication.principal.phone }"/></td>
+                        <td align="left"><input text="text" class="text-field" id="phone" th:value="${ #authentication.principal.phone }"/></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -61,14 +61,14 @@
                     <tr>
                         <td align="right">주소</td>
                         <td align="left">
-                            <input class="text-field" name="zipCode" id="zipCode" th:value="${ #authentication.principal.zipCode }">
-                            <input class="text-field" name="address" id="searchAddress" th:value="${ #authentication.principal.address }">
+                            <input class="text-field" id="zipCode" th:value="${ #authentication.principal.zipCode }">
+                            <input class="text-field" id="searchAddress" th:value="${ #authentication.principal.address }">
                         </td>
                     </tr>
                     <tr>
                         <td></td>
                         <td align="left">
-                            <input type="text" name="detailAddress" id="detailAddress" th:value="${ #authentication.principal.detailAddress }">
+                            <input type="text" id="detailAddress" th:value="${ #authentication.principal.detailAddress }">
                             <input type="button" id="search" class="search-button button" value="검색"/>
                         </td>
                     <tr>

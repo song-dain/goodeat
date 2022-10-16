@@ -45,7 +45,7 @@ public class AdmEventController {
 	}
 	
 	
-	@GetMapping("/event")
+	@GetMapping("/event/list")
 	public String eventList(@RequestParam(defaultValue="1") int page,
 							@RequestParam(required=false) String searchValue,
 							Model model) {

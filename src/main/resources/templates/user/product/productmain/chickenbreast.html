@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" 
+	  xmlns:th="http://www.thymeleaf.org"  
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="/css/user/product/categoy.css">
-    <link rel="stylesheet" href="/source/font/Cafe24Ssurround.ttf">
-    
+    <link rel="stylesheet" href="/css/user/product/categoy.css">
+    <link rel="stylesheet" href="/font/user/Cafe24Ssurround.ttf">
     <title>MainPage</title>
 </head>
 <body>
- <!-- 헤더부분 -->
- 	<div th:replace="user/common/header.html"></div>
-    <!-- 메인 메뉴 -->
- 	
 
+   <div th:replace="user/common/header.html"></div>
+   
    <section id="con-wrap">
       <div class="con-wrap-frame">
         <div class="page-title-area">
@@ -24,184 +23,52 @@
             <img src="/images/user/product/chicken/chicken_main.png">
         </div>
         <div class="grid-list-wrap">
-            <div class="page-sorting-box">
-                <p class="total">
-                    <span>닭가슴살</span> 상품
-                </p>
-                <div class="right-func">
-                    <div class="select-box" data-value="100">
-                     
-                            <select name="option" id="option">
-                                <option value="p-high">가격높은순</option>
-                                <option value="p-low">가격낮은순</option>
-                                <option value="k-high">오름차순</option>
-                                <option value="k-low">내림차순</option>
-                             </select>
-                    
-                    </div>
-
-                    <div class="btn-detail-search ui-toggle-btn">
-                        <a title="select" class="select-value">
-                            <span>상세검색</span>
-                        </a>
-                        <div class="inner">
-                            <fieldset>
-                                <legend class="search-tit">인기검색어</legend>
-                                <div class="scroll-area">
-                                    <ul class="form-inline-list">
-                                        <li>
-                                            <div class="custom-checkbox">
-                                                <input type="checkbox" id="keyword-0" class="checkbox" name="vkeyword" value="닭가슴살" data-name="닭가슴살">
-                                                <label for=""keyword-0>"닭가슴살"</label>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </div>
-
-                    
-
-                </div> 
-
-            </div>
-<!--        상세검색 입력 폼?
-            <div class="detail-search-box hide">
-                <form></form>
-            </div>
-!-->
-
-        <!-- 상품 list -->
-        <div class="product-list row">
-            <div class="product-box cell">
-                <div class="img-box">
-                    <a href="#">
-                        <img class="milkit" src="/images/user/product/chicken/chicken1.png">
-                    </a>
-                </div>
-                <div class="text-box"></div>
-                    <span class="mil-text1">주말 닭가슴살 식단 패키지A </span>
-                <div class="price-box">
-                    <span class="mil-price1"><b>21,400원</b></span>
-                </div>
-            </div>
-            <div class="product-box cell">
-                <div class="img-box">
-                    <a href="#">
-                        <img class="milkit" src="/images/user/product/chicken/chicken2.png">
-                    </a>
-                </div>
-                <div class="text-box"></div>
-                    <span class="mil-text2">주말 닭가슴살 식단 패키지B </span>
-                <div class="price-box">
-                    <span class="mil-price2"><b>22,000원</b></span>
-                </div>
-            </div>
-            <div class="product-box cell">
-                <div class="img-box">
-                    <a href="#">
-                        <img class="milkit" src="/images/user/product/chicken/chicken3.png">
-                    </a>
-                </div>
-                <div class="text-box"></div>
-                    <span class="mil-text3">주말 닭가슴살 식단 패키지A </span>
-                <div class="price-box">
-                    <span class="mil-price3"><b>49,400원</b></span>
-                </div>
-            </div>
-            <div class="product-box cell">
-                <div class="img-box">
-                    <a href="#">
-                        <img class="milkit" src="/images/user/product/chicken/chicken4.png">
-                    </a>
-                </div>
-                <div class="text-box"></div>
-                    <span class="mil-text1">평일 닭가슴살 식단 패키지B </span>
-                <div class="price-box">
-                    <span class="mil-price1"><b>52,000원</b></span>
-                </div>
-            </div>
-
-            <div class="product-box cell">
-                <div class="img-box">
-                    <a href="#">
-                        <img class="milkit" src="/images/user/product/chicken/chicken5.png">
-                    </a>
-                </div>
-                <div class="text-box"></div>
-                    <span class="mil-text5">닭가슴살 볼 치즈맛</span>
-                <div class="price-box">
-                    <span class="mil-price5"><b>18,900원</b></span>
-                </div>
-            </div>
-            <div class="product-box cell">
-                <div class="img-box">
-                    <a href="#">
-                        <img class="milkit" src="/images/user/product/chicken/chicken6.png">
-                    </a>
-                </div>
-                <div class="text-box"></div>
-                    <span class="mil-text6">닭가슴살 오븐 구이 매콤어니언</span>
-                <div class="price-box">
-                    <span class="mil-price6"><b>24,900원</b></span>
-                </div>
-            </div>
-            <div class="product-box cell">
-                <div class="img-box">
-                    <a href="#">
-                        <img class="milkit" src="/images/user/product/chicken/chicken7.png">
-                    </a>
-                </div>
-                <div class="text-box"></div>
-                    <span class="mil-text7">닭가슴살 한끼볼 현미</span>
-                <div class="price-box">
-                    <span class="mil-price7"><b>27,000원</b></span>
-                </div>
-            </div>
-            <div class="product-box cell">
-                <div class="img-box">
-                    <a href="#">
-                        <img class="milkit" src="/images/user/product/chicken/chicken8.png">
-                    </a>
-                </div>
-                <div class="text-box"></div>
-                    <span class="mil-text1">소프트 닭가슴살 </span>
-                <div class="price-box">
-                    <span class="mil-price1"><b>19,900원</b></span>
-                </div>
-            </div>
-         
-            <div class="product-box cell">
-                <div class="img-box">
-                    <a href="#">
-                        <img class="milkit" src="/images/user/product/chicken/chicken9.png">
-                    </a>
-                </div>
-                <div class="text-box"></div>
-                    <span class="mil-text1">스팀&저염 스팀 닭가슴살 혼합 </span>
-                <div class="price-box">
-                    <span class="mil-price1"><b>18,900원</b></span>
-                </div>
-            </div>
-            <div class="product-box cell">
-                <div class="img-box">
-                    <a href="#">
-                        <img class="milkit" src="/images/user/product/chicken/chicken10.png">
-                    </a>
-                </div>
+            <div class="page-sorting-box">            
                 
-                <div class="text-box"></div>
-                    <span class="mil-text1">스팀 닭가슴살 혼합</span>
-                <div class="price-box">
-                    <span class="mil-price1"><b>18,900원</b></span>
-                </div>
-            </div>
+        <div class="grid-list-wrap">
+            <div class="page-sorting-box">
+            
+            <th:block th:each="product : ${ productList }">
+            	<div align="center">
+            		<div>
+            			<th:block th:each="attachment : ${ product.AddfileList }">
+            			
+            			<img th:if="${ attachment.fileType == 'TITLE' }"
+            				 th:src="${ attachment.thumbnailRoute }">
+            			</th:block>
+            		</div>
+            		<span th:text="${ product.productName }"></span>
+            		<span th:text="${ product.productPrice } + '원'"></span>
+            	</div>	
+            </th:block>
+
+			</div>
         </div>
+     </div>
+     
+     <div id="paging" align="center">
 
-
-</section> 
- 	
+		<button th:onclick="'location.href=\'/user/chicken?page=' + @{${paging.startPage}} + '\''">&lt;&lt;</button>
+		
+		<button th:onclick="'location.href=\'/user/chicken?page=' + @{${paging.currentPage - 1}} + '\''"
+				th:disabled="${ productList.first }"></button>
+		
+		<th:block th:each="page : ${ #numbers.sequence(paging.startPage, paging.endPage)}">
+			<button th:onclick="'location.href=\'user/chicken?page=' + @{${page}} + '\''"
+					th:text="${ page }"
+					th:disabled="${ paging.currentPage eq page }">
+			</button>
+		</th:block>
+		
+		<button th:onclick="'location.href=\'user/chicken?page=' + @{${paging.currentPage + 1}} + '\''"
+				th:disabled="${ productList.last }">></button>
+		
+		<button th:onclick="'location.href=\'user/chicken?page=' + @{${paging.endPage}} + '\''">>></button>			
+	</div>
+	
+	</div>
+	</div>
+	</section>
 </body>
 </html>
 

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/user/main.css">
     <link rel="stylesheet" href="/css/user/main-contents.css">
     <script type="text/javascript" th:src="@{/js/product.js}"></script>
-    <title>Document</title>
+    <title>Main</title>
 </head>
 
 <body>
@@ -18,8 +18,7 @@
         	<th:block sec:authorize="isAnonymous()">
             <ul>
                 <li><a th:href="@{/login}">로그인</a></li>
-                <li><a th:href="@{join}">회원가입</a></li>
-                <li><a href="help-main">고객센터</a></li>
+                <li><a th:href="@{/join}">회원가입</a></li>
             </ul>
             </th:block>
             
@@ -27,7 +26,7 @@
             <ul>
                 <li><a th:href="@{/member/logout}">로그아웃</a></li>
                 <th:block sec:authorize="hasRole('MEMBER')">
-	                <li><a th:href="@{mypage}">My Page</a></li>
+	                <li><a th:href="@{/mypage}">My Page</a></li>
                 </th:block>
                 <th:block sec:authorize="hasRole('ADMIN')">
                 <li><a th:href="@{/admin/member}">관리 메뉴</a></li>
@@ -38,14 +37,14 @@
             
             <ul class="img-link">
                 <li>
-                    <a href="">
+                    <a >
                     <img src="/images/user/main/post.png"  style="width: 60px; height: 60px;">
                     </a>
                 </li>
                 <li>
-                    <button id="Cart">
+                    <a th:href="@{/user/cartList}">
                         <img src="/images/user/main/cart.png" style="width: 60px; height: 60px;">
-                    </button>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -67,35 +66,32 @@
                     <p>카테고리</p>
                     <!-- 드롭 다운 -->
                     <ul class="item-menu">
-                        <li><a th:href="@{user/productdetail}">밀키트</a></li>
-                        <li><a href="">도시락</a></li>
-                        <li><a href="">닭가슴살</a></li>
-                        <li><a href="">간편식</a></li>
-                        <li><a href="">비건</a></li>
-                        <li><a href="">공지사항/이벤트</a></li>
+                    	<li><a th:href="@{/user/productAll}">전체상품</a></li>
+                        <li><a th:href="@{/user/mil}">밀키트</a></li>
+                        <li><a th:href="@{/user/lunchbox}">도시락</a></li>
+                        <li><a th:href="@{/user/chicken}">닭가슴살</a></li>
+                        <li><a th:href="@{/user/convenince}">간편식</a></li>
+                        <li><a th:href="@{/user/vegan}">비건</a></li>
+                        <li><a th:href="@{/post/list}">공지사항/이벤트</a></li>
                     </ul>
                 </li>
                 <li class="item">
-
-                    <a id="mil1"></a> 
-
-                    <a th:href="@{/user/productdetail}">밀키트</a>
-
+                    <a id="mil1" th:href="@{/user/mil}">밀키트</a> 
                 </li>
                 <li class="item">
-                    <a id="lunch1" >도시락</a>
+                    <a id="lunch1" th:href="@{/user/lunchbox}">도시락</a>
                 </li>
                 <li class="item">
-                    <a id="chicken1">닭가슴살</a>
+                    <a id="chicken1" th:href="@{/user/chicken}">닭가슴살</a>
                 </li>
                 <li class="item">
-                   <a id="convenince">간편식</a>
+                   <a id="convenince" th:href="@{/user/convenince}">간편식</a>
                 </li>
                 <li class="item">
-                  <a id= "vegan">비건</a>
+                  <a id= "vegan" th:href="@{/user/vegan}">비건</a>
                 </li>
                 <li class="item">
-                    <a id="post">공지사항/이벤트</a>
+                    <a id="post" th:href="@{/post/list}">공지사항/이벤트</a>
                     <!-- 드롭 다운 -->
                     <ul class="item-menu">
                         <li><a id="notice">공지사항</a></li>
