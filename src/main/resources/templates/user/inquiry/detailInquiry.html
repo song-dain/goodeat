@@ -24,16 +24,18 @@
 	        <h1>게시글 보기</h1>
 	        	<table id="tbdetail" action="/user/productDetail/detail/inquiry" border="0" method="post">
 	        		<tr>
-	        			<td>작성자</td>
+	        			
+	        		</tr>
+	        		<tr style="border-bottom:1px solid #ddd;">
+	        			<td>제목 : </td>
+	        			<td th:text="${ inquiry.inquiryTitle }"></td>
+	        			<td style="border-left:1px solid #ddd;">문의 유형 : </td>
+	        			<td th:text="${ inquiry.inquiryType.inquiryTypeNo }"></td>
+	        			<td style="border-left:1px solid #ddd;">작성자 : </td>
 	        			<td th:text="${ inquiry.member.memberName }"></td>
 	        		</tr>
 	        		<tr>
-	        			<td>제목</td>
-	        			<td th:text="${ inquiry.inquiryTitle }"></td>
-	        		</tr>
-	        		<tr>
-	        			<td>문의 유형</td>
-	        			<td th:text="${ inquiry.inquiryType.inquiryTypeNo }"></td>
+	        			
 	        		</tr>
 	        		<tr>
 	        			<td>내용</td>

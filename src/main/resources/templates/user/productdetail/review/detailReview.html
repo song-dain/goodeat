@@ -23,20 +23,19 @@
 	        <div id="decontainer">
 	        <h1>게시글 보기</h1>
 	        	<table id="tbdetail" action="/user/productDetail/list" border="0" method="post">
-	        		<tr>
-	        			<td>작성자</td>
+
+	        		<tr style="border-bottom:1px solid #ddd;">
+	        			<td>제목:</td>
+	        			<td th:text="${ review.reviewTitle }"></td>
+	        			<td style="border-left:1px solid #ddd;">작성자:</td>
 	        			<td th:text="${ review.member.memberName }"></td>
 	        		</tr>
-	        		<tr>
-	        			<td>제목</td>
-	        			<td th:text="${ review.reviewTitle }"></td>
-	        		</tr>
-	        		<tr>
-	        			<td>내용</td>
+	        		<tr style="border-bottom:1px solid #ddd;">
+	        			<td>내용:</td>
 	        			<td th:text="${ review.reviewContent }"></td>
 	        		</tr>
 	        		<tr>
-	        			<td>첨부파일</td>
+	        			<td>첨부파일:</td>
 	        			<td>
 	        				<input type="file"/>
 	        			</td>
@@ -44,7 +43,6 @@
 	        	</table>
 	        	<button type="submit" th:onclick="|location.href='/user/productdetail/review/modify?reviewCode=${review.reviewCode}'|" class="btn-sl">수정</button>
         		<button type="submit" th:onclick="|location.href='/user/productdetail/review/delete?reviewCode=${review.reviewCode}'|" class="btn-sl2">삭제</button>
-        		<button type="submit" value="메인으로" class="btn-sl2">뒤로가기</button>
 
 	        </div>
 

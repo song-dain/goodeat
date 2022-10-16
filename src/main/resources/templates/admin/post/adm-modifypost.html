@@ -23,17 +23,18 @@
    
     <div class="gong-head-box"></div>
     <div class="event-head-box"></div>
-      <a class="gong-head" th:href="@{/admin/event}">이벤트</a>
+      <a class="gong-head" th:href="@{/admin/event/list}">이벤트</a>
       <a class="event-head">공지사항</a>
     
     
     <form id="textbox" action="/admin/post/modify" method="post">
-    	<input type="number" placeholder="관리자 번호를 입력해" name="member.memberNo">
-    	<input type="number" placeholder="수정게시글번호" name="postCode">
+    	<input type="number" placeholder="관리자 번호를 입력해" name="member.memberNo" class="memberNoBox">
+    	<input type="number" name="postCode" placeholder="수정 게시글 번호">
     	<select name="postType.postTypeCode">
     		<option value="1">공지사항</option>
     		<option value="2">이벤트</option>
     	</select>
+    	<hr>
         <input type="text" class="titlebox" placeholder="제목을 입력하세요" name="postTitle">
         
         <textarea style="width: 100%; height: 70%; resize: none;" 

@@ -7,6 +7,8 @@ import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/post")
 public class AdmPostController {
 	
 	private final AdmPostService admPostService;
@@ -38,7 +40,7 @@ public class AdmPostController {
 		this.messageSourceAccessor = messageSourceAccessor;
 	}
 	
-	@GetMapping("/post")
+	@GetMapping("/list")
 	public String fintPostList(Model model, @PageableDefault Pageable pageable) {
 		
 		log.info("[PostController] =======================");
@@ -55,13 +57,13 @@ public class AdmPostController {
 		return "/admin/post/adm-post";
 	}
 	
-	@GetMapping("/post/regist")
+	@GetMapping("/regist")
 	public String goRegist() {
 		
 		return "/admin/post/adm-detailpost";
 	}
 	
-	@PostMapping("/post/regist")
+	@PostMapping("/regist")
 	public String registPost(Model model, PostDTO newPost, RedirectAttributes rttr) {
 		
 		log.info("[PostController] =======================");
@@ -75,10 +77,10 @@ public class AdmPostController {
 //		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("post.regist"));
 		
 		
-		return "redirect:/admin/post";
+		return "redirect:/admin/post/list";
 	}
 	
-	@GetMapping("/post/detail")
+	@GetMapping("/detail")
 	public String selectPostDetail(Model model, Integer postCode) {
 		
 		log.info("[admPostController] ========================================= ");
@@ -96,12 +98,16 @@ public class AdmPostController {
 		
 	}
 	
-	@GetMapping("post/modify")
-	public String midifyPost() {
+	@GetMapping("/modify")
+	public String midifyPost(Model model, Integer postCode) {
+		
+		PostDTO post = admPostService.selectPostDetail(postCode);
+		model.addAttribute("post", post);
+		
 		return "admin/post/adm-modifypost";
 	}
 	
-	@PostMapping("post/modify")
+	@PostMapping("/modify")
 	public String modifyPost(Model model, PostDTO post, RedirectAttributes rttr) {
 		
 		admPostService.modifyPost(post);
@@ -109,15 +115,15 @@ public class AdmPostController {
 		
 		model.addAttribute("post", post);
 		
-		return "redirect:/admin/post";
+		return "redirect:/admin/post/list";
 	}
 	
-	@GetMapping("/post/delete")
+	@GetMapping("/delete")
 	public String deletePost(@RequestParam Integer postCode) {
 		
 		admPostService.deletePost(postCode);
 		
-		return "redirect:/admin/post";
+		return "redirect:/admin/post/list";
 	}
 	
 	

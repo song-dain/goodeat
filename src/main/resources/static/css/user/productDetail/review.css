@@ -1,1 +1,38 @@
-@charset "EUC-KR";
+#decontainer{
+	text-align:center;
+	margin-top:150px;
+}
+
+#decontainer > h1{
+	margin: 30px auto;
+}
+
+#decontainer > table{
+	text-align:left;
+	
+}
+
+#tbdetail{
+	background-color:#fbf1e8;
+	border-radius:5px;
+	width:1400px;
+	font-size:24px;
+
+	
+}
+
+#tbdetail td{
+	height:150px;
+}
+
+table {
+    margin-left:auto; 
+    margin-right:auto;
+    margin-bottom: 20px;
+}
+
+table, td {
+    border-collapse : collapse;
+    padding: 50px;
+}
+
