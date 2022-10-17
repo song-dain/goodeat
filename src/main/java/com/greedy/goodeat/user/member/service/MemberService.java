@@ -1,8 +1,5 @@
 package com.greedy.goodeat.user.member.service;
 
-import java.util.List;
-import java.util.Optional;
-
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -12,9 +9,6 @@ import com.greedy.goodeat.common.dto.MemberDTO;
 import com.greedy.goodeat.common.entity.Member;
 import com.greedy.goodeat.user.member.repository.MemberRepository;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Service
 @Transactional
 public class MemberService {
@@ -70,9 +64,6 @@ public class MemberService {
 	}
 
 	public MemberDTO findByMemberNameAndEmail(MemberDTO member) {
-		
-		log.info("[MemberService] memberName : {}", member.getMemberName());
-		log.info("[MemberService] email : {}", member.getEmail());
 		
 		Member findmember = memberRepository.findByMemberNameAndEmail(member.getMemberName(), member.getEmail());
 

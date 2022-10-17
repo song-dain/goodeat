@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>header</title>
+    <title>굿잇 : 관리자 페이지</title>
     <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gamja+Flower&family=Gowun+Dodum&family=Poor+Story&display=swap" rel="stylesheet">
    <link rel="stylesheet" th:href="@{/css/admin/product/product.css}">
    <link rel="icon" type="image/x-icom" th:href="@{/images/common/HEQXSRYC.ico}">
@@ -50,7 +50,7 @@
     <section>
         <div class="head-top">
             <div class="logout-content">
-                <a>로그아웃</a>
+                <a th:href="@{/member/logout}">로그아웃</a>
             </div>
             <div class="logout-img">
             	<a><img th:src="@{/images/admin/logout.png}"></a>
