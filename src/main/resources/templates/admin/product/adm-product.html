@@ -95,8 +95,8 @@
                     <td th:text="${ product.productInventory }"></td>
                     <td th:switch="${ product.productStatus }">
 					  <p th:case="'NOMAL'">정상</p>
-					  <p th:case="'SOLDOUT'">품절</p>
-					  <p th:case="'HIDDEN'">숨김</p>
+					  <p th:case="'SOLDOUT'" style="color: red;">품절</p>
+					  <p th:case="'HIDDEN'" style="color: blue;">숨김</p>
 					</td>
                 </tr>
             </table>

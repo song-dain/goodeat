@@ -92,7 +92,7 @@
                     <td th:text ="${ order.product.productName}" ></td>
                     <td th:text ="${ order.amountPay }"></td>
                     <td th:text ="${ order.orderDate}"></td>
-                    <td th:text ="${ order.member.memberId}"></td>
+                    <td th:text ="${ order.member.memberName}"></td>
                     <td><p th:text ="${ order.delivery?.invoiceNo }" th:if="${ order.delivery} ne null"></p>
                     <p th:text = "'미입력'" th:if="${#strings.isEmpty(order.delivery.invoiceNo)}" onclick="javascript:openPop()"></p>
                     <td th:switch="${order.orderStatus}">
