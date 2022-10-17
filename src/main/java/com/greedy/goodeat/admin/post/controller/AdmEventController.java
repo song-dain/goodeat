@@ -77,7 +77,7 @@ public class AdmEventController {
 		model.addAttribute("newEvent", newEvent);
 		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("event.regist"));
 		
-		return "redirect:/admin/event";
+		return "redirect:/admin/event/list";
 		
 	}
 	
@@ -118,7 +118,7 @@ public class AdmEventController {
 	public String deleteEvent(Integer eventCode) {
 		admEventService.deleteEvent(eventCode);
 		
-		return "redirect:/admin/event";
+		return "redirect:/admin/event/list";
 	}
 	
 	
