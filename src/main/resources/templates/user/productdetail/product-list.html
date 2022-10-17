@@ -22,10 +22,7 @@
         <ul>
             <li class="pt-img">
 
-             
-
-                <img th:if="${ attachment.fileType == 'TITLE' }"
-            				 th:src="${ attachment.thumbnailRoute }" alt="밀키트">
+			<img src="/images/user/product/milkit/mill6.png" alt="">
 
             </li>
             <li class="right-te">
@@ -37,8 +34,8 @@
             </li>
         </ul>
         <div class="btn-ser2-in">
-            <button>장바구니</button>
-            <button>바로구매</button>
+            <a th:href="@{/user/cartList}">장바구니</a>
+            <a th:href="@{/user/cartList}">바로구매</a>
         </div>
     </div> 
 
@@ -68,7 +65,35 @@
       
 		<div th:replace="user/productdetail/review/listReview.html"></div>
      
-     	<div th:replace="user/inquiry/listInquiry.html"></div>
+     	 <div id="section3" class="container-fluid bg-warning" >
+        <section class="article-list">
+          <div class="table-con">
+            <p class="con">상품 문의</p>
+            <button type="button" th:onclick="|location.href='/user/productdetail/inquiry/regist'|" class="btn-sel" >등록</button>
+            <table id="listArea" style="margin: auto;">
+				<tr>
+					<th style="width: 100px">순번</th>
+					<th style="width: 300px">제목</th>
+					<th style="width: 300px">문의유형</th>
+					<th style="width: 100px">작성자</th>
+					<th style="width: 150px">작성일</th>
+					<th style="width: 300px">비고</th>
+				</tr>
+				<tr th:each="inquiry : ${ inquiryList }"
+				    th:onclick="|location.href='/user/productdetail/detail/inquiry?inquiryCode=${inquiry.inquiryCode}'|"
+				    style="cursor:pointer;">
+					<td th:text="${ inquiry.inquiryCode }"></td>
+					<td th:text="${ inquiry.inquiryTitle }"></td>
+					<td th:text="${ inquiry.inquiryType.inquiryTypeNo }"></td>
+					<td th:text="${ inquiry.member.memberName }"></td>
+					<td th:text="${ inquiry.inquiryRegistDate }"></td>
+					<td th:text="${ inquiry.inquiryStatus }"></td>
+				</tr>
+			</table>
+        </div>
+        
+        </section>
+	  </div>
 		
         <div id="section4" class="container-fluid bg-secondary">
             <img src="/images/user/productDetail/etc/post_ss.PNG" alt="" style="width:40%; height:100%;">

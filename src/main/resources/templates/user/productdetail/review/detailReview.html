@@ -22,7 +22,7 @@
 
 	        <div id="decontainer">
 	        <h1>게시글 보기</h1>
-	        	<table id="tbdetail" action="/user/productDetail/list" border="0" method="post">
+	        	<table id="tbdetail" action="/user/productDetail/review/detail" border="0"  th:method="post">
 
 	        		<tr style="border-bottom:1px solid #ddd;">
 	        			<td>제목:</td>
@@ -35,9 +35,9 @@
 	        			<td th:text="${ review.reviewContent }"></td>
 	        		</tr>
 	        		<tr>
-	        			<td>첨부파일:</td>
+	        			<td></td>
 	        			<td>
-	        				<input type="file"/>
+	        				<input type="hidden"/>
 	        			</td>
 	        		</tr>
 	        	</table>

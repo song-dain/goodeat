@@ -82,13 +82,13 @@ public class ProductdetailController {
 	
 	  //리뷰 등록
 	  
-	  @GetMapping("/regist") 
+	  @GetMapping("/review/regist") 
 	  public String goRegist() {
 	  
 	  return "user/productdetail/review/registReview"; 
 	  }
 	  
-	  @PostMapping("/regist") public String registReview(hgReviewDTO
+	  @PostMapping("/review/regist") public String registReview(hgReviewDTO
 	  review, @AuthenticationPrincipal MemberDTO member, RedirectAttributes rttr) {
 	  
 	  member = new MemberDTO(); 
@@ -108,7 +108,7 @@ public class ProductdetailController {
 	  
 	  //리뷰 상세확인
 	  
-	  @GetMapping("/detail")
+	  @GetMapping("/review/detail")
 	  public String selectReviewDetail(Model model, Integer
 	  reviewCode) {
 	  
