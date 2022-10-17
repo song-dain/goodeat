@@ -24,7 +24,7 @@ public class InquiryService {
 	
 	public static final int TEXT_PAGE_SIZE = 10;
 	public static final String SORT_BY = "inquiryCode";
-	public static final String ACTIVE_STATUS = "답변";
+	public static final String ACTIVE_STATUS = "정상";
 	
 	private final ModelMapper modelMapper;
 	private final InquiryRepository inquiryRepository;
