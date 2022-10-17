@@ -28,6 +28,7 @@
             <th class="tg2-lboi">번호</th>
             <th class="tg2-lboi">제목</th>
             <th class="tg2-lboi">관리자</th>
+            <td class="tg2-0pky">분류</td>
           </tr>
         </thead>
         <tbody>
@@ -40,8 +41,9 @@
             <td class="tg2-0pky">001</td>
             <td class="tg2-0pky">새 공지사항을 등록하려면 위의 등록 버튼을 클릭하세요</td>
             <td class="tg2-0pky">작성자</td>
+            <td class="tg2-0pky"></td>
           </tr>
-          <tr th:each="post : ${ postList }"
+          <tr th:each="post : ${ postList }" th:if="${ post.postType.PostTypeCode == 1}"
           	  th:onclick="|location.href='/admin/post/detail?postCode=${post.postCode}'|">
 			<td class="tg2-0pkq">
               <input type="checkbox" id="cb2">
@@ -50,6 +52,7 @@
 			<td th:text="${ post.postCode }"></td>
 			<td th:text="${ post.postTitle }"></td>
 			<td th:text="${ post.member.memberName }"></td>
+			<td th:text="${ post.postType.PostType }"></td>
 		  </tr>
         </tbody>
         </table>
