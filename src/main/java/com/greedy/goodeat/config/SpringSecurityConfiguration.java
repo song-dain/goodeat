@@ -17,6 +17,9 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.greedy.goodeat.user.member.service.AuthenticationService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @EnableWebSecurity
 public class SpringSecurityConfiguration {
 	
@@ -42,6 +45,9 @@ public class SpringSecurityConfiguration {
 		
 		List<String> adminPermitList = permitListMap.get("admin");
 		List<String> memberPermitList = permitListMap.get("member");
+		
+		log.info("[SpringSecurityConfiguration] adminPermitList {} :", adminPermitList);
+		log.info("[SpringSecurityConfiguration] memberPermitList {} :", memberPermitList);
 		
 		return http
 			.csrf()

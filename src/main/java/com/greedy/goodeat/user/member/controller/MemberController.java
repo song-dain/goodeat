@@ -110,11 +110,11 @@ public class MemberController {
 	
 	
 	@PostMapping("/join")
-	public String joinMembership(@ModelAttribute MemberDTO member, String email, String email2, 
+	public String joinMembership(@ModelAttribute MemberDTO member, String email1, String email2, 
 				String year, String month, String day, RedirectAttributes rttr) {
 		
 		member.setMemberPwd(passwordEncoder.encode(member.getMemberPwd()));
-		member.setEmail(email + "@" + email2);
+		member.setEmail(email1 + "@" + email2);
 		
 		if(!year.equals("") && !month.equals("") && !day.equals("")) {
 			java.sql.Date birthDate = java.sql.Date.valueOf(year + "-" + month + "-" + day);
