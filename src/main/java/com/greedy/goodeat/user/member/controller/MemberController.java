@@ -89,6 +89,11 @@ public class MemberController {
 	   return "user/mypage/info";
    }
    
+   @GetMapping("/unjoin")
+   public String goUnjoin() {
+	   return "user/join/unjoin";
+   }
+   
 	@PostMapping("/idDupCheck")
 	public ResponseEntity<String> checkDuplication(@RequestBody MemberDTO member){
 		
@@ -220,7 +225,7 @@ public class MemberController {
 		
 	}
 	
-	@GetMapping("/unjoin")
+	@PostMapping("/unjoin")
 	public String unjoin(@AuthenticationPrincipal MemberDTO loginMember, RedirectAttributes rttr) {
 		
 		memberService.unjoinMembership(loginMember);
