@@ -193,7 +193,7 @@ public class ProductdetailController {
 			  			messageSourceAccessor.getMessage("inquiry.regist"));
 	  
 	  
-	  return "redirect:/user/productdetail/list?productCode=1"; }
+	  return "redirect:/user/productdetail/list?productCode=41"; }
 	  
 	  //수정
 	  
