@@ -60,8 +60,8 @@
 /* 검색 버튼 */
 .member-button {
     position : fixed;
-    top: 80%;
-    left : 87.5%;
+    top: 63%;
+    left : 84.5%;
     width: 125px;
     height: 50px;
     font-size: 25px;
@@ -77,13 +77,40 @@
     color: #293F54;
 }
 
-/* 검색버튼 클릭*/
+/* 검색버튼 클릭
 .member-button:active {
     font-size: 20px;
     box-shadow: 1px 1px 0 rgb(0,0,0,0.5);
     position: fixed;
     top:452px;
 }
+*/
+
+#replyResult tr td {
+	font-size: 1.3em;
+}
+
+#replyResult tr td:nth-child(1){
+	width: 70%;
+	height: 30px;
+	
+}
+
+#replyResult tr td:nth-child(2){
+	width:250px;
+} 
+
+#replyResult tr td:nth-child(3){
+	width: 150px;
+} 
+
+#replyResult tr td:nth-child(4){
+	border: none;
+	float: right;
+	width: 100px;
+	
+}  
+
 
 .wrapper-up {
     position : fixed;
@@ -236,4 +263,8 @@
 #report-box {
     font-size: 20px;
     margin-top: 10px;
+}
+
+#replyResult {
+	font-size: 20px;
 }
