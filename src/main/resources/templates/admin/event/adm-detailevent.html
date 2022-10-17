@@ -25,7 +25,7 @@
    
     <div class="gong-head-box"></div>
     <div class="event-head-box"></div>
-      <a class="gong-head">이벤트</a>
+      <a class="gong-head" th:href="@{/admin/event/list}">이벤트</a>
       <a class="event-head" th:href="@{/admin/post/list}">공지사항</a>
     
     
@@ -59,7 +59,7 @@
     </table>
         
     <input type="submit" class="member-button" value="수정" id="eventModifyButton" th:onclick= "|location.href='/admin/event/modify?eventCode=${event.postCode}'|">
-    <input type="submit" value="목록으로" id="eventButtonList" onclick="location.href='/admin/member'">
+    <input type="submit" value="목록으로" class="member-button" id="eventButtonList" onclick="location.href='/admin/event/list'">
     
     <input type="submit" class="btn-del" value="삭제" id="eventDeleteButton" th:onclick= "|location.href='/admin/event/delete?eventCode=${event.postCode}'|"/>
     

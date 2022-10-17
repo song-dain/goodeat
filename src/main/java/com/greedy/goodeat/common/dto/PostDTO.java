@@ -18,7 +18,7 @@ public class PostDTO {
 	private List<AddfileDTO> AddfileList;
 	private MemberDTO member;
 	private PostTypeDTO postType;
-	private java.sql.Date postRegisDate;
+	private java.sql.Date postRegistDate;
 	private java.sql.Date postModifyDate;
 	private java.sql.Date postDelDate;
 	private String postStatus;

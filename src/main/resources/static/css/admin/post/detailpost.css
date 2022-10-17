@@ -13,41 +13,75 @@
     width: 100%;
 }
 
+/* 게시글 상세 조회 */
 #textbox {
 	
 	position : fixed;
 	top : 250px;
 	left : 250px;
-	background-color : grey;
 	height: 450px;
 }
 
-.memberNo {
-	font-size: 2em;
+.a-textContent {
+	font-size: 1.5em;
+	background-color: #293F54;
+	color: white;
+	border-style: groove;
+	width: 10%;
+}
+
+#textContent {
+	margin-left: 20px;
 	
 }
 
-.a-memberNo {
-	font-size: 2em;
+.title-No {
+	display:flex;
+	border: 2px groove #F3F3F3;
+	
 }
 
-.a-postType {
-	margin-left:20%;
+.type-date{
+	display:flex;
+	border: 2px groove #F3F3F3;
+}
+
+.memberNo {
+	font-size: 1.8em;
 }
 
 .postType {
-	
+	font-size: 1.8em;
+	width:40%;
 }
 
-.postTitle {
-	
+.a-postContent {
+	font-size: 1.8em;
+	background-color: #293F54;
+	color: white;
 }
 
 .postContent {
-	
+	border: 2px groove #F3F3F3;
+	height: 70%;
+	font-size: 1.4em;
+	color: #293F54;
 }
 
 
+.postTitle {
+	font-size: 1.8em;
+	width:40%;
+}
+
+.registDate {
+	font-size: 1.8em;
+}
+
+
+#eventButtonList {
+	margin-left: 155px;
+}
 
 
 /* 등록 버튼 */

@@ -30,8 +30,10 @@
     </div>
     <div class="wrapper-down">
         <div class="msbox-down">
-            <div class="ms-down">답변</div><br>
-            <table id="replyWrite" class="">
+            <div class="ms-down">답변
+           
+        
+    <table id="replyWrite" class="">
 		<input type="hidden" id="inquiryCode" th:value="${inquiry.inquiryCode}"/>
 		<input type="hidden" id="member.memberNo" th:value="${inquiry.member.memberNo}"/>
 			<tr>
@@ -42,15 +44,15 @@
 					   height: 150px;"></textarea></td>
 				<td style="border:none;
 						   float: right;
-						   margin-top:50%;"><button type="button" class="" id="registReply">작성하기</button></td>
+						   margin-top:50%;"><button type="button" class="member-button" id="registReply">작성하기</button></td>
 			</tr>
 	</table>
 	
 	<table id="replyResult" style="margin-top: 200px;
 								   float: left;"></table>
-         </div>
-    </div>   
-     
+        	</div><br>
+        </div>
+    </div>  
     
 	    
      		
