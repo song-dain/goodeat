@@ -26,30 +26,19 @@ public class MemberService {
 		return memberRepository.findByMemberIdAndMemberStatus(memberId, "Y").isPresent();
 	}
 	
+	public void joinMembership(MemberDTO member) {
+		
+		memberRepository.save(modelMapper.map(member, Member.class));
+		
+	}
+	
 	public boolean selectMemberByNameAndEmail(String memberName, String email) {
 		
 		boolean isExist = false;
 		
 		if(memberRepository.findByMemberNameAndMemberStatus(memberName, "Y").isPresent()
 				&& memberRepository.findByEmailAndMemberStatus(email, "Y").isPresent()) {
-			isExist = true;
-		}
-		
-		return isExist;
-	}
-
-	public void joinMembership(MemberDTO member) {
-		
-		memberRepository.save(modelMapper.map(member, Member.class));
-		
-	}
-
-	public boolean selectMemberByIdAndEmail(String memberId, String email) {
-		
-		boolean isExist = false;
-		
-		if(memberRepository.findByMemberIdAndMemberStatus(memberId, "Y").isPresent()
-				&& memberRepository.findByEmailAndMemberStatus(email, "Y").isPresent()) {
+			
 			isExist = true;
 		}
 		
@@ -63,6 +52,19 @@ public class MemberService {
 		return modelMapper.map(findmember, MemberDTO.class);
 	}
 
+
+	public boolean selectMemberByIdAndEmail(String memberId, String email) {
+		
+		boolean isExist = false;
+		
+		if(memberRepository.findByMemberIdAndMemberStatus(memberId, "Y").isPresent()
+				&& memberRepository.findByEmailAndMemberStatus(email, "Y").isPresent()) {
+			isExist = true;
+		}
+		
+		return isExist;
+	}
+	
 	public MemberDTO findByMemberNameAndEmail(MemberDTO member) {
 		
 		Member findmember = memberRepository.findByMemberNameAndEmail(member.getMemberName(), member.getEmail());

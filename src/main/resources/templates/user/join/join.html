@@ -81,8 +81,8 @@
                     <tr>
                         <td align="right">이메일 <img src="/images/user/info/essential.png" width="5px"/></td>
                         <td align="left">
-                            <input type="text" name="email1" class="text-field email-button button" id="email1" placeholder="이메일 입력"/>
-                            <select name="email2" id="email2">
+                            <input type="text" name="emailId" class="text-field email-button button" id="email1" placeholder="이메일 입력"/>
+                            <select name="emailAddress" id="email2">
                                 <option>gmail.com</option>
 								<option>naver.com</option>
                                 <option>daum.net</option>
@@ -251,7 +251,7 @@
      const checkedAgreement = document.getElementById("checkedAgreement");
      const checkedEmail = document.getElementById("checkedEmail");
      
-	const sendCodeBtn = document.getElementById("sendCodeBtn");
+	 const sendCodeBtn = document.getElementById("sendCodeBtn");
 
      function checkForm() {
     	 
@@ -422,7 +422,7 @@
 				return;
 			}
 			
-			fetch("/emailCheck", {
+			fetch("/emailAthnt", {
 				method: "POST",
 	    		 headers: {
 	    			 'Content-Type': 'application/json;charset=UTF-8'

@@ -24,9 +24,6 @@ import com.greedy.goodeat.user.member.service.AuthenticationService;
 import com.greedy.goodeat.user.member.service.MailSendService;
 import com.greedy.goodeat.user.member.service.MemberService;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Controller
 public class MemberController {
 	
@@ -55,6 +52,7 @@ public class MemberController {
 		return "user/login/login";
 	}
 	
+	
     @PostMapping("/loginfail")
     public String loginFailed(RedirectAttributes rttr) {
     	
@@ -62,44 +60,20 @@ public class MemberController {
     	
     	return "redirect:/login";
     }
-	
+
+   
 	@GetMapping("/join")
-	public String goJoin() {
+	public String goJoin() 
+	{
 		return "user/join/join";
 	}
-  
-  @GetMapping("/findId")
-	public String goFindId() {
-		return "user/findInfo/findId";
-	}
-	
-
-	@GetMapping("/findPwd")
-	public String goFindPwd() {
-		return "user/findInfo/findPwd";
-  }
-	
-   @GetMapping("/mypage")
-   public String goMypage() {
-	   return "user/mypage/mypage";
-   }
-   
-   @GetMapping("/mypage/info")
-   public String goInfo() {
-	   return "user/mypage/info";
-   }
-   
-   @GetMapping("/unjoin")
-   public String goUnjoin() {
-	   return "user/join/unjoin";
-   }
    
 	@PostMapping("/idDupCheck")
-	public ResponseEntity<String> checkDuplication(@RequestBody MemberDTO member){
+	public ResponseEntity<String> idDupCheck(@RequestBody MemberDTO reqInfo){
 		
 		String result = "canUse";
 		
-		if(memberService.selectMemberById(member.getMemberId())) {
+		if(memberService.selectMemberById(reqInfo.getMemberId())) {
 			result = "cannotUse";
 		}
 		
@@ -107,126 +81,156 @@ public class MemberController {
 	}
 	
 	@ResponseBody
-	@PostMapping(value = "/emailCheck", produces="text/html; charset=UTF-8")
-	public String emailCheck(@RequestBody MemberDTO member){
+	@PostMapping("/emailAthnt")
+	public String emailAthnt(@RequestBody MemberDTO reqInfo){
 		
-		return mailSendService.sendEmailForm(member.getEmail());
+		return mailSendService.sendEmailForm(reqInfo.getEmail());
 	}
 	
-	
 	@PostMapping("/join")
-	public String joinMembership(@ModelAttribute MemberDTO member, String email1, String email2, 
+	public String joinMembership(@ModelAttribute MemberDTO reqInfo, String emailId, String emailAddress, 
 				String year, String month, String day, RedirectAttributes rttr) {
 		
-		member.setMemberPwd(passwordEncoder.encode(member.getMemberPwd()));
-		member.setEmail(email1 + "@" + email2);
+		reqInfo.setMemberPwd(passwordEncoder.encode(reqInfo.getMemberPwd()));
+		reqInfo.setEmail(emailId + "@" + emailAddress);
 		
 		if(!year.equals("") && !month.equals("") && !day.equals("")) {
 			java.sql.Date birthDate = java.sql.Date.valueOf(year + "-" + month + "-" + day);
-			member.setBirthDate(birthDate);
+			reqInfo.setBirthDate(birthDate);
 		}
 		
-		memberService.joinMembership(member);
+		memberService.joinMembership(reqInfo);
 		
 		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.join"));
 		
 		return "redirect:/login";
 	}
 	
+	
+	@GetMapping("/findId")
+	public String goFindId() {
+	  
+		return "user/findInfo/findId";
+	}
 
 	@PostMapping("/findId")
-	public String findId(@ModelAttribute MemberDTO member, RedirectAttributes rttr) {
+	public String sendId(@ModelAttribute MemberDTO reqInfo, RedirectAttributes rttr) {
 		
-		String result = "";
+		String redirectUrl = "";
 		
-		if(memberService.selectMemberByNameAndEmail(member.getMemberName(), member.getEmail())) {
+		if(memberService.selectMemberByNameAndEmail(reqInfo.getMemberName(), reqInfo.getEmail())) {
 		
-			MemberDTO findMember = memberService.findByMemberNameAndEmail(member);
+			MemberDTO matchMember = memberService.findByMemberNameAndEmail(reqInfo);
 			
-			mailSendService.findIdEmailForm(findMember.getMemberId(), member.getEmail());
+			mailSendService.findIdEmailForm(matchMember.getMemberId(), matchMember.getEmail());
 			
 			rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.found"));
-			result = "redirect:/login";
+			redirectUrl = "redirect:/login";
 			
 		} else {
+			
 			rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.notfound"));
-			result = "redirect:/findId";
+			redirectUrl = "redirect:/findId";
+			
 		}
 			
-		return result;
+		return redirectUrl;
+	}
+	
+	
+	@GetMapping("/findPwd")
+	public String goFindPwd() {
+		
+		return "user/findInfo/findPwd";
+	}
+	
+	@PostMapping("/findPwd")
+	public String sendTmprrPwd(@ModelAttribute MemberDTO reqInfo, RedirectAttributes rttr) {
+		
+		String redirectUrl = "";
+		
+		if(memberService.selectMemberByIdAndEmail(reqInfo.getMemberId(), reqInfo.getEmail())) {
+			
+			MemberDTO matchMember = memberService.findByMemberIdAndEmail(reqInfo);
+			
+			String tmprrPwd = mailSendService.findPwdEmailForm(matchMember);
+			
+			matchMember.setMemberPwd(passwordEncoder.encode(tmprrPwd));
+			
+			memberService.changeMemberPwd(matchMember);
+			
+			rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.pwdIssue"));
+			redirectUrl = "redirect:/login";
+			
+		} else {
+			
+			rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.notfound"));
+			redirectUrl = "redirect:/findPwd";
+			
+		}
+			
+		return redirectUrl;
 	}
 	
 
-	@PostMapping("/findPwd")
-	public String findPwd(@ModelAttribute MemberDTO member, RedirectAttributes rttr) {
-		
-		String result = "";
-		
-		if(memberService.selectMemberByIdAndEmail(member.getMemberId(), member.getEmail())) {
-			
-			MemberDTO findMember = memberService.findByMemberIdAndEmail(member);
-			
-			String pwdIssue = mailSendService.findPwdEmailForm(findMember);
-			
-			findMember.setMemberPwd(passwordEncoder.encode(pwdIssue));
-			
-			memberService.changeMemberPwd(findMember);
-			
-			rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.pwdIssue"));
-			result = "redirect:/login";
-			
-		} else {
-			
-			rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.notfound"));
-			result = "redirect:/findPwd";
-			
-		}
-			
-		return result;
+	@GetMapping("/mypage")
+	public String goMypage() {
+		   
+		return "user/mypage/mypage";
 	}
 	
 	@PostMapping("/mypage")
-	public String pwdReinput(@RequestParam String memberPwd, @AuthenticationPrincipal MemberDTO loginMember,
+	public String pwdReinput(@RequestParam String inputPwd, @AuthenticationPrincipal MemberDTO loginMember,
 				RedirectAttributes rttr) {
 		
-		log.info("[memberController] inputPwd : {}", memberPwd);
-		log.info("[memberController] loginMember : {}", loginMember);
+		String redirectUrl = "";
 		
-		String result = "";
-		
-		if(passwordEncoder.matches(memberPwd, loginMember.getMemberPwd())) {
-			result = "redirect:/mypage/info";
+		if(passwordEncoder.matches(inputPwd, loginMember.getMemberPwd())) {
+			
+			redirectUrl = "redirect:/mypage/info";
+			
 		} else {
+			
 			rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.enterMypageFail"));
-			result = "redirect:/mypage";
+			redirectUrl = "redirect:/mypage";
+			
 		}
 
-		return result;
-		
+		return redirectUrl;
+	}
+	
+	
+	@GetMapping("/mypage/info")
+	public String goInfo() {
+		   
+		return "user/mypage/info";
 	}
 	
 	@PostMapping("/mypage/info")
-	public String modifyInfo(@ModelAttribute MemberDTO member, String year, String month, String day,
+	public String updateMemberInfo(@ModelAttribute MemberDTO updateInfo, String year, String month, String day,
 			@AuthenticationPrincipal MemberDTO loginMember, RedirectAttributes rttr) {
 		
-		log.info("[MemberController] update info : {}", member);
+		updateInfo.setMemberNo(loginMember.getMemberNo());
+		updateInfo.setMemberPwd(passwordEncoder.encode(updateInfo.getMemberPwd()));
 		
-		member.setMemberNo(loginMember.getMemberNo());
-		member.setMemberPwd(passwordEncoder.encode(member.getMemberPwd()));
-		
-		memberService.modifyInfo(member);
+		memberService.modifyInfo(updateInfo);
 		
     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     	SecurityContextHolder.getContext().setAuthentication(createNewAuthentication(authentication, loginMember.getMemberId()));
 		
-		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.modify"));
+		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.update"));
 		
 		return "redirect:/mypage/info";
-		
+	}
+
+	@GetMapping("/unjoin")
+	public String goUnjoin() {
+		   
+		return "user/join/unjoin";
 	}
 	
 	@PostMapping("/unjoin")
-	public String unjoin(@AuthenticationPrincipal MemberDTO loginMember, RedirectAttributes rttr) {
+	public String unjoinMembership(@AuthenticationPrincipal MemberDTO loginMember, RedirectAttributes rttr) {
 		
 		memberService.unjoinMembership(loginMember);
 		
@@ -242,8 +246,8 @@ public class MemberController {
     	UserDetails newPrincipal = authenticationService.loadUserByUsername(memberId);
     	UsernamePasswordAuthenticationToken newAuth = new UsernamePasswordAuthenticationToken(newPrincipal, currentAuth.getCredentials(), newPrincipal.getAuthorities());
     	newAuth.setDetails(currentAuth.getDetails());
+    	
         return newAuth;
-        
     }
 
 	
