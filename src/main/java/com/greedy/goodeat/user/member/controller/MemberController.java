@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.greedy.goodeat.common.dto.MemberDTO;
@@ -43,6 +42,8 @@ public class MemberController {
 		this.authenticationService = authenticationService;
 	}
 	
+	
+	/* 로그인, 이전 페이지 전달 */
 	@GetMapping("/login")
 	public String goLogin(HttpServletRequest request) {
 		
@@ -53,6 +54,7 @@ public class MemberController {
 	}
 	
 	
+	/* 로그인 실패 */
     @PostMapping("/loginfail")
     public String loginFailed(RedirectAttributes rttr) {
     	
@@ -61,13 +63,15 @@ public class MemberController {
     	return "redirect:/login";
     }
 
-   
+    
+    /* 회원가입 페이지 이동 */
 	@GetMapping("/join")
 	public String goJoin() 
 	{
 		return "user/join/join";
 	}
    
+	/* 회원가입 - 아이디 중복 체크 */
 	@PostMapping("/idDupCheck")
 	public ResponseEntity<String> idDupCheck(@RequestBody MemberDTO reqInfo){
 		
@@ -79,14 +83,23 @@ public class MemberController {
 		
 		return ResponseEntity.ok(result);
 	}
-	
-	@ResponseBody
+
+	/* 회원가입 - 이메일 중복 체크 후 인증번호 전송 */
 	@PostMapping("/emailAthnt")
-	public String emailAthnt(@RequestBody MemberDTO reqInfo){
+	public ResponseEntity<String> emailAthnt(@RequestBody MemberDTO reqInfo){
 		
-		return mailSendService.sendEmailForm(reqInfo.getEmail());
+		String result = "";
+		
+		if(memberService.selectMemberByEmail(reqInfo.getEmail())){
+			result = "cannotUse";
+		} else {
+			result = mailSendService.sendEmailForm(reqInfo.getEmail());
+		}
+		
+		return ResponseEntity.ok(result);
 	}
 	
+	/* 회원가입 */
 	@PostMapping("/join")
 	public String joinMembership(@ModelAttribute MemberDTO reqInfo, String emailId, String emailAddress, 
 				String year, String month, String day, RedirectAttributes rttr) {
@@ -107,12 +120,14 @@ public class MemberController {
 	}
 	
 	
+	/* 아이디 찾기 페이지 이동 */
 	@GetMapping("/findId")
 	public String goFindId() {
 	  
 		return "user/findInfo/findId";
 	}
 
+	/* 아이디 찾기 */
 	@PostMapping("/findId")
 	public String sendId(@ModelAttribute MemberDTO reqInfo, RedirectAttributes rttr) {
 		
@@ -138,16 +153,18 @@ public class MemberController {
 	}
 	
 	
+	/* 비밀번호 찾기 페이지 이동 */
 	@GetMapping("/findPwd")
 	public String goFindPwd() {
 		
 		return "user/findInfo/findPwd";
 	}
 	
+	/* 비밀번호 찾기 */
 	@PostMapping("/findPwd")
 	public String sendTmprrPwd(@ModelAttribute MemberDTO reqInfo, RedirectAttributes rttr) {
 		
-		String redirectUrl = "";
+		String redirectUrl = "redirect:/login";
 		
 		if(memberService.selectMemberByIdAndEmail(reqInfo.getMemberId(), reqInfo.getEmail())) {
 			
@@ -160,7 +177,6 @@ public class MemberController {
 			memberService.changeMemberPwd(matchMember);
 			
 			rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.pwdIssue"));
-			redirectUrl = "redirect:/login";
 			
 		} else {
 			
@@ -173,12 +189,14 @@ public class MemberController {
 	}
 	
 
+	/* 마이페이지 이동 */
 	@GetMapping("/mypage")
 	public String goMypage() {
 		   
 		return "user/mypage/mypage";
 	}
 	
+	/* 마이페이지 - 비밀번호 재확인 */
 	@PostMapping("/mypage")
 	public String pwdReinput(@RequestParam String inputPwd, @AuthenticationPrincipal MemberDTO loginMember,
 				RedirectAttributes rttr) {
@@ -200,12 +218,14 @@ public class MemberController {
 	}
 	
 	
+	/* 내 정보 조회/수정 페이지로 이동 */
 	@GetMapping("/mypage/info")
 	public String goInfo() {
 		   
 		return "user/mypage/info";
 	}
 	
+	/* 내 정보 조회/수정 */
 	@PostMapping("/mypage/info")
 	public String updateMemberInfo(@ModelAttribute MemberDTO updateInfo, String year, String month, String day,
 			@AuthenticationPrincipal MemberDTO loginMember, RedirectAttributes rttr) {
@@ -222,13 +242,16 @@ public class MemberController {
 		
 		return "redirect:/mypage/info";
 	}
+	
 
+	/* 회원 탈퇴 페이지 이동 */
 	@GetMapping("/unjoin")
 	public String goUnjoin() {
 		   
 		return "user/join/unjoin";
 	}
 	
+	/* 회원 탈퇴 */
 	@PostMapping("/unjoin")
 	public String unjoinMembership(@AuthenticationPrincipal MemberDTO loginMember, RedirectAttributes rttr) {
 		
@@ -241,6 +264,8 @@ public class MemberController {
         return "redirect:/";
 	}
 	
+	
+	/* 로그인되어 있는 회원 정보를 갱신하는 메소드 */
     protected Authentication createNewAuthentication(Authentication currentAuth, String memberId) {
     	
     	UserDetails newPrincipal = authenticationService.loadUserByUsername(memberId);

@@ -28,6 +28,8 @@ public class AuthenticationService implements UserDetailsService {
 		this.modelMapper = modelMapper;
 	}
 	
+	
+	/* 권한별 메뉴 조회 */
 	public Map<String, List<String>> getPermitListMap(){
 		
 		Map<String, List<String>> permitListMap = new HashMap<>();
@@ -38,6 +40,8 @@ public class AuthenticationService implements UserDetailsService {
 		return permitListMap;
 	}
 
+	
+	/* 로그인 */
 	@Override
 	public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
 		
@@ -46,7 +50,7 @@ public class AuthenticationService implements UserDetailsService {
 		MemberDTO member = modelMapper.map(selectedMember, MemberDTO.class);
         
         return member;
-
 	}
 
+	
 }

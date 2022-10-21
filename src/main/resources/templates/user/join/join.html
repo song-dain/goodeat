@@ -251,8 +251,11 @@
      const checkedAgreement = document.getElementById("checkedAgreement");
      const checkedEmail = document.getElementById("checkedEmail");
      
+     const $searchAddress = document.getElementById("search");
 	 const sendCodeBtn = document.getElementById("sendCodeBtn");
-
+	 
+	 
+	 /* 입력값 유효성 검사 */
      function checkForm() {
     	 
     	 if(!id_RegExp.test(memberId.value.trim()) || document.getElementById("cannotUse")){
@@ -304,6 +307,8 @@
 		 }
      }
      
+	 
+	 /* 아이디 유효성 검사, 중복 체크 */
      if(memberId){
 	     
 	     memberId.onkeyup = function () {
@@ -336,8 +341,9 @@
 	    	 	.catch((error) => error.text().then((res) => alert(res)));
 	     }
      }
-    
-
+     
+	 
+	 /* 비밀번호 유효성 검사 */
      if(password){
     	 
     	 memberPwd.onkeyup = function() {
@@ -345,7 +351,7 @@
     		 let memberPwdValue = memberPwd.value.trim();
     		 
     		 if(!pwd_RegExp.test(memberPwdValue)){
-    			 checkedPwd.innerHTML = '<div class="result"> 6~16자 영문, 숫자 혼합 비밀번호만 가능합니다. <div>';
+    			 checkedPwd.innerHTML = '<div class="result"> 6~16자 영문, 숫자 혼합 비밀번호만 가능합니다. <div>'
     			 return;
     		 } else {
     			 checkedPwd.innerHTML = '';
@@ -354,7 +360,8 @@
     	 }
      }
      
-     
+	 
+     /* 사용 비밀번호 확인 */
      if(password2){
     	 
     	 password2.onkeyup = function(){
@@ -365,7 +372,7 @@
     		 console.log(memberPwdValue, password2Value);
     		 
     		 if(password.value != password2.value)  {
-    			 checkedPwd.innerHTML = '<div class="result"> 비밀번호가 일치하지 않습니다. <div>';
+    			 checkedPwd.innerHTML = '<div class="result"> 비밀번호가 일치하지 않습니다. <div>'
     			 return;
     		 } else {
     			 checkedPwd.innerHTML = '';
@@ -374,6 +381,7 @@
      }
      
 
+     /* 이름 유효성 검사 */
      if(memberName){
     	 
     	 memberName.onkeyup = function() {
@@ -381,7 +389,7 @@
     		 let memberNameValue = memberName.value.trim();
     		 
     		 if(!n_RegExp.test(memberNameValue)){
-    			 checkedName.innerHTML = '<div class="result"> 2~15자 한글만 입력 가능합니다. <div>';
+    			 checkedName.innerHTML = '<div class="result"> 2~15자 한글만 입력 가능합니다. <div>'
     			 return;
     		 } else {
     			 checkedName.innerHTML = '';
@@ -390,6 +398,7 @@
      }
      
 
+     /* 휴대전화 번호 유효성 검사 */
      if(phone){
     	 
     	 phone.onkeyup = function() {
@@ -397,7 +406,7 @@
     		 let phoneValue = phone.value.trim();
     		 
     		 if(!p_RegExp.test(phoneValue)){
-    			 checkedPhone.innerHTML = '<div class="result"> 휴대전화 번호 11자리를 입력하세요. <div>';
+    			 checkedPhone.innerHTML = '<div class="result"> 휴대전화 번호 11자리를 입력하세요. <div>'
     			 return;
     		 } else {
     			 checkedPhone.innerHTML = '';
@@ -405,8 +414,10 @@
     	 }
      }
      
+     
 	let sendCode = '';
 	
+	/* 이메일 유효성 검사, 중복 체크, 인증번호 전송 */
 	if(email1){ 
 		
 		sendCodeBtn.onclick = function(){
@@ -431,13 +442,20 @@
 			})
 				.then(result => result.text())
 				.then(result => {
-					sendCode = result
-					checkedEmail.innerHTML = '<div class="result"> 이메일로 인증번호가 전송되었습니다. <div>'
+					if(result != "cannotUse"){
+						console.log(result)
+						sendCode = result
+						checkedEmail.innerHTML = '<div class="result"> 이메일로 인증번호가 전송되었습니다. <div>'
+					} else {
+						checkedEmail.innerHTML = '<div class="result"> 해당 이메일로 가입한 이력이 있습니다. <div>'
+					}
 				})
 				.catch((error) => error.text().then((res) => alert(res)));
 		}
 	}
-	 
+
+
+	/* 인증번호 일치 확인 */
 	 if(emailCode){
 	 
 		emailCode.onkeyup = function(){
@@ -456,8 +474,8 @@
 		 }
 	 }
 
-     const $searchAddress = document.getElementById("search");
-     
+
+     /* 주소 찾기(다음 우편번호 API) */
      $searchAddress.onclick = function () {
      
 	     new daum.Postcode({

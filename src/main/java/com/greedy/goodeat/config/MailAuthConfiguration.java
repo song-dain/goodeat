@@ -10,6 +10,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 @Configuration
 public class MailAuthConfiguration {
 	
+	/* 메일 전송 설정 */
 	@Bean(name="mailSender")
 	public JavaMailSender getJavaMailSender() {
 		Properties properties = new Properties();

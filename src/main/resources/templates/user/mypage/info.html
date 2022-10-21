@@ -129,6 +129,9 @@
     var n_RegExp = /^[가-힣]{2,}$/; // 이름
     var p_RegExp = /^[0-9]{11,}$/; // 번호 
     
+    const $searchAddress = document.getElementById("search");
+    
+    /* 입력값 유효성 검사 */
     function checkForm(){
     	
     	 if(!pwd_RegExp.test(password1.value.trim())){
@@ -168,6 +171,8 @@
     	 }
     }
     
+    
+    /* 비밀번호 유효성 검사 */
     if(password1){
    	 
 		password1.onkeyup = function() {
@@ -184,6 +189,8 @@
 		}	
 	}
     
+    
+    /* 사용 비밀번호 확인 */
     if(password2){
    	 
     	password2.onkeyup = function(){
@@ -202,6 +209,8 @@
 		}
 	}
     
+    
+    /* 이름 유효성 검사 */
     if(memberName){
    	 
    		 memberName.onkeyup = function() {
@@ -217,6 +226,8 @@
 		}
 	} 
     
+    
+    /* 휴대전화 번호 유효성 검사 */
     if(document.getElementById("phone")){
    	 
    	 phone.onkeyup = function() {
@@ -232,8 +243,8 @@
    	 }
     }
    
-    const $searchAddress = document.getElementById("search");
-    
+
+	/* 주소 찾기(다음 우편번호 API) */   
     $searchAddress.onclick = function () {
     
 	     new daum.Postcode({
@@ -244,9 +255,7 @@
 	    	 }
 	     }).open();
     }
-    
 
-    
     
     </script>
 

@@ -12,6 +12,7 @@ import org.springframework.security.web.authentication.SavedRequestAwareAuthenti
 
 public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler  {
 
+	/* 로그인 - 로그인 성공 로직 수정 (로그인 성공 후 전 페이지로 이동) */
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
@@ -28,7 +29,6 @@ public class CustomLoginSuccessHandler extends SavedRequestAwareAuthenticationSu
 		} else {
 			super.onAuthenticationSuccess(request, response, authentication);
 		}
-
 	}
 
 }
