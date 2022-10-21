@@ -26,12 +26,82 @@ public class MailSendService {
 		this.mailSender = mailSender;
 	}
 	
+	
+	/* 회원가입 - 인증번호 이메일 전송 폼 */
+	public String sendEmailForm(String email) {
+
+		makeRandomNumber();
+		String setFrom = "goodeattest@gmail.com";
+		String toMail = email;
+		String title = "Good Eat 이메일 인증번호 안내드립니다";
+		String content = "<h3>Good Eat 회원가입을 위해 이메일 인증을 완료해주세요.</h3> " 
+					   + "<br>"
+					   + "인증번호는 <b>" + authNumber + "</b>입니다.";
+		mailSend(setFrom, toMail, title, content);
+		
+		return Integer.toString(authNumber);
+	}
+	
+	
+	/* 아이디 찾기 - 아이디 이메일 전송 폼 */
+	public void findIdEmailForm(String findId, String email) {
+		
+		log.info("[MailSendService] email : {} ", email);
+		log.info("[MailSendService] findId : {} ", findId);
+		
+		String setFrom = "goodeattest@gmail.com";
+		String toMail = email;
+		String title = "[Good Eat] 요청하신 아이디 안내드립니다";
+		String content = "<h3>요청하신 GoodEat 아이디 안내드립니다.</h3> " 
+					   + "<br>"
+					   + "회원님의 아이디는 <b>" + findId + "</b>입니다.";
+		mailSend(setFrom, toMail, title, content);
+	}
+	
+	
+	/* 비밀번호 찾기 - 임시 비밀번호 전송 폼 */
+	public String findPwdEmailForm(MemberDTO member) {
+		
+		member.setMemberPwd(makeRandomPwd());
+		
+		String setFrom = "goodeattest@gmail.com";
+		String toMail = member.getEmail();
+		String title = "[Good Eat] 임시 비밀번호 발급 안내드립니다";
+		String content = "<h3>요청하신 GoodEat 임시 비밀번호입니다.</h3> " 
+					   + "<br>"
+					   + "회원님의 임시 비밀번호는 <b>" + member.getMemberPwd() + "</b>입니다.";
+		mailSend(setFrom, toMail, title, content);
+		
+		return member.getMemberPwd();
+		
+	}
+	
+	
+	/* 이메일 전송 메소드 */
+	public void mailSend(String setFrom, String toMail, String title, String content) {
+		
+		MimeMessage message = mailSender.createMimeMessage();
+		
+		try {
+			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+			helper.setFrom(setFrom);
+			helper.setTo(toMail);
+			helper.setSubject(title);
+			helper.setText(content,true);
+			mailSender.send(message);
+		} catch(MessagingException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/* 회원가입 - 인증번호 생성 메소드 */
 	public void makeRandomNumber() {
 		Random r = new Random();
 		int checkNum = r.nextInt(888888) + 111111;
 		authNumber = checkNum;
 	}
 	
+	/* 비밀번호 찾기 - 임시 비밀번호 생성 메소드 */
 	public String makeRandomPwd() {
 		
 		char[] charSet = new char[] {
@@ -52,66 +122,6 @@ public class MailSendService {
 		}
 
 		return sb.toString();
-	}
-	
-	public String sendEmailForm(String email) {
-
-		makeRandomNumber();
-		String setFrom = "goodeattest@gmail.com";
-		String toMail = email;
-		String title = "Good Eat 이메일 인증번호 안내드립니다";
-		String content = "<h3>Good Eat 회원가입을 위해 이메일 인증을 완료해주세요.</h3> " 
-					   + "<br>"
-					   + "인증번호는 <b>" + authNumber + "</b>입니다.";
-		mailSend(setFrom, toMail, title, content);
-		
-		return Integer.toString(authNumber);
-	}
-	
-	public String findPwdEmailForm(MemberDTO member) {
-		
-		member.setMemberPwd(makeRandomPwd());
-		
-		String setFrom = "goodeattest@gmail.com";
-		String toMail = member.getEmail();
-		String title = "[Good Eat] 임시 비밀번호 발급 안내드립니다";
-		String content = "<h3>요청하신 GoodEat 임시 비밀번호입니다.</h3> " 
-					   + "<br>"
-					   + "회원님의 임시 비밀번호는 <b>" + member.getMemberPwd() + "</b>입니다.";
-		mailSend(setFrom, toMail, title, content);
-		
-		return member.getMemberPwd();
-		
-	}
-	
-	public void findIdEmailForm(String findId, String email) {
-		
-		log.info("[MailSendService] email : {} ", email);
-		log.info("[MailSendService] findId : {} ", findId);
-		
-		String setFrom = "goodeattest@gmail.com";
-		String toMail = email;
-		String title = "[Good Eat] 요청하신 아이디 안내드립니다";
-		String content = "<h3>요청하신 GoodEat 아이디 안내드립니다.</h3> " 
-					   + "<br>"
-					   + "회원님의 아이디는 <b>" + findId + "</b>입니다.";
-		mailSend(setFrom, toMail, title, content);
-	}
-	
-	public void mailSend(String setFrom, String toMail, String title, String content) {
-		
-		MimeMessage message = mailSender.createMimeMessage();
-		
-		try {
-			MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
-			helper.setFrom(setFrom);
-			helper.setTo(toMail);
-			helper.setSubject(title);
-			helper.setText(content,true);
-			mailSender.send(message);
-		} catch(MessagingException e) {
-			e.printStackTrace();
-		}
 	}
 
 }

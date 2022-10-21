@@ -37,6 +37,7 @@
     const id = document.getElementById("memberId");
     const emailAddress = document.getElementById("email");
     
+    /* 아이디, 이메일 유효성 검사 */
     function findInfo(){
     	
 	   	 if(!id_RegExp.test(id.value.trim()) || id.value.trim() == ''){
@@ -49,8 +50,7 @@
 			 alert('이메일 형식에 맞지 않습니다.');
 			 email.focus();
 			 return false;
-	   	 }
-	   	 
+	   	 }	 
     }
     
     </script>

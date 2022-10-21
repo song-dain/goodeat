@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.greedy.goodeat.common.dto.MemberDTO;
@@ -24,9 +23,6 @@ import com.greedy.goodeat.user.member.service.AuthenticationService;
 import com.greedy.goodeat.user.member.service.MailSendService;
 import com.greedy.goodeat.user.member.service.MemberService;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Controller
 public class MemberController {
 	
@@ -46,6 +42,8 @@ public class MemberController {
 		this.authenticationService = authenticationService;
 	}
 	
+	
+	/* 로그인, 이전 페이지 전달 */
 	@GetMapping("/login")
 	public String goLogin(HttpServletRequest request) {
 		
@@ -55,6 +53,8 @@ public class MemberController {
 		return "user/login/login";
 	}
 	
+	
+	/* 로그인 실패 */
     @PostMapping("/loginfail")
     public String loginFailed(RedirectAttributes rttr) {
     	
@@ -62,171 +62,198 @@ public class MemberController {
     	
     	return "redirect:/login";
     }
-	
+
+    
+    /* 회원가입 페이지 이동 */
 	@GetMapping("/join")
-	public String goJoin() {
+	public String goJoin() 
+	{
 		return "user/join/join";
 	}
-  
-  @GetMapping("/findId")
-	public String goFindId() {
-		return "user/findInfo/findId";
-	}
-	
-
-	@GetMapping("/findPwd")
-	public String goFindPwd() {
-		return "user/findInfo/findPwd";
-  }
-	
-   @GetMapping("/mypage")
-   public String goMypage() {
-	   return "user/mypage/mypage";
-   }
    
-   @GetMapping("/mypage/info")
-   public String goInfo() {
-	   return "user/mypage/info";
-   }
-   
-   @GetMapping("/unjoin")
-   public String goUnjoin() {
-	   return "user/join/unjoin";
-   }
-   
+	/* 회원가입 - 아이디 중복 체크 */
 	@PostMapping("/idDupCheck")
-	public ResponseEntity<String> checkDuplication(@RequestBody MemberDTO member){
+	public ResponseEntity<String> idDupCheck(@RequestBody MemberDTO reqInfo){
 		
 		String result = "canUse";
 		
-		if(memberService.selectMemberById(member.getMemberId())) {
+		if(memberService.selectMemberById(reqInfo.getMemberId())) {
 			result = "cannotUse";
 		}
 		
 		return ResponseEntity.ok(result);
 	}
-	
-	@ResponseBody
-	@PostMapping(value = "/emailCheck", produces="text/html; charset=UTF-8")
-	public String emailCheck(@RequestBody MemberDTO member){
+
+	/* 회원가입 - 이메일 중복 체크 후 인증번호 전송 */
+	@PostMapping("/emailAthnt")
+	public ResponseEntity<String> emailAthnt(@RequestBody MemberDTO reqInfo){
 		
-		return mailSendService.sendEmailForm(member.getEmail());
+		String result = "";
+		
+		if(memberService.selectMemberByEmail(reqInfo.getEmail())){
+			result = "cannotUse";
+		} else {
+			result = mailSendService.sendEmailForm(reqInfo.getEmail());
+		}
+		
+		return ResponseEntity.ok(result);
 	}
 	
-	
+	/* 회원가입 */
 	@PostMapping("/join")
-	public String joinMembership(@ModelAttribute MemberDTO member, String email1, String email2, 
+	public String joinMembership(@ModelAttribute MemberDTO reqInfo, String emailId, String emailAddress, 
 				String year, String month, String day, RedirectAttributes rttr) {
 		
-		member.setMemberPwd(passwordEncoder.encode(member.getMemberPwd()));
-		member.setEmail(email1 + "@" + email2);
+		reqInfo.setMemberPwd(passwordEncoder.encode(reqInfo.getMemberPwd()));
+		reqInfo.setEmail(emailId + "@" + emailAddress);
 		
 		if(!year.equals("") && !month.equals("") && !day.equals("")) {
 			java.sql.Date birthDate = java.sql.Date.valueOf(year + "-" + month + "-" + day);
-			member.setBirthDate(birthDate);
+			reqInfo.setBirthDate(birthDate);
 		}
 		
-		memberService.joinMembership(member);
+		memberService.joinMembership(reqInfo);
 		
 		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.join"));
 		
 		return "redirect:/login";
 	}
 	
+	
+	/* 아이디 찾기 페이지 이동 */
+	@GetMapping("/findId")
+	public String goFindId() {
+	  
+		return "user/findInfo/findId";
+	}
 
+	/* 아이디 찾기 */
 	@PostMapping("/findId")
-	public String findId(@ModelAttribute MemberDTO member, RedirectAttributes rttr) {
+	public String sendId(@ModelAttribute MemberDTO reqInfo, RedirectAttributes rttr) {
 		
-		String result = "";
+		String redirectUrl = "";
 		
-		if(memberService.selectMemberByNameAndEmail(member.getMemberName(), member.getEmail())) {
+		if(memberService.selectMemberByNameAndEmail(reqInfo.getMemberName(), reqInfo.getEmail())) {
 		
-			MemberDTO findMember = memberService.findByMemberNameAndEmail(member);
+			MemberDTO matchMember = memberService.findByMemberNameAndEmail(reqInfo);
 			
-			mailSendService.findIdEmailForm(findMember.getMemberId(), member.getEmail());
+			mailSendService.findIdEmailForm(matchMember.getMemberId(), matchMember.getEmail());
 			
 			rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.found"));
-			result = "redirect:/login";
+			redirectUrl = "redirect:/login";
 			
 		} else {
+			
 			rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.notfound"));
-			result = "redirect:/findId";
+			redirectUrl = "redirect:/findId";
+			
 		}
 			
-		return result;
+		return redirectUrl;
 	}
 	
-
+	
+	/* 비밀번호 찾기 페이지 이동 */
+	@GetMapping("/findPwd")
+	public String goFindPwd() {
+		
+		return "user/findInfo/findPwd";
+	}
+	
+	/* 비밀번호 찾기 */
 	@PostMapping("/findPwd")
-	public String findPwd(@ModelAttribute MemberDTO member, RedirectAttributes rttr) {
+	public String sendTmprrPwd(@ModelAttribute MemberDTO reqInfo, RedirectAttributes rttr) {
 		
-		String result = "";
+		String redirectUrl = "redirect:/login";
 		
-		if(memberService.selectMemberByIdAndEmail(member.getMemberId(), member.getEmail())) {
+		if(memberService.selectMemberByIdAndEmail(reqInfo.getMemberId(), reqInfo.getEmail())) {
 			
-			MemberDTO findMember = memberService.findByMemberIdAndEmail(member);
+			MemberDTO matchMember = memberService.findByMemberIdAndEmail(reqInfo);
 			
-			String pwdIssue = mailSendService.findPwdEmailForm(findMember);
+			String tmprrPwd = mailSendService.findPwdEmailForm(matchMember);
 			
-			findMember.setMemberPwd(passwordEncoder.encode(pwdIssue));
+			matchMember.setMemberPwd(passwordEncoder.encode(tmprrPwd));
 			
-			memberService.changeMemberPwd(findMember);
+			memberService.changeMemberPwd(matchMember);
 			
 			rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.pwdIssue"));
-			result = "redirect:/login";
 			
 		} else {
 			
 			rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.notfound"));
-			result = "redirect:/findPwd";
+			redirectUrl = "redirect:/findPwd";
 			
 		}
 			
-		return result;
+		return redirectUrl;
 	}
 	
+
+	/* 마이페이지 이동 */
+	@GetMapping("/mypage")
+	public String goMypage() {
+		   
+		return "user/mypage/mypage";
+	}
+	
+	/* 마이페이지 - 비밀번호 재확인 */
 	@PostMapping("/mypage")
-	public String pwdReinput(@RequestParam String memberPwd, @AuthenticationPrincipal MemberDTO loginMember,
+	public String pwdReinput(@RequestParam String inputPwd, @AuthenticationPrincipal MemberDTO loginMember,
 				RedirectAttributes rttr) {
 		
-		log.info("[memberController] inputPwd : {}", memberPwd);
-		log.info("[memberController] loginMember : {}", loginMember);
+		String redirectUrl = "";
 		
-		String result = "";
-		
-		if(passwordEncoder.matches(memberPwd, loginMember.getMemberPwd())) {
-			result = "redirect:/mypage/info";
+		if(passwordEncoder.matches(inputPwd, loginMember.getMemberPwd())) {
+			
+			redirectUrl = "redirect:/mypage/info";
+			
 		} else {
+			
 			rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.enterMypageFail"));
-			result = "redirect:/mypage";
+			redirectUrl = "redirect:/mypage";
+			
 		}
 
-		return result;
-		
+		return redirectUrl;
 	}
 	
+	
+	/* 내 정보 조회/수정 페이지로 이동 */
+	@GetMapping("/mypage/info")
+	public String goInfo() {
+		   
+		return "user/mypage/info";
+	}
+	
+	/* 내 정보 조회/수정 */
 	@PostMapping("/mypage/info")
-	public String modifyInfo(@ModelAttribute MemberDTO member, String year, String month, String day,
+	public String updateMemberInfo(@ModelAttribute MemberDTO updateInfo, String year, String month, String day,
 			@AuthenticationPrincipal MemberDTO loginMember, RedirectAttributes rttr) {
 		
-		log.info("[MemberController] update info : {}", member);
+		updateInfo.setMemberNo(loginMember.getMemberNo());
+		updateInfo.setMemberPwd(passwordEncoder.encode(updateInfo.getMemberPwd()));
 		
-		member.setMemberNo(loginMember.getMemberNo());
-		member.setMemberPwd(passwordEncoder.encode(member.getMemberPwd()));
-		
-		memberService.modifyInfo(member);
+		memberService.modifyInfo(updateInfo);
 		
     	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     	SecurityContextHolder.getContext().setAuthentication(createNewAuthentication(authentication, loginMember.getMemberId()));
 		
-		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.modify"));
+		rttr.addFlashAttribute("message", messageSourceAccessor.getMessage("member.update"));
 		
 		return "redirect:/mypage/info";
-		
 	}
 	
+
+	/* 회원 탈퇴 페이지 이동 */
+	@GetMapping("/unjoin")
+	public String goUnjoin() {
+		   
+		return "user/join/unjoin";
+	}
+	
+	/* 회원 탈퇴 */
 	@PostMapping("/unjoin")
-	public String unjoin(@AuthenticationPrincipal MemberDTO loginMember, RedirectAttributes rttr) {
+	public String unjoinMembership(@AuthenticationPrincipal MemberDTO loginMember, RedirectAttributes rttr) {
 		
 		memberService.unjoinMembership(loginMember);
 		
@@ -237,13 +264,15 @@ public class MemberController {
         return "redirect:/";
 	}
 	
+	
+	/* 로그인되어 있는 회원 정보를 갱신하는 메소드 */
     protected Authentication createNewAuthentication(Authentication currentAuth, String memberId) {
     	
     	UserDetails newPrincipal = authenticationService.loadUserByUsername(memberId);
     	UsernamePasswordAuthenticationToken newAuth = new UsernamePasswordAuthenticationToken(newPrincipal, currentAuth.getCredentials(), newPrincipal.getAuthorities());
     	newAuth.setDetails(currentAuth.getDetails());
+    	
         return newAuth;
-        
     }
 
 	

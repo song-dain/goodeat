@@ -35,6 +35,7 @@
     
     const $findIdBtn = document.getElementById("findIdBtn");
     
+    /* 이름, 이메일 유효성 검사 */
     function findInfo() {
     	
 	   	 if(!n_RegExp.test(name.value.trim()) || name.value.trim() == ''){
@@ -49,7 +50,8 @@
 			 return false;
 	   	 }
  
-	 }    
+	 }  
+    
     </script>
  
 	<div th:replace="user/common/footer.html"></div>
