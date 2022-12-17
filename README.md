@@ -1,44 +1,56 @@
-# goodeat
-# git 사용 Rule
-1. master 에 직접 psuh 하지 않는다.
+### 🍊 Good Eat
 
-2. 각각 기능별로 브랜치를 생성한다.
-브랜치명은 어떤 기능 구현인지가 담기도록 설정! 
+Spring Boot를 사용한 FullStack Project
 
-3. 코드작업 진행 
-작업 디렉토리 최대한 디테일하게 분리하기 
+---
 
-4. 코드 작업이 끝난 후 
-commit > main pull 받기(두번째 pull 사용) > 충돌 발생시 충돌해결 > push
-- 커밋메세지 : [본인이름]어떤 내용의 수정인지 디테일하게 
-- 충돌을 해결하지 못하고 push를 했을 경우 git에서 병합전 형상관리자가 
-충돌 해결 후 병합진행
+### 🍊 프로젝트 소개
 
-5. 병합주기에 맞춰서 각각의 push 된 브랜치 main과 병합진행
-git에서 각각의 브랜치를 main과 병합하는 작업은 형상관리자가 진행
-개인이 추가 병합이 필요할 경우 형상관리자에게 요청
-병합 완료 후 브랜치 삭제 진행
-- 병합주기 : 매일 하루한번 오전 9시30분 진행
+맛있게 건강해지고 싶다면 Let’s Good Eat
 
-# 다같이 한번씩 주의 해주세요!!
-1. commit, push 혹시 충돌 해결이 어렵거나 잘 모를 경우 임의데로 무조건 push 
-하지말고 조원들의 help를 구하기!! main에서 작업 절대금지!! 
+#간편한 #건강한 #비건 #다이어트 푸드 전문 쇼핑몰 Good Eat!
+Good Eat은 다이어터에게 부담스럽지 않으면서 맛있고 포만감을 줄 수 있는 음식만을 엄선합니다. Good Eat에서 나의 몸에 꼭 필요했던 음식을 찾아가세요.
 
-2. git Repositories 늘 켜놓고 어디서 작업중인지 수시로 확인,
-commit push 전 내가만든 브랜치에서 작업한게 맞는지 다시한번 doubleCheck
+---
 
-3. 각자 열심히 작업한 코드가 날라가지 않게 pull, push 할땐 항상 주의하기! 
+### 🍊 개발 환경
 
-# 코드 작업시 폴더 생성 Rule
-사용자 화면은 user 폴더 하위에서 작업진행
-- user 안에서 결제 로직 작업 시 
-goodeat > user > payment > controller,dto,repository,entity,service > 하위 클래스들 생성/ 
-- user 안에서 회원 로직 작업 시 
-goodeat > user > member > controller,dto,repository,entity,service > 하위 클래스들 생성/ 
+**개발도구 :** STS4, Oracle SQL Developer
 
-어드민 화면은 은 admin폴더 하위에서 작업진행
-- admin 안에서 결제 로직 작업 시 
-goodeat > admin > product > controller,dto,repository,entity,service > 하위 클래스들 생성/ 
-- admin 안에서 회원 로직 작업 시 
-goodeat > admin > member > controller,dto,repository,entity,service > 하위 클래스들 생성/ 
- 
+**DBMS :** Oracle
+
+**Server :** Apache Tomcat
+
+**언어 :** Java,  JavaScript, HTML, CSS3
+
+**협업툴 :** GitHub, DA#, Figma, Whimsical, Slack, Notion
+
+**API :** Google Login API
+
+---
+
+### 🍊 주요 기능 및 담당
+
+**송다인**
+
+- 로그인 · 로그아웃
+- 아이디 찾기 · 비밀번호 찾기
+- 회원정보 조회 · 수정
+- 회원 가입 · 탈퇴
+
+**김형기**
+
+- 메인
+- 상품 상세 조회(상품 상세 · 리뷰 · 문의)
+
+**구주영**
+
+- 회원 관리
+- 상품 관리
+- 배송 관리
+
+**안세용**
+
+- 공지 게시판 관리
+- 리뷰 관리
+- 문의 관리
